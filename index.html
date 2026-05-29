@@ -512,6 +512,16 @@
 
   .manifesto-body strong { color: var(--text); font-weight: 600; }
 
+  .manifesto-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: var(--accent-mid);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s;
+  }
+
+  .manifesto-body a:hover { text-decoration-color: var(--accent); }
+
   .section-tag {
     font-family: var(--mono);
     font-size: 11px;
@@ -1182,20 +1192,6 @@
   </div>
 </div>
 
-<!-- ───── Why ABMe Exists ───── -->
-<div class="container">
-  <section class="manifesto-section">
-    <div class="section-tag">Why ABMe Exists</div>
-    <div class="section-title">Evidence over anecdotes.</div>
-    <div class="manifesto-body">
-      <p>There's no shortage of wellness advice. Podcasters, coaches, and influencers recommend protocols they believe in, often based on personal experience or emerging research. The challenge is that personal experience is unreliable. Without controlled comparison, it's difficult to separate real effects from personal bias or the dozen other things that changed the same week you started a new supplement.</p>
-      <p>Clinical trials address this with randomization and statistical inference, but they're designed for populations. They estimate the <strong>average treatment effect (ATE)</strong> across many people. That's valuable, but it doesn't tell you much about you specifically. Individual responses to interventions vary widely &mdash; a protocol that helps most people may not help you, and one that fails on average may work well for your particular biology.</p>
-      <p>ABMe brings this rigor to the individual through N-of-1 trials. You define a treatment and control condition, the app randomizes you across periods, your wearable collects the outcomes, and valid statistical inference gives you a real estimate of your own <strong>individual treatment effect (ITE)</strong> &mdash; not a population average, but a causal effect estimated from your own data.</p>
-      <p>The community layer makes this more useful over time. If you recommend a protocol, you can share a properly conducted experiment &mdash; not a testimonial. If you're considering trying someone else's protocol, you can run it yourself and see if the effect replicates. As more people run the same experiments, the community accumulates independent replications. Interventions that consistently produce effects across different people become easy to distinguish from those that don't.</p>
-    </div>
-  </section>
-</div>
-
 <!-- ───── Causation vs Correlation ───── -->
 <div class="container">
   <section id="why">
@@ -1527,7 +1523,24 @@
       Request Early Access
     </a>
   </div>
+</div>
 
+<!-- ───── Why ABMe Exists ───── -->
+<div class="container">
+  <section class="manifesto-section">
+    <div class="section-tag">Why ABMe Exists</div>
+    <div class="section-title">Evidence over anecdotes.</div>
+    <div class="manifesto-body">
+      <p>There's no shortage of wellness advice. Podcasters, coaches, and influencers recommend protocols they believe in, often based on personal experience or emerging research. The challenge is that personal experience is unreliable. Without controlled comparison, it's difficult to separate real effects from personal bias or the dozen other things that changed the same week you started a new supplement.</p>
+      <p>Clinical trials address this with randomization and statistical inference, but they're designed for populations. They estimate the <strong>average treatment effect (ATE)</strong> across many people. That's valuable, but it doesn't tell you much about you specifically. Individual responses to interventions vary widely &mdash; a protocol that helps most people may not help you, and one that fails on average may work well for your particular biology.</p>
+      <p>ABMe brings this rigor to the individual through N-of-1 trials. You define a treatment and control condition, the app randomizes you across periods, your wearable collects the outcomes, and valid statistical inference gives you a real estimate of your own <strong>individual treatment effect (ITE)</strong> &mdash; not a population average, but a causal effect estimated from your own data.</p>
+      <p>The community layer makes this more useful over time. If you recommend a protocol, you can share a properly conducted experiment &mdash; not a testimonial. If you're considering trying someone else's protocol, you can run it yourself and see if the effect replicates. As more people run the same experiments, the community accumulates independent replications. Interventions that consistently produce effects across different people become easy to distinguish from those that don't.</p>
+      <p>To see what this looks like in practice, peruse our <a href="experiments/index.html">existing experiment templates</a> or read our <a href="blog/index.html">blog posts</a>.</p>
+    </div>
+  </section>
+</div>
+
+<div class="container">
   <footer>
     <span>&copy; 2026 ABMe</span>
     <span><a href="#">Privacy</a> &middot; <a href="#">Contact</a></span>
