@@ -1122,6 +1122,168 @@
   footer a { color: var(--text-muted); text-decoration: none; }
   footer a:hover { color: var(--text); }
 
+  /* ── Blog Posts Grid ── */
+  .posts-section { border-top: 1px solid var(--border); }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .post-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-card:hover {
+    border-color: var(--accent-mid);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  }
+
+  .post-cat {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+
+  .post-cat.cat-sleep { color: #818cf8; }
+  .post-cat.cat-performance { color: var(--accent); }
+  .post-cat.cat-recovery { color: #4ade80; }
+
+  .post-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+
+  .post-hyp {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex: 1;
+  }
+
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+  }
+
+  .post-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: var(--text-muted);
+  }
+
+  .post-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-top: 16px;
+  }
+
+  .posts-footer {
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  .posts-footer a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .posts-footer a:hover { text-decoration: underline; }
+
+  /* ── Experiment Catalogue ── */
+  .catalog-section { border-top: 1px solid var(--border); }
+
+  .catalog-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .catalog-tile {
+    display: block;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 32px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+  }
+
+  .catalog-tile:hover {
+    border-color: var(--accent-mid);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  }
+
+  .catalog-tile-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .catalog-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .catalog-name {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+
+  .catalog-count {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    margin-left: auto;
+  }
+
+  .catalog-examples {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .cat-sleep-bg { background: #818cf8; }
+  .cat-running-bg { background: #f87171; }
+  .cat-recovery-bg { background: #4ade80; }
+  .cat-supplements-bg { background: var(--accent); }
+
   /* ── Responsive ── */
   @media (max-width: 768px) {
     .hero { grid-template-columns: 1fr; padding-top: 120px; gap: 48px; }
@@ -1129,6 +1291,7 @@
     .iphone-screen { min-height: 460px; }
     .causation-grid { grid-template-columns: 1fr; }
     .steps-grid { grid-template-columns: 1fr 1fr; }
+    .catalog-grid { grid-template-columns: 1fr; }
     .nav-links a:not(.btn-primary) { display: none; }
     footer { flex-direction: column; gap: 8px; }
     .privacy-features { gap: 24px; }
@@ -1514,6 +1677,57 @@
   </section>
 </div>
 
+<!-- ───── Experiment Catalogue ───── -->
+<div class="container">
+  <section class="catalog-section">
+    <div class="section-tag">Experiment Catalogue</div>
+    <div class="section-title">26 ready-to-run experiments. Tap one to load it into the app.</div>
+    <p class="section-sub">Templates span sleep, running, recovery, and supplements &mdash; each pre-loaded with synthetic data so you can see what the results will look like before you commit.</p>
+
+    <div class="catalog-grid">
+
+      <a class="catalog-tile" href="experiments/index.html">
+        <div class="catalog-tile-head">
+          <span class="catalog-dot cat-sleep-bg"></span>
+          <span class="catalog-name">Sleep</span>
+          <span class="catalog-count">10 experiments</span>
+        </div>
+        <div class="catalog-examples">Caffeine curfew &middot; Magnesium glycinate &middot; Glycine &middot; Blue light glasses &middot; Tart cherry juice &middot; Alcohol &middot; Late eating cutoff &middot; Melatonin microdose &middot; No screens &middot; Warm shower</div>
+      </a>
+
+      <a class="catalog-tile" href="experiments/index.html">
+        <div class="catalog-tile-head">
+          <span class="catalog-dot cat-running-bg"></span>
+          <span class="catalog-name">Running</span>
+          <span class="catalog-count">8 experiments</span>
+        </div>
+        <div class="catalog-examples">Carbon-plated shoes &middot; Pre-run caffeine &middot; Beetroot juice &middot; Nasal vs mouth breathing &middot; Fasted vs fed &middot; Electrolytes vs water &middot; Sodium pre-loading &middot; Music vs silence</div>
+      </a>
+
+      <a class="catalog-tile" href="experiments/index.html">
+        <div class="catalog-tile-head">
+          <span class="catalog-dot cat-recovery-bg"></span>
+          <span class="catalog-name">Recovery</span>
+          <span class="catalog-count">5 experiments</span>
+        </div>
+        <div class="catalog-examples">Cold plunge &middot; Morning sunlight &middot; Meditation &middot; Post-meal walking &middot; Contrast therapy</div>
+      </a>
+
+      <a class="catalog-tile" href="experiments/index.html">
+        <div class="catalog-tile-head">
+          <span class="catalog-dot cat-supplements-bg"></span>
+          <span class="catalog-name">Supplements</span>
+          <span class="catalog-count">3 experiments</span>
+        </div>
+        <div class="catalog-examples">L-Theanine &amp; coffee &middot; Apigenin &middot; Huberman Sleep Stack</div>
+      </a>
+
+    </div>
+
+    <div class="posts-footer"><a href="experiments/index.html">Browse all 26 experiments &rarr;</a></div>
+  </section>
+</div>
+
 <!-- ───── Final CTA ───── -->
 <div class="container">
   <div class="final-cta" id="download">
@@ -1523,6 +1737,91 @@
       Request Early Access
     </a>
   </div>
+</div>
+
+<!-- ───── Blog Posts ───── -->
+<div class="container">
+  <section class="posts-section">
+    <div class="section-tag">From the Blog</div>
+    <div class="section-title">The science behind common interventions.</div>
+    <p class="section-sub">Deep dives on the research behind popular interventions &mdash; what the studies show, what the typical effect sizes look like, and why averages may not predict your personal response.</p>
+    <div class="posts-grid">
+
+      <a href="blog/racing-shoes.html" class="post-card">
+        <div class="post-cat cat-performance">Performance</div>
+        <h3>Are Carbon-Plated Shoes Actually Faster?</h3>
+        <p class="post-hyp">The Vaporfly revolution changed marathon racing forever. A 4% running economy improvement is one of the most replicated findings in sports science. But does it hold for your stride?</p>
+        <div class="post-meta">
+          <span class="post-tag">Running Pace</span>
+          <span class="post-tag">Ground Contact Time</span>
+          <span class="post-tag">60 days</span>
+        </div>
+        <span class="post-more">Read more &rarr;</span>
+      </a>
+
+      <a href="blog/caffeine-curfew-sleep.html" class="post-card">
+        <div class="post-cat cat-sleep">Sleep</div>
+        <h3>Does a 10 AM Caffeine Curfew Fix My Deep Sleep?</h3>
+        <p class="post-hyp">Caffeine has a 5-hour half-life, but genetic variation means yours could be 3 or 10. This experiment produced the largest detectable effect of any sleep intervention we tested.</p>
+        <div class="post-meta">
+          <span class="post-tag">Deep Sleep</span>
+          <span class="post-tag">Sleep Efficiency</span>
+          <span class="post-tag">75 days</span>
+        </div>
+        <span class="post-more">Read more &rarr;</span>
+      </a>
+
+      <a href="blog/cold-plunge-recovery.html" class="post-card">
+        <div class="post-cat cat-recovery">Recovery</div>
+        <h3>Does Cold Plunging Improve My HRV?</h3>
+        <p class="post-hyp">Cold water immersion has exploded in popularity with 334% search growth. The parasympathetic activation is real &mdash; but is 2 minutes enough to move your heart rate variability?</p>
+        <div class="post-meta">
+          <span class="post-tag">HRV (SDNN)</span>
+          <span class="post-tag">Resting HR</span>
+          <span class="post-tag">90 days</span>
+        </div>
+        <span class="post-more">Read more &rarr;</span>
+      </a>
+
+      <a href="blog/pre-workout-running.html" class="post-card">
+        <div class="post-cat cat-performance">Performance</div>
+        <h3>Does Caffeine Actually Make Me Run Faster?</h3>
+        <p class="post-hyp">The most studied ergogenic aid in sports science meets Apple Watch running metrics. A meta-analysis of 21 studies shows 2&ndash;5% endurance improvement &mdash; can you detect it in your own pace data?</p>
+        <div class="post-meta">
+          <span class="post-tag">Running Pace</span>
+          <span class="post-tag">Workout Duration</span>
+          <span class="post-tag">90 days</span>
+        </div>
+        <span class="post-more">Read more &rarr;</span>
+      </a>
+
+      <a href="blog/alcohol-sleep.html" class="post-card">
+        <div class="post-cat cat-sleep">Sleep</div>
+        <h3>Does a Single Drink Impair My Sleep?</h3>
+        <p class="post-hyp">Alcohol's effect on sleep is surprisingly complex: it increases deep sleep but devastates REM. Five metrics tracked over 120 days reveal a nuanced picture most sleep trackers miss.</p>
+        <div class="post-meta">
+          <span class="post-tag">REM Sleep</span>
+          <span class="post-tag">HRV (SDNN)</span>
+          <span class="post-tag">120 days</span>
+        </div>
+        <span class="post-more">Read more &rarr;</span>
+      </a>
+
+      <a href="blog/magnesium-deep-sleep.html" class="post-card">
+        <div class="post-cat cat-sleep">Sleep</div>
+        <h3>Does Magnesium Glycinate Deepen My Sleep?</h3>
+        <p class="post-hyp">Huberman's #1 sleep supplement recommendation has plausible biochemistry and growing trial evidence. Instead of trusting a population average, run the experiment on yourself.</p>
+        <div class="post-meta">
+          <span class="post-tag">Deep Sleep</span>
+          <span class="post-tag">Sleep Efficiency</span>
+          <span class="post-tag">90 days</span>
+        </div>
+        <span class="post-more">Read more &rarr;</span>
+      </a>
+
+    </div>
+    <div class="posts-footer"><a href="blog/index.html">Read all posts &rarr;</a></div>
+  </section>
 </div>
 
 <!-- ───── Why ABMe Exists ───── -->
