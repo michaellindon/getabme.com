@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<title>ABMe — The Experimentation Platform That Fits in Your Pocket</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0b0f1a;
+    --surface: #111726;
+    --surface-2: #171e30;
+    --border: #1f2940;
+    --border-light: #2a3654;
+    --text: #eae6df;
+    --text-muted: #8892a8;
+    --accent: #e8a838;
+    --accent-dim: rgba(232, 168, 56, 0.1);
+    --accent-mid: rgba(232, 168, 56, 0.25);
+    --blue: #4a8fe7;
+    --blue-dim: rgba(74, 143, 231, 0.15);
+    --coral: #d96350;
+    --coral-dim: rgba(217, 99, 80, 0.12);
+    --treatment: #4a8fe7;
+    --control: #e0884e;
+    --chart-red: rgba(217, 80, 64, 0.85);
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Manrope', -apple-system, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+
+  /* ───── Nav ───── */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background: rgba(11, 15, 26, 0.88);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 14px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 17px;
+    letter-spacing: -0.5px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+
+  .logo .a { color: var(--control); }
+  .logo .b { color: var(--blue); }
+
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+
+  nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+
+  nav a:hover { color: var(--text); }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: var(--bg);
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover { background: #d69a2e; transform: translateY(-1px); box-shadow: 0 4px 20px var(--accent-dim); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-muted);
+    padding: 10px 22px;
+    border-radius: 8px;
+    border: 1px solid var(--border-light);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+
+  .btn-secondary:hover { color: var(--text); border-color: var(--text-muted); }
+
+  /* ───── Hero ───── */
+  .hero {
+    padding: 160px 0 80px;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .hero h1 {
+    font-size: clamp(34px, 4.5vw, 52px);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.08;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    color: var(--text-muted);
+    max-width: 480px;
+    margin-bottom: 36px;
+    line-height: 1.75;
+    font-weight: 400;
+  }
+
+  .hero-sub strong { color: var(--text); font-weight: 600; }
+
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  /* ── iPhone Mockup ── */
+  .iphone {
+    width: 290px;
+    margin: 0 auto;
+    background: #000;
+    border-radius: 40px;
+    padding: 14px;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+    position: relative;
+  }
+
+  .iphone-notch {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 28px;
+    background: #000;
+    border-radius: 0 0 18px 18px;
+    z-index: 2;
+  }
+
+  .iphone-screen {
+    background: #1c1c1e;
+    border-radius: 28px;
+    overflow: hidden;
+    min-height: 520px;
+  }
+
+  .app-status-bar {
+    padding: 14px 20px 6px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .app-nav {
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #007aff;
+    font-size: 13px;
+  }
+
+  .app-nav svg { width: 12px; height: 12px; }
+
+  .app-title-bar {
+    padding: 4px 16px 12px;
+  }
+
+  .app-title-bar h3 {
+    font-family: -apple-system, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+
+  .app-title-bar .app-subtitle {
+    font-size: 11px;
+    color: #8e8e93;
+  }
+
+  .app-status-badge {
+    margin: 0 16px 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(52, 199, 89, 0.15);
+    color: #34c759;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .app-metric-pills {
+    padding: 0 16px 10px;
+    display: flex;
+    gap: 6px;
+    overflow: hidden;
+  }
+
+  .app-pill {
+    font-size: 10px;
+    padding: 5px 10px;
+    border-radius: 14px;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+
+  .app-pill.active { background: rgba(0, 122, 255, 0.15); color: #007aff; }
+  .app-pill.inactive { background: #2c2c2e; color: #8e8e93; }
+
+  .app-chart-area {
+    margin: 0 16px;
+    background: #2c2c2e;
+    border-radius: 12px;
+    padding: 12px;
+    height: 160px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .app-chart-area svg { width: 100%; height: 100%; }
+
+  .app-chart-label {
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    font-size: 9px;
+    color: #8e8e93;
+    font-weight: 500;
+  }
+
+  .app-summary {
+    padding: 12px 16px;
+  }
+
+  .app-summary-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+  }
+
+  .app-summary-icon {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .app-summary-text {
+    font-size: 11px;
+    color: #fff;
+    font-weight: 500;
+  }
+
+  .app-summary-detail {
+    font-size: 10px;
+    color: #8e8e93;
+    line-height: 1.5;
+    margin-top: 4px;
+  }
+
+  .app-stats {
+    padding: 8px 16px 16px;
+    display: flex;
+    gap: 8px;
+  }
+
+  .app-stat-box {
+    flex: 1;
+    background: #2c2c2e;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .app-stat-val {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .app-stat-val.blue { color: #007aff; }
+  .app-stat-val.orange { color: #ff9f0a; }
+
+  .app-stat-label {
+    font-size: 9px;
+    color: #8e8e93;
+    margin-top: 2px;
+  }
+
+  /* ───── Animated Separators ───── */
+
+  /* Metrics Carousel */
+  .metrics-ticker {
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .metrics-ticker::before,
+  .metrics-ticker::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .metrics-ticker::before { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
+  .metrics-ticker::after { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
+
+  .ticker-track {
+    display: flex;
+    gap: 40px;
+    animation: tickerScroll 35s linear infinite;
+    white-space: nowrap;
+  }
+
+  .ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .ticker-metric {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .ticker-delta {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .ticker-delta.up { color: #4ade80; }
+  .ticker-delta.down { color: #f87171; }
+
+  .ticker-arrow { font-size: 11px; }
+
+  @keyframes tickerScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* Treatment Assignment Separator */
+  .assignment-separator {
+    padding: 28px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .assignment-strip {
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
+
+  .assignment-col {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex-shrink: 0;
+  }
+
+  .assignment-cell {
+    width: 14px;
+    height: 18px;
+    border-radius: 2px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+  }
+
+  .assignment-cell.treatment { background: var(--treatment); border-color: var(--treatment); }
+  .assignment-cell.control { background: var(--control); border-color: var(--control); }
+
+  .assignment-labels {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 10px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+
+  .assignment-labels span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  .dot.t { background: var(--treatment); }
+  .dot.c { background: var(--control); }
+
+  /* Timeseries Separator */
+  .timeseries-separator {
+    padding: 28px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .timeseries-separator canvas {
+    width: 100%;
+    height: 60px;
+    display: block;
+  }
+
+  .timeseries-label {
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ───── Sections ───── */
+  section { padding: 100px 0; }
+
+  /* ── Manifesto ── */
+  .manifesto-section {
+    border-top: 1px solid var(--border);
+  }
+
+  .manifesto-body {
+  }
+
+  .manifesto-body p {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.85;
+    margin-bottom: 20px;
+  }
+
+  .manifesto-body p:last-child { margin-bottom: 0; }
+
+  .manifesto-body strong { color: var(--text); font-weight: 600; }
+
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+
+  .section-title {
+    font-size: clamp(28px, 3.5vw, 38px);
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+    line-height: 1.15;
+  }
+
+  .section-sub {
+    color: var(--text-muted);
+    font-size: 16px;
+    max-width: 540px;
+    margin-bottom: 48px;
+    line-height: 1.7;
+  }
+
+  /* ── Causation Section ── */
+  .causation-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .cause-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    transition: border-color 0.2s;
+  }
+
+  .cause-card.highlight {
+    border-color: var(--accent-mid);
+    background: linear-gradient(135deg, var(--surface), rgba(232, 168, 56, 0.03));
+  }
+
+  .cause-card .card-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+
+  .cause-card.highlight .card-label { color: var(--accent); }
+  .cause-card:not(.highlight) .card-label { color: var(--text-muted); }
+
+  .cause-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -0.3px;
+  }
+
+  .cause-card p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .cause-list {
+    list-style: none;
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cause-list li {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cause-list .icon-yes { color: #4ade80; }
+  .cause-list .icon-no { color: #f87171; }
+
+  /* ── ML Section ── */
+  .ml-section {
+    border-top: 1px solid var(--border);
+  }
+
+  .ml-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+    margin-top: 32px;
+  }
+
+  .ml-text p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 14px;
+  }
+
+  .ml-text p:last-child { margin-bottom: 0; }
+  .ml-text strong { color: var(--text); font-weight: 600; }
+
+  .ml-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+  }
+
+  .ml-cs-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    margin-top: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .ml-split { grid-template-columns: 1fr; }
+  }
+
+  .ml-card p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+
+  .ml-card p:last-child { margin-bottom: 0; }
+
+  .ml-card strong { color: var(--text); font-weight: 600; }
+
+  .ml-diagram {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ml-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ml-row .ml-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    width: 80px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .ml-bar-track {
+    flex: 1;
+    height: 28px;
+    background: var(--surface-2);
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .ml-bar {
+    height: 100%;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+  }
+
+  .ml-bar.wide {
+    width: 100%;
+    background: rgba(232,168,56,0.12);
+    color: var(--accent);
+  }
+
+  .ml-bar.narrow {
+    width: 55%;
+    background: rgba(74,143,231,0.18);
+    color: var(--blue);
+  }
+
+  .ml-diagram-label {
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    letter-spacing: 0.3px;
+  }
+
+  .ml-metrics-flow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .ml-chip {
+    font-family: var(--mono);
+    font-size: 10px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: var(--text-muted);
+  }
+
+  .ml-arrow {
+    color: var(--accent);
+    font-size: 14px;
+  }
+
+  .ml-chip.result {
+    border-color: var(--accent-mid);
+    color: var(--accent);
+    background: var(--accent-dim);
+  }
+
+  @media (max-width: 768px) {
+    .ml-card { padding: 20px; }
+    .ml-cs-card { padding: 20px; }
+  }
+
+  /* ── How It Works ── */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .step-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 24px;
+    position: relative;
+  }
+
+  .step-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
+  }
+
+  .step-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .step-card p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ── Hardware / Wearables ── */
+  .hardware-section { border-top: 1px solid var(--border); }
+
+  .devices-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+  }
+
+  .device-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: border-color 0.2s;
+  }
+
+  .device-card:hover { border-color: var(--border-light); }
+
+  .device-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .device-icon.apple { background: rgba(255,255,255,0.06); }
+  .device-icon.oura { background: rgba(180, 140, 255, 0.1); }
+  .device-icon.whoop { background: rgba(0, 200, 150, 0.1); }
+  .device-icon.garmin { background: rgba(0, 150, 255, 0.1); }
+  .device-icon.fitbit { background: rgba(0, 200, 200, 0.1); }
+  .device-icon.polar { background: rgba(255, 80, 80, 0.1); }
+  .device-icon.withings { background: rgba(0, 200, 100, 0.1); }
+  .device-icon.coros { background: rgba(255, 160, 0, 0.1); }
+
+  .device-info h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .device-info p {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .healthkit-note {
+    margin-top: 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .healthkit-note .hk-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #ff2d55, #ff6b8a);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .healthkit-note p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .healthkit-note strong { color: var(--text); font-weight: 600; }
+
+  /* ── Privacy Section ── */
+  .privacy-section {
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+
+  .privacy-headline {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  .privacy-headline .line { display: block; }
+  .privacy-headline .em { color: var(--accent); }
+
+  .privacy-sub {
+    color: var(--text-muted);
+    font-size: 17px;
+    max-width: 520px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+
+  .privacy-features {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .privacy-feat {
+    text-align: center;
+  }
+
+  .privacy-feat .icon-wrap {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+
+  .privacy-feat h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .privacy-feat p {
+    font-size: 12px;
+    color: var(--text-muted);
+    max-width: 160px;
+  }
+
+  /* ── ML CS Legend ── */
+  .ml-cs-legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .ml-cs-legend span { display: flex; align-items: center; gap: 6px; }
+
+  .leg-swatch {
+    display: inline-block;
+    width: 24px;
+    height: 8px;
+    border-radius: 2px;
+  }
+
+  /* ── Community ── */
+  .community-section {
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .community-sub {
+    color: var(--text-muted);
+    font-size: 16px;
+    max-width: 600px;
+    margin: 0 auto 48px;
+    line-height: 1.75;
+  }
+
+  .community-diagram {
+    width: 240px;
+    height: auto;
+    margin: 0 auto 40px;
+    display: block;
+  }
+
+  .community-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    text-align: left;
+  }
+
+  .community-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    transition: border-color 0.2s;
+  }
+
+  .community-card:hover { border-color: var(--accent-mid); }
+
+  .community-card .card-icon {
+    font-size: 28px;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .community-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .community-card p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  .community-stats {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+  }
+
+  .community-stat {
+    text-align: center;
+  }
+
+  .community-stat .num {
+    font-family: var(--mono);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .community-stat .label {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .growth-loop {
+    margin-top: 48px;
+    background: linear-gradient(135deg, var(--surface), rgba(232, 168, 56, 0.04));
+    border: 1px solid var(--accent-mid);
+    border-radius: 14px;
+    padding: 36px;
+    text-align: center;
+  }
+
+  .growth-loop h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .loop-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .loop-step {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 6px;
+  }
+
+  .loop-arrow { color: var(--accent); font-size: 16px; }
+
+  @media (max-width: 768px) {
+    .community-grid { grid-template-columns: 1fr; }
+    .community-stats { gap: 24px; }
+  }
+
+  /* ── Final CTA ── */
+  .final-cta {
+    text-align: center;
+    padding: 100px 0 120px;
+    border-top: 1px solid var(--border);
+  }
+
+  .final-cta h2 {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+  }
+
+  .final-cta p {
+    color: var(--text-muted);
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+
+  .final-cta .btn-primary { padding: 14px 32px; font-size: 16px; }
+
+  /* ── Footer ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  footer a { color: var(--text-muted); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; padding-top: 120px; gap: 48px; }
+    .iphone { width: 260px; }
+    .iphone-screen { min-height: 460px; }
+    .causation-grid { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links a:not(.btn-primary) { display: none; }
+    footer { flex-direction: column; gap: 8px; }
+    .privacy-features { gap: 24px; }
+    .assignment-cell { width: 8px; height: 12px; }
+  }
+
+  @media (max-width: 480px) {
+    .steps-grid { grid-template-columns: 1fr; }
+    .devices-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ───── Nav ───── -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><svg width="22" height="24" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="nl"><rect x="0" y="0" width="100" height="220"/></clipPath><clipPath id="nr"><rect x="100" y="0" width="100" height="220"/></clipPath></defs><circle cx="100" cy="62" r="36" clip-path="url(#nl)" fill="rgb(224,135,79)"/><circle cx="100" cy="62" r="36" clip-path="url(#nr)" fill="rgb(74,143,232)"/><path d="M100,110 C65,110 38,138 38,168 L38,195 C38,203 44,209 52,209 L100,209 Z" clip-path="url(#nl)" fill="rgb(224,135,79)"/><path d="M100,110 C135,110 162,138 162,168 L162,195 C162,203 156,209 148,209 L100,209 Z" clip-path="url(#nr)" fill="rgb(74,143,232)"/></svg><span><span class="a">A</span><span class="b">B</span>Me</span></div>
+    <div class="nav-links">
+      <a href="#how">How It Works</a>
+      <a href="#hardware">Devices</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#community">Community</a>
+      <a href="experiments/index.html">Experiments</a>
+      <a href="blog/index.html">Blog</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUIUJBtQCGMjL7C8JgCRhozEFw1dMqrdEfdmFISsPyiO5ZXQ/viewform?usp=dialog" target="_blank" class="btn-primary">
+        Request Early Access
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ───── Hero ───── -->
+<div class="container">
+  <div class="hero">
+    <div class="hero-text">
+      <h1>The <em>experimentation platform</em> that fits in your pocket.</h1>
+      <p class="hero-sub">Built on the same research and technology that powers A/B testing at the world's largest tech companies &mdash; <strong>ABMe brings rigorous experimentation to a single subject: you.</strong> Design randomized N-of-1 experiments, collect data from your wearable, and find out what actually works.</p>
+      <div class="hero-actions">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUIUJBtQCGMjL7C8JgCRhozEFw1dMqrdEfdmFISsPyiO5ZXQ/viewform?usp=dialog" target="_blank" class="btn-primary">
+          Request Early Access
+        </a>
+        <a href="#how" class="btn-secondary">Learn More</a>
+      </div>
+    </div>
+
+    <!-- iPhone showing real experiment results (Caffeine Curfew & Sleep) -->
+    <div class="iphone">
+      <div class="iphone-notch"></div>
+      <div class="iphone-screen">
+        <img src="app-screenshot.png" alt="ABMe showing a statistically significant +14 minute deep sleep increase from a 10 AM caffeine curfew" style="width:100%;height:auto;display:block;">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ───── Metrics Carousel Separator ───── -->
+<div class="metrics-ticker">
+  <div class="ticker-track" id="metricsTicker">
+    <!-- Filled by JS — duplicated for seamless loop -->
+  </div>
+</div>
+
+<!-- ───── Why ABMe Exists ───── -->
+<div class="container">
+  <section class="manifesto-section">
+    <div class="section-tag">Why ABMe Exists</div>
+    <div class="section-title">Evidence over anecdotes.</div>
+    <div class="manifesto-body">
+      <p>There's no shortage of wellness advice. Podcasters, coaches, and influencers recommend protocols they believe in, often based on personal experience or emerging research. The challenge is that personal experience is unreliable. Without controlled comparison, it's difficult to separate real effects from personal bias or the dozen other things that changed the same week you started a new supplement.</p>
+      <p>Clinical trials address this with randomization and statistical inference, but they're designed for populations. They estimate the <strong>average treatment effect (ATE)</strong> across many people. That's valuable, but it doesn't tell you much about you specifically. Individual responses to interventions vary widely &mdash; a protocol that helps most people may not help you, and one that fails on average may work well for your particular biology.</p>
+      <p>ABMe brings this rigor to the individual through N-of-1 trials. You define a treatment and control condition, the app randomizes you across periods, your wearable collects the outcomes, and valid statistical inference gives you a real estimate of your own <strong>individual treatment effect (ITE)</strong> &mdash; not a population average, but a causal effect estimated from your own data.</p>
+      <p>The community layer makes this more useful over time. If you recommend a protocol, you can share a properly conducted experiment &mdash; not a testimonial. If you're considering trying someone else's protocol, you can run it yourself and see if the effect replicates. As more people run the same experiments, the community accumulates independent replications. Interventions that consistently produce effects across different people become easy to distinguish from those that don't.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ───── Causation vs Correlation ───── -->
+<div class="container">
+  <section id="why">
+    <div class="section-tag">Why Experiment?</div>
+    <div class="section-title">Tracking tells you <em style="font-style:normal;color:var(--accent)">what happened.</em><br>Experimentation tells you <em style="font-style:normal;color:var(--accent)">what caused it.</em></div>
+    <p class="section-sub">You tried creatine for a month and your HRV "seemed better." But was it the creatine, or the extra sleep, or the season changing? Without randomization, you'll never know.</p>
+
+    <div class="causation-grid">
+      <div class="cause-card highlight">
+        <div class="card-label">ABMe</div>
+        <h3>Randomized Experimentation</h3>
+        <p>Each experimental unit is randomly assigned to treatment or control. Randomization eliminates confounders, isolating the causal effect of your intervention.</p>
+        <ul class="cause-list">
+          <li><span class="icon-yes">&#10003;</span> True randomization per unit</li>
+          <li><span class="icon-yes">&#10003;</span> Causal inference, not correlation</li>
+          <li><span class="icon-yes">&#10003;</span> Automatic data from your wearable</li>
+          <li><span class="icon-yes">&#10003;</span> Statistical confidence in results</li>
+        </ul>
+      </div>
+      <div class="cause-card">
+        <div class="card-label">Typical Health Tracker</div>
+        <h3>Observational Logging</h3>
+        <p>You pick when to try something and eyeball the results. No randomization means no way to separate the effect of your intervention from everything else in your life.</p>
+        <ul class="cause-list">
+          <li><span class="icon-no">&#10007;</span> Self-selected conditions</li>
+          <li><span class="icon-no">&#10007;</span> Correlation only</li>
+          <li><span class="icon-no">&#10007;</span> Manual data entry</li>
+          <li><span class="icon-no">&#10007;</span> Gut-feel conclusions</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ───── Treatment Assignment Separator ───── -->
+<div class="assignment-separator">
+  <div class="assignment-strip" id="assignmentStrip"></div>
+  <div class="assignment-labels">
+    <span><span class="dot t"></span> Treatment</span>
+    <span><span class="dot c"></span> Control</span>
+  </div>
+</div>
+
+<!-- ───── How It Works ───── -->
+<div class="container">
+  <section id="how">
+    <div class="section-tag">How It Works</div>
+    <div class="section-title">Four steps to your first experiment.</div>
+    <p class="section-sub">Design once, then tap to randomize each period. ABMe handles assignment, data collection, and analysis automatically.</p>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3>Design</h3>
+        <p>Name your experiment. Define treatment and control. Pick your HealthKit metrics, measurement window, and unit duration.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3>Randomize</h3>
+        <p>Tap "Start Next Unit." ABMe randomly assigns you to treatment or control. No self-selection. No bias.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3>Live</h3>
+        <p>Follow your assigned condition. Your wearable records metrics automatically. At the end of each unit, data flows into the experiment.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <h3>Learn</h3>
+        <p>Watch the confidence interval tighten over time. When it excludes zero, you've found a real personal effect.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ───── Timeseries Separator ───── -->
+<div class="timeseries-separator">
+  <div class="container">
+    <canvas id="timeseriesCanvas"></canvas>
+  </div>
+</div>
+
+<!-- ───── ML Variance Reduction ───── -->
+<div class="container">
+  <section class="ml-section">
+    <div class="section-tag">Smarter Estimates</div>
+    <div class="section-title">Machine learning makes your experiments <em style="font-style:normal;color:var(--accent)">faster.</em></div>
+
+    <div class="ml-split">
+      <div class="ml-text">
+        <p>Your health metrics don't exist in isolation. How well you slept last night affects your resting heart rate today. Yesterday's workout intensity shapes today's HRV. These day-to-day fluctuations add noise to your experiment &mdash; making it harder to detect the signal you're looking for.</p>
+        <p>ABMe uses machine learning to account for this. It trains a model on the metrics that capture your body's daily state &mdash; <strong>how well you slept, how hard you trained, how recovered you are</strong> &mdash; to predict what your outcome would have looked like regardless of your treatment assignment. By subtracting that prediction, the noise drops and the confidence band tightens.</p>
+        <p>The result: <strong>faster answers with the same statistical rigor.</strong> This is the same augmented estimator used by the world's most sophisticated experimentation platforms &mdash; now running on your phone.</p>
+      </div>
+      <div class="ml-card">
+        <div class="ml-metrics-flow">
+          <span class="ml-chip">Sleep Duration</span>
+          <span class="ml-chip">Deep Sleep</span>
+          <span class="ml-chip">Sleep Efficiency</span>
+          <span class="ml-chip">Active Calories</span>
+          <span class="ml-chip">Exercise Minutes</span>
+          <span class="ml-chip">Resting HR</span>
+          <span class="ml-chip">HRV</span>
+          <span class="ml-chip">Respiratory Rate</span>
+          <span class="ml-chip">Steps</span>
+          <span class="ml-arrow">&rarr;</span>
+          <span class="ml-chip result">ML predictions</span>
+          <span class="ml-arrow">&rarr;</span>
+          <span class="ml-chip result">Noise removed</span>
+        </div>
+        <div style="margin-top: 16px;">
+          <div class="ml-row">
+            <span class="ml-label">Standard</span>
+            <div class="ml-bar-track"><div class="ml-bar wide">wider uncertainty</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="ml-row">
+            <span class="ml-label">With ML</span>
+            <div class="ml-bar-track"><div class="ml-bar narrow">tighter bounds</div></div>
+          </div>
+        </div>
+        <div class="ml-diagram-label">Same data, same rigor &mdash; faster conclusions</div>
+        <canvas id="csCanvas" style="width:100%;height:140px;display:block;margin-top:20px;"></canvas>
+        <div class="ml-cs-legend">
+          <span><span class="leg-swatch" style="background:rgba(232,168,56,0.25)"></span> Standard</span>
+          <span><span class="leg-swatch" style="background:rgba(74,143,232,0.5)"></span> With ML</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ───── Hardware / Wearables ───── -->
+<div class="container">
+  <section id="hardware" class="hardware-section">
+    <div class="section-tag">Compatible Hardware</div>
+    <div class="section-title">If it syncs to HealthKit, it works with ABMe.</div>
+    <p class="section-sub">ABMe reads from Apple HealthKit, which means every device that writes health data to your iPhone is automatically compatible.</p>
+
+    <div class="devices-grid">
+      <div class="device-card">
+        <div class="device-icon apple">&#x2328;</div>
+        <div class="device-info">
+          <h4>Apple Watch</h4>
+          <p>Series 4+ / SE / Ultra</p>
+        </div>
+      </div>
+      <div class="device-card">
+        <div class="device-icon oura">&#x25CB;</div>
+        <div class="device-info">
+          <h4>Oura Ring</h4>
+          <p>Gen 3 / Gen 4</p>
+        </div>
+      </div>
+      <div class="device-card">
+        <div class="device-icon whoop">&#x25A0;</div>
+        <div class="device-info">
+          <h4>WHOOP</h4>
+          <p>4.0 / 5.0</p>
+        </div>
+      </div>
+      <div class="device-card">
+        <div class="device-icon garmin">&#x25B2;</div>
+        <div class="device-info">
+          <h4>Garmin</h4>
+          <p>Forerunner / Fenix / Venu</p>
+        </div>
+      </div>
+      <div class="device-card">
+        <div class="device-icon fitbit">&#x25CF;</div>
+        <div class="device-info">
+          <h4>Fitbit</h4>
+          <p>Sense / Versa / Charge</p>
+        </div>
+      </div>
+      <div class="device-card">
+        <div class="device-icon polar">&#x2665;</div>
+        <div class="device-info">
+          <h4>Polar</h4>
+          <p>Vantage / Grit X / Ignite</p>
+        </div>
+      </div>
+      <div class="device-card">
+        <div class="device-icon withings">&#x2B22;</div>
+        <div class="device-info">
+          <h4>Withings</h4>
+          <p>ScanWatch / Steel HR</p>
+        </div>
+      </div>
+      <div class="device-card">
+        <div class="device-icon coros">&#x25C6;</div>
+        <div class="device-info">
+          <h4>COROS</h4>
+          <p>PACE / APEX / VERTIX</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="healthkit-note">
+      <div class="hk-icon">+</div>
+      <p><strong>Any device that writes to Apple HealthKit is supported.</strong> ABMe reads 70+ metric types directly from HealthKit &mdash; heart rate, HRV, sleep stages, blood oxygen, respiratory rate, VO2max, steps, workouts, and more. Zero manual entry.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ───── Privacy ───── -->
+<div class="container">
+  <section id="privacy" class="privacy-section">
+    <div class="section-tag">Privacy</div>
+    <div class="privacy-headline">
+      <span class="line">Your body.</span>
+      <span class="line">Your experiment.</span>
+      <span class="line">Your <span class="em">data.</span></span>
+    </div>
+    <p class="privacy-sub">ABMe has no backend, no accounts, and no analytics. Your experiment data never leaves your phone. We couldn't see it even if we wanted to.</p>
+
+    <div class="privacy-features">
+      <div class="privacy-feat">
+        <div class="icon-wrap">&#x1F4F1;</div>
+        <h4>On-Device Only</h4>
+        <p>All computation happens locally on your iPhone.</p>
+      </div>
+      <div class="privacy-feat">
+        <div class="icon-wrap">&#x1F6AB;</div>
+        <h4>No Backend</h4>
+        <p>No servers. No databases. No cloud processing.</p>
+      </div>
+      <div class="privacy-feat">
+        <div class="icon-wrap">&#x1F510;</div>
+        <h4>No Accounts</h4>
+        <p>No sign-up. No email. No profile.</p>
+      </div>
+      <div class="privacy-feat">
+        <div class="icon-wrap">&#x1F504;</div>
+        <h4>iCloud Sync</h4>
+        <p>CloudKit syncs only between your own devices.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ───── Community ───── -->
+<div class="container">
+  <section class="community-section" id="community">
+    <div class="section-tag">Community</div>
+    <div class="section-title">Share results. Replicate experiments. Build evidence.</div>
+    <p class="community-sub">ABMe isn't just a personal tool. When you share your results, you contribute to a growing body of independent evidence. Followers can replicate your experiment with a single tap — no setup, no configuration. Over time, the community separates what works from what doesn't.</p>
+
+    <svg class="community-diagram" viewBox="0 0 320 290" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrowControl" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0,0 L8,4 L0,8 Z" fill="rgba(224,135,79,0.6)"/>
+        </marker>
+        <marker id="arrowTreatment" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0,0 L8,4 L0,8 Z" fill="rgba(74,143,232,0.6)"/>
+        </marker>
+      </defs>
+
+      <!-- Outer ring -->
+      <circle cx="160" cy="145" r="112" fill="none" stroke="#1f2940" stroke-width="1" stroke-dasharray="4,4"/>
+
+      <!-- Center globe -->
+      <circle cx="160" cy="145" r="28" fill="rgba(31,41,64,0.4)" stroke="#3a4a66" stroke-width="2"/>
+      <ellipse cx="160" cy="145" rx="12" ry="28" fill="none" stroke="#3a4a66" stroke-width="1.2"/>
+      <ellipse cx="160" cy="145" rx="22" ry="10" fill="none" stroke="#3a4a66" stroke-width="0.8"/>
+      <line x1="132" y1="145" x2="188" y2="145" stroke="#3a4a66" stroke-width="1.2"/>
+      <line x1="136" y1="132" x2="184" y2="132" stroke="#3a4a66" stroke-width="0.6"/>
+      <line x1="136" y1="158" x2="184" y2="158" stroke="#3a4a66" stroke-width="0.6"/>
+
+      <!-- Arrows: Sharer → Replicator Left -->
+      <path d="M140,95 Q100,130 85,180" fill="none" stroke="rgba(224,135,79,0.5)" stroke-width="1.5" marker-end="url(#arrowControl)"/>
+      <!-- Arrows: Sharer → Replicator Right -->
+      <path d="M180,95 Q220,130 235,180" fill="none" stroke="rgba(224,135,79,0.5)" stroke-width="1.5" marker-end="url(#arrowControl)"/>
+
+      <!-- Arrows: Replicator Left → Sharer -->
+      <path d="M78,185 Q70,120 135,55" fill="none" stroke="rgba(74,143,232,0.5)" stroke-width="1.5" marker-end="url(#arrowTreatment)"/>
+      <!-- Arrows: Replicator Right → Sharer -->
+      <path d="M242,185 Q250,120 185,55" fill="none" stroke="rgba(74,143,232,0.5)" stroke-width="1.5" marker-end="url(#arrowTreatment)"/>
+
+      <!-- Arrows: Replicator Left → Replicator Right -->
+      <path d="M98,230 Q160,260 222,230" fill="none" stroke="rgba(74,143,232,0.5)" stroke-width="1.5" marker-end="url(#arrowTreatment)"/>
+      <!-- Arrows: Replicator Right → Replicator Left -->
+      <path d="M222,240 Q160,270 98,240" fill="none" stroke="rgba(74,143,232,0.5)" stroke-width="1.5" marker-end="url(#arrowTreatment)"/>
+
+      <!-- Person 1: top center (Sharer) — control color -->
+      <circle cx="160" cy="38" r="14" fill="rgb(224,135,79)"/>
+      <path d="M160,58 C145,58 134,70 134,84 L134,92 C134,94 136,96 138,96 L182,96 C184,96 186,94 186,92 L186,84 C186,70 175,58 160,58 Z" fill="rgb(224,135,79)"/>
+      <text x="160" y="115" text-anchor="middle" fill="#8892a8" font-family="JetBrains Mono,monospace" font-size="9">Share</text>
+
+      <!-- Person 2: bottom left (Replicator) — treatment color -->
+      <circle cx="72" cy="203" r="14" fill="rgb(74,143,232)"/>
+      <path d="M72,223 C57,223 46,235 46,249 L46,257 C46,259 48,261 50,261 L94,261 C96,261 98,259 98,257 L98,249 C98,235 87,223 72,223 Z" fill="rgb(74,143,232)"/>
+      <text x="72" y="280" text-anchor="middle" fill="#8892a8" font-family="JetBrains Mono,monospace" font-size="9">Replicate</text>
+
+      <!-- Person 3: bottom right (Replicator) — treatment color -->
+      <circle cx="248" cy="203" r="14" fill="rgb(74,143,232)"/>
+      <path d="M248,223 C233,223 222,235 222,249 L222,257 C222,259 224,261 226,261 L270,261 C272,261 274,259 274,257 L274,249 C274,235 263,223 248,223 Z" fill="rgb(74,143,232)"/>
+      <text x="248" y="280" text-anchor="middle" fill="#8892a8" font-family="JetBrains Mono,monospace" font-size="9">Replicate</text>
+    </svg>
+
+    <div class="community-grid">
+      <div class="community-card">
+        <span class="card-icon">&#x1F4E4;</span>
+        <h3>Share Your Results</h3>
+        <p>Publish your experiment as a branded result card — complete with your confidence sequence chart, effect size, and verdict. Share to Instagram, Twitter, iMessage, or anywhere.</p>
+      </div>
+      <div class="community-card">
+        <span class="card-icon">&#x1F501;</span>
+        <h3>One-Tap Replication</h3>
+        <p>See someone's results and want to try it yourself? Tap "Replicate" to download their experiment template pre-configured. Just hit Start and begin your own trial. No setup required.</p>
+      </div>
+      <div class="community-card">
+        <span class="card-icon">&#x1F4CA;</span>
+        <h3>Decentralized Evidence</h3>
+        <p>As more ABMembers run the same experiment, we aggregate replications. "42 people tried this. 71% found a significant effect on deep sleep." That's a decentralized clinical trial.</p>
+      </div>
+    </div>
+
+  </section>
+</div>
+
+<!-- ───── Final CTA ───── -->
+<div class="container">
+  <div class="final-cta" id="download">
+    <h2>Be among the first to experiment.</h2>
+    <p>Private beta via TestFlight. Free. Statistically rigorous.</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUIUJBtQCGMjL7C8JgCRhozEFw1dMqrdEfdmFISsPyiO5ZXQ/viewform?usp=dialog" target="_blank" class="btn-primary">
+      Request Early Access
+    </a>
+  </div>
+
+  <footer>
+    <span>&copy; 2026 ABMe</span>
+    <span><a href="#">Privacy</a> &middot; <a href="#">Contact</a></span>
+  </footer>
+</div>
+
+<!-- ───── Scripts ───── -->
+<script>
+(function() {
+
+  /* ── Metrics Carousel ── */
+  const metrics = [
+    { name: 'Heart Rate Variability', delta: '+4.2 ms', dir: 'up' },
+    { name: 'Resting Heart Rate', delta: '-3.1 bpm', dir: 'down' },
+    { name: 'Deep Sleep', delta: '+18 min', dir: 'up' },
+    { name: 'VO2 Max', delta: '+1.8 mL/kg/min', dir: 'up' },
+    { name: 'Respiratory Rate', delta: '-0.6 breaths/min', dir: 'down' },
+    { name: 'Step Count', delta: '+2,400 steps', dir: 'up' },
+    { name: 'Blood Oxygen', delta: '+0.4 %', dir: 'up' },
+    { name: 'Walking Heart Rate', delta: '-5.2 bpm', dir: 'down' },
+    { name: 'Sleep Duration', delta: '+32 min', dir: 'up' },
+    { name: 'Active Energy', delta: '+140 kcal', dir: 'up' },
+    { name: 'Stand Hours', delta: '+1.5 hr', dir: 'up' },
+    { name: 'Heart Rate Recovery', delta: '+6 bpm', dir: 'up' },
+    { name: 'Body Temperature', delta: '-0.12 °C', dir: 'down' },
+    { name: 'Walking Speed', delta: '+0.08 m/s', dir: 'up' },
+    { name: 'Sleep Efficiency', delta: '+3.2 %', dir: 'up' },
+    { name: 'Exercise Minutes', delta: '+12 min', dir: 'up' },
+  ];
+
+  const tickerEl = document.getElementById('metricsTicker');
+  let html = '';
+  for (let rep = 0; rep < 2; rep++) {
+    metrics.forEach(m => {
+      const arrow = m.dir === 'up' ? '&#x25B2;' : '&#x25BC;';
+      html += `<div class="ticker-item"><span class="ticker-metric">${m.name}</span><span class="ticker-delta ${m.dir}"><span class="ticker-arrow">${arrow}</span> ${m.delta}</span></div>`;
+    });
+  }
+  tickerEl.innerHTML = html;
+
+  /* ── Treatment Assignment Animation ── */
+  const stripEl = document.getElementById('assignmentStrip');
+  const COLS = 60;
+  const assignments = [];
+  for (let i = 0; i < COLS; i++) {
+    assignments.push(Math.random() < 0.5 ? 'treatment' : 'control');
+  }
+
+  let stripHTML = '';
+  for (let i = 0; i < COLS; i++) {
+    const isTreatment = assignments[i] === 'treatment';
+    stripHTML += `<div class="assignment-col" data-idx="${i}">`;
+    stripHTML += `<div class="assignment-cell" data-row="treatment"></div>`;
+    stripHTML += `<div class="assignment-cell" data-row="control"></div>`;
+    stripHTML += `</div>`;
+  }
+  stripEl.innerHTML = stripHTML;
+
+  function animateAssignment() {
+    const cols = stripEl.querySelectorAll('.assignment-col');
+    let i = 0;
+    function fillNext() {
+      if (i >= cols.length) {
+        setTimeout(() => {
+          cols.forEach(c => {
+            c.querySelector('[data-row="treatment"]').classList.remove('treatment');
+            c.querySelector('[data-row="control"]').classList.remove('control');
+          });
+          i = 0;
+          setTimeout(fillNext, 600);
+        }, 2000);
+        return;
+      }
+      const col = cols[i];
+      const assigned = assignments[i];
+      col.querySelector(`[data-row="${assigned}"]`).classList.add(assigned);
+      i++;
+      setTimeout(fillNext, 80);
+    }
+    fillNext();
+  }
+
+  const assignmentObs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      animateAssignment();
+      assignmentObs.disconnect();
+    }
+  }, { threshold: 0.5 });
+  assignmentObs.observe(stripEl);
+
+  /* ── Timeseries Animation ── */
+  const tsCanvas = document.getElementById('timeseriesCanvas');
+  const tsCtx = tsCanvas.getContext('2d');
+
+  function resizeTS() {
+    const rect = tsCanvas.parentElement.getBoundingClientRect();
+    tsCanvas.width = rect.width * 2;
+    tsCanvas.height = 60 * 2;
+    tsCanvas.style.width = rect.width + 'px';
+    tsCanvas.style.height = '60px';
+  }
+  resizeTS();
+  window.addEventListener('resize', resizeTS);
+
+  const tsN = 120;
+  const tsData = [];
+  for (let i = 0; i < tsN; i++) {
+    tsData.push(50 + Math.sin(i * 0.15) * 30 + (Math.random() - 0.5) * 40);
+  }
+
+  let tsFrame = 0;
+
+  function drawTS() {
+    const w = tsCanvas.width;
+    const h = tsCanvas.height;
+    tsCtx.clearRect(0, 0, w, h);
+
+    const currentN = Math.min(tsN, Math.floor(tsFrame));
+    if (currentN < 2) { tsFrame += 1.5; requestAnimationFrame(drawTS); return; }
+
+    const pad = 20;
+
+    tsCtx.strokeStyle = 'rgba(232,168,56,0.15)';
+    tsCtx.lineWidth = 1;
+    tsCtx.setLineDash([4, 4]);
+    tsCtx.beginPath();
+    tsCtx.moveTo(pad, h / 2);
+    tsCtx.lineTo(w - pad, h / 2);
+    tsCtx.stroke();
+    tsCtx.setLineDash([]);
+
+    const xScale = (i) => pad + (i / (tsN - 1)) * (w - 2 * pad);
+    const tsMin = Math.min(...tsData);
+    const tsMax = Math.max(...tsData);
+    const yScale = (v) => pad + (1 - (v - tsMin) / (tsMax - tsMin)) * (h - 2 * pad);
+
+    tsCtx.strokeStyle = 'rgba(232,168,56,0.4)';
+    tsCtx.lineWidth = 2;
+    tsCtx.beginPath();
+    tsCtx.moveTo(xScale(0), yScale(tsData[0]));
+    for (let i = 1; i < currentN; i++) {
+      tsCtx.lineTo(xScale(i), yScale(tsData[i]));
+    }
+    tsCtx.stroke();
+
+    for (let i = 0; i < currentN; i++) {
+      const isT = assignments[i % assignments.length] === 'treatment';
+      tsCtx.beginPath();
+      tsCtx.arc(xScale(i), yScale(tsData[i]), 3, 0, Math.PI * 2);
+      tsCtx.fillStyle = isT ? 'rgba(74,143,231,0.7)' : 'rgba(224,136,78,0.7)';
+      tsCtx.fill();
+    }
+
+    if (tsFrame < tsN + 5) {
+      tsFrame += 1.5;
+      requestAnimationFrame(drawTS);
+    }
+  }
+
+  const tsObs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      tsFrame = 0;
+      drawTS();
+      tsObs.disconnect();
+    }
+  }, { threshold: 0.5 });
+  tsObs.observe(tsCanvas);
+
+  /* ── Dual Confidence Sequence Animation (ML card) ── */
+  const csCanvas = document.getElementById('csCanvas');
+  if (csCanvas) {
+  const csCtx = csCanvas.getContext('2d');
+
+  function resizeCS() {
+    const rect = csCanvas.parentElement.getBoundingClientRect();
+    csCanvas.width = rect.width * 2;
+    csCanvas.height = 140 * 2;
+  }
+  resizeCS();
+  window.addEventListener('resize', resizeCS);
+
+  const N = 30;
+  const alpha = 0.05;
+  const trueEffect = 0.3;
+  const propensity = 0.5;
+
+  // First pass: generate raw data and cumulative S_t
+  // S_t = Σ γ̂²_{j|j-1} where γ̂ = (Y - m̂) / p for the assigned arm
+  // With simple running-mean adjustment and p=0.5, variance term = residual² / p²
+  const rawEst = [], rawEstML = [], rawCumS = [];
+  let cumSum = 0, cumSumML = 0, cumS = 0;
+  let runningMean = 0, runningCount = 0;
+  for (let t = 1; t <= N; t++) {
+    const noise = (Math.random() - 0.5) * 2;
+    const obs = trueEffect + noise;
+    const mHat = runningCount > 0 ? runningMean : 0;
+    const residual = obs - mHat;
+    const p = propensity;
+    cumS += (residual * residual) / (p * p);
+    runningCount++;
+    runningMean += (obs - runningMean) / runningCount;
+    cumSum += obs;
+    cumSumML += obs + (Math.random() - 0.5) * 0.08;
+    rawEst.push(cumSum / t);
+    rawEstML.push(cumSumML / t);
+    rawCumS.push(cumS);
+  }
+
+  // Optimal η via B.2 closed-form (eq 50): η² = u / S_T where u = -2·log(α) + log(-2·log(α) + 1)
+  function hwAtT(eta, t) {
+    const St = rawCumS[t - 1];
+    const term = St * eta * eta + 1;
+    return (1 / t) * Math.sqrt((term / (eta * eta)) * Math.log(term / (alpha * alpha)));
+  }
+  const logAlpha = Math.log(alpha);
+  const u = -2 * logAlpha + Math.log(-2 * logAlpha + 1);
+  const eta = Math.sqrt(u / rawCumS[N - 1]);
+
+  // Second pass: compute bounds with calibrated η
+  const stdEstimates = [], mlEstimates = [];
+  const stdUpper = [], stdLower = [], mlUpper = [], mlLower = [];
+  for (let t = 1; t <= N; t++) {
+    const est = rawEst[t - 1];
+    const estML = rawEstML[t - 1];
+    const hw = hwAtT(eta, t);
+    const hwML = hw * 0.5;
+
+    stdEstimates.push(est);
+    mlEstimates.push(estML);
+    stdUpper.push(est + hw);
+    stdLower.push(est - hw);
+    mlUpper.push(estML + hwML);
+    mlLower.push(estML - hwML);
+  }
+
+  let csFrame = 0;
+
+  function drawCS() {
+    const w = csCanvas.width;
+    const h = csCanvas.height;
+    csCtx.clearRect(0, 0, w, h);
+
+    const currentN = Math.min(N, Math.floor(csFrame));
+    if (currentN < 2) { csFrame += 0.3; requestAnimationFrame(drawCS); return; }
+
+    const padL = 55, padR = 20, padT = 20, padB = 40;
+    const plotW = w - padL - padR;
+    const plotH = h - padT - padB;
+
+    const allVals = [...stdUpper.slice(0, currentN), ...stdLower.slice(0, currentN)];
+    let yMin = Math.min(...allVals) - 0.3;
+    let yMax = Math.max(...allVals) + 0.3;
+
+    const xScale = (i) => padL + (i / (N - 1)) * plotW;
+    const yScale = (v) => padT + (1 - (v - yMin) / (yMax - yMin)) * plotH;
+
+    const fontSize = Math.max(16, w * 0.014);
+    csCtx.font = fontSize + 'px JetBrains Mono, monospace';
+
+    // Y-axis line
+    csCtx.strokeStyle = '#2a3654';
+    csCtx.lineWidth = 1;
+    csCtx.beginPath();
+    csCtx.moveTo(padL, padT);
+    csCtx.lineTo(padL, h - padB);
+    csCtx.stroke();
+
+    // X-axis line
+    csCtx.beginPath();
+    csCtx.moveTo(padL, h - padB);
+    csCtx.lineTo(w - padR, h - padB);
+    csCtx.stroke();
+
+    // Y-axis ticks and grid
+    const yTickCount = 5;
+    const yRange = yMax - yMin;
+    const yStep = yRange / yTickCount;
+    csCtx.fillStyle = '#6b7a94';
+    csCtx.textAlign = 'right';
+    csCtx.textBaseline = 'middle';
+    for (let i = 0; i <= yTickCount; i++) {
+      const val = yMin + i * yStep;
+      const y = yScale(val);
+      csCtx.strokeStyle = '#1a2236';
+      csCtx.beginPath(); csCtx.moveTo(padL, y); csCtx.lineTo(w - padR, y); csCtx.stroke();
+      csCtx.fillStyle = '#6b7a94';
+      csCtx.fillText(val.toFixed(1), padL - 8, y);
+    }
+
+    // X-axis ticks
+    csCtx.textAlign = 'center';
+    csCtx.textBaseline = 'top';
+    const xTicks = [1, 5, 10, 15, 20, 25, 30];
+    for (const t of xTicks) {
+      if (t > currentN) break;
+      const x = xScale(t - 1);
+      csCtx.strokeStyle = '#2a3654';
+      csCtx.beginPath(); csCtx.moveTo(x, h - padB); csCtx.lineTo(x, h - padB + 8); csCtx.stroke();
+      csCtx.fillStyle = '#6b7a94';
+      csCtx.fillText(t.toString(), x, h - padB + 12);
+    }
+
+    // Axis labels
+    csCtx.fillStyle = '#6b7a94';
+    csCtx.textAlign = 'center';
+    csCtx.fillText('Round', padL + plotW / 2, h - 4);
+
+    // Zero line
+    const zeroY = yScale(0);
+    csCtx.strokeStyle = '#3a4a66';
+    csCtx.lineWidth = 1.5;
+    csCtx.setLineDash([6, 4]);
+    csCtx.beginPath(); csCtx.moveTo(padL, zeroY); csCtx.lineTo(w - padR, zeroY); csCtx.stroke();
+    csCtx.setLineDash([]);
+
+    // Standard band (wider, accent color)
+    csCtx.fillStyle = 'rgba(232, 168, 56, 0.08)';
+    csCtx.beginPath();
+    csCtx.moveTo(xScale(0), yScale(stdUpper[0]));
+    for (let i = 1; i < currentN; i++) csCtx.lineTo(xScale(i), yScale(stdUpper[i]));
+    for (let i = currentN - 1; i >= 0; i--) csCtx.lineTo(xScale(i), yScale(stdLower[i]));
+    csCtx.closePath();
+    csCtx.fill();
+
+    csCtx.strokeStyle = 'rgba(232, 168, 56, 0.3)';
+    csCtx.lineWidth = 1;
+    csCtx.beginPath();
+    csCtx.moveTo(xScale(0), yScale(stdUpper[0]));
+    for (let i = 1; i < currentN; i++) csCtx.lineTo(xScale(i), yScale(stdUpper[i]));
+    csCtx.stroke();
+    csCtx.beginPath();
+    csCtx.moveTo(xScale(0), yScale(stdLower[0]));
+    for (let i = 1; i < currentN; i++) csCtx.lineTo(xScale(i), yScale(stdLower[i]));
+    csCtx.stroke();
+
+    // Standard estimate line (amber, thinner)
+    csCtx.strokeStyle = 'rgba(232, 168, 56, 0.6)';
+    csCtx.lineWidth = 1.5;
+    csCtx.beginPath();
+    csCtx.moveTo(xScale(0), yScale(stdEstimates[0]));
+    for (let i = 1; i < currentN; i++) csCtx.lineTo(xScale(i), yScale(stdEstimates[i]));
+    csCtx.stroke();
+
+    // ML band (tighter, treatment blue)
+    csCtx.fillStyle = 'rgba(74, 143, 232, 0.10)';
+    csCtx.beginPath();
+    csCtx.moveTo(xScale(0), yScale(mlUpper[0]));
+    for (let i = 1; i < currentN; i++) csCtx.lineTo(xScale(i), yScale(mlUpper[i]));
+    for (let i = currentN - 1; i >= 0; i--) csCtx.lineTo(xScale(i), yScale(mlLower[i]));
+    csCtx.closePath();
+    csCtx.fill();
+
+    csCtx.strokeStyle = 'rgba(74, 143, 232, 0.45)';
+    csCtx.lineWidth = 1.5;
+    csCtx.beginPath();
+    csCtx.moveTo(xScale(0), yScale(mlUpper[0]));
+    for (let i = 1; i < currentN; i++) csCtx.lineTo(xScale(i), yScale(mlUpper[i]));
+    csCtx.stroke();
+    csCtx.beginPath();
+    csCtx.moveTo(xScale(0), yScale(mlLower[0]));
+    for (let i = 1; i < currentN; i++) csCtx.lineTo(xScale(i), yScale(mlLower[i]));
+    csCtx.stroke();
+
+    // ML estimate line (blue, bolder)
+    csCtx.strokeStyle = '#4a8fe7';
+    csCtx.lineWidth = 2.5;
+    csCtx.beginPath();
+    csCtx.moveTo(xScale(0), yScale(mlEstimates[0]));
+    for (let i = 1; i < currentN; i++) csCtx.lineTo(xScale(i), yScale(mlEstimates[i]));
+    csCtx.stroke();
+
+    // Dots at end
+    if (currentN > 1) {
+      const lx = xScale(currentN - 1);
+      csCtx.beginPath();
+      csCtx.arc(lx, yScale(stdEstimates[currentN - 1]), 4, 0, Math.PI * 2);
+      csCtx.fillStyle = 'rgba(232, 168, 56, 0.7)';
+      csCtx.fill();
+      csCtx.beginPath();
+      csCtx.arc(lx, yScale(mlEstimates[currentN - 1]), 4, 0, Math.PI * 2);
+      csCtx.fillStyle = '#4a8fe7';
+      csCtx.fill();
+    }
+
+    if (csFrame < N + 5) {
+      csFrame += 0.3;
+      requestAnimationFrame(drawCS);
+    }
+  }
+
+  const csObs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      csFrame = 0;
+      drawCS();
+      csObs.disconnect();
+    }
+  }, { threshold: 0.5 });
+  csObs.observe(csCanvas);
+  }
+
+})();
+</script>
+
+</body>
+</html>

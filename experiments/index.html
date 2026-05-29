@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="../logo.svg">
+<title>Experiment Catalogue — ABMe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0b0f1a; --surface: #111726; --surface-2: #171e30; --border: #1f2940;
+  --border-light: #2a3654; --text: #eae6df; --text-muted: #8892a8;
+  --accent: #e8a838; --accent-dim: rgba(232,168,56,0.1); --accent-mid: rgba(232,168,56,0.25);
+  --mono: 'JetBrains Mono', monospace; --sans: 'Manrope', -apple-system, sans-serif;
+  --sleep: #818cf8; --running: #f87171; --recovery: #4ade80; --supplements: #e8a838;
+}
+body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+
+/* Nav */
+nav { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(11,15,26,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+.nav-inner { max-width: 1120px; margin: 0 auto; padding: 14px 28px; display: flex; justify-content: space-between; align-items: center; }
+.logo { font-family: var(--mono); font-weight: 500; font-size: 17px; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+.logo .a { color: rgb(224,135,79); }
+.logo .b { color: rgb(74,143,232); }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+nav a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; }
+nav a:hover { color: var(--text); }
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: var(--bg); padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; }
+
+/* Header */
+.page-header { padding: 100px 0 40px; }
+.page-header h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
+.page-header p { font-size: 15px; color: var(--text-muted); max-width: 540px; }
+
+/* Category nav */
+.cat-nav { display: flex; gap: 8px; padding: 16px 0 32px; position: sticky; top: 52px; z-index: 50; background: var(--bg); border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+.cat-pill { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border); color: var(--text-muted); text-decoration: none; cursor: pointer; background: none; transition: all 0.15s; }
+.cat-pill:hover, .cat-pill.active { border-color: var(--accent-mid); color: var(--text); background: var(--accent-dim); }
+
+/* Category headings */
+.cat-heading { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500; padding: 32px 0 12px; }
+.cat-heading.sleep { color: var(--sleep); }
+.cat-heading.running { color: var(--running); }
+.cat-heading.recovery { color: var(--recovery); }
+.cat-heading.supplements { color: var(--supplements); }
+
+/* Experiment card */
+.exp-card { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; background: var(--surface); overflow: hidden; transition: border-color 0.15s; }
+.exp-card:hover { border-color: var(--border-light); }
+.exp-summary { display: flex; align-items: center; gap: 12px; padding: 14px 16px; cursor: pointer; }
+.exp-summary:hover { background: var(--surface-2); }
+.exp-name { font-size: 15px; font-weight: 600; flex: 1; min-width: 0; }
+.exp-effect { font-family: var(--mono); font-size: 11px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 260px; }
+.exp-load { font-family: var(--mono); font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 6px; border: none; background: var(--accent); color: var(--bg); cursor: pointer; white-space: nowrap; text-decoration: none; flex-shrink: 0; }
+.exp-load:hover { background: #d69a2e; }
+.exp-toggle { color: var(--text-muted); font-size: 12px; transition: transform 0.2s; flex-shrink: 0; width: 16px; text-align: center; }
+.exp-card.open .exp-toggle { transform: rotate(180deg); }
+
+/* Expanded detail */
+.exp-detail { display: none; padding: 0 16px 16px; }
+.exp-card.open .exp-detail { display: block; }
+.exp-hypothesis { font-size: 13px; color: var(--text-muted); font-style: italic; margin-bottom: 12px; }
+.exp-table { width: 100%; font-size: 13px; border-collapse: collapse; margin-bottom: 12px; }
+.exp-table td { padding: 5px 0; border-bottom: 1px solid var(--border); }
+.exp-table td:first-child { color: var(--text-muted); width: 110px; font-weight: 500; }
+.exp-table td:last-child { color: var(--text); }
+
+/* Metrics list */
+.metrics-list { margin-bottom: 12px; }
+.metric-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px; border-bottom: 1px solid var(--border); }
+.metric-row:last-child { border-bottom: none; }
+.metric-name { color: var(--text); }
+.metric-name.primary { font-weight: 600; }
+.metric-agg { font-family: var(--mono); font-size: 11px; color: var(--text-muted); }
+
+/* Citations */
+.citations { margin-top: 8px; }
+.cite { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 2px; }
+.cite a { color: var(--accent); text-decoration: none; font-family: var(--mono); font-size: 10px; }
+.cite a:hover { text-decoration: underline; }
+
+/* Count */
+.count { text-align: center; padding: 48px 0 64px; font-size: 13px; color: var(--text-muted); }
+.count strong { color: var(--text); }
+
+/* Footer */
+footer { border-top: 1px solid var(--border); padding: 24px 0; display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); }
+footer a { color: var(--text-muted); text-decoration: none; }
+footer a:hover { color: var(--text); }
+
+@media (max-width: 640px) {
+  .exp-effect { display: none; }
+  .nav-links a:not(.btn-primary) { display: none; }
+  footer { flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="../index.html"><svg width="22" height="24" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="nl"><rect x="0" y="0" width="100" height="220"/></clipPath><clipPath id="nr"><rect x="100" y="0" width="100" height="220"/></clipPath></defs><circle cx="100" cy="62" r="36" clip-path="url(#nl)" fill="rgb(224,135,79)"/><circle cx="100" cy="62" r="36" clip-path="url(#nr)" fill="rgb(74,143,232)"/><path d="M100,110 C65,110 38,138 38,168 L38,195 C38,203 44,209 52,209 L100,209 Z" clip-path="url(#nl)" fill="rgb(224,135,79)"/><path d="M100,110 C135,110 162,138 162,168 L162,195 C162,203 156,209 148,209 L100,209 Z" clip-path="url(#nr)" fill="rgb(74,143,232)"/></svg><span><span class="a">A</span><span class="b">B</span>Me</span></a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../experiments/index.html">Experiments</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="https://apps.apple.com/app/ab-me/id6746427726" class="btn-primary">App Store</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <h1>Experiment Catalogue</h1>
+    <p>26 ready-to-run N-of-1 experiments. Tap to load any template directly into ABMe.</p>
+  </div>
+
+  <div class="cat-nav">
+    <button class="cat-pill active" onclick="filterCat('all')">All (26)</button>
+    <button class="cat-pill" onclick="filterCat('Sleep')">Sleep (10)</button>
+    <button class="cat-pill" onclick="filterCat('Running')">Running (8)</button>
+    <button class="cat-pill" onclick="filterCat('Recovery')">Recovery (5)</button>
+    <button class="cat-pill" onclick="filterCat('Supplements')">Supplements (3)</button>
+  </div>
+
+  <div id="catalogue"></div>
+
+  <footer>
+    <span>&copy; 2026 ABMe</span>
+    <span><a href="../index.html">Home</a> &middot; <a href="https://apps.apple.com/app/ab-me/id6746427726">App Store</a></span>
+  </footer>
+</div>
+
+<script src="data.js"></script>
+<script>
+const APP_STORE = 'https://apps.apple.com/app/ab-me/id6746427726';
+const catClass = c => c.toLowerCase().replace(/\s+/g, '');
+
+function loadTemplate(url) {
+  window.location = url;
+  setTimeout(() => { window.location = APP_STORE; }, 1500);
+}
+
+function toggleCard(el) {
+  el.closest('.exp-card').classList.toggle('open');
+}
+
+function renderCatalogue(filter) {
+  const el = document.getElementById('catalogue');
+  let html = '';
+  let currentCat = '';
+
+  for (const exp of EXPERIMENTS) {
+    if (filter && filter !== 'all' && exp.category !== filter) continue;
+
+    if (exp.category !== currentCat) {
+      currentCat = exp.category;
+      html += `<div class="cat-heading ${catClass(currentCat)}">${currentCat}</div>`;
+    }
+
+    const t = exp.template;
+    const allMetrics = [t.primaryMetric, ...t.secondaryMetrics];
+    const cites = exp.citations.map(c => {
+      const doi = c.doi
+        ? ` <a href="https://doi.org/${c.doi}" target="_blank" rel="noopener">DOI&nbsp;&#8599;</a>`
+        : '';
+      return `<div class="cite">${c.short} &mdash; <em>${c.journal}</em>${doi}</div>`;
+    }).join('');
+
+    const metricRows = allMetrics.map((metric, i) => {
+      const name = metricDisplayName(metric.identifier);
+      const cls = i === 0 ? 'primary' : '';
+      const tag = i === 0 ? ' (primary)' : '';
+      return `<div class="metric-row"><span class="metric-name ${cls}">${name}${tag}</span><span class="metric-agg">${metric.aggregation.toLowerCase()}</span></div>`;
+    }).join('');
+
+    html += `
+    <div class="exp-card" data-cat="${exp.category}">
+      <div class="exp-summary" onclick="toggleCard(this)">
+        <span class="exp-toggle">&#9660;</span>
+        <span class="exp-name">${t.name}</span>
+        <span class="exp-effect">${exp.effectSummary}</span>
+        <a class="exp-load" href="${exp.url}" onclick="event.stopPropagation(); loadTemplate('${exp.url}');">Load in ABMe</a>
+      </div>
+      <div class="exp-detail">
+        <div class="exp-hypothesis">${t.hypothesis}</div>
+        <table class="exp-table">
+          <tr><td>Treatment</td><td>${t.interventionDescription}</td></tr>
+          <tr><td>Control</td><td>${t.controlDescription}</td></tr>
+          <tr><td>Window</td><td>${t.windowStart} &rarr; ${t.windowEnd}</td></tr>
+          <tr><td>Unit</td><td>1 day &middot; no washout</td></tr>
+          <tr><td>&alpha;</td><td>${t.alpha}</td></tr>
+        </table>
+        <div class="metrics-list">${metricRows}</div>
+        <div class="citations">${cites}</div>
+      </div>
+    </div>`;
+  }
+
+  el.innerHTML = html;
+}
+
+function filterCat(cat) {
+  document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  renderCatalogue(cat);
+}
+
+function metricDisplayName(id) {
+  const map = {
+    'deepSleepDuration': 'Deep Sleep',
+    'remSleepDuration': 'REM Sleep',
+    'coreSleepDuration': 'Core Sleep',
+    'sleepDuration': 'Sleep Duration',
+    'sleepEfficiency': 'Sleep Efficiency',
+    'workoutDuration': 'Workout Duration',
+    'workoutDistance': 'Workout Distance',
+    'workoutCaloriesBurned': 'Workout Calories',
+    'HKQuantityTypeIdentifierRestingHeartRate': 'Resting HR',
+    'HKQuantityTypeIdentifierHeartRateVariabilitySDNN': 'HRV (SDNN)',
+    'HKQuantityTypeIdentifierHeartRate': 'Heart Rate',
+    'HKQuantityTypeIdentifierVO2Max': 'VO2 Max',
+    'HKQuantityTypeIdentifierRunningSpeed': 'Running Pace',
+    'HKQuantityTypeIdentifierRunningGroundContactTime': 'Ground Contact Time',
+    'HKQuantityTypeIdentifierRunningStrideLength': 'Stride Length',
+    'HKQuantityTypeIdentifierStepCount': 'Steps',
+    'HKQuantityTypeIdentifierActiveEnergyBurned': 'Active Energy',
+    'HKQuantityTypeIdentifierDistanceWalkingRunning': 'Distance',
+    'HKQuantityTypeIdentifierWalkingHeartRateAverage': 'Walking HR',
+    'HKQuantityTypeIdentifierOxygenSaturation': 'SpO2',
+    'HKQuantityTypeIdentifierRespiratoryRate': 'Respiratory Rate',
+  };
+  return map[id] || id.replace('HKQuantityTypeIdentifier', '');
+}
+
+renderCatalogue('all');
+</script>
+</body>
+</html>

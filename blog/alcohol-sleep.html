@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="../logo.svg">
+<title>Does a Single Drink Impair My Sleep? — ABMe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0b0f1a; --surface: #111726; --surface-2: #171e30; --border: #1f2940;
+    --border-light: #2a3654; --text: #eae6df; --text-muted: #8892a8;
+    --accent: #e8a838; --accent-dim: rgba(232,168,56,0.1); --accent-mid: rgba(232,168,56,0.25);
+    --mono: 'JetBrains Mono', monospace; --sans: 'Manrope', -apple-system, sans-serif;
+  }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .container { max-width: 720px; margin: 0 auto; padding: 0 28px; }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(11,15,26,0.88); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+  .nav-inner { max-width: 1120px; margin: 0 auto; padding: 14px 28px; display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-family: var(--mono); font-weight: 500; font-size: 17px; color: var(--text); display: flex; align-items: center; gap: 8px; text-decoration: none; }
+  .logo .a { color: rgb(224,135,79); } .logo .b { color: rgb(74,143,232); }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  nav a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.15s; }
+  nav a:hover { color: var(--text); }
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: var(--bg); padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; }
+  .btn-primary:hover { background: #d69a2e; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; margin-bottom: 24px; }
+  .back-link:hover { color: var(--text); }
+  article { padding: 120px 0 80px; }
+  .post-category { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500; margin-bottom: 14px; }
+  article h1 { font-size: clamp(28px,4vw,40px); font-weight: 800; letter-spacing: -1px; line-height: 1.15; margin-bottom: 16px; }
+  .post-meta { font-size: 14px; color: var(--text-muted); margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+  article h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; margin: 40px 0 12px; }
+  article p { font-size: 16px; color: var(--text-muted); line-height: 1.8; margin-bottom: 16px; }
+  article p strong { color: var(--text); font-weight: 600; }
+  article ul, article ol { margin: 0 0 16px 20px; color: var(--text-muted); font-size: 16px; line-height: 1.8; }
+  article li { margin-bottom: 4px; }
+  .design-table { width: 100%; border-collapse: collapse; margin: 24px 0 32px; font-size: 14px; }
+  .design-table td { padding: 10px 16px; border-bottom: 1px solid var(--border); color: var(--text-muted); }
+  .design-table td:first-child { font-weight: 500; color: var(--text); white-space: nowrap; }
+  .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 24px 0; }
+  .callout p { margin: 0; font-size: 15px; }
+  .results-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin: 24px 0; }
+  .results-box h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: var(--accent); }
+  .result-row { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+  .result-row:last-child { border-bottom: none; }
+  .result-label { color: var(--text); font-weight: 500; }
+  .result-value { font-family: var(--mono); font-size: 13px; }
+  .result-sig { color: #4ade80; }
+  .result-ns { color: var(--text-muted); }
+  .references { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .references h2 { font-size: 18px; margin-bottom: 16px; }
+  .references ol { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+  .references li { margin-bottom: 8px; }
+  .cta-box { background: linear-gradient(135deg, var(--surface), rgba(232,168,56,0.04)); border: 1px solid var(--accent-mid); border-radius: 14px; padding: 36px; text-align: center; margin: 48px 0; }
+  .cta-box h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .cta-box p { text-align: center; margin-bottom: 20px; }
+  .screenshot-box { margin: 32px 0; text-align: center; }
+  .screenshot-box img { max-width: 300px; border-radius: 24px; border: 2px solid var(--border); box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
+  .screenshot-box .caption { font-size: 13px; color: var(--text-muted); margin-top: 12px; font-style: italic; }
+  footer { border-top: 1px solid var(--border); padding: 24px 0; display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); }
+  footer a { color: var(--text-muted); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+  @media (max-width: 640px) { .nav-links a:not(.btn-primary) { display: none; } footer { flex-direction: column; gap: 8px; } }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="../index.html"><svg width="22" height="24" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="nl"><rect x="0" y="0" width="100" height="220"/></clipPath><clipPath id="nr"><rect x="100" y="0" width="100" height="220"/></clipPath></defs><circle cx="100" cy="62" r="36" clip-path="url(#nl)" fill="rgb(224,135,79)"/><circle cx="100" cy="62" r="36" clip-path="url(#nr)" fill="rgb(74,143,232)"/><path d="M100,110 C65,110 38,138 38,168 L38,195 C38,203 44,209 52,209 L100,209 Z" clip-path="url(#nl)" fill="rgb(224,135,79)"/><path d="M100,110 C135,110 162,138 162,168 L162,195 C162,203 156,209 148,209 L100,209 Z" clip-path="url(#nr)" fill="rgb(74,143,232)"/></svg><span><span class="a">A</span><span class="b">B</span>Me</span></a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../experiments/index.html">Experiments</a>
+      <a href="index.html">Blog</a>
+      <a href="https://apps.apple.com/app/ab-me/id6746427726" class="btn-primary">App Store</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <article>
+    <a class="back-link" href="index.html">&larr; All posts</a>
+    <div class="post-category" style="color: #818cf8;">Sleep</div>
+    <h1>Does a Single Drink Impair My Sleep?</h1>
+    <div class="post-meta">7 min read &middot; Pre-loaded in ABMe</div>
+
+    <h2>The Question</h2>
+    <p>You had one glass of wine with dinner. Not a binge, not a party — just a single standard drink. You fell asleep at your normal time and slept your normal seven hours. So what's the problem?</p>
+    <p>The problem is that <strong>total sleep time is a terrible metric for sleep quality</strong>. What matters is what happens <em>inside</em> those seven hours — the architecture of your sleep stages, the autonomic recovery your nervous system achieves overnight, and whether your heart rate drops to the resting baseline it needs. A growing body of evidence suggests that even moderate alcohol consumption fundamentally reshapes this architecture in ways your wearable can detect but your subjective experience cannot.</p>
+    <p>Most people who track sleep notice that alcohol "helps them fall asleep." This is technically true — ethanol is a sedative. But sedation is not sleep. The question isn't whether you'll fall asleep faster. The question is whether the sleep you get is doing what it's supposed to do.</p>
+
+    <h2>What the Science Says</h2>
+    <p>A 2025 systematic review by <strong>Gardiner et al.</strong> in <em>Sleep Medicine Reviews</em> synthesized 68 studies examining alcohol's dose-dependent effects on polysomnographic sleep architecture [1]. Even at low doses (1-2 standard drinks), the findings are remarkably consistent: alcohol suppresses REM sleep in the first half of the night and produces a rebound effect in the second half, but the net effect across a full night is a significant reduction in total REM time. At a dose of one standard drink, the weighted mean REM reduction was approximately 11-12 minutes.</p>
+    <p>What surprises most people is the effect on deep sleep. <strong>Ebrahim et al. (2013)</strong> demonstrated that low-dose alcohol actually <em>increases</em> slow-wave sleep (N3) in the first sleep cycle [2]. This is the paradox of alcohol and sleep: your first 90-minute cycle looks better, while everything after it deteriorates. The net deep sleep increase of roughly 8 minutes comes at the direct expense of lighter NREM2 and REM stages that are critical for memory consolidation and emotional regulation.</p>
+    <p><strong>Pietila et al. (2018)</strong> moved beyond polysomnography to wearable-detectable metrics [3]. Using heart rate data from 4,098 participants, they found that even a single drink elevated resting heart rate by 3-5 bpm throughout the night and reduced HRV (SDNN) by approximately 5-7 ms. These are large effects by cardiovascular standards — your heart is working measurably harder to metabolize alcohol while you sleep, and the parasympathetic "rest and digest" nervous system is suppressed.</p>
+    <p>The critical insight for self-experimenters is that <strong>total sleep duration is essentially unaffected</strong>. You sleep the same number of minutes. This is precisely why subjective sleep assessments fail — you wake up after a normal-length sleep and assume the night was fine. Only the internal composition has changed.</p>
+
+    <h2>Experiment Design</h2>
+    <table class="design-table">
+      <tr><td>Treatment</td><td>One standard alcoholic drink with dinner (5 oz wine, 12 oz beer, or 1.5 oz spirits)</td></tr>
+      <tr><td>Control</td><td>No alcohol consumed that day</td></tr>
+      <tr><td>Primary Metric</td><td>REM Sleep (minutes)</td></tr>
+      <tr><td>Secondary Metrics</td><td>Deep Sleep (min), Sleep Duration (min), HRV / SDNN (ms), Resting Heart Rate (bpm)</td></tr>
+      <tr><td>Window</td><td>Bedtime to rising time</td></tr>
+      <tr><td>Unit Duration</td><td>1 day</td></tr>
+      <tr><td>Experiment Length</td><td>120 days</td></tr>
+      <tr><td>Washout</td><td>None (single-drink effects clear within one sleep cycle)</td></tr>
+    </table>
+
+    <div class="callout">
+      <p><strong>Why no washout?</strong> Alcohol's acute effects on sleep architecture are fully resolved by the following night. A single standard drink is metabolized within 3-5 hours, and no residual pharmacological effect persists into the next 24-hour period. This makes daily randomization without washout both practical and statistically valid.</p>
+    </div>
+
+    <div class="screenshot-box">
+      <img src="images/evening-alcohol-sleep.png" alt="ABMe confidence sequence chart showing significant REM sleep reduction from alcohol">
+      <div class="caption">ABMe detecting a significant 15.5-minute reduction in REM sleep from a single evening drink, with the confidence sequence excluding zero by day 49.</div>
+    </div>
+
+    <h2>Synthetic Results</h2>
+    <p>We simulated this experiment using the design-based confidence sequence framework (Theorem 6.1 from Ham et al. [4]) with effect sizes drawn from the literature above. Here are the 95% confidence sequences at day 120:</p>
+
+    <div class="results-box">
+      <h3>Confidence Sequences at Day 120</h3>
+      <div class="result-row">
+        <span class="result-label">REM Sleep</span>
+        <span class="result-value result-sig">-11.3 min &nbsp; CS [-18.5, -4.1]</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Resting Heart Rate</span>
+        <span class="result-value result-sig">+4.0 bpm &nbsp; CS [+2.3, +5.7]</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">HRV (SDNN)</span>
+        <span class="result-value result-sig">-5.7 ms &nbsp; CS [-10.1, -1.3]</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Deep Sleep</span>
+        <span class="result-value result-sig">+8.0 min &nbsp; CS [+1.4, +14.6]</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Sleep Duration</span>
+        <span class="result-value result-ns">-3.0 min &nbsp; CS [-22.4, +16.4]</span>
+      </div>
+    </div>
+
+    <h2>What This Means</h2>
+    <p>Four of five metrics reached statistical significance within 120 days, and the one that didn't — sleep duration — is exactly the result the literature predicts. This is what makes alcohol's effect on sleep so insidious: <strong>the metric most people use to judge their sleep (total time) is the one metric that doesn't change</strong>.</p>
+    <p>The REM reduction of 11.3 minutes is the headline finding. REM sleep is when your brain consolidates procedural memory, processes emotional experiences, and performs critical synaptic maintenance. Losing 11 minutes per night of drinking represents roughly a 12% reduction from a typical 92-minute REM baseline. Over months of regular moderate drinking, the cumulative REM deficit is substantial.</p>
+    <p>The deep sleep increase of 8 minutes is the counterintuitive result that often confuses people. Yes, alcohol genuinely increases slow-wave sleep — but this is a pharmacological artifact of sedation, not an improvement in sleep quality. The deep sleep gain occurs in the first half of the night and is more than offset by the second-half fragmentation that destroys REM architecture.</p>
+    <p>The cardiovascular effects are equally striking. A 4 bpm resting heart rate increase and 5.7 ms HRV decrease mean your autonomic nervous system is measurably less recovered on alcohol nights. Your body is spending metabolic resources processing ethanol instead of repairing tissue and consolidating memory.</p>
+
+    <h2>Tips for Running This Experiment</h2>
+    <ul>
+      <li><strong>Standardize your drink.</strong> Use exactly one standard drink: 5 oz of wine, 12 oz of beer, or 1.5 oz of spirits. Variation in dose introduces noise that makes the confidence sequence wider.</li>
+      <li><strong>Keep dinner timing consistent.</strong> Eat at roughly the same time on both treatment and control nights. A 6 PM drink metabolizes differently than a 9 PM drink relative to bedtime.</li>
+      <li><strong>Don't change your bedtime.</strong> The experiment measures alcohol's effect, not the effect of staying up later at a bar. Go to bed at your normal time on both conditions.</li>
+      <li><strong>Watch the secondary metrics.</strong> If your RHR and HRV effects are large but REM looks inconclusive, your wearable may have limited REM detection accuracy. The cardiovascular metrics are generally more reliable from wrist-based sensors.</li>
+      <li><strong>Be honest about compliance.</strong> If you were randomized to control but had a drink anyway, mark the day as non-compliant. The confidence sequence handles missing data gracefully — faking compliance just adds noise.</li>
+    </ul>
+
+    <div class="references">
+      <h2>References</h2>
+      <ol>
+        <li>Gardiner C, et al. "The effect of alcohol on sleep architecture: A systematic review and meta-analysis of controlled studies." <em>Sleep Medicine Reviews</em>, 2025;80:102030.</li>
+        <li>Ebrahim IO, et al. "Alcohol and sleep I: Effects on normal sleep." <em>Alcoholism: Clinical and Experimental Research</em>, 2013;37(4):539-549.</li>
+        <li>Pietila J, et al. "Acute effect of alcohol intake on cardiovascular autonomic regulation during the first hours of sleep in a large real-world sample." <em>JMIR Mental Health</em>, 2018;5(1):e23.</li>
+        <li>Ham D, Lindon M, Tingley D, Bojinov I. "Design-Based Confidence Sequences for Anytime-Valid Causal Inference." <em>NeurIPS</em>, 2023.</li>
+      </ol>
+    </div>
+
+    <div class="cta-box">
+      <h3>Run This Experiment Yourself</h3>
+      <p>This experiment is pre-loaded in ABMe. Tap to start and get your first randomized assignment tonight. The confidence sequence updates after every night — check your results anytime without inflating your error rate.</p>
+      <a href="https://apps.apple.com/app/ab-me/id6746427726" class="btn-primary">Download ABMe</a>
+    </div>
+  </article>
+
+  <footer>
+    <span>&copy; 2026 ABMe</span>
+    <span><a href="index.html">Blog</a> &middot; <a href="../index.html">Home</a>
+      <a href="../experiments/index.html">Experiments</a></span>
+  </footer>
+</div>
+</body>
+</html>

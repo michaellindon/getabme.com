@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" width="200" height="220">
+  <!--
+    ABMe Logo
+    Left half:  Theme.control     rgb(224, 135, 79)   — "A" condition
+    Right half: Theme.treatment   rgb(74, 143, 232)    — "B" condition
+  -->
+  <defs>
+    <clipPath id="leftHalf">
+      <rect x="0" y="0" width="100" height="220"/>
+    </clipPath>
+    <clipPath id="rightHalf">
+      <rect x="100" y="0" width="100" height="220"/>
+    </clipPath>
+  </defs>
+
+  <!-- Head: circle at (100, 62), radius 36 -->
+  <circle cx="100" cy="62" r="36" clip-path="url(#leftHalf)" fill="rgb(224,135,79)"/>
+  <circle cx="100" cy="62" r="36" clip-path="url(#rightHalf)" fill="rgb(74,143,232)"/>
+
+  <!-- Body: rounded torso shape -->
+  <!-- Left half — control -->
+  <path d="M100,110 C65,110 38,138 38,168 L38,195 C38,203 44,209 52,209 L100,209 Z"
+        clip-path="url(#leftHalf)" fill="rgb(224,135,79)"/>
+  <!-- Right half — treatment -->
+  <path d="M100,110 C135,110 162,138 162,168 L162,195 C162,203 156,209 148,209 L100,209 Z"
+        clip-path="url(#rightHalf)" fill="rgb(74,143,232)"/>
+</svg>

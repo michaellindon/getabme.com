@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="../logo.svg">
+<title>Does Caffeine Actually Make Me Run Faster? — ABMe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0b0f1a; --surface: #111726; --surface-2: #171e30; --border: #1f2940;
+    --border-light: #2a3654; --text: #eae6df; --text-muted: #8892a8;
+    --accent: #e8a838; --accent-dim: rgba(232,168,56,0.1); --accent-mid: rgba(232,168,56,0.25);
+    --mono: 'JetBrains Mono', monospace; --sans: 'Manrope', -apple-system, sans-serif;
+  }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .container { max-width: 720px; margin: 0 auto; padding: 0 28px; }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(11,15,26,0.88); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+  .nav-inner { max-width: 1120px; margin: 0 auto; padding: 14px 28px; display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-family: var(--mono); font-weight: 500; font-size: 17px; color: var(--text); display: flex; align-items: center; gap: 8px; text-decoration: none; }
+  .logo .a { color: rgb(224,135,79); } .logo .b { color: rgb(74,143,232); }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  nav a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.15s; }
+  nav a:hover { color: var(--text); }
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: var(--bg); padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; }
+  .btn-primary:hover { background: #d69a2e; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; margin-bottom: 24px; }
+  .back-link:hover { color: var(--text); }
+  article { padding: 120px 0 80px; }
+  .post-category { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500; margin-bottom: 14px; }
+  article h1 { font-size: clamp(28px,4vw,40px); font-weight: 800; letter-spacing: -1px; line-height: 1.15; margin-bottom: 16px; }
+  .post-meta { font-size: 14px; color: var(--text-muted); margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+  article h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; margin: 40px 0 12px; }
+  article p { font-size: 16px; color: var(--text-muted); line-height: 1.8; margin-bottom: 16px; }
+  article p strong { color: var(--text); font-weight: 600; }
+  article ul, article ol { margin: 0 0 16px 20px; color: var(--text-muted); font-size: 16px; line-height: 1.8; }
+  article li { margin-bottom: 4px; }
+  .design-table { width: 100%; border-collapse: collapse; margin: 24px 0 32px; font-size: 14px; }
+  .design-table td { padding: 10px 16px; border-bottom: 1px solid var(--border); color: var(--text-muted); }
+  .design-table td:first-child { font-weight: 500; color: var(--text); white-space: nowrap; }
+  .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 24px 0; }
+  .callout p { margin: 0; font-size: 15px; }
+  .results-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin: 24px 0; }
+  .results-box h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: var(--accent); }
+  .result-row { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+  .result-row:last-child { border-bottom: none; }
+  .result-label { color: var(--text); font-weight: 500; }
+  .result-value { font-family: var(--mono); font-size: 13px; }
+  .result-sig { color: #4ade80; }
+  .result-ns { color: var(--text-muted); }
+  .references { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .references h2 { font-size: 18px; margin-bottom: 16px; }
+  .references ol { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+  .references li { margin-bottom: 8px; }
+  .cta-box { background: linear-gradient(135deg, var(--surface), rgba(232,168,56,0.04)); border: 1px solid var(--accent-mid); border-radius: 14px; padding: 36px; text-align: center; margin: 48px 0; }
+  .cta-box h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .cta-box p { text-align: center; margin-bottom: 20px; }
+  .screenshot-box { margin: 32px 0; text-align: center; }
+  .screenshot-box img { max-width: 300px; border-radius: 24px; border: 2px solid var(--border); box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
+  .screenshot-box .caption { font-size: 13px; color: var(--text-muted); margin-top: 12px; font-style: italic; }
+  footer { border-top: 1px solid var(--border); padding: 24px 0; display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); }
+  footer a { color: var(--text-muted); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+  @media (max-width: 640px) { .nav-links a:not(.btn-primary) { display: none; } footer { flex-direction: column; gap: 8px; } }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="../index.html"><svg width="22" height="24" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="nl"><rect x="0" y="0" width="100" height="220"/></clipPath><clipPath id="nr"><rect x="100" y="0" width="100" height="220"/></clipPath></defs><circle cx="100" cy="62" r="36" clip-path="url(#nl)" fill="rgb(224,135,79)"/><circle cx="100" cy="62" r="36" clip-path="url(#nr)" fill="rgb(74,143,232)"/><path d="M100,110 C65,110 38,138 38,168 L38,195 C38,203 44,209 52,209 L100,209 Z" clip-path="url(#nl)" fill="rgb(224,135,79)"/><path d="M100,110 C135,110 162,138 162,168 L162,195 C162,203 156,209 148,209 L100,209 Z" clip-path="url(#nr)" fill="rgb(74,143,232)"/></svg><span><span class="a">A</span><span class="b">B</span>Me</span></a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../experiments/index.html">Experiments</a>
+      <a href="index.html">Blog</a>
+      <a href="https://apps.apple.com/app/ab-me/id6746427726" class="btn-primary">App Store</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <article>
+    <a class="back-link" href="index.html">&larr; All Posts</a>
+    <div class="post-category" style="color: #e8a838;">Performance</div>
+    <h1>Does Caffeine Actually Make Me Run Faster?</h1>
+    <div class="post-meta">April 14, 2026 &middot; 6 min read</div>
+
+    <h2>The Question</h2>
+    <p>Caffeine is the most widely consumed psychoactive substance on the planet, and by far the most studied ergogenic aid in sports science. Runners swear by their pre-run espresso. Supplement companies sell caffeinated gels, chews, and capsules with bold performance claims. The research literature is overwhelmingly positive at the population level.</p>
+    <p>But population-level evidence hides enormous individual variation. <strong>Genetic differences in caffeine metabolism (CYP1A2 polymorphisms) mean that the same 200 mg dose can be a turbocharger for one runner and a jittery, stomach-churning disaster for another.</strong> Your training history, habitual caffeine intake, body weight, and even your gut microbiome all modulate the response.</p>
+    <p>The only way to know whether caffeine makes <em>you</em> faster is to run a proper randomized experiment on yourself, with your Apple Watch recording every split.</p>
+
+    <h2>What the Science Says</h2>
+    <p>Southward et al. (2018) conducted a comprehensive meta-analysis of 46 studies and found that caffeine improves endurance performance by an average of <strong>2-4%</strong>, with the most consistent effects at doses of 3-6 mg per kg of body weight [1]. For a 70 kg runner, that is 210-420 mg, roughly one to two strong coffees.</p>
+    <p>The mechanism is well understood. Caffeine is an adenosine receptor antagonist: it blocks the neurotransmitter that accumulates during wakefulness and makes you feel tired. In exercise, this translates to a <strong>reduced rating of perceived exertion (RPE)</strong>, meaning the same pace feels easier [3]. You do not gain more muscle or more aerobic capacity. You simply tolerate discomfort better, which lets you push harder for longer.</p>
+    <p>Guest et al. (2021) published an International Society of Sports Nutrition position stand confirming caffeine's ergogenic effects across endurance, strength, and high-intensity exercise, while noting that <strong>habitual caffeine users may experience attenuated benefits</strong> [2]. This is precisely why self-experimentation matters: if you drink three cups of coffee a day, the marginal benefit of a pre-run capsule could be smaller than the literature suggests.</p>
+    <p>The optimal timing window is <strong>30-60 minutes before exercise</strong>, when plasma caffeine concentrations peak. Capsule form provides more precise dosing than coffee, which varies wildly in caffeine content depending on brew method, bean, and serving size.</p>
+
+    <h2>Experiment Design</h2>
+    <table class="design-table">
+      <tr><td>Treatment</td><td>200 mg caffeine capsule, taken 30 min before running</td></tr>
+      <tr><td>Control</td><td>Placebo capsule (no caffeine), taken 30 min before running</td></tr>
+      <tr><td>Primary Metric</td><td>Running Pace (m/s)</td></tr>
+      <tr><td>Secondary Metrics</td><td>Workout Duration (min), Workout Calories (kcal)</td></tr>
+      <tr><td>Window</td><td>Workout start to workout end</td></tr>
+      <tr><td>Duration</td><td>90 days</td></tr>
+      <tr><td>Unit Length</td><td>1 day (daily randomization)</td></tr>
+      <tr><td>Washout</td><td>None (caffeine half-life ~5 hours, next-day carryover negligible)</td></tr>
+    </table>
+
+    <div class="callout">
+      <p><strong>Why a placebo capsule matters.</strong> Unlike the magnesium experiment where the outcome (deep sleep) is measured unconsciously by your watch, running performance is partially influenced by psychology. If you know you took caffeine, you might push harder simply because you expect to feel faster. A placebo capsule controls for this expectation effect. Have someone else prepare identical-looking capsules, or use a blinding service, to ensure your experiment is rigorous.</p>
+    </div>
+
+    <div class="screenshot-box">
+      <img src="images/pre-run-caffeine-pace.png" alt="ABMe confidence sequence chart showing significant running pace increase from pre-workout caffeine">
+      <div class="caption">ABMe detecting a significant running pace improvement from 200 mg pre-run caffeine, with the confidence sequence excluding zero by day 37.</div>
+    </div>
+
+    <h2>Synthetic Results</h2>
+    <p>We simulated 90 days of daily-randomized running data using effect sizes from the published literature and the design-based confidence sequence framework [4]. These results illustrate what a real experiment might show for a runner who genuinely responds to caffeine.</p>
+
+    <div class="results-box">
+      <h3>Day 90 Results (95% Confidence Sequence)</h3>
+      <div class="result-row">
+        <span class="result-label">Running Pace</span>
+        <span class="result-value result-sig">+0.12 m/s &nbsp; [+0.04, +0.20]</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Workout Duration</span>
+        <span class="result-value result-sig">+5.0 min &nbsp; [+1.8, +8.2]</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Workout Calories</span>
+        <span class="result-value result-sig">+40 kcal &nbsp; [+11, +69]</span>
+      </div>
+    </div>
+
+    <h2>What This Means</h2>
+    <p>All three metrics reached statistical significance by day 90. The primary finding: <strong>caffeine increased running pace by 0.12 m/s, a 4% improvement</strong>. To put that in concrete terms, if your baseline 5K pace is 25:00, a 4% improvement brings you to approximately 24:00. That is a meaningful jump, the kind of gain that normally takes weeks of structured training to achieve.</p>
+    <p>The secondary metrics tell a coherent story. Workout duration increased by 5 minutes, suggesting that caffeine extended the point at which fatigue forced a stop. Calorie expenditure increased by 40 kcal, a natural consequence of running longer and faster. All three results point in the same direction: caffeine genuinely enhanced this runner's performance.</p>
+    <p>Importantly, the confidence sequence is <strong>anytime-valid</strong>. If the pace effect had been obvious by day 20, you could have stopped the experiment early with full statistical certainty. No need to wait for an arbitrary "end date." If the effect were smaller or absent, the bounds would simply remain wide, telling you honestly that you do not yet have enough evidence.</p>
+
+    <h2>Tips for Running This Experiment</h2>
+    <ul>
+      <li><strong>Use capsules, not coffee.</strong> A standard cup of drip coffee contains anywhere from 80 to 200 mg of caffeine depending on the brew. Capsules give you a precise, repeatable dose. Buy 200 mg caffeine capsules and identical-looking placebo capsules from a compounding pharmacy or supplement retailer.</li>
+      <li><strong>Run the same route.</strong> Pace is heavily influenced by terrain, elevation, wind, and temperature. Reducing route variability reduces noise. If you cannot run the same route every day, at least keep the route category consistent (flat road vs. hilly trail).</li>
+      <li><strong>Time your dose precisely.</strong> Caffeine peaks in plasma at 30-60 minutes post-ingestion. Set a timer. Taking it 5 minutes before you walk out the door wastes most of the ergogenic window.</li>
+      <li><strong>Avoid stacking stimulants.</strong> If you drink a morning coffee at 7 AM and run at 6 PM, residual caffeine is minimal. But if you drink coffee at 3 PM and run at 4 PM, the experimental caffeine is layered on top of dietary caffeine, confounding the result.</li>
+      <li><strong>Record non-run days too.</strong> If the app randomizes you to caffeine on a rest day, that is fine. The confidence sequence simply skips days without workout data. But do not skip running days because you "do not feel like it" after seeing your assignment, as that introduces selection bias.</li>
+    </ul>
+
+    <div class="references">
+      <h2>References</h2>
+      <ol>
+        <li>Southward K, et al. Caffeine ingestion and endurance performance: a meta-analysis. Sports Medicine, 2018;48(8):1913-1928.</li>
+        <li>Guest NS, et al. International Society of Sports Nutrition position stand: caffeine and exercise performance. JISSN, 2021;18(1):1.</li>
+        <li>Doherty M, Smith PM. Effects of caffeine ingestion on rating of perceived exertion during and after exercise. International Journal of Sport Nutrition and Exercise Metabolism, 2005;15(1):69-83.</li>
+        <li>Ham D, Lindon M, Tingley D, Bojinov I. Design-Based Confidence Sequences. NeurIPS, 2023.</li>
+      </ol>
+    </div>
+
+    <div class="cta-box">
+      <h3>Find Out If Caffeine Works for You</h3>
+      <p>Set up a rigorous pre-workout caffeine experiment in ABMe. Your Apple Watch tracks every run. The confidence sequence tells you when you have a real answer.</p>
+      <a href="https://apps.apple.com/app/ab-me/id6746427726" class="btn-primary">Download ABMe</a>
+    </div>
+  </article>
+
+  <footer>
+    <span>&copy; 2026 ABMe</span>
+    <span><a href="index.html">Blog</a> &middot; <a href="../index.html">Home</a>
+      <a href="../experiments/index.html">Experiments</a></span>
+  </footer>
+</div>
+</body>
+</html>
