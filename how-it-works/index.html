@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="../logo.svg">
+<title>How It Works — ABMe</title>
+<meta name="description" content="A plain-English explanation of how ABMe helps you find out whether a habit, supplement, or routine actually works for you.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0b0f1a; --surface: #111726; --surface-2: #171e30; --border: #1f2940;
+    --border-light: #2a3654; --text: #eae6df; --text-muted: #8892a8;
+    --accent: #e8a838; --accent-dim: rgba(232,168,56,0.1); --accent-mid: rgba(232,168,56,0.25);
+    --treatment: #4a8fe7; --control: #e0884e;
+    --mono: 'JetBrains Mono', monospace; --sans: 'Manrope', -apple-system, sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  .container { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+  /* Nav (matches the rest of the site) */
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(11,15,26,0.88); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+  .nav-inner { max-width: 1120px; margin: 0 auto; padding: 14px 28px; display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-family: var(--mono); font-weight: 500; font-size: 17px; color: var(--text); display: flex; align-items: center; gap: 8px; text-decoration: none; }
+  .logo .a { color: rgb(224,135,79); } .logo .b { color: rgb(74,143,232); }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  nav a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.15s; }
+  nav a:hover, nav a.active { color: var(--text); }
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: var(--bg); padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; }
+  .btn-primary:hover { background: #d69a2e; }
+  .btn-secondary { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border-light); color: var(--text); padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; }
+  .btn-secondary:hover { border-color: var(--accent-mid); }
+
+  /* Page header */
+  .page-hero { padding: 130px 0 48px; }
+  .overline { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); margin-bottom: 14px; }
+  .page-hero h1 { font-size: clamp(32px, 5vw, 50px); font-weight: 800; letter-spacing: -1.4px; line-height: 1.1; margin-bottom: 18px; }
+  .page-hero h1 em { font-style: normal; color: var(--accent); }
+  .page-hero .lede { font-size: 18px; color: var(--text-muted); line-height: 1.7; max-width: 620px; }
+  .page-hero .lede strong { color: var(--text); font-weight: 600; }
+
+  /* Prose */
+  section { padding: 40px 0; border-top: 1px solid var(--border); }
+  h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 14px; }
+  h2 em { font-style: normal; color: var(--accent); }
+  p { font-size: 16px; color: var(--text-muted); line-height: 1.8; margin-bottom: 16px; }
+  p strong { color: var(--text); font-weight: 600; }
+  p a { color: var(--accent); text-decoration: none; }
+  p a:hover { text-decoration: underline; }
+  .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 24px 0; }
+  .callout p { margin: 0; font-size: 15px; }
+
+  /* Steps */
+  .steps { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
+  .step { display: grid; grid-template-columns: 56px 1fr; gap: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px 24px; }
+  .step-num { font-family: var(--mono); font-size: 13px; color: var(--accent); font-weight: 500; padding-top: 4px; }
+  .step h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .step p { margin-bottom: 0; font-size: 15px; }
+  .step p + p { margin-top: 10px; }
+
+  /* Coin-flip strip */
+  .strip-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px 24px 18px; margin: 24px 0; }
+  .strip-title { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); margin-bottom: 14px; }
+  .strip { display: flex; gap: 6px; flex-wrap: wrap; }
+  .strip span { width: 26px; height: 26px; border-radius: 6px; font-family: var(--mono); font-size: 11px; display: flex; align-items: center; justify-content: center; color: #0b0f1a; font-weight: 600; }
+  .strip .t { background: var(--treatment); }
+  .strip .c { background: var(--control); }
+  .strip-legend { display: flex; gap: 20px; margin-top: 14px; font-size: 13px; color: var(--text-muted); }
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+  .dot.t { background: var(--treatment); } .dot.c { background: var(--control); }
+
+  /* Narrowing range diagram */
+  .range-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px 24px; margin: 24px 0; }
+  .range-row { display: grid; grid-template-columns: 72px 1fr; align-items: center; gap: 14px; margin-bottom: 10px; }
+  .range-label { font-family: var(--mono); font-size: 11px; color: var(--text-muted); text-align: right; }
+  .range-track { position: relative; height: 18px; }
+  .range-zero { position: absolute; left: 35%; top: -4px; bottom: -4px; width: 1px; background: var(--border-light); }
+  .range-bar { position: absolute; top: 3px; height: 12px; border-radius: 6px; background: rgba(74,143,231,0.35); border: 1px solid rgba(74,143,231,0.7); }
+  .range-bar.final { background: rgba(74,143,231,0.7); }
+  .range-caption { font-size: 13px; color: var(--text-muted); margin-top: 14px; }
+  .range-caption .z { font-family: var(--mono); font-size: 11px; }
+
+  /* Example */
+  .example-table { width: 100%; border-collapse: collapse; margin: 20px 0 24px; font-size: 14px; }
+  .example-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-muted); vertical-align: top; }
+  .example-table td:first-child { font-weight: 500; color: var(--text); white-space: nowrap; width: 150px; }
+
+  /* FAQ */
+  .faq { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+  .faq details { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 0 20px; }
+  .faq summary { cursor: pointer; font-size: 16px; font-weight: 600; padding: 16px 0; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; font-family: var(--mono); color: var(--accent); font-size: 18px; }
+  .faq details[open] summary::after { content: '−'; }
+  .faq details p { font-size: 15px; padding-bottom: 16px; margin: 0; }
+  .faq details p + p { padding-top: 10px; }
+
+  /* CTA */
+  .cta-box { background: linear-gradient(135deg, var(--surface), rgba(232,168,56,0.04)); border: 1px solid var(--accent-mid); border-radius: 14px; padding: 40px 36px; text-align: center; margin: 48px 0; }
+  .cta-box h2 { font-size: 24px; margin-bottom: 8px; }
+  .cta-box p { margin-bottom: 22px; }
+  .cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  footer { border-top: 1px solid var(--border); padding: 24px 0; display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); }
+  footer a { color: var(--text-muted); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+
+  @media (max-width: 640px) {
+    .nav-links a:not(.btn-primary) { display: none; }
+    .page-hero { padding-top: 110px; }
+    .step { grid-template-columns: 1fr; gap: 6px; }
+    .example-table td:first-child { width: auto; white-space: normal; }
+    footer { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="../index.html"><svg width="22" height="24" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="nl"><rect x="0" y="0" width="100" height="220"/></clipPath><clipPath id="nr"><rect x="100" y="0" width="100" height="220"/></clipPath></defs><circle cx="100" cy="62" r="36" clip-path="url(#nl)" fill="rgb(224,135,79)"/><circle cx="100" cy="62" r="36" clip-path="url(#nr)" fill="rgb(74,143,232)"/><path d="M100,110 C65,110 38,138 38,168 L38,195 C38,203 44,209 52,209 L100,209 Z" clip-path="url(#nl)" fill="rgb(224,135,79)"/><path d="M100,110 C135,110 162,138 162,168 L162,195 C162,203 156,209 148,209 L100,209 Z" clip-path="url(#nr)" fill="rgb(74,143,232)"/></svg><span><span class="a">A</span><span class="b">B</span>Me</span></a>
+    <div class="nav-links">
+      <a href="../how-it-works/index.html" class="active">How It Works</a>
+      <a href="../index.html#hardware">Devices</a>
+      <a href="../index.html#privacy">Privacy</a>
+      <a href="../index.html#community">Community</a>
+      <a href="../experiments/index.html">Experiments</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUIUJBtQCGMjL7C8JgCRhozEFw1dMqrdEfdmFISsPyiO5ZXQ/viewform?usp=dialog" target="_blank" class="btn-primary">
+        Request Early Access
+      </a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="page-hero">
+    <div class="overline">How It Works</div>
+    <h1>Find out what <em>actually</em> works for you. No science degree required.</h1>
+    <p class="lede">You've probably tried a new supplement, an earlier bedtime, or a cold shower and wondered: <strong>is this doing anything, or do I just want it to?</strong> ABMe is an app that answers that question properly. Here is how, in plain English.</p>
+  </div>
+
+  <!-- ───── The problem ───── -->
+  <section id="problem">
+    <h2>Why "just trying it for a month" doesn't tell you much</h2>
+    <p>Say you start taking magnesium and, a few weeks later, you feel like you're sleeping better. Was it the magnesium? Or was it the cooler weather, the holiday you took, the fact you stopped checking email in bed, or simply that you expected it to help?</p>
+    <p>All of those things changed in the same month. Your body doesn't label which one caused what. So when you compare "the month before" with "the month after," you're really comparing two different periods of your life, not the supplement against no supplement.</p>
+    <div class="callout">
+      <p><strong>The fix is surprisingly simple: don't choose when to do the thing. Let a coin flip choose.</strong> If a coin decides which nights you take magnesium, then the weather, your stress, and your expectations get spread evenly across both kinds of nights. Any difference left over has to be the magnesium.</p>
+    </div>
+    <p>That's the whole idea behind ABMe. It flips the coin for you, keeps score, and tells you when there is a real difference.</p>
+  </section>
+
+  <!-- ───── The steps ───── -->
+  <section id="steps">
+    <h2>What you actually do</h2>
+    <p>An experiment in ABMe is a comparison between two versions of your life. Call them <strong>A</strong> and <strong>B</strong>: with the thing, and without it. You spend a stretch of time switching between the two, and the app works out which one was better for you.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div>
+          <h3>Pick a question</h3>
+          <p>Choose one of the ready-made experiments in the <a href="../experiments/index.html">library</a>, such as "Does a 10 AM caffeine cut-off deepen my sleep?" or "Do carbon-plated shoes make me faster?", or write your own. You decide what A and B mean (for example, "no caffeine after 10 AM" versus "my usual habits") and what you want to measure, like minutes of deep sleep.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div>
+          <h3>Let the app flip the coin</h3>
+          <p>Experiments are split into small chunks. Depending on the question, a chunk might be a night, a day, or a single workout. Each time a new chunk begins, you tap once and ABMe randomly tells you whether this one is an A or a B. You don't get to pick, and that is the point.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div>
+          <h3>Live it</h3>
+          <p>Do what the app told you. Skip the afternoon coffee, or don't. Wear the racing shoes, or the trainers. Then get on with your day as normal.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div>
+          <h3>Your wearable keeps score</h3>
+          <p>If you wear an Apple Watch, Oura ring, WHOOP, Garmin, Fitbit, or any other device that syncs to Apple Health, ABMe reads the result for each chunk automatically: how long you slept, your heart rate, your pace, and so on. Nothing to write down. For things no device can measure, you can type the result in yourself.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <div>
+          <h3>See the answer</h3>
+          <p>ABMe sorts your results into the A pile and the B pile and compares them. Rather than a simple "yes" or "no," it shows you a range of how big the difference could be, and that range narrows as the experiment goes on. Once the range clearly sits on one side of "no difference," you have your answer. You can stop whenever the picture is clear enough for you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── The coin flip, visually ───── -->
+  <section id="coin">
+    <h2>What the coin flip looks like</h2>
+    <p>Here is what six weeks of a sleep experiment might look like. Each square is one night. Blue nights are A (the new habit), orange nights are B (your usual routine). Notice there's no pattern. That's deliberate.</p>
+    <div class="strip-box">
+      <div class="strip-title">42 nights, assigned at random</div>
+      <div class="strip" id="strip" aria-label="A random sequence of A and B nights"></div>
+      <div class="strip-legend">
+        <span><span class="dot t"></span>A: the new habit</span>
+        <span><span class="dot c"></span>B: your usual routine</span>
+      </div>
+    </div>
+    <p>Because both kinds of night are scattered across the same six weeks, they share the same weather, the same work deadlines, and the same mood swings. When you average the blue nights and the orange nights, all of that cancels out. What's left is the effect of the habit itself.</p>
+  </section>
+
+  <!-- ───── Reading the result ───── -->
+  <section id="result">
+    <h2>How to read the result</h2>
+    <p>ABMe doesn't ask you to trust a single number. Instead it shows a <strong>range</strong>: the smallest and largest difference that is still believable given what it has seen so far. Early on, with only a handful of nights, that range is wide, because almost anything is still possible. Each new night makes it a little narrower.</p>
+
+    <div class="range-box">
+      <div class="range-row"><div class="range-label">week 1</div><div class="range-track"><div class="range-zero"></div><div class="range-bar" style="left:4%; width:84%"></div></div></div>
+      <div class="range-row"><div class="range-label">week 2</div><div class="range-track"><div class="range-zero"></div><div class="range-bar" style="left:18%; width:62%"></div></div></div>
+      <div class="range-row"><div class="range-label">week 3</div><div class="range-track"><div class="range-zero"></div><div class="range-bar" style="left:28%; width:46%"></div></div></div>
+      <div class="range-row"><div class="range-label">week 4</div><div class="range-track"><div class="range-zero"></div><div class="range-bar" style="left:34%; width:36%"></div></div></div>
+      <div class="range-row"><div class="range-label">week 5</div><div class="range-track"><div class="range-zero"></div><div class="range-bar final" style="left:40%; width:28%"></div></div></div>
+      <div class="range-caption">The thin grey line is <span class="z">"no difference."</span> By week 5 the whole range sits to its right, so the new habit is helping, and by roughly how much.</div>
+    </div>
+
+    <p>Three things can happen:</p>
+    <p><strong>The range ends up entirely on the "better" side.</strong> The habit works for you, and the range tells you by about how much. Keep it.</p>
+    <p><strong>The range ends up entirely on the "worse" side.</strong> The habit is hurting. Good to know, and now you can drop it with a clear conscience.</p>
+    <p><strong>The range hugs "no difference."</strong> Whatever effect exists is too small to matter, at least for you. Save your money and move on.</p>
+    <p>Unlike most studies, you don't have to decide in advance how long to run things. ABMe's maths is built so that you can peek at the result every single day and stop the moment the picture is clear, without fooling yourself. Many of the experiments in the library resolve in five to eight weeks.</p>
+  </section>
+
+  <!-- ───── Worked example ───── -->
+  <section id="example">
+    <h2>A real example, start to finish</h2>
+    <p>Take the most popular experiment in the app: the <a href="../blog/caffeine-curfew-sleep.html">10 AM caffeine curfew</a>.</p>
+    <table class="example-table">
+      <tr><td>The question</td><td>Does cutting caffeine after 10 AM give me more deep sleep?</td></tr>
+      <tr><td>A (the new habit)</td><td>No caffeine of any kind after 10 AM. Morning coffee is fine.</td></tr>
+      <tr><td>B (usual routine)</td><td>Drink coffee and tea whenever I normally would.</td></tr>
+      <tr><td>One chunk</td><td>A single day and the night that follows it.</td></tr>
+      <tr><td>What's measured</td><td>Minutes of deep sleep that night, read from your watch or ring.</td></tr>
+      <tr><td>Each morning</td><td>Tap once. The app says "today is A" or "today is B." Follow it.</td></tr>
+      <tr><td>The answer</td><td>Typically clear within about five weeks. The app shows how many extra minutes of deep sleep the curfew is worth to you, if any.</td></tr>
+    </table>
+    <p>That's it. No spreadsheets, no formulas, no remembering to log anything. One tap in the morning, live your day, and let the watch and the app do the rest.</p>
+  </section>
+
+  <!-- ───── FAQ ───── -->
+  <section id="faq">
+    <h2>Common questions</h2>
+    <div class="faq">
+      <details>
+        <summary>Why can't I just pick which days to do it?</summary>
+        <p>Because you'd pick badly without meaning to. People tend to start the new habit on a good day, skip it when they're stressed, and try harder on the days they're being measured. None of that is dishonest, it's just human. Handing the choice to a coin flip removes you from the decision, which is the only way to be sure the difference you see is real.</p>
+      </details>
+      <details>
+        <summary>Doesn't switching back and forth make it harder?</summary>
+        <p>Slightly, but that's what makes the answer trustworthy. For some things that linger in your system, the app can build in a gap between switches so one chunk doesn't bleed into the next. The ready-made experiments already have sensible settings for this.</p>
+      </details>
+      <details>
+        <summary>How long does an experiment take?</summary>
+        <p>It depends on how big the effect is and how noisy the measurement is. Big, obvious effects show up in a couple of weeks. Subtle ones take longer. The nice part is that you don't have to guess up front: the range on screen narrows as you go, and you stop when it's clear enough. Most library experiments land in five to eight weeks.</p>
+      </details>
+      <details>
+        <summary>What if I forget, or cave and have the coffee anyway?</summary>
+        <p>It happens. Mark that chunk as "didn't follow it" in the app and carry on. One slip won't ruin the experiment. Pretending you followed it when you didn't is the only thing that will, because then the two piles get mixed up.</p>
+      </details>
+      <details>
+        <summary>Do I need a wearable?</summary>
+        <p>For anything about sleep, heart rate, recovery, or exercise, yes. A wearable is what turns "I think I slept well" into an actual number, and it does the recording for you. Any device that syncs to Apple Health works. For things no device measures, you can type the result in yourself after each chunk.</p>
+      </details>
+      <details>
+        <summary>Is this the same as a medical study?</summary>
+        <p>It uses the same core idea, randomization, that clinical trials and the big tech companies' A/B tests rely on. The difference is the subject. A clinical trial tells you what works on average across thousands of people. ABMe tells you what works for one person: you. Those can be very different answers. ABMe is a tool for curiosity and self-knowledge, not a medical device, and it's no substitute for your doctor.</p>
+      </details>
+      <details>
+        <summary>Who sees my data?</summary>
+        <p>Nobody. ABMe has no accounts and no servers. Everything is stored and calculated on your own phone. If you choose to share a result with the community, you share the result, not your raw health data.</p>
+      </details>
+      <details>
+        <summary>Can I try an experiment someone else ran?</summary>
+        <p>Yes. When someone shares an experiment, you can load their exact setup with one tap and run it on yourself. If the effect shows up for you too, that's much stronger evidence than any single person's story.</p>
+      </details>
+    </div>
+  </section>
+
+  <div class="cta-box">
+    <h2>Ready to stop guessing?</h2>
+    <p>Browse the ready-made experiments, or request early access and run your first one this week.</p>
+    <div class="cta-actions">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUIUJBtQCGMjL7C8JgCRhozEFw1dMqrdEfdmFISsPyiO5ZXQ/viewform?usp=dialog" target="_blank" class="btn-primary">Request Early Access</a>
+      <a href="../experiments/index.html" class="btn-secondary">Browse Experiments</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>&copy; 2026 ABMe</span>
+    <span><a href="../index.html">Home</a> &middot; <a href="../blog/index.html">Blog</a> &middot; <a href="../experiments/index.html">Experiments</a></span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  // A fixed, random-looking sequence so the strip is the same on every visit.
+  var seq = 'ABBABAABBBABABAABABBAABBABAABABBBAABABBAAB';
+  var el = document.getElementById('strip');
+  var html = '';
+  for (var i = 0; i < seq.length; i++) {
+    var isA = seq[i] === 'A';
+    html += '<span class="' + (isA ? 't' : 'c') + '" title="Night ' + (i + 1) + ': ' + seq[i] + '">' + seq[i] + '</span>';
+  }
+  el.innerHTML = html;
+})();
+</script>
+</body>
+</html>
