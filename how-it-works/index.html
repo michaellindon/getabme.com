@@ -3,36 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/svg+xml" href="../logo.svg">
 <title>How It Works — ABMe</title>
 <meta name="description" content="A plain-English explanation of how ABMe helps you find out whether a habit, supplement, or routine actually works for you.">
+<link rel="canonical" href="https://getabme.com/how-it-works/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ABMe">
+<meta property="og:title" content="How It Works — ABMe">
+<meta property="og:description" content="A plain-English explanation of how ABMe helps you find out whether a habit, supplement, or routine actually works for you.">
+<meta property="og:url" content="https://getabme.com/how-it-works/">
+<meta property="og:image" content="https://getabme.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How It Works — ABMe">
+<meta name="twitter:description" content="A plain-English explanation of how ABMe helps you find out whether a habit, supplement, or routine actually works for you.">
+<meta name="twitter:image" content="https://getabme.com/og-image.png">
+<link rel="icon" type="image/svg+xml" href="../logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  :root {
-    --bg: #0b0f1a; --surface: #111726; --surface-2: #171e30; --border: #1f2940;
-    --border-light: #2a3654; --text: #eae6df; --text-muted: #8892a8;
-    --accent: #e8a838; --accent-dim: rgba(232,168,56,0.1); --accent-mid: rgba(232,168,56,0.25);
-    --treatment: #4a8fe7; --control: #e0884e;
-    --mono: 'JetBrains Mono', monospace; --sans: 'Manrope', -apple-system, sans-serif;
-  }
-  html { scroll-behavior: smooth; }
-  body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-  .container { max-width: 760px; margin: 0 auto; padding: 0 28px; }
-
-  /* Nav (matches the rest of the site) */
-  nav { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(11,15,26,0.88); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
-  .nav-inner { max-width: 1120px; margin: 0 auto; padding: 14px 28px; display: flex; justify-content: space-between; align-items: center; }
-  .logo { font-family: var(--mono); font-weight: 500; font-size: 17px; color: var(--text); display: flex; align-items: center; gap: 8px; text-decoration: none; }
-  .logo .a { color: rgb(224,135,79); } .logo .b { color: rgb(74,143,232); }
-  .nav-links { display: flex; gap: 28px; align-items: center; }
-  nav a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.15s; }
-  nav a:hover, nav a.active { color: var(--text); }
-  .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: var(--bg); padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; }
-  .btn-primary:hover { background: #d69a2e; }
-  .btn-secondary { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border-light); color: var(--text); padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; }
-  .btn-secondary:hover { border-color: var(--accent-mid); }
+  .container { max-width: 760px; }
 
   /* Page header */
   .page-hero { padding: 130px 0 48px; }
@@ -94,6 +86,7 @@
   .faq summary { cursor: pointer; font-size: 16px; font-weight: 600; padding: 16px 0; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
   .faq summary::-webkit-details-marker { display: none; }
   .faq summary::after { content: '+'; font-family: var(--mono); color: var(--accent); font-size: 18px; }
+  .faq summary:focus-visible { outline-offset: 2px; }
   .faq details[open] summary::after { content: '−'; }
   .faq details p { font-size: 15px; padding-bottom: 16px; margin: 0; }
   .faq details p + p { padding-top: 10px; }
@@ -104,16 +97,10 @@
   .cta-box p { margin-bottom: 22px; }
   .cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
-  footer { border-top: 1px solid var(--border); padding: 24px 0; display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); }
-  footer a { color: var(--text-muted); text-decoration: none; }
-  footer a:hover { color: var(--text); }
-
   @media (max-width: 640px) {
-    .nav-links a:not(.btn-primary) { display: none; }
     .page-hero { padding-top: 110px; }
     .step { grid-template-columns: 1fr; gap: 6px; }
     .example-table td:first-child { width: auto; white-space: normal; }
-    footer { flex-direction: column; gap: 8px; }
   }
 </style>
 </head>
@@ -121,17 +108,18 @@
 
 <nav>
   <div class="nav-inner">
-    <a class="logo" href="../index.html"><svg width="22" height="24" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="nl"><rect x="0" y="0" width="100" height="220"/></clipPath><clipPath id="nr"><rect x="100" y="0" width="100" height="220"/></clipPath></defs><circle cx="100" cy="62" r="36" clip-path="url(#nl)" fill="rgb(224,135,79)"/><circle cx="100" cy="62" r="36" clip-path="url(#nr)" fill="rgb(74,143,232)"/><path d="M100,110 C65,110 38,138 38,168 L38,195 C38,203 44,209 52,209 L100,209 Z" clip-path="url(#nl)" fill="rgb(224,135,79)"/><path d="M100,110 C135,110 162,138 162,168 L162,195 C162,203 156,209 148,209 L100,209 Z" clip-path="url(#nr)" fill="rgb(74,143,232)"/></svg><span><span class="a">A</span><span class="b">B</span>Me</span></a>
-    <div class="nav-links">
+    <a class="logo" href="../index.html"><svg width="22" height="24" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><clipPath id="nl"><rect x="0" y="0" width="100" height="220"/></clipPath><clipPath id="nr"><rect x="100" y="0" width="100" height="220"/></clipPath></defs><circle cx="100" cy="62" r="36" clip-path="url(#nl)" fill="rgb(224,135,79)"/><circle cx="100" cy="62" r="36" clip-path="url(#nr)" fill="rgb(74,143,232)"/><path d="M100,110 C65,110 38,138 38,168 L38,195 C38,203 44,209 52,209 L100,209 Z" clip-path="url(#nl)" fill="rgb(224,135,79)"/><path d="M100,110 C135,110 162,138 162,168 L162,195 C162,203 156,209 148,209 L100,209 Z" clip-path="url(#nr)" fill="rgb(74,143,232)"/></svg><span><span class="a">A</span><span class="b">B</span>Me</span></a>
+    <div class="nav-links" id="nav-menu">
       <a href="../how-it-works/index.html" class="active">How It Works</a>
-      <a href="../index.html#hardware">Devices</a>
-      <a href="../index.html#privacy">Privacy</a>
-      <a href="../index.html#community">Community</a>
+      <a href="../index.html#hardware" class="nav-anchor">Devices</a>
+      <a href="../index.html#privacy" class="nav-anchor">Privacy</a>
+      <a href="../index.html#community" class="nav-anchor">Community</a>
       <a href="../experiments/index.html">Experiments</a>
       <a href="../blog/index.html">Blog</a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUIUJBtQCGMjL7C8JgCRhozEFw1dMqrdEfdmFISsPyiO5ZXQ/viewform?usp=dialog" target="_blank" class="btn-primary">
-        Request Early Access
-      </a>
+    </div>
+    <div class="nav-right">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUIUJBtQCGMjL7C8JgCRhozEFw1dMqrdEfdmFISsPyiO5ZXQ/viewform?usp=dialog" target="_blank" rel="noopener" class="btn-primary">Request Early Access</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
@@ -294,14 +282,14 @@
     <h2>Ready to stop guessing?</h2>
     <p>Browse the ready-made experiments, or request early access and run your first one this week.</p>
     <div class="cta-actions">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUIUJBtQCGMjL7C8JgCRhozEFw1dMqrdEfdmFISsPyiO5ZXQ/viewform?usp=dialog" target="_blank" class="btn-primary">Request Early Access</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUIUJBtQCGMjL7C8JgCRhozEFw1dMqrdEfdmFISsPyiO5ZXQ/viewform?usp=dialog" target="_blank" rel="noopener" class="btn-primary">Request Early Access</a>
       <a href="../experiments/index.html" class="btn-secondary">Browse Experiments</a>
     </div>
   </div>
 
   <footer>
     <span>&copy; 2026 ABMe</span>
-    <span><a href="../index.html">Home</a> &middot; <a href="../blog/index.html">Blog</a> &middot; <a href="../experiments/index.html">Experiments</a></span>
+    <span><a href="../index.html">Home</a> &middot; <a href="../how-it-works/index.html">How It Works</a> &middot; <a href="../experiments/index.html">Experiments</a> &middot; <a href="../blog/index.html">Blog</a> &middot; <a href="../privacy.html">Privacy</a> &middot; <a href="mailto:feedback@getabme.com">Contact</a></span>
   </footer>
 </div>
 
@@ -318,5 +306,6 @@
   el.innerHTML = html;
 })();
 </script>
+<script src="../assets/site.js" defer></script>
 </body>
 </html>

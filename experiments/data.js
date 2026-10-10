@@ -1,3 +1,34 @@
+// Experiment templates shown on the catalogue page. Each entry is filed under the
+// outcome it measures (Sleep, Running or Recovery). The abme://template/ deep link is
+// derived from `template` at render time, so the JSON here is the single source of truth.
+
+const CATEGORY_ORDER = ['Sleep', 'Running', 'Recovery'];
+
+// Display names for metric identifiers used in the templates.
+const METRIC_NAMES = {
+  'deepSleepDuration': 'Deep Sleep',
+  'remSleepDuration': 'REM Sleep',
+  'coreSleepDuration': 'Core Sleep',
+  'sleepDuration': 'Sleep Duration',
+  'sleepEfficiency': 'Sleep Efficiency',
+  'workoutDuration': 'Workout Duration',
+  'workoutDistance': 'Workout Distance',
+  'workoutCaloriesBurned': 'Workout Calories',
+  'HKQuantityTypeIdentifierRestingHeartRate': 'Resting HR',
+  'HKQuantityTypeIdentifierHeartRateVariabilitySDNN': 'HRV (SDNN)',
+  'HKQuantityTypeIdentifierHeartRate': 'Heart Rate',
+  'HKQuantityTypeIdentifierVO2Max': 'VO2 Max',
+  'HKQuantityTypeIdentifierRunningSpeed': 'Running Pace',
+  'HKQuantityTypeIdentifierRunningGroundContactTime': 'Ground Contact Time',
+  'HKQuantityTypeIdentifierRunningStrideLength': 'Stride Length',
+  'HKQuantityTypeIdentifierStepCount': 'Steps',
+  'HKQuantityTypeIdentifierActiveEnergyBurned': 'Active Energy',
+  'HKQuantityTypeIdentifierDistanceWalkingRunning': 'Distance',
+  'HKQuantityTypeIdentifierWalkingHeartRateAverage': 'Walking HR',
+  'HKQuantityTypeIdentifierOxygenSaturation': 'SpO2',
+  'HKQuantityTypeIdentifierRespiratoryRate': 'Respiratory Rate',
+};
+
 const EXPERIMENTS = [
   {
     "category": "Sleep",
@@ -38,7 +69,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiQ2FmZmVpbmUgQ3VyZmV3ICYgRGVlcCBTbGVlcCIsImh5cG90aGVzaXMiOiJEb2VzIGN1dHRpbmcgYWZ0ZXJub29uIGNhZmZlaW5lIGluY3JlYXNlIGRlZXAgc2xlZXA_IiwiaW50ZXJ2ZW50aW9uRGVzY3JpcHRpb24iOiJObyBjYWZmZWluZSBhZnRlciAxMCBBTSAoY29mZmVlLCB0ZWEsIHByZS13b3Jrb3V0LCBlbmVyZ3kgZHJpbmtzKSIsImNvbnRyb2xEZXNjcmlwdGlvbiI6Ik5vcm1hbCBjYWZmZWluZSBoYWJpdHMgaW5jbHVkaW5nIGFmdGVybm9vbiBjb2ZmZWUiLCJwcmltYXJ5TWV0cmljIjp7ImlkZW50aWZpZXIiOiJkZWVwU2xlZXBEdXJhdGlvbiIsImFnZ3JlZ2F0aW9uIjoiU3VtIn0sInNlY29uZGFyeU1ldHJpY3MiOlt7ImlkZW50aWZpZXIiOiJzbGVlcER1cmF0aW9uIiwiYWdncmVnYXRpb24iOiJTdW0ifSx7ImlkZW50aWZpZXIiOiJzbGVlcEVmZmljaWVuY3kiLCJhZ2dyZWdhdGlvbiI6IkF2ZXJhZ2UifSx7ImlkZW50aWZpZXIiOiJjb3JlU2xlZXBEdXJhdGlvbiIsImFnZ3JlZ2F0aW9uIjoiU3VtIn1dLCJwcm9wZW5zaXR5IjowLjUsImFscGhhIjowLjA1LCJldGEiOjAuNzcsInBlcmlvZERheXMiOjEsIndhc2hvdXREYXlzIjowLCJ3aW5kb3dTdGFydCI6IkJlZHRpbWUiLCJ3aW5kb3dFbmQiOiJSaXNpbmcgdGltZSIsIndpbmRvd1N0YXJ0SG91ciI6bnVsbCwid2luZG93U3RhcnRNaW51dGUiOm51bGwsIndpbmRvd0VuZEhvdXIiOm51bGwsIndpbmRvd0VuZE1pbnV0ZSI6bnVsbCwicHVibGljRXhwZXJpbWVudElEIjpudWxsfQ",
     "effectSummary": "Deep Sleep +12 min, Sleep Duration +25 min, Sleep Efficiency +5%",
     "citations": [
       {
@@ -90,7 +120,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiTWFnbmVzaXVtICYgRGVlcCBTbGVlcCIsImh5cG90aGVzaXMiOiJEb2VzIG1hZ25lc2l1bSBnbHljaW5hdGUgYmVmb3JlIGJlZCBpbmNyZWFzZSBkZWVwIHNsZWVwPyIsImludGVydmVudGlvbkRlc2NyaXB0aW9uIjoiNDAwIG1nIG1hZ25lc2l1bSBnbHljaW5hdGUgMzAgbWluIGJlZm9yZSBiZWQiLCJjb250cm9sRGVzY3JpcHRpb24iOiJObyBtYWduZXNpdW0gc3VwcGxlbWVudCIsInByaW1hcnlNZXRyaWMiOnsiaWRlbnRpZmllciI6ImRlZXBTbGVlcER1cmF0aW9uIiwiYWdncmVnYXRpb24iOiJTdW0ifSwic2Vjb25kYXJ5TWV0cmljcyI6W3siaWRlbnRpZmllciI6IkhLUXVhbnRpdHlUeXBlSWRlbnRpZmllckhlYXJ0UmF0ZVZhcmlhYmlsaXR5U0ROTiIsImFnZ3JlZ2F0aW9uIjoiQXZlcmFnZSJ9LHsiaWRlbnRpZmllciI6IkhLUXVhbnRpdHlUeXBlSWRlbnRpZmllclJlc3RpbmdIZWFydFJhdGUiLCJhZ2dyZWdhdGlvbiI6IkF2ZXJhZ2UifV0sInByb3BlbnNpdHkiOjAuNSwiYWxwaGEiOjAuMDUsImV0YSI6MC43NywicGVyaW9kRGF5cyI6MSwid2FzaG91dERheXMiOjAsIndpbmRvd1N0YXJ0IjoiQmVkdGltZSIsIndpbmRvd0VuZCI6IlJpc2luZyB0aW1lIiwid2luZG93U3RhcnRIb3VyIjpudWxsLCJ3aW5kb3dTdGFydE1pbnV0ZSI6bnVsbCwid2luZG93RW5kSG91ciI6bnVsbCwid2luZG93RW5kTWludXRlIjpudWxsLCJwdWJsaWNFeHBlcmltZW50SUQiOm51bGx9",
     "effectSummary": "Deep Sleep +10 min, HRV +4.5 ms, RHR \u22122.5 bpm",
     "citations": [
       {
@@ -142,7 +171,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiR2x5Y2luZSAmIFNsZWVwIFF1YWxpdHkiLCJoeXBvdGhlc2lzIjoiRG9lcyBnbHljaW5lIGJlZm9yZSBiZWQgaW1wcm92ZSBzbGVlcCBvbnNldCBhbmQgZGVlcCBzbGVlcD8iLCJpbnRlcnZlbnRpb25EZXNjcmlwdGlvbiI6IjMgZyBnbHljaW5lIHBvd2RlciAzMCBtaW4gYmVmb3JlIGJlZCIsImNvbnRyb2xEZXNjcmlwdGlvbiI6Ik5vIGdseWNpbmUiLCJwcmltYXJ5TWV0cmljIjp7ImlkZW50aWZpZXIiOiJkZWVwU2xlZXBEdXJhdGlvbiIsImFnZ3JlZ2F0aW9uIjoiU3VtIn0sInNlY29uZGFyeU1ldHJpY3MiOlt7ImlkZW50aWZpZXIiOiJzbGVlcER1cmF0aW9uIiwiYWdncmVnYXRpb24iOiJTdW0ifSx7ImlkZW50aWZpZXIiOiJzbGVlcEVmZmljaWVuY3kiLCJhZ2dyZWdhdGlvbiI6IkF2ZXJhZ2UifV0sInByb3BlbnNpdHkiOjAuNSwiYWxwaGEiOjAuMDUsImV0YSI6MC43NywicGVyaW9kRGF5cyI6MSwid2FzaG91dERheXMiOjAsIndpbmRvd1N0YXJ0IjoiQmVkdGltZSIsIndpbmRvd0VuZCI6IlJpc2luZyB0aW1lIiwid2luZG93U3RhcnRIb3VyIjpudWxsLCJ3aW5kb3dTdGFydE1pbnV0ZSI6bnVsbCwid2luZG93RW5kSG91ciI6bnVsbCwid2luZG93RW5kTWludXRlIjpudWxsLCJwdWJsaWNFeHBlcmltZW50SUQiOm51bGx9",
     "effectSummary": "Faster sleep onset, improved deep sleep quality",
     "citations": [
       {
@@ -194,7 +222,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiTm8gU2NyZWVucyBCZWZvcmUgQmVkIiwiaHlwb3RoZXNpcyI6IkRvZXMgYXZvaWRpbmcgc2NyZWVucyBmb3IgMSBob3VyIGJlZm9yZSBiZWQgaW1wcm92ZSBzbGVlcD8iLCJpbnRlcnZlbnRpb25EZXNjcmlwdGlvbiI6Ik5vIHBob25lLCBsYXB0b3AsIG9yIFRWIGZvciA2MCBtaW4gYmVmb3JlIGJlZCIsImNvbnRyb2xEZXNjcmlwdGlvbiI6Ik5vcm1hbCBzY3JlZW4gdXNlIHVudGlsIGJlZHRpbWUiLCJwcmltYXJ5TWV0cmljIjp7ImlkZW50aWZpZXIiOiJzbGVlcER1cmF0aW9uIiwiYWdncmVnYXRpb24iOiJTdW0ifSwic2Vjb25kYXJ5TWV0cmljcyI6W3siaWRlbnRpZmllciI6ImRlZXBTbGVlcER1cmF0aW9uIiwiYWdncmVnYXRpb24iOiJTdW0ifSx7ImlkZW50aWZpZXIiOiJzbGVlcEVmZmljaWVuY3kiLCJhZ2dyZWdhdGlvbiI6IkF2ZXJhZ2UifV0sInByb3BlbnNpdHkiOjAuNSwiYWxwaGEiOjAuMDUsImV0YSI6MC43NywicGVyaW9kRGF5cyI6MSwid2FzaG91dERheXMiOjAsIndpbmRvd1N0YXJ0IjoiQmVkdGltZSIsIndpbmRvd0VuZCI6IlJpc2luZyB0aW1lIiwid2luZG93U3RhcnRIb3VyIjpudWxsLCJ3aW5kb3dTdGFydE1pbnV0ZSI6bnVsbCwid2luZG93RW5kSG91ciI6bnVsbCwid2luZG93RW5kTWludXRlIjpudWxsLCJwdWJsaWNFeHBlcmltZW50SUQiOm51bGx9",
     "effectSummary": "Earlier sleep onset, longer total sleep",
     "citations": [
       {
@@ -240,7 +267,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiQmx1ZSBMaWdodCBCbG9ja2luZyBHbGFzc2VzIiwiaHlwb3RoZXNpcyI6IkRvIGJsdWUgbGlnaHQgYmxvY2tpbmcgZ2xhc3NlcyBhZnRlciBzdW5zZXQgaW1wcm92ZSBzbGVlcD8iLCJpbnRlcnZlbnRpb25EZXNjcmlwdGlvbiI6IldlYXIgYW1iZXItbGVucyBibHVlLWJsb2NraW5nIGdsYXNzZXMgZnJvbSBzdW5zZXQgdW50aWwgYmVkIiwiY29udHJvbERlc2NyaXB0aW9uIjoiTm8gZ2xhc3Nlcywgbm9ybWFsIHNjcmVlbiB1c2UiLCJwcmltYXJ5TWV0cmljIjp7ImlkZW50aWZpZXIiOiJzbGVlcER1cmF0aW9uIiwiYWdncmVnYXRpb24iOiJTdW0ifSwic2Vjb25kYXJ5TWV0cmljcyI6W3siaWRlbnRpZmllciI6ImRlZXBTbGVlcER1cmF0aW9uIiwiYWdncmVnYXRpb24iOiJTdW0ifSx7ImlkZW50aWZpZXIiOiJzbGVlcEVmZmljaWVuY3kiLCJhZ2dyZWdhdGlvbiI6IkF2ZXJhZ2UifV0sInByb3BlbnNpdHkiOjAuNSwiYWxwaGEiOjAuMDUsImV0YSI6MC43NywicGVyaW9kRGF5cyI6MSwid2FzaG91dERheXMiOjAsIndpbmRvd1N0YXJ0IjoiQmVkdGltZSIsIndpbmRvd0VuZCI6IlJpc2luZyB0aW1lIiwid2luZG93U3RhcnRIb3VyIjpudWxsLCJ3aW5kb3dTdGFydE1pbnV0ZSI6bnVsbCwid2luZG93RW5kSG91ciI6bnVsbCwid2luZG93RW5kTWludXRlIjpudWxsLCJwdWJsaWNFeHBlcmltZW50SUQiOm51bGx9",
     "effectSummary": "Earlier melatonin onset, improved sleep duration",
     "citations": [
       {
@@ -286,7 +312,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiV2FybSBTaG93ZXIgQmVmb3JlIEJlZCIsImh5cG90aGVzaXMiOiJEb2VzIGEgd2FybSBzaG93ZXIgOTAgbWluIGJlZm9yZSBiZWQgaW1wcm92ZSBzbGVlcCBvbnNldD8iLCJpbnRlcnZlbnRpb25EZXNjcmlwdGlvbiI6Ildhcm0gc2hvd2VyICgxMDRcdTIwMTMxMDhcdTAwYjBGKSA5MCBtaW4gYmVmb3JlIGJlZCIsImNvbnRyb2xEZXNjcmlwdGlvbiI6Ik5vIHByZS1iZWQgc2hvd2VyIiwicHJpbWFyeU1ldHJpYyI6eyJpZGVudGlmaWVyIjoic2xlZXBEdXJhdGlvbiIsImFnZ3JlZ2F0aW9uIjoiU3VtIn0sInNlY29uZGFyeU1ldHJpY3MiOlt7ImlkZW50aWZpZXIiOiJkZWVwU2xlZXBEdXJhdGlvbiIsImFnZ3JlZ2F0aW9uIjoiU3VtIn0seyJpZGVudGlmaWVyIjoic2xlZXBFZmZpY2llbmN5IiwiYWdncmVnYXRpb24iOiJBdmVyYWdlIn1dLCJwcm9wZW5zaXR5IjowLjUsImFscGhhIjowLjA1LCJldGEiOjAuNzcsInBlcmlvZERheXMiOjEsIndhc2hvdXREYXlzIjowLCJ3aW5kb3dTdGFydCI6IkJlZHRpbWUiLCJ3aW5kb3dFbmQiOiJSaXNpbmcgdGltZSIsIndpbmRvd1N0YXJ0SG91ciI6bnVsbCwid2luZG93U3RhcnRNaW51dGUiOm51bGwsIndpbmRvd0VuZEhvdXIiOm51bGwsIndpbmRvd0VuZE1pbnV0ZSI6bnVsbCwicHVibGljRXhwZXJpbWVudElEIjpudWxsfQ",
     "effectSummary": "Faster sleep onset via core temperature drop",
     "citations": [
       {
@@ -332,7 +357,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiTGF0ZSBFYXRpbmcgQ3V0b2ZmIiwiaHlwb3RoZXNpcyI6IkRvZXMgc3RvcHBpbmcgZm9vZCAzKyBob3VycyBiZWZvcmUgYmVkIGltcHJvdmUgb3Zlcm5pZ2h0IHJlY292ZXJ5PyIsImludGVydmVudGlvbkRlc2NyaXB0aW9uIjoiTm8gZm9vZCBhZnRlciA3IFBNIiwiY29udHJvbERlc2NyaXB0aW9uIjoiRWF0IG5vcm1hbGx5IHVudGlsIGJlZHRpbWUiLCJwcmltYXJ5TWV0cmljIjp7ImlkZW50aWZpZXIiOiJIS1F1YW50aXR5VHlwZUlkZW50aWZpZXJSZXN0aW5nSGVhcnRSYXRlIiwiYWdncmVnYXRpb24iOiJBdmVyYWdlIn0sInNlY29uZGFyeU1ldHJpY3MiOlt7ImlkZW50aWZpZXIiOiJIS1F1YW50aXR5VHlwZUlkZW50aWZpZXJIZWFydFJhdGVWYXJpYWJpbGl0eVNETk4iLCJhZ2dyZWdhdGlvbiI6IkF2ZXJhZ2UifSx7ImlkZW50aWZpZXIiOiJkZWVwU2xlZXBEdXJhdGlvbiIsImFnZ3JlZ2F0aW9uIjoiU3VtIn1dLCJwcm9wZW5zaXR5IjowLjUsImFscGhhIjowLjA1LCJldGEiOjAuNzcsInBlcmlvZERheXMiOjEsIndhc2hvdXREYXlzIjowLCJ3aW5kb3dTdGFydCI6IkJlZHRpbWUiLCJ3aW5kb3dFbmQiOiJSaXNpbmcgdGltZSIsIndpbmRvd1N0YXJ0SG91ciI6bnVsbCwid2luZG93U3RhcnRNaW51dGUiOm51bGwsIndpbmRvd0VuZEhvdXIiOm51bGwsIndpbmRvd0VuZE1pbnV0ZSI6bnVsbCwicHVibGljRXhwZXJpbWVudElEIjpudWxsfQ",
     "effectSummary": "Lower overnight RHR, improved HRV",
     "citations": [
       {
@@ -378,7 +402,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiVGFydCBDaGVycnkgSnVpY2UgJiBTbGVlcCIsImh5cG90aGVzaXMiOiJEb2VzIHRhcnQgY2hlcnJ5IGp1aWNlIGJlZm9yZSBiZWQgZXh0ZW5kIHNsZWVwIGR1cmF0aW9uPyIsImludGVydmVudGlvbkRlc2NyaXB0aW9uIjoiOCBveiBNb250bW9yZW5jeSB0YXJ0IGNoZXJyeSBqdWljZSAxIGhyIGJlZm9yZSBiZWQiLCJjb250cm9sRGVzY3JpcHRpb24iOiJObyBjaGVycnkganVpY2UiLCJwcmltYXJ5TWV0cmljIjp7ImlkZW50aWZpZXIiOiJzbGVlcER1cmF0aW9uIiwiYWdncmVnYXRpb24iOiJTdW0ifSwic2Vjb25kYXJ5TWV0cmljcyI6W3siaWRlbnRpZmllciI6ImRlZXBTbGVlcER1cmF0aW9uIiwiYWdncmVnYXRpb24iOiJTdW0ifSx7ImlkZW50aWZpZXIiOiJzbGVlcEVmZmljaWVuY3kiLCJhZ2dyZWdhdGlvbiI6IkF2ZXJhZ2UifV0sInByb3BlbnNpdHkiOjAuNSwiYWxwaGEiOjAuMDUsImV0YSI6MC43NywicGVyaW9kRGF5cyI6MSwid2FzaG91dERheXMiOjAsIndpbmRvd1N0YXJ0IjoiQmVkdGltZSIsIndpbmRvd0VuZCI6IlJpc2luZyB0aW1lIiwid2luZG93U3RhcnRIb3VyIjpudWxsLCJ3aW5kb3dTdGFydE1pbnV0ZSI6bnVsbCwid2luZG93RW5kSG91ciI6bnVsbCwid2luZG93RW5kTWludXRlIjpudWxsLCJwdWJsaWNFeHBlcmltZW50SUQiOm51bGx9",
     "effectSummary": "Sleep Duration +84 min in one study, natural melatonin source",
     "citations": [
       {
@@ -432,7 +455,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiQWxjb2hvbCAmIFNsZWVwIFF1YWxpdHkiLCJoeXBvdGhlc2lzIjoiRG9lcyBhIHNpbmdsZSBldmVuaW5nIGRyaW5rIGltcGFpciBzbGVlcD8iLCJpbnRlcnZlbnRpb25EZXNjcmlwdGlvbiI6Ik9uZSBzdGFuZGFyZCBhbGNvaG9saWMgZHJpbmsgd2l0aCBkaW5uZXIiLCJjb250cm9sRGVzY3JpcHRpb24iOiJBYnN0YWluIGZyb20gYWxjb2hvbCIsInByaW1hcnlNZXRyaWMiOnsiaWRlbnRpZmllciI6InJlbVNsZWVwRHVyYXRpb24iLCJhZ2dyZWdhdGlvbiI6IlN1bSJ9LCJzZWNvbmRhcnlNZXRyaWNzIjpbeyJpZGVudGlmaWVyIjoiSEtRdWFudGl0eVR5cGVJZGVudGlmaWVySGVhcnRSYXRlVmFyaWFiaWxpdHlTRE5OIiwiYWdncmVnYXRpb24iOiJBdmVyYWdlIn0seyJpZGVudGlmaWVyIjoiSEtRdWFudGl0eVR5cGVJZGVudGlmaWVyUmVzdGluZ0hlYXJ0UmF0ZSIsImFnZ3JlZ2F0aW9uIjoiQXZlcmFnZSJ9LHsiaWRlbnRpZmllciI6ImRlZXBTbGVlcER1cmF0aW9uIiwiYWdncmVnYXRpb24iOiJTdW0ifSx7ImlkZW50aWZpZXIiOiJzbGVlcER1cmF0aW9uIiwiYWdncmVnYXRpb24iOiJTdW0ifV0sInByb3BlbnNpdHkiOjAuNSwiYWxwaGEiOjAuMDUsImV0YSI6MC43NywicGVyaW9kRGF5cyI6MSwid2FzaG91dERheXMiOjAsIndpbmRvd1N0YXJ0IjoiQmVkdGltZSIsIndpbmRvd0VuZCI6IlJpc2luZyB0aW1lIiwid2luZG93U3RhcnRIb3VyIjpudWxsLCJ3aW5kb3dTdGFydE1pbnV0ZSI6bnVsbCwid2luZG93RW5kSG91ciI6bnVsbCwid2luZG93RW5kTWludXRlIjpudWxsLCJwdWJsaWNFeHBlcmltZW50SUQiOm51bGx9",
     "effectSummary": "REM Sleep \u221211 min, HRV \u22125.7 ms, RHR +4 bpm",
     "citations": [
       {
@@ -484,7 +506,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiTWVsYXRvbmluIE1pY3JvZG9zZSIsImh5cG90aGVzaXMiOiJEb2VzIDAuMyBtZyBtZWxhdG9uaW4gaW1wcm92ZSBzbGVlcCBvbnNldCB3aXRob3V0IGdyb2dnaW5lc3M_IiwiaW50ZXJ2ZW50aW9uRGVzY3JpcHRpb24iOiIwLjMgbWcgbWVsYXRvbmluIDMwIG1pbiBiZWZvcmUgYmVkIiwiY29udHJvbERlc2NyaXB0aW9uIjoiTm8gbWVsYXRvbmluIiwicHJpbWFyeU1ldHJpYyI6eyJpZGVudGlmaWVyIjoic2xlZXBEdXJhdGlvbiIsImFnZ3JlZ2F0aW9uIjoiU3VtIn0sInNlY29uZGFyeU1ldHJpY3MiOlt7ImlkZW50aWZpZXIiOiJkZWVwU2xlZXBEdXJhdGlvbiIsImFnZ3JlZ2F0aW9uIjoiU3VtIn0seyJpZGVudGlmaWVyIjoic2xlZXBFZmZpY2llbmN5IiwiYWdncmVnYXRpb24iOiJBdmVyYWdlIn1dLCJwcm9wZW5zaXR5IjowLjUsImFscGhhIjowLjA1LCJldGEiOjAuNzcsInBlcmlvZERheXMiOjEsIndhc2hvdXREYXlzIjowLCJ3aW5kb3dTdGFydCI6IkJlZHRpbWUiLCJ3aW5kb3dFbmQiOiJSaXNpbmcgdGltZSIsIndpbmRvd1N0YXJ0SG91ciI6bnVsbCwid2luZG93U3RhcnRNaW51dGUiOm51bGwsIndpbmRvd0VuZEhvdXIiOm51bGwsIndpbmRvd0VuZE1pbnV0ZSI6bnVsbCwicHVibGljRXhwZXJpbWVudElEIjpudWxsfQ",
     "effectSummary": "Physiological dose \u2014 may outperform standard 3\u20135 mg",
     "citations": [
       {
@@ -536,7 +557,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiQ2FyYm9uLVBsYXRlZCBTaG9lcyB2cyBUcmFpbmVycyIsImh5cG90aGVzaXMiOiJEbyBjYXJib24tcGxhdGVkIHJhY2luZyBzaG9lcyBhY3R1YWxseSBtYWtlIHlvdSBmYXN0ZXI_IiwiaW50ZXJ2ZW50aW9uRGVzY3JpcHRpb24iOiJDYXJib24tcGxhdGVkIHJhY2VyIChlLmcuIE5pa2UgVmFwb3JmbHksIEFkaWRhcyBBZGlvcyBQcm8pIiwiY29udHJvbERlc2NyaXB0aW9uIjoiRGFpbHkgdHJhaW5lciAoZS5nLiBBU0lDUyBHZWwgTmltYnVzLCBCcm9va3MgR2hvc3QpIiwicHJpbWFyeU1ldHJpYyI6eyJpZGVudGlmaWVyIjoiSEtRdWFudGl0eVR5cGVJZGVudGlmaWVyUnVubmluZ1NwZWVkIiwiYWdncmVnYXRpb24iOiJBdmVyYWdlIn0sInNlY29uZGFyeU1ldHJpY3MiOlt7ImlkZW50aWZpZXIiOiJIS1F1YW50aXR5VHlwZUlkZW50aWZpZXJSdW5uaW5nR3JvdW5kQ29udGFjdFRpbWUiLCJhZ2dyZWdhdGlvbiI6IkF2ZXJhZ2UifSx7ImlkZW50aWZpZXIiOiJIS1F1YW50aXR5VHlwZUlkZW50aWZpZXJSdW5uaW5nU3RyaWRlTGVuZ3RoIiwiYWdncmVnYXRpb24iOiJBdmVyYWdlIn1dLCJwcm9wZW5zaXR5IjowLjUsImFscGhhIjowLjA1LCJldGEiOjAuNzcsInBlcmlvZERheXMiOjEsIndhc2hvdXREYXlzIjowLCJ3aW5kb3dTdGFydCI6IldvcmtvdXQgc3RhcnQiLCJ3aW5kb3dFbmQiOiJXb3Jrb3V0IGVuZCIsIndpbmRvd1N0YXJ0SG91ciI6bnVsbCwid2luZG93U3RhcnRNaW51dGUiOm51bGwsIndpbmRvd0VuZEhvdXIiOm51bGwsIndpbmRvd0VuZE1pbnV0ZSI6bnVsbCwicHVibGljRXhwZXJpbWVudElEIjpudWxsfQ",
     "effectSummary": "Pace +4.3%, Ground Contact Time \u22128 ms",
     "citations": [
       {
@@ -588,7 +608,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiUHJlLVJ1biBDYWZmZWluZSAmIFBhY2UiLCJoeXBvdGhlc2lzIjoiRG9lcyBjYWZmZWluZSBiZWZvcmUgYSBydW4gaW1wcm92ZSB5b3VyIHBhY2U_IiwiaW50ZXJ2ZW50aW9uRGVzY3JpcHRpb24iOiIyMDAgbWcgY2FmZmVpbmUgY2Fwc3VsZSA0NSBtaW4gYmVmb3JlIHJ1bm5pbmciLCJjb250cm9sRGVzY3JpcHRpb24iOiJQbGFjZWJvIGNhcHN1bGUgKG5vIGNhZmZlaW5lKSBiZWZvcmUgcnVubmluZyIsInByaW1hcnlNZXRyaWMiOnsiaWRlbnRpZmllciI6IkhLUXVhbnRpdHlUeXBlSWRlbnRpZmllclJ1bm5pbmdTcGVlZCIsImFnZ3JlZ2F0aW9uIjoiQXZlcmFnZSJ9LCJzZWNvbmRhcnlNZXRyaWNzIjpbeyJpZGVudGlmaWVyIjoid29ya291dER1cmF0aW9uIiwiYWdncmVnYXRpb24iOiJTdW0ifSx7ImlkZW50aWZpZXIiOiJ3b3Jrb3V0Q2Fsb3JpZXNCdXJuZWQiLCJhZ2dyZWdhdGlvbiI6IlN1bSJ9XSwicHJvcGVuc2l0eSI6MC41LCJhbHBoYSI6MC4wNSwiZXRhIjowLjc3LCJwZXJpb2REYXlzIjoxLCJ3YXNob3V0RGF5cyI6MCwid2luZG93U3RhcnQiOiJXb3Jrb3V0IHN0YXJ0Iiwid2luZG93RW5kIjoiV29ya291dCBlbmQiLCJ3aW5kb3dTdGFydEhvdXIiOm51bGwsIndpbmRvd1N0YXJ0TWludXRlIjpudWxsLCJ3aW5kb3dFbmRIb3VyIjpudWxsLCJ3aW5kb3dFbmRNaW51dGUiOm51bGwsInB1YmxpY0V4cGVyaW1lbnRJRCI6bnVsbH0",
     "effectSummary": "Pace +2\u20135%, Workout Duration +5 min",
     "citations": [
       {
@@ -640,7 +659,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiQmVldHJvb3QgSnVpY2UgJiBSdW5uaW5nIFBhY2UiLCJoeXBvdGhlc2lzIjoiRG9lcyBiZWV0cm9vdCBqdWljZSBiZWZvcmUgYSBydW4gbWFrZSB5b3UgZmFzdGVyPyIsImludGVydmVudGlvbkRlc2NyaXB0aW9uIjoiQ29uY2VudHJhdGVkIGJlZXRyb290IHNob3QgKH40MDAgbWcgbml0cmF0ZSkgMlx1MjAxMzMgaHIgYmVmb3JlIHJ1bm5pbmciLCJjb250cm9sRGVzY3JpcHRpb24iOiJObyBiZWV0cm9vdCBqdWljZSIsInByaW1hcnlNZXRyaWMiOnsiaWRlbnRpZmllciI6IkhLUXVhbnRpdHlUeXBlSWRlbnRpZmllclJ1bm5pbmdTcGVlZCIsImFnZ3JlZ2F0aW9uIjoiQXZlcmFnZSJ9LCJzZWNvbmRhcnlNZXRyaWNzIjpbeyJpZGVudGlmaWVyIjoiSEtRdWFudGl0eVR5cGVJZGVudGlmaWVySGVhcnRSYXRlIiwiYWdncmVnYXRpb24iOiJBdmVyYWdlIn0seyJpZGVudGlmaWVyIjoid29ya291dER1cmF0aW9uIiwiYWdncmVnYXRpb24iOiJTdW0ifV0sInByb3BlbnNpdHkiOjAuNSwiYWxwaGEiOjAuMDUsImV0YSI6MC43NywicGVyaW9kRGF5cyI6MSwid2FzaG91dERheXMiOjAsIndpbmRvd1N0YXJ0IjoiV29ya291dCBzdGFydCIsIndpbmRvd0VuZCI6IldvcmtvdXQgZW5kIiwid2luZG93U3RhcnRIb3VyIjpudWxsLCJ3aW5kb3dTdGFydE1pbnV0ZSI6bnVsbCwid2luZG93RW5kSG91ciI6bnVsbCwid2luZG93RW5kTWludXRlIjpudWxsLCJwdWJsaWNFeHBlcmltZW50SUQiOm51bGx9",
     "effectSummary": "2\u20134% time-to-exhaustion improvement; 15\u201320% are genetic non-responders",
     "citations": [
       {
@@ -692,7 +710,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiTXVzaWMgdnMgU2lsZW5jZSBSdW5uaW5nIiwiaHlwb3RoZXNpcyI6IkRvZXMgbGlzdGVuaW5nIHRvIG11c2ljIGltcHJvdmUgcnVubmluZyBwZXJmb3JtYW5jZT8iLCJpbnRlcnZlbnRpb25EZXNjcmlwdGlvbiI6IlVwYmVhdCBwbGF5bGlzdCAoMTIwXHUyMDEzMTQwIEJQTSkgZHVyaW5nIHJ1biIsImNvbnRyb2xEZXNjcmlwdGlvbiI6Ik5vIGhlYWRwaG9uZXMsIHJ1biBpbiBzaWxlbmNlIiwicHJpbWFyeU1ldHJpYyI6eyJpZGVudGlmaWVyIjoiSEtRdWFudGl0eVR5cGVJZGVudGlmaWVyUnVubmluZ1NwZWVkIiwiYWdncmVnYXRpb24iOiJBdmVyYWdlIn0sInNlY29uZGFyeU1ldHJpY3MiOlt7ImlkZW50aWZpZXIiOiJIS1F1YW50aXR5VHlwZUlkZW50aWZpZXJEaXN0YW5jZVdhbGtpbmdSdW5uaW5nIiwiYWdncmVnYXRpb24iOiJTdW0ifSx7ImlkZW50aWZpZXIiOiJIS1F1YW50aXR5VHlwZUlkZW50aWZpZXJIZWFydFJhdGUiLCJhZ2dyZWdhdGlvbiI6IkF2ZXJhZ2UifV0sInByb3BlbnNpdHkiOjAuNSwiYWxwaGEiOjAuMDUsImV0YSI6MC43NywicGVyaW9kRGF5cyI6MSwid2FzaG91dERheXMiOjAsIndpbmRvd1N0YXJ0IjoiV29ya291dCBzdGFydCIsIndpbmRvd0VuZCI6IldvcmtvdXQgZW5kIiwid2luZG93U3RhcnRIb3VyIjpudWxsLCJ3aW5kb3dTdGFydE1pbnV0ZSI6bnVsbCwid2luZG93RW5kSG91ciI6bnVsbCwid2luZG93RW5kTWludXRlIjpudWxsLCJwdWJsaWNFeHBlcmltZW50SUQiOm51bGx9",
     "effectSummary": "+10% distance in time-limited runs, cadence sync with BPM",
     "citations": [
       {
@@ -738,7 +755,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiTmFzYWwgdnMgTW91dGggQnJlYXRoaW5nIiwiaHlwb3RoZXNpcyI6IkRvZXMgbm9zZS1vbmx5IGJyZWF0aGluZyBkdXJpbmcgZWFzeSBydW5zIGNoYW5nZSBoZWFydCByYXRlIG9yIHBhY2U_IiwiaW50ZXJ2ZW50aW9uRGVzY3JpcHRpb24iOiJOYXNhbC1vbmx5IGJyZWF0aGluZyBkdXJpbmcgZWFzeSBydW5zIiwiY29udHJvbERlc2NyaXB0aW9uIjoiTm9ybWFsIG1vdXRoIGJyZWF0aGluZyIsInByaW1hcnlNZXRyaWMiOnsiaWRlbnRpZmllciI6IkhLUXVhbnRpdHlUeXBlSWRlbnRpZmllckhlYXJ0UmF0ZSIsImFnZ3JlZ2F0aW9uIjoiQXZlcmFnZSJ9LCJzZWNvbmRhcnlNZXRyaWNzIjpbeyJpZGVudGlmaWVyIjoiSEtRdWFudGl0eVR5cGVJZGVudGlmaWVyUnVubmluZ1NwZWVkIiwiYWdncmVnYXRpb24iOiJBdmVyYWdlIn0seyJpZGVudGlmaWVyIjoiSEtRdWFudGl0eVR5cGVJZGVudGlmaWVyUmVzcGlyYXRvcnlSYXRlIiwiYWdncmVnYXRpb24iOiJBdmVyYWdlIn1dLCJwcm9wZW5zaXR5IjowLjUsImFscGhhIjowLjA1LCJldGEiOjAuNzcsInBlcmlvZERheXMiOjEsIndhc2hvdXREYXlzIjowLCJ3aW5kb3dTdGFydCI6IldvcmtvdXQgc3RhcnQiLCJ3aW5kb3dFbmQiOiJXb3Jrb3V0IGVuZCIsIndpbmRvd1N0YXJ0SG91ciI6bnVsbCwid2luZG93U3RhcnRNaW51dGUiOm51bGwsIndpbmRvd0VuZEhvdXIiOm51bGwsIndpbmRvd0VuZE1pbnV0ZSI6bnVsbCwicHVibGljRXhwZXJpbWVudElEIjpudWxsfQ",
     "effectSummary": "Comparable VO2 at submaximal intensity; high individual variation",
     "citations": [
       {
@@ -790,7 +806,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiRmFzdGVkIHZzIEZlZCBSdW5uaW5nIiwiaHlwb3RoZXNpcyI6IkRvZXMgcnVubmluZyBvbiBhbiBlbXB0eSBzdG9tYWNoIGNoYW5nZSBoZWFydCByYXRlIG9yIGVuZXJneSBidXJuPyIsImludGVydmVudGlvbkRlc2NyaXB0aW9uIjoiTW9ybmluZyBydW4gYWZ0ZXIgMTIrIGhyIG92ZXJuaWdodCBmYXN0IiwiY29udHJvbERlc2NyaXB0aW9uIjoiU2FtZSBydW4gNjAgbWluIGFmdGVyIGEgNDAwIGtjYWwgbWVhbCIsInByaW1hcnlNZXRyaWMiOnsiaWRlbnRpZmllciI6IkhLUXVhbnRpdHlUeXBlSWRlbnRpZmllckhlYXJ0UmF0ZSIsImFnZ3JlZ2F0aW9uIjoiQXZlcmFnZSJ9LCJzZWNvbmRhcnlNZXRyaWNzIjpbeyJpZGVudGlmaWVyIjoiSEtRdWFudGl0eVR5cGVJZGVudGlmaWVyQWN0aXZlRW5lcmd5QnVybmVkIiwiYWdncmVnYXRpb24iOiJTdW0ifSx7ImlkZW50aWZpZXIiOiJIS1F1YW50aXR5VHlwZUlkZW50aWZpZXJSdW5uaW5nU3BlZWQiLCJhZ2dyZWdhdGlvbiI6IkF2ZXJhZ2UifV0sInByb3BlbnNpdHkiOjAuNSwiYWxwaGEiOjAuMDUsImV0YSI6MC43NywicGVyaW9kRGF5cyI6MSwid2FzaG91dERheXMiOjAsIndpbmRvd1N0YXJ0IjoiV29ya291dCBzdGFydCIsIndpbmRvd0VuZCI6IldvcmtvdXQgZW5kIiwid2luZG93U3RhcnRIb3VyIjpudWxsLCJ3aW5kb3dTdGFydE1pbnV0ZSI6bnVsbCwid2luZG93RW5kSG91ciI6bnVsbCwid2luZG93RW5kTWludXRlIjpudWxsLCJwdWJsaWNFeHBlcmltZW50SUQiOm51bGx9",
     "effectSummary": "Higher fat oxidation fasted; heart rate tends higher fasted",
     "citations": [
       {
@@ -836,7 +851,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiRWxlY3Ryb2x5dGVzIHZzIFdhdGVyIiwiaHlwb3RoZXNpcyI6IkRvZXMgYW4gZWxlY3Ryb2x5dGUgbWl4IGJlZm9yZSBydW5uaW5nIGxvd2VyIGV4ZXJjaXNlIGhlYXJ0IHJhdGU_IiwiaW50ZXJ2ZW50aW9uRGVzY3JpcHRpb24iOiIxIHBhY2tldCBMTU5UICgxMDAwIG1nIHNvZGl1bSkgaW4gMTYgb3ogd2F0ZXIgcHJlLXJ1biIsImNvbnRyb2xEZXNjcmlwdGlvbiI6IjE2IG96IHBsYWluIHdhdGVyIHByZS1ydW4iLCJwcmltYXJ5TWV0cmljIjp7ImlkZW50aWZpZXIiOiJIS1F1YW50aXR5VHlwZUlkZW50aWZpZXJIZWFydFJhdGUiLCJhZ2dyZWdhdGlvbiI6IkF2ZXJhZ2UifSwic2Vjb25kYXJ5TWV0cmljcyI6W3siaWRlbnRpZmllciI6IkhLUXVhbnRpdHlUeXBlSWRlbnRpZmllclJ1bm5pbmdTcGVlZCIsImFnZ3JlZ2F0aW9uIjoiQXZlcmFnZSJ9LHsiaWRlbnRpZmllciI6IndvcmtvdXREdXJhdGlvbiIsImFnZ3JlZ2F0aW9uIjoiU3VtIn1dLCJwcm9wZW5zaXR5IjowLjUsImFscGhhIjowLjA1LCJldGEiOjAuNzcsInBlcmlvZERheXMiOjEsIndhc2hvdXREYXlzIjowLCJ3aW5kb3dTdGFydCI6IldvcmtvdXQgc3RhcnQiLCJ3aW5kb3dFbmQiOiJXb3Jrb3V0IGVuZCIsIndpbmRvd1N0YXJ0SG91ciI6bnVsbCwid2luZG93U3RhcnRNaW51dGUiOm51bGwsIndpbmRvd0VuZEhvdXIiOm51bGwsIndpbmRvd0VuZE1pbnV0ZSI6bnVsbCwicHVibGljRXhwZXJpbWVudElEIjpudWxsfQ",
     "effectSummary": "Lower exercise HR when sodium-loaded; plasma volume expansion",
     "citations": [
       {
@@ -882,7 +896,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiU29kaXVtIFByZS1Mb2FkaW5nIiwiaHlwb3RoZXNpcyI6IkRvZXMgc29kaXVtIGJlZm9yZSBleGVyY2lzZSBsb3dlciBoZWFydCByYXRlIGluIGhlYXQ_IiwiaW50ZXJ2ZW50aW9uRGVzY3JpcHRpb24iOiIxNTAwIG1nIHNvZGl1bSBpbiA3NTAgbWwgd2F0ZXIgNjBcdTIwMTM5MCBtaW4gYmVmb3JlIGV4ZXJjaXNlIiwiY29udHJvbERlc2NyaXB0aW9uIjoiNzUwIG1sIHBsYWluIHdhdGVyIDYwXHUyMDEzOTAgbWluIGJlZm9yZSBleGVyY2lzZSIsInByaW1hcnlNZXRyaWMiOnsiaWRlbnRpZmllciI6IkhLUXVhbnRpdHlUeXBlSWRlbnRpZmllckhlYXJ0UmF0ZSIsImFnZ3JlZ2F0aW9uIjoiQXZlcmFnZSJ9LCJzZWNvbmRhcnlNZXRyaWNzIjpbeyJpZGVudGlmaWVyIjoiSEtRdWFudGl0eVR5cGVJZGVudGlmaWVyUnVubmluZ1NwZWVkIiwiYWdncmVnYXRpb24iOiJBdmVyYWdlIn0seyJpZGVudGlmaWVyIjoiSEtRdWFudGl0eVR5cGVJZGVudGlmaWVyQWN0aXZlRW5lcmd5QnVybmVkIiwiYWdncmVnYXRpb24iOiJTdW0ifV0sInByb3BlbnNpdHkiOjAuNSwiYWxwaGEiOjAuMDUsImV0YSI6MC43NywicGVyaW9kRGF5cyI6MSwid2FzaG91dERheXMiOjAsIndpbmRvd1N0YXJ0IjoiV29ya291dCBzdGFydCIsIndpbmRvd0VuZCI6IldvcmtvdXQgZW5kIiwid2luZG93U3RhcnRIb3VyIjpudWxsLCJ3aW5kb3dTdGFydE1pbnV0ZSI6bnVsbCwid2luZG93RW5kSG91ciI6bnVsbCwid2luZG93RW5kTWludXRlIjpudWxsLCJwdWJsaWNFeHBlcmltZW50SUQiOm51bGx9",
     "effectSummary": "Measurable plasma volume expansion; lower exercise HR in heat",
     "citations": [
       {
@@ -928,7 +941,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiQ29sZCBQbHVuZ2UgJiBSZWNvdmVyeSIsImh5cG90aGVzaXMiOiJEb2VzIG1vcm5pbmcgY29sZCB3YXRlciBpbW1lcnNpb24gaW1wcm92ZSBIUlYgYW5kIGxvd2VyIHJlc3RpbmcgaGVhcnQgcmF0ZT8iLCJpbnRlcnZlbnRpb25EZXNjcmlwdGlvbiI6IjItbWluIGNvbGQgcGx1bmdlICg1MFx1MjAxMzU5XHUwMGIwRiAvIDEwXHUyMDEzMTVcdTAwYjBDKSB3aXRoaW4gMSBociBvZiB3YWtpbmciLCJjb250cm9sRGVzY3JpcHRpb24iOiJOb3JtYWwgbW9ybmluZyByb3V0aW5lLCBubyBjb2xkIGV4cG9zdXJlIiwicHJpbWFyeU1ldHJpYyI6eyJpZGVudGlmaWVyIjoiSEtRdWFudGl0eVR5cGVJZGVudGlmaWVySGVhcnRSYXRlVmFyaWFiaWxpdHlTRE5OIiwiYWdncmVnYXRpb24iOiJBdmVyYWdlIn0sInNlY29uZGFyeU1ldHJpY3MiOlt7ImlkZW50aWZpZXIiOiJIS1F1YW50aXR5VHlwZUlkZW50aWZpZXJSZXN0aW5nSGVhcnRSYXRlIiwiYWdncmVnYXRpb24iOiJBdmVyYWdlIn0seyJpZGVudGlmaWVyIjoiZGVlcFNsZWVwRHVyYXRpb24iLCJhZ2dyZWdhdGlvbiI6IlN1bSJ9XSwicHJvcGVuc2l0eSI6MC41LCJhbHBoYSI6MC4wNSwiZXRhIjowLjc3LCJwZXJpb2REYXlzIjoxLCJ3YXNob3V0RGF5cyI6MCwid2luZG93U3RhcnQiOiJNaWRuaWdodCIsIndpbmRvd0VuZCI6Ik1pZG5pZ2h0Iiwid2luZG93U3RhcnRIb3VyIjpudWxsLCJ3aW5kb3dTdGFydE1pbnV0ZSI6bnVsbCwid2luZG93RW5kSG91ciI6bnVsbCwid2luZG93RW5kTWludXRlIjpudWxsLCJwdWJsaWNFeHBlcmltZW50SUQiOm51bGx9",
     "effectSummary": "HRV +8 ms (SMD 0.61), RHR \u22123 bpm",
     "citations": [
       {
@@ -946,7 +958,7 @@ const EXPERIMENTS = [
     ]
   },
   {
-    "category": "Recovery",
+    "category": "Sleep",
     "template": {
       "version": 1,
       "name": "Morning Sunlight & Sleep",
@@ -980,7 +992,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiTW9ybmluZyBTdW5saWdodCAmIFNsZWVwIiwiaHlwb3RoZXNpcyI6IkRvZXMgbW9ybmluZyBzdW5saWdodCBleHBvc3VyZSBpbXByb3ZlIHRoYXQgbmlnaHQncyBzbGVlcD8iLCJpbnRlcnZlbnRpb25EZXNjcmlwdGlvbiI6IjEwXHUyMDEzMTUgbWluIG91dGRvb3Igc3VubGlnaHQgd2l0aGluIDEgaHIgb2Ygd2FraW5nIChubyBzdW5nbGFzc2VzKSIsImNvbnRyb2xEZXNjcmlwdGlvbiI6IlN0YXkgaW5kb29ycywgbm9ybWFsIG1vcm5pbmcgcm91dGluZSIsInByaW1hcnlNZXRyaWMiOnsiaWRlbnRpZmllciI6InNsZWVwRHVyYXRpb24iLCJhZ2dyZWdhdGlvbiI6IlN1bSJ9LCJzZWNvbmRhcnlNZXRyaWNzIjpbeyJpZGVudGlmaWVyIjoiZGVlcFNsZWVwRHVyYXRpb24iLCJhZ2dyZWdhdGlvbiI6IlN1bSJ9LHsiaWRlbnRpZmllciI6IkhLUXVhbnRpdHlUeXBlSWRlbnRpZmllckhlYXJ0UmF0ZVZhcmlhYmlsaXR5U0ROTiIsImFnZ3JlZ2F0aW9uIjoiQXZlcmFnZSJ9XSwicHJvcGVuc2l0eSI6MC41LCJhbHBoYSI6MC4wNSwiZXRhIjowLjc3LCJwZXJpb2REYXlzIjoxLCJ3YXNob3V0RGF5cyI6MCwid2luZG93U3RhcnQiOiJCZWR0aW1lIiwid2luZG93RW5kIjoiUmlzaW5nIHRpbWUiLCJ3aW5kb3dTdGFydEhvdXIiOm51bGwsIndpbmRvd1N0YXJ0TWludXRlIjpudWxsLCJ3aW5kb3dFbmRIb3VyIjpudWxsLCJ3aW5kb3dFbmRNaW51dGUiOm51bGwsInB1YmxpY0V4cGVyaW1lbnRJRCI6bnVsbH0",
     "effectSummary": "Sets circadian clock; effects on melatonin timing 14\u201316 hr later",
     "citations": [
       {
@@ -1022,7 +1033,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiTWVkaXRhdGlvbiAmIEhSViIsImh5cG90aGVzaXMiOiJEb2VzIDEwIG1pbiBvZiBtb3JuaW5nIG1lZGl0YXRpb24gaW1wcm92ZSBoZWFydCByYXRlIHZhcmlhYmlsaXR5PyIsImludGVydmVudGlvbkRlc2NyaXB0aW9uIjoiMTAgbWluIGd1aWRlZCBtZWRpdGF0aW9uIG9yIGJveCBicmVhdGhpbmcgaW4gdGhlIG1vcm5pbmciLCJjb250cm9sRGVzY3JpcHRpb24iOiJObyBtZWRpdGF0aW9uLCBub3JtYWwgbW9ybmluZyByb3V0aW5lIiwicHJpbWFyeU1ldHJpYyI6eyJpZGVudGlmaWVyIjoiSEtRdWFudGl0eVR5cGVJZGVudGlmaWVySGVhcnRSYXRlVmFyaWFiaWxpdHlTRE5OIiwiYWdncmVnYXRpb24iOiJBdmVyYWdlIn0sInNlY29uZGFyeU1ldHJpY3MiOlt7ImlkZW50aWZpZXIiOiJIS1F1YW50aXR5VHlwZUlkZW50aWZpZXJSZXN0aW5nSGVhcnRSYXRlIiwiYWdncmVnYXRpb24iOiJBdmVyYWdlIn1dLCJwcm9wZW5zaXR5IjowLjUsImFscGhhIjowLjA1LCJldGEiOjAuNzcsInBlcmlvZERheXMiOjEsIndhc2hvdXREYXlzIjowLCJ3aW5kb3dTdGFydCI6Ik1pZG5pZ2h0Iiwid2luZG93RW5kIjoiTWlkbmlnaHQiLCJ3aW5kb3dTdGFydEhvdXIiOm51bGwsIndpbmRvd1N0YXJ0TWludXRlIjpudWxsLCJ3aW5kb3dFbmRIb3VyIjpudWxsLCJ3aW5kb3dFbmRNaW51dGUiOm51bGwsInB1YmxpY0V4cGVyaW1lbnRJRCI6bnVsbH0",
     "effectSummary": "HRV increase, RHR decrease; cumulative benefits over weeks",
     "citations": [
       {
@@ -1074,7 +1084,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiUG9zdC1NZWFsIFdhbGtpbmciLCJoeXBvdGhlc2lzIjoiRG9lcyBhIDEwLW1pbiB3YWxrIGFmdGVyIG1lYWxzIGltcHJvdmUgZGFpbHkgYWN0aXZpdHkgYW5kIGhlYXJ0IHJhdGU_IiwiaW50ZXJ2ZW50aW9uRGVzY3JpcHRpb24iOiIxMFx1MjAxMzE1IG1pbiB3YWxrIHdpdGhpbiAzMCBtaW4gb2YgZWF0aW5nIChhZnRlciBlYWNoIG1haW4gbWVhbCkiLCJjb250cm9sRGVzY3JpcHRpb24iOiJTaXQgb3IgcmVzdCBhZnRlciBtZWFscyIsInByaW1hcnlNZXRyaWMiOnsiaWRlbnRpZmllciI6IkhLUXVhbnRpdHlUeXBlSWRlbnRpZmllclN0ZXBDb3VudCIsImFnZ3JlZ2F0aW9uIjoiU3VtIn0sInNlY29uZGFyeU1ldHJpY3MiOlt7ImlkZW50aWZpZXIiOiJIS1F1YW50aXR5VHlwZUlkZW50aWZpZXJXYWxraW5nSGVhcnRSYXRlQXZlcmFnZSIsImFnZ3JlZ2F0aW9uIjoiQXZlcmFnZSJ9LHsiaWRlbnRpZmllciI6IkhLUXVhbnRpdHlUeXBlSWRlbnRpZmllckFjdGl2ZUVuZXJneUJ1cm5lZCIsImFnZ3JlZ2F0aW9uIjoiU3VtIn1dLCJwcm9wZW5zaXR5IjowLjUsImFscGhhIjowLjA1LCJldGEiOjAuNzcsInBlcmlvZERheXMiOjEsIndhc2hvdXREYXlzIjowLCJ3aW5kb3dTdGFydCI6Ik1pZG5pZ2h0Iiwid2luZG93RW5kIjoiTWlkbmlnaHQiLCJ3aW5kb3dTdGFydEhvdXIiOm51bGwsIndpbmRvd1N0YXJ0TWludXRlIjpudWxsLCJ3aW5kb3dFbmRIb3VyIjpudWxsLCJ3aW5kb3dFbmRNaW51dGUiOm51bGwsInB1YmxpY0V4cGVyaW1lbnRJRCI6bnVsbH0",
     "effectSummary": "+3000 daily steps; glucose response flattened ~30%",
     "citations": [
       {
@@ -1116,7 +1125,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiQ29udHJhc3QgVGhlcmFweSAmIFJlY292ZXJ5IiwiaHlwb3RoZXNpcyI6IkRvZXMgYWx0ZXJuYXRpbmcgaG90IGFuZCBjb2xkIGFmdGVyIGV4ZXJjaXNlIGltcHJvdmUgb3Zlcm5pZ2h0IHJlY292ZXJ5PyIsImludGVydmVudGlvbkRlc2NyaXB0aW9uIjoiQWx0ZXJuYXRlIDEgbWluIGNvbGQgLyAxIG1pbiBob3QgZm9yIDEyXHUyMDEzMTUgbWluIHRvdGFsIHBvc3Qtd29ya291dCIsImNvbnRyb2xEZXNjcmlwdGlvbiI6Ik5vIGNvbnRyYXN0IHRoZXJhcHkgcG9zdC13b3Jrb3V0IiwicHJpbWFyeU1ldHJpYyI6eyJpZGVudGlmaWVyIjoiSEtRdWFudGl0eVR5cGVJZGVudGlmaWVySGVhcnRSYXRlVmFyaWFiaWxpdHlTRE5OIiwiYWdncmVnYXRpb24iOiJBdmVyYWdlIn0sInNlY29uZGFyeU1ldHJpY3MiOlt7ImlkZW50aWZpZXIiOiJIS1F1YW50aXR5VHlwZUlkZW50aWZpZXJSZXN0aW5nSGVhcnRSYXRlIiwiYWdncmVnYXRpb24iOiJBdmVyYWdlIn1dLCJwcm9wZW5zaXR5IjowLjUsImFscGhhIjowLjA1LCJldGEiOjAuNzcsInBlcmlvZERheXMiOjEsIndhc2hvdXREYXlzIjowLCJ3aW5kb3dTdGFydCI6Ik1pZG5pZ2h0Iiwid2luZG93RW5kIjoiTWlkbmlnaHQiLCJ3aW5kb3dTdGFydEhvdXIiOm51bGwsIndpbmRvd1N0YXJ0TWludXRlIjpudWxsLCJ3aW5kb3dFbmRIb3VyIjpudWxsLCJ3aW5kb3dFbmRNaW51dGUiOm51bGwsInB1YmxpY0V4cGVyaW1lbnRJRCI6bnVsbH0",
     "effectSummary": "Greater parasympathetic recovery than passive rest",
     "citations": [
       {
@@ -1128,7 +1136,7 @@ const EXPERIMENTS = [
     ]
   },
   {
-    "category": "Supplements",
+    "category": "Recovery",
     "template": {
       "version": 1,
       "name": "L-Theanine & Coffee",
@@ -1158,7 +1166,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiTC1UaGVhbmluZSAmIENvZmZlZSIsImh5cG90aGVzaXMiOiJEb2VzIGFkZGluZyBMLXRoZWFuaW5lIHRvIGNvZmZlZSBpbXByb3ZlIGZvY3VzIHdpdGhvdXQgaml0dGVycz8iLCJpbnRlcnZlbnRpb25EZXNjcmlwdGlvbiI6IjIwMCBtZyBMLXRoZWFuaW5lIHdpdGggbW9ybmluZyBjb2ZmZWUiLCJjb250cm9sRGVzY3JpcHRpb24iOiJNb3JuaW5nIGNvZmZlZSBhbG9uZSAobm8gTC10aGVhbmluZSkiLCJwcmltYXJ5TWV0cmljIjp7ImlkZW50aWZpZXIiOiJIS1F1YW50aXR5VHlwZUlkZW50aWZpZXJSZXN0aW5nSGVhcnRSYXRlIiwiYWdncmVnYXRpb24iOiJBdmVyYWdlIn0sInNlY29uZGFyeU1ldHJpY3MiOlt7ImlkZW50aWZpZXIiOiJIS1F1YW50aXR5VHlwZUlkZW50aWZpZXJIZWFydFJhdGVWYXJpYWJpbGl0eVNETk4iLCJhZ2dyZWdhdGlvbiI6IkF2ZXJhZ2UifV0sInByb3BlbnNpdHkiOjAuNSwiYWxwaGEiOjAuMDUsImV0YSI6MC43NywicGVyaW9kRGF5cyI6MSwid2FzaG91dERheXMiOjAsIndpbmRvd1N0YXJ0IjoiTWlkbmlnaHQiLCJ3aW5kb3dFbmQiOiJNaWRuaWdodCIsIndpbmRvd1N0YXJ0SG91ciI6bnVsbCwid2luZG93U3RhcnRNaW51dGUiOm51bGwsIndpbmRvd0VuZEhvdXIiOm51bGwsIndpbmRvd0VuZE1pbnV0ZSI6bnVsbCwicHVibGljRXhwZXJpbWVudElEIjpudWxsfQ",
     "effectSummary": "Lower RHR, higher HRV; reduced caffeine jitteriness",
     "citations": [
       {
@@ -1176,7 +1183,7 @@ const EXPERIMENTS = [
     ]
   },
   {
-    "category": "Supplements",
+    "category": "Sleep",
     "template": {
       "version": 1,
       "name": "Apigenin & Sleep",
@@ -1210,7 +1217,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiQXBpZ2VuaW4gJiBTbGVlcCIsImh5cG90aGVzaXMiOiJEb2VzIGFwaWdlbmluIGJlZm9yZSBiZWQgaW1wcm92ZSBzbGVlcCBvbnNldD8iLCJpbnRlcnZlbnRpb25EZXNjcmlwdGlvbiI6IjUwIG1nIGFwaWdlbmluIDMwXHUyMDEzNjAgbWluIGJlZm9yZSBiZWQiLCJjb250cm9sRGVzY3JpcHRpb24iOiJObyBhcGlnZW5pbiIsInByaW1hcnlNZXRyaWMiOnsiaWRlbnRpZmllciI6InNsZWVwRHVyYXRpb24iLCJhZ2dyZWdhdGlvbiI6IlN1bSJ9LCJzZWNvbmRhcnlNZXRyaWNzIjpbeyJpZGVudGlmaWVyIjoiZGVlcFNsZWVwRHVyYXRpb24iLCJhZ2dyZWdhdGlvbiI6IlN1bSJ9LHsiaWRlbnRpZmllciI6InNsZWVwRWZmaWNpZW5jeSIsImFnZ3JlZ2F0aW9uIjoiQXZlcmFnZSJ9XSwicHJvcGVuc2l0eSI6MC41LCJhbHBoYSI6MC4wNSwiZXRhIjowLjc3LCJwZXJpb2REYXlzIjoxLCJ3YXNob3V0RGF5cyI6MCwid2luZG93U3RhcnQiOiJCZWR0aW1lIiwid2luZG93RW5kIjoiUmlzaW5nIHRpbWUiLCJ3aW5kb3dTdGFydEhvdXIiOm51bGwsIndpbmRvd1N0YXJ0TWludXRlIjpudWxsLCJ3aW5kb3dFbmRIb3VyIjpudWxsLCJ3aW5kb3dFbmRNaW51dGUiOm51bGwsInB1YmxpY0V4cGVyaW1lbnRJRCI6bnVsbH0",
     "effectSummary": "Mild sedative via GABA-A; part of Huberman's sleep stack",
     "citations": [
       {
@@ -1222,7 +1228,7 @@ const EXPERIMENTS = [
     ]
   },
   {
-    "category": "Supplements",
+    "category": "Sleep",
     "template": {
       "version": 1,
       "name": "Huberman Sleep Stack",
@@ -1256,7 +1262,6 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiSHViZXJtYW4gU2xlZXAgU3RhY2siLCJoeXBvdGhlc2lzIjoiRG9lcyB0aGUgZnVsbCBIdWJlcm1hbiBzbGVlcCBjb2NrdGFpbCBpbXByb3ZlIGRlZXAgc2xlZXA_IiwiaW50ZXJ2ZW50aW9uRGVzY3JpcHRpb24iOiJNZyB0aHJlb25hdGUgKDE0NSBtZykgKyBMLXRoZWFuaW5lICgyMDAgbWcpICsgYXBpZ2VuaW4gKDUwIG1nKSBiZWZvcmUgYmVkIiwiY29udHJvbERlc2NyaXB0aW9uIjoiTm8gc3VwcGxlbWVudHMgYmVmb3JlIGJlZCIsInByaW1hcnlNZXRyaWMiOnsiaWRlbnRpZmllciI6ImRlZXBTbGVlcER1cmF0aW9uIiwiYWdncmVnYXRpb24iOiJTdW0ifSwic2Vjb25kYXJ5TWV0cmljcyI6W3siaWRlbnRpZmllciI6IkhLUXVhbnRpdHlUeXBlSWRlbnRpZmllckhlYXJ0UmF0ZVZhcmlhYmlsaXR5U0ROTiIsImFnZ3JlZ2F0aW9uIjoiQXZlcmFnZSJ9LHsiaWRlbnRpZmllciI6InNsZWVwRHVyYXRpb24iLCJhZ2dyZWdhdGlvbiI6IlN1bSJ9XSwicHJvcGVuc2l0eSI6MC41LCJhbHBoYSI6MC4wNSwiZXRhIjowLjc3LCJwZXJpb2REYXlzIjoxLCJ3YXNob3V0RGF5cyI6MCwid2luZG93U3RhcnQiOiJCZWR0aW1lIiwid2luZG93RW5kIjoiUmlzaW5nIHRpbWUiLCJ3aW5kb3dTdGFydEhvdXIiOm51bGwsIndpbmRvd1N0YXJ0TWludXRlIjpudWxsLCJ3aW5kb3dFbmRIb3VyIjpudWxsLCJ3aW5kb3dFbmRNaW51dGUiOm51bGwsInB1YmxpY0V4cGVyaW1lbnRJRCI6bnVsbH0",
     "effectSummary": "Combined stack targeting GABA, glycine, and parasympathetic pathways",
     "citations": [
       {
