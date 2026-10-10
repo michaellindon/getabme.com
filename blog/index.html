@@ -3,101 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/svg+xml" href="../logo.svg">
 <title>ABMe Blog — Experiment Ideas</title>
+<meta name="description" content="Evidence-based experiment ideas: what the research says about magnesium, caffeine, cold plunges, alcohol and racing shoes, and how to test each one on yourself.">
+<link rel="canonical" href="https://getabme.com/blog/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ABMe">
+<meta property="og:title" content="ABMe Blog — Experiment Ideas">
+<meta property="og:description" content="Evidence-based experiment ideas: what the research says about magnesium, caffeine, cold plunges, alcohol and racing shoes, and how to test each one on yourself.">
+<meta property="og:url" content="https://getabme.com/blog/">
+<meta property="og:image" content="https://getabme.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ABMe Blog — Experiment Ideas">
+<meta name="twitter:description" content="Evidence-based experiment ideas: what the research says about magnesium, caffeine, cold plunges, alcohol and racing shoes, and how to test each one on yourself.">
+<meta name="twitter:image" content="https://getabme.com/og-image.png">
+<link rel="icon" type="image/svg+xml" href="../logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --bg: #0b0f1a;
-    --surface: #111726;
-    --surface-2: #171e30;
-    --border: #1f2940;
-    --border-light: #2a3654;
-    --text: #eae6df;
-    --text-muted: #8892a8;
-    --accent: #e8a838;
-    --accent-dim: rgba(232, 168, 56, 0.1);
-    --accent-mid: rgba(232, 168, 56, 0.25);
-    --blue: #4a8fe7;
-    --blue-dim: rgba(74, 143, 231, 0.15);
-    --coral: #d96350;
-    --control: #e0884e;
-    --mono: 'JetBrains Mono', monospace;
-    --sans: 'Manrope', -apple-system, sans-serif;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: var(--sans);
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .container { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
-
-  nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-    background: rgba(11, 15, 26, 0.88);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .nav-inner {
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 14px 28px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .logo {
-    font-family: var(--mono);
-    font-weight: 500;
-    font-size: 17px; letter-spacing: -0.5px;
-    color: var(--text); display: flex; align-items: center; gap: 8px;
-    text-decoration: none;
-  }
-
-  .logo .a { color: rgb(224,135,79); } .logo .b { color: rgb(74,143,232); }
-
-  .nav-links { display: flex; gap: 28px; align-items: center; }
-
-  nav a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition: color 0.15s;
-  }
-
-  nav a:hover { color: var(--text); }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--accent);
-    color: var(--bg);
-    padding: 10px 22px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-
-  .btn-primary:hover { background: #d69a2e; }
-
   .page-hero {
     padding: 140px 0 60px;
     border-bottom: 1px solid var(--border);
@@ -156,16 +82,15 @@
 
   .card-category {
     font-family: var(--mono);
-    font-size: 10px;
+    font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 500;
     margin-bottom: 14px;
   }
 
-  .cat-cardio { color: #f87171; }
-  .cat-sleep { color: #818cf8; }
-  .cat-recovery { color: #4ade80; }
+  .cat-sleep { color: var(--sleep); }
+  .cat-recovery { color: var(--recovery); }
   .cat-performance { color: var(--accent); }
   .cat-nutrition { color: var(--control); }
 
@@ -194,7 +119,7 @@
 
   .meta-tag {
     font-family: var(--mono);
-    font-size: 10px;
+    font-size: 11px;
     background: var(--surface-2);
     border: 1px solid var(--border);
     padding: 4px 8px;
@@ -212,22 +137,10 @@
     margin-top: 16px;
   }
 
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 24px 0;
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    color: var(--text-muted);
-  }
-
-  footer a { color: var(--text-muted); text-decoration: none; }
-  footer a:hover { color: var(--text); }
-
   @media (max-width: 768px) {
     .cards-grid { grid-template-columns: 1fr; }
-    .nav-links a:not(.btn-primary) { display: none; }
-    footer { flex-direction: column; gap: 8px; }
+    .page-hero { padding: 110px 0 40px; }
+    .cards-section { padding: 40px 0 64px; }
   }
 </style>
 </head>
@@ -235,26 +148,27 @@
 
 <nav>
   <div class="nav-inner">
-    <a class="logo" href="../index.html"><svg width="22" height="24" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="nl"><rect x="0" y="0" width="100" height="220"/></clipPath><clipPath id="nr"><rect x="100" y="0" width="100" height="220"/></clipPath></defs><circle cx="100" cy="62" r="36" clip-path="url(#nl)" fill="rgb(224,135,79)"/><circle cx="100" cy="62" r="36" clip-path="url(#nr)" fill="rgb(74,143,232)"/><path d="M100,110 C65,110 38,138 38,168 L38,195 C38,203 44,209 52,209 L100,209 Z" clip-path="url(#nl)" fill="rgb(224,135,79)"/><path d="M100,110 C135,110 162,138 162,168 L162,195 C162,203 156,209 148,209 L100,209 Z" clip-path="url(#nr)" fill="rgb(74,143,232)"/></svg><span><span class="a">A</span><span class="b">B</span>Me</span></a>
-    <div class="nav-links">
+    <a class="logo" href="../index.html"><svg width="22" height="24" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><clipPath id="nl"><rect x="0" y="0" width="100" height="220"/></clipPath><clipPath id="nr"><rect x="100" y="0" width="100" height="220"/></clipPath></defs><circle cx="100" cy="62" r="36" clip-path="url(#nl)" fill="rgb(224,135,79)"/><circle cx="100" cy="62" r="36" clip-path="url(#nr)" fill="rgb(74,143,232)"/><path d="M100,110 C65,110 38,138 38,168 L38,195 C38,203 44,209 52,209 L100,209 Z" clip-path="url(#nl)" fill="rgb(224,135,79)"/><path d="M100,110 C135,110 162,138 162,168 L162,195 C162,203 156,209 148,209 L100,209 Z" clip-path="url(#nr)" fill="rgb(74,143,232)"/></svg><span><span class="a">A</span><span class="b">B</span>Me</span></a>
+    <div class="nav-links" id="nav-menu">
       <a href="../how-it-works/index.html">How It Works</a>
-      <a href="../index.html#hardware">Devices</a>
-      <a href="../index.html#privacy">Privacy</a>
-      <a href="../index.html#community">Community</a>
+      <a href="../index.html#hardware" class="nav-anchor">Devices</a>
+      <a href="../index.html#privacy" class="nav-anchor">Privacy</a>
+      <a href="../index.html#community" class="nav-anchor">Community</a>
       <a href="../experiments/index.html">Experiments</a>
-      <a href="../blog/index.html">Blog</a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUIUJBtQCGMjL7C8JgCRhozEFw1dMqrdEfdmFISsPyiO5ZXQ/viewform?usp=dialog" target="_blank" class="btn-primary">
-        Request Early Access
-      </a>
+      <a href="../blog/index.html" class="active">Blog</a>
+    </div>
+    <div class="nav-right">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUIUJBtQCGMjL7C8JgCRhozEFw1dMqrdEfdmFISsPyiO5ZXQ/viewform?usp=dialog" target="_blank" rel="noopener" class="btn-primary">Request Early Access</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
 
 <div class="container">
   <div class="page-hero">
-    <div class="overline">Experiment Library</div>
+    <div class="overline">Blog</div>
     <h1>What will you test first?</h1>
-    <p>Every experiment below comes pre-loaded in the app with synthetic data showing real results. Read the science, see the confidence sequences, then launch your own N-of-1 trial.</p>
+    <p>Every experiment below comes pre-loaded in the app with synthetic data showing what a result looks like. Read the science, see the confidence sequences, then launch your own N-of-1 trial.</p>
   </div>
 
   <div class="cards-section">
@@ -337,9 +251,10 @@
 
   <footer>
     <span>&copy; 2026 ABMe</span>
-    <span><a href="../index.html">Home</a> &middot; <a href="https://apps.apple.com/app/ab-me/id6746427726">App Store</a></span>
+    <span><a href="../index.html">Home</a> &middot; <a href="../how-it-works/index.html">How It Works</a> &middot; <a href="../experiments/index.html">Experiments</a> &middot; <a href="../blog/index.html">Blog</a> &middot; <a href="../privacy.html">Privacy</a> &middot; <a href="mailto:feedback@getabme.com">Contact</a></span>
   </footer>
 </div>
 
+<script src="../assets/site.js" defer></script>
 </body>
 </html>

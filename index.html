@@ -3,129 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/svg+xml" href="logo.svg">
 <title>ABMe — The Experimentation Platform That Fits in Your Pocket</title>
+<meta name="description" content="ABMe turns your iPhone and wearable into a personal experimentation platform. Randomize what you do, let HealthKit measure the result, and get anytime-valid answers about what actually works for you.">
+<link rel="canonical" href="https://getabme.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ABMe">
+<meta property="og:title" content="ABMe — The Experimentation Platform That Fits in Your Pocket">
+<meta property="og:description" content="ABMe turns your iPhone and wearable into a personal experimentation platform. Randomize what you do, let HealthKit measure the result, and get anytime-valid answers about what actually works for you.">
+<meta property="og:url" content="https://getabme.com/">
+<meta property="og:image" content="https://getabme.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ABMe — The Experimentation Platform That Fits in Your Pocket">
+<meta name="twitter:description" content="ABMe turns your iPhone and wearable into a personal experimentation platform. Randomize what you do, let HealthKit measure the result, and get anytime-valid answers about what actually works for you.">
+<meta name="twitter:image" content="https://getabme.com/og-image.png">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --bg: #0b0f1a;
-    --surface: #111726;
-    --surface-2: #171e30;
-    --border: #1f2940;
-    --border-light: #2a3654;
-    --text: #eae6df;
-    --text-muted: #8892a8;
-    --accent: #e8a838;
-    --accent-dim: rgba(232, 168, 56, 0.1);
-    --accent-mid: rgba(232, 168, 56, 0.25);
-    --blue: #4a8fe7;
-    --blue-dim: rgba(74, 143, 231, 0.15);
-    --coral: #d96350;
-    --coral-dim: rgba(217, 99, 80, 0.12);
-    --treatment: #4a8fe7;
-    --control: #e0884e;
-    --chart-red: rgba(217, 80, 64, 0.85);
-    --mono: 'JetBrains Mono', monospace;
-    --sans: 'Manrope', -apple-system, sans-serif;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: var(--sans);
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-
-  .container { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
-
-  /* ───── Nav ───── */
-  nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-    background: rgba(11, 15, 26, 0.88);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .nav-inner {
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 14px 28px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .logo {
-    font-family: var(--mono);
-    font-weight: 500;
-    font-size: 17px;
-    letter-spacing: -0.5px;
-    color: var(--text);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-  }
-
-  .logo .a { color: var(--control); }
-  .logo .b { color: var(--blue); }
-
-  .nav-links { display: flex; gap: 28px; align-items: center; }
-
-  nav a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition: color 0.15s;
-  }
-
-  nav a:hover { color: var(--text); }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--accent);
-    color: var(--bg);
-    padding: 10px 22px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.2s;
-    border: none;
-    cursor: pointer;
-  }
-
-  .btn-primary:hover { background: #d69a2e; transform: translateY(-1px); box-shadow: 0 4px 20px var(--accent-dim); }
-
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--text-muted);
-    padding: 10px 22px;
-    border-radius: 8px;
-    border: 1px solid var(--border-light);
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.15s;
-  }
-
-  .btn-secondary:hover { color: var(--text); border-color: var(--text-muted); }
-
   /* ───── Hero ───── */
   .hero {
     padding: 160px 0 80px;
@@ -396,8 +294,7 @@
     gap: 3px;
   }
 
-  .ticker-delta.up { color: #4ade80; }
-  .ticker-delta.down { color: #f87171; }
+  .ticker-delta { color: var(--good); }
 
   .ticker-arrow { font-size: 11px; }
 
@@ -446,7 +343,7 @@
     gap: 24px;
     margin-top: 10px;
     font-family: var(--mono);
-    font-size: 10px;
+    font-size: 11px;
     color: var(--text-muted);
     letter-spacing: 0.5px;
   }
@@ -484,7 +381,7 @@
   .timeseries-label {
     text-align: center;
     font-family: var(--mono);
-    font-size: 10px;
+    font-size: 11px;
     color: var(--text-muted);
     margin-top: 8px;
     letter-spacing: 0.5px;
@@ -496,9 +393,6 @@
   /* ── Manifesto ── */
   .manifesto-section {
     border-top: 1px solid var(--border);
-  }
-
-  .manifesto-body {
   }
 
   .manifesto-body p {
@@ -703,7 +597,7 @@
     justify-content: flex-end;
     padding-right: 10px;
     font-family: var(--mono);
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 500;
   }
 
@@ -722,7 +616,7 @@
   .ml-diagram-label {
     text-align: center;
     font-family: var(--mono);
-    font-size: 10px;
+    font-size: 11px;
     color: var(--text-muted);
     margin-top: 4px;
     letter-spacing: 0.3px;
@@ -738,7 +632,7 @@
 
   .ml-chip {
     font-family: var(--mono);
-    font-size: 10px;
+    font-size: 11px;
     background: var(--surface-2);
     border: 1px solid var(--border);
     padding: 4px 8px;
@@ -831,7 +725,7 @@
     flex-shrink: 0;
   }
 
-  .device-icon.apple { background: rgba(255,255,255,0.06); }
+  .device-icon.apple { background: rgba(255,255,255,0.06); color: var(--text); }
   .device-icon.oura { background: rgba(180, 140, 255, 0.1); }
   .device-icon.whoop { background: rgba(0, 200, 150, 0.1); }
   .device-icon.garmin { background: rgba(0, 150, 255, 0.1); }
@@ -840,7 +734,7 @@
   .device-icon.withings { background: rgba(0, 200, 100, 0.1); }
   .device-icon.coros { background: rgba(255, 160, 0, 0.1); }
 
-  .device-info h4 {
+  .device-info h3 {
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 2px;
@@ -909,6 +803,9 @@
     line-height: 1.7;
   }
 
+  .privacy-sub a { color: var(--accent); text-decoration: none; }
+  .privacy-sub a:hover { text-decoration: underline; }
+
   .privacy-features {
     display: flex;
     justify-content: center;
@@ -930,10 +827,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
+    color: var(--accent);
   }
 
-  .privacy-feat h4 {
+  .icon-wrap svg, .card-icon svg, .device-icon svg { width: 24px; height: 24px; display: block; }
+
+  .privacy-feat h3 {
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 4px;
@@ -1004,9 +903,24 @@
   .community-card:hover { border-color: var(--accent-mid); }
 
   .community-card .card-icon {
-    font-size: 28px;
-    margin-bottom: 14px;
     display: block;
+    margin-bottom: 14px;
+    color: var(--accent);
+  }
+
+  .community-card .card-icon svg { width: 28px; height: 28px; }
+
+  .roadmap-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    border: 1px solid var(--accent-mid);
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin-left: 8px;
+    vertical-align: middle;
   }
 
   .community-card h3 {
@@ -1109,19 +1023,6 @@
 
   .final-cta .btn-primary { padding: 14px 32px; font-size: 16px; }
 
-  /* ── Footer ── */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 24px 0;
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    color: var(--text-muted);
-  }
-
-  footer a { color: var(--text-muted); text-decoration: none; }
-  footer a:hover { color: var(--text); }
-
   /* ── Blog Posts Grid ── */
   .posts-section { border-top: 1px solid var(--border); }
 
@@ -1151,7 +1052,7 @@
 
   .post-cat {
     font-family: var(--mono);
-    font-size: 10px;
+    font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 500;
@@ -1187,7 +1088,7 @@
 
   .post-tag {
     font-family: var(--mono);
-    font-size: 10px;
+    font-size: 11px;
     background: var(--surface-2);
     border: 1px solid var(--border);
     padding: 4px 8px;
@@ -1224,7 +1125,7 @@
 
   .catalog-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
 
@@ -1282,7 +1183,6 @@
   .cat-sleep-bg { background: #818cf8; }
   .cat-running-bg { background: #f87171; }
   .cat-recovery-bg { background: #4ade80; }
-  .cat-supplements-bg { background: var(--accent); }
 
   /* ── Responsive ── */
   @media (max-width: 768px) {
@@ -1291,16 +1191,18 @@
     .iphone-screen { min-height: 460px; }
     .causation-grid { grid-template-columns: 1fr; }
     .steps-grid { grid-template-columns: 1fr 1fr; }
-    .catalog-grid { grid-template-columns: 1fr; }
-    .nav-links a:not(.btn-primary) { display: none; }
-    footer { flex-direction: column; gap: 8px; }
     .privacy-features { gap: 24px; }
     .assignment-cell { width: 8px; height: 12px; }
+    section { padding: 64px 0; }
+    .final-cta { padding: 64px 0 80px; }
+    .catalog-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 480px) {
     .steps-grid { grid-template-columns: 1fr; }
-    .devices-grid { grid-template-columns: 1fr; }
+    .devices-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .device-card { padding: 14px; gap: 10px; }
+    .device-info p { font-size: 11px; }
   }
 </style>
 </head>
@@ -1309,17 +1211,18 @@
 <!-- ───── Nav ───── -->
 <nav>
   <div class="nav-inner">
-    <a class="logo" href="index.html"><svg width="22" height="24" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="nl"><rect x="0" y="0" width="100" height="220"/></clipPath><clipPath id="nr"><rect x="100" y="0" width="100" height="220"/></clipPath></defs><circle cx="100" cy="62" r="36" clip-path="url(#nl)" fill="rgb(224,135,79)"/><circle cx="100" cy="62" r="36" clip-path="url(#nr)" fill="rgb(74,143,232)"/><path d="M100,110 C65,110 38,138 38,168 L38,195 C38,203 44,209 52,209 L100,209 Z" clip-path="url(#nl)" fill="rgb(224,135,79)"/><path d="M100,110 C135,110 162,138 162,168 L162,195 C162,203 156,209 148,209 L100,209 Z" clip-path="url(#nr)" fill="rgb(74,143,232)"/></svg><span><span class="a">A</span><span class="b">B</span>Me</span></a>
-    <div class="nav-links">
+    <a class="logo" href="index.html"><svg width="22" height="24" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><clipPath id="nl"><rect x="0" y="0" width="100" height="220"/></clipPath><clipPath id="nr"><rect x="100" y="0" width="100" height="220"/></clipPath></defs><circle cx="100" cy="62" r="36" clip-path="url(#nl)" fill="rgb(224,135,79)"/><circle cx="100" cy="62" r="36" clip-path="url(#nr)" fill="rgb(74,143,232)"/><path d="M100,110 C65,110 38,138 38,168 L38,195 C38,203 44,209 52,209 L100,209 Z" clip-path="url(#nl)" fill="rgb(224,135,79)"/><path d="M100,110 C135,110 162,138 162,168 L162,195 C162,203 156,209 148,209 L100,209 Z" clip-path="url(#nr)" fill="rgb(74,143,232)"/></svg><span><span class="a">A</span><span class="b">B</span>Me</span></a>
+    <div class="nav-links" id="nav-menu">
       <a href="how-it-works/index.html">How It Works</a>
-      <a href="#hardware">Devices</a>
-      <a href="#privacy">Privacy</a>
-      <a href="#community">Community</a>
+      <a href="#hardware" class="nav-anchor">Devices</a>
+      <a href="#privacy" class="nav-anchor">Privacy</a>
+      <a href="#community" class="nav-anchor">Community</a>
       <a href="experiments/index.html">Experiments</a>
       <a href="blog/index.html">Blog</a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUIUJBtQCGMjL7C8JgCRhozEFw1dMqrdEfdmFISsPyiO5ZXQ/viewform?usp=dialog" target="_blank" class="btn-primary">
-        Request Early Access
-      </a>
+    </div>
+    <div class="nav-right">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUIUJBtQCGMjL7C8JgCRhozEFw1dMqrdEfdmFISsPyiO5ZXQ/viewform?usp=dialog" target="_blank" rel="noopener" class="btn-primary">Request Early Access</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
@@ -1331,7 +1234,7 @@
       <h1>The <em>experimentation platform</em> that fits in your pocket.</h1>
       <p class="hero-sub">Built on the same research and technology that powers A/B testing at the world's largest tech companies &mdash; <strong>ABMe brings rigorous experimentation to a single subject: you.</strong> Design randomized N-of-1 experiments, collect data from your wearable, and find out what actually works.</p>
       <div class="hero-actions">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUIUJBtQCGMjL7C8JgCRhozEFw1dMqrdEfdmFISsPyiO5ZXQ/viewform?usp=dialog" target="_blank" class="btn-primary">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUIUJBtQCGMjL7C8JgCRhozEFw1dMqrdEfdmFISsPyiO5ZXQ/viewform?usp=dialog" target="_blank" rel="noopener" class="btn-primary">
           Request Early Access
         </a>
         <a href="#why" class="btn-secondary">Learn More</a>
@@ -1342,7 +1245,7 @@
     <div class="iphone">
       <div class="iphone-notch"></div>
       <div class="iphone-screen">
-        <img src="app-screenshot.png" alt="ABMe showing a statistically significant +14 minute deep sleep increase from a 10 AM caffeine curfew" style="width:100%;height:auto;display:block;">
+        <img src="app-screenshot.png" alt="ABMe showing a statistically significant +14 minute deep sleep increase from a 10 AM caffeine curfew" width="1206" height="2622" style="width:100%;height:auto;display:block;">
       </div>
     </div>
   </div>
@@ -1359,7 +1262,7 @@
 <div class="container">
   <section id="why">
     <div class="section-tag">Why Experiment?</div>
-    <div class="section-title">Tracking tells you <em style="font-style:normal;color:var(--accent)">what happened.</em><br>Experimentation tells you <em style="font-style:normal;color:var(--accent)">what caused it.</em></div>
+    <h2 class="section-title">Tracking tells you <em style="font-style:normal;color:var(--accent)">what happened.</em><br>Experimentation tells you <em style="font-style:normal;color:var(--accent)">what caused it.</em></h2>
     <p class="section-sub">You tried creatine for a month and your HRV "seemed better." But was it the creatine, or the extra sleep, or the season changing? Without randomization, you'll never know.</p>
 
     <div class="causation-grid">
@@ -1402,7 +1305,7 @@
 <div class="container">
   <section id="how">
     <div class="section-tag">How It Works</div>
-    <div class="section-title">Four steps to your first experiment.</div>
+    <h2 class="section-title">Four steps to your first experiment.</h2>
     <p class="section-sub">Design once, then tap to randomize each period. ABMe handles assignment, data collection, and analysis automatically.</p>
 
     <div class="steps-grid">
@@ -1442,7 +1345,7 @@
 <div class="container">
   <section class="ml-section">
     <div class="section-tag">Smarter Estimates</div>
-    <div class="section-title">Machine learning makes your experiments <em style="font-style:normal;color:var(--accent)">faster.</em></div>
+    <h2 class="section-title">Machine learning makes your experiments <em style="font-style:normal;color:var(--accent)">faster.</em></h2>
 
     <div class="ml-split">
       <div class="ml-text">
@@ -1493,63 +1396,63 @@
 <div class="container">
   <section id="hardware" class="hardware-section">
     <div class="section-tag">Compatible Hardware</div>
-    <div class="section-title">If it syncs to HealthKit, it works with ABMe.</div>
+    <h2 class="section-title">If it syncs to HealthKit, it works with ABMe.</h2>
     <p class="section-sub">ABMe reads from Apple HealthKit, which means every device that writes health data to your iPhone is automatically compatible.</p>
 
     <div class="devices-grid">
       <div class="device-card">
-        <div class="device-icon apple">&#x231A;</div>
+        <div class="device-icon apple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="6" width="10" height="12" rx="2.5"/><path d="M9 6V3h6v3M9 18v3h6v-3"/></svg></div>
         <div class="device-info">
-          <h4>Apple Watch</h4>
+          <h3>Apple Watch</h3>
           <p>Series 4+ / SE / Ultra</p>
         </div>
       </div>
       <div class="device-card">
         <div class="device-icon oura">&#x25CB;</div>
         <div class="device-info">
-          <h4>Oura Ring</h4>
+          <h3>Oura Ring</h3>
           <p>Gen 3 / Gen 4</p>
         </div>
       </div>
       <div class="device-card">
         <div class="device-icon whoop">&#x25A0;</div>
         <div class="device-info">
-          <h4>WHOOP</h4>
+          <h3>WHOOP</h3>
           <p>4.0 / 5.0</p>
         </div>
       </div>
       <div class="device-card">
         <div class="device-icon garmin">&#x25B2;</div>
         <div class="device-info">
-          <h4>Garmin</h4>
+          <h3>Garmin</h3>
           <p>Forerunner / Fenix / Venu</p>
         </div>
       </div>
       <div class="device-card">
         <div class="device-icon fitbit">&#x25CF;</div>
         <div class="device-info">
-          <h4>Fitbit</h4>
+          <h3>Fitbit</h3>
           <p>Sense / Versa / Charge</p>
         </div>
       </div>
       <div class="device-card">
         <div class="device-icon polar">&#x2665;</div>
         <div class="device-info">
-          <h4>Polar</h4>
+          <h3>Polar</h3>
           <p>Vantage / Grit X / Ignite</p>
         </div>
       </div>
       <div class="device-card">
         <div class="device-icon withings">&#x2B22;</div>
         <div class="device-info">
-          <h4>Withings</h4>
+          <h3>Withings</h3>
           <p>ScanWatch / Steel HR</p>
         </div>
       </div>
       <div class="device-card">
         <div class="device-icon coros">&#x25C6;</div>
         <div class="device-info">
-          <h4>COROS</h4>
+          <h3>COROS</h3>
           <p>PACE / APEX / VERTIX</p>
         </div>
       </div>
@@ -1557,7 +1460,7 @@
 
     <div class="healthkit-note">
       <div class="hk-icon">+</div>
-      <p><strong>Any device that writes to Apple HealthKit is supported.</strong> ABMe reads 70+ metric types directly from HealthKit &mdash; heart rate, HRV, sleep stages, blood oxygen, respiratory rate, VO2max, steps, workouts, and more. Zero manual entry.</p>
+      <p><strong>Any device that writes to Apple HealthKit is supported.</strong> ABMe reads nearly 70 metric types directly from HealthKit &mdash; heart rate, HRV, sleep stages, blood oxygen, respiratory rate, VO2max, steps, workouts, and more. Zero manual entry.</p>
     </div>
   </section>
 </div>
@@ -1566,32 +1469,32 @@
 <div class="container">
   <section id="privacy" class="privacy-section">
     <div class="section-tag">Privacy</div>
-    <div class="privacy-headline">
+    <h2 class="privacy-headline">
       <span class="line">Your body.</span>
       <span class="line">Your experiment.</span>
       <span class="line">Your <span class="em">data.</span></span>
-    </div>
-    <p class="privacy-sub">ABMe has no backend, no accounts, and no analytics. Your experiment data never leaves your phone. We couldn't see it even if we wanted to.</p>
+    </h2>
+    <p class="privacy-sub">ABMe runs without a backend, accounts, or analytics. Your health data never leaves your phone unless you choose to publish an experiment, and even then only that experiment's results are shared. <a href="privacy.html">Read the privacy policy.</a></p>
 
     <div class="privacy-features">
       <div class="privacy-feat">
-        <div class="icon-wrap">&#x1F4F1;</div>
-        <h4>On-Device Only</h4>
+        <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></div>
+        <h3>On-Device Only</h3>
         <p>All computation happens locally on your iPhone.</p>
       </div>
       <div class="privacy-feat">
-        <div class="icon-wrap">&#x1F6AB;</div>
-        <h4>No Backend</h4>
+        <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6.3 9.5 4.25 4.25 0 0 0 7 18z"/><path d="M4 4l16 16"/></svg></div>
+        <h3>No Backend</h3>
         <p>No servers. No databases. No cloud processing.</p>
       </div>
       <div class="privacy-feat">
-        <div class="icon-wrap">&#x1F510;</div>
-        <h4>No Accounts</h4>
-        <p>No sign-up. No email. No profile.</p>
+        <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+        <h3>No Accounts</h3>
+        <p>No sign-up needed to run an experiment.</p>
       </div>
       <div class="privacy-feat">
-        <div class="icon-wrap">&#x1F504;</div>
-        <h4>iCloud Sync</h4>
+        <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.5-4.5L4 8"/><path d="M4 4v4h4"/><path d="M4 13a8 8 0 0 0 14.5 4.5L20 16"/><path d="M20 20v-4h-4"/></svg></div>
+        <h3>iCloud Sync</h3>
         <p>CloudKit syncs only between your own devices.</p>
       </div>
     </div>
@@ -1602,7 +1505,7 @@
 <div class="container">
   <section class="community-section" id="community">
     <div class="section-tag">Community</div>
-    <div class="section-title">Share results. Replicate experiments. Build evidence.</div>
+    <h2 class="section-title">Share results. Replicate experiments. Build evidence.</h2>
     <p class="community-sub">ABMe isn't just a personal tool. When you share your results, you contribute to a growing body of independent evidence. Followers can replicate your experiment with a single tap — no setup, no configuration. Over time, the community separates what works from what doesn't.</p>
 
     <svg class="community-diagram" viewBox="0 0 320 290" xmlns="http://www.w3.org/2000/svg">
@@ -1659,19 +1562,19 @@
 
     <div class="community-grid">
       <div class="community-card">
-        <span class="card-icon">&#x1F4E4;</span>
+        <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4"/><path d="M8 8l4-4 4 4"/><path d="M5 13v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></svg></span>
         <h3>Share Your Results</h3>
         <p>Publish your experiment as a branded result card — complete with your confidence sequence chart, effect size, and verdict. Share to Instagram, Twitter, iMessage, or anywhere.</p>
       </div>
       <div class="community-card">
-        <span class="card-icon">&#x1F501;</span>
+        <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></span>
         <h3>One-Tap Replication</h3>
         <p>See someone's results and want to try it yourself? Tap "Replicate" to download their experiment template pre-configured. Just hit Start and begin your own trial. No setup required.</p>
       </div>
       <div class="community-card">
-        <span class="card-icon">&#x1F4CA;</span>
-        <h3>Decentralized Evidence</h3>
-        <p>As more ABMembers run the same experiment, we aggregate replications. "42 people tried this. 71% found a significant effect on deep sleep." That's a decentralized clinical trial.</p>
+        <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h16"/><rect x="6" y="11" width="3" height="9"/><rect x="10.5" y="6" width="3" height="14"/><rect x="15" y="14" width="3" height="6"/></svg></span>
+        <h3>Decentralized Evidence <span class="roadmap-tag">Roadmap</span></h3>
+        <p>Today, sharing and replication happen one experiment at a time. The goal is to pool independent replications so an experiment page can say "42 people tried this. 71% found a significant effect on deep sleep." That is a decentralized clinical trial.</p>
       </div>
     </div>
 
@@ -1682,21 +1585,21 @@
 <div class="container">
   <section class="catalog-section">
     <div class="section-tag">Experiment Catalogue</div>
-    <div class="section-title">26 ready-to-run experiments. Tap one to load it into the app.</div>
-    <p class="section-sub">Templates span sleep, running, recovery, and supplements &mdash; each pre-loaded with synthetic data so you can see what the results will look like before you commit.</p>
+    <h2 class="section-title">26 ready-to-run experiments. Tap one to load it into the app.</h2>
+    <p class="section-sub">Templates span sleep, running, and recovery &mdash; each pre-loaded with synthetic data so you can see what the results will look like before you commit.</p>
 
     <div class="catalog-grid">
 
-      <a class="catalog-tile" href="experiments/index.html">
+      <a class="catalog-tile" href="experiments/index.html#sleep">
         <div class="catalog-tile-head">
           <span class="catalog-dot cat-sleep-bg"></span>
           <span class="catalog-name">Sleep</span>
-          <span class="catalog-count">10 experiments</span>
+          <span class="catalog-count">13 experiments</span>
         </div>
-        <div class="catalog-examples">Caffeine curfew &middot; Magnesium glycinate &middot; Glycine &middot; Blue light glasses &middot; Tart cherry juice &middot; Alcohol &middot; Late eating cutoff &middot; Melatonin microdose &middot; No screens &middot; Warm shower</div>
+        <div class="catalog-examples">Caffeine curfew &middot; Magnesium glycinate &middot; Glycine &middot; Blue light glasses &middot; Tart cherry juice &middot; Alcohol &middot; Late eating cutoff &middot; Melatonin microdose &middot; No screens &middot; Warm shower &middot; Morning sunlight &middot; Apigenin &middot; Huberman Sleep Stack</div>
       </a>
 
-      <a class="catalog-tile" href="experiments/index.html">
+      <a class="catalog-tile" href="experiments/index.html#running">
         <div class="catalog-tile-head">
           <span class="catalog-dot cat-running-bg"></span>
           <span class="catalog-name">Running</span>
@@ -1705,22 +1608,13 @@
         <div class="catalog-examples">Carbon-plated shoes &middot; Pre-run caffeine &middot; Beetroot juice &middot; Nasal vs mouth breathing &middot; Fasted vs fed &middot; Electrolytes vs water &middot; Sodium pre-loading &middot; Music vs silence</div>
       </a>
 
-      <a class="catalog-tile" href="experiments/index.html">
+      <a class="catalog-tile" href="experiments/index.html#recovery">
         <div class="catalog-tile-head">
           <span class="catalog-dot cat-recovery-bg"></span>
           <span class="catalog-name">Recovery</span>
           <span class="catalog-count">5 experiments</span>
         </div>
-        <div class="catalog-examples">Cold plunge &middot; Morning sunlight &middot; Meditation &middot; Post-meal walking &middot; Contrast therapy</div>
-      </a>
-
-      <a class="catalog-tile" href="experiments/index.html">
-        <div class="catalog-tile-head">
-          <span class="catalog-dot cat-supplements-bg"></span>
-          <span class="catalog-name">Supplements</span>
-          <span class="catalog-count">3 experiments</span>
-        </div>
-        <div class="catalog-examples">L-Theanine &amp; coffee &middot; Apigenin &middot; Huberman Sleep Stack</div>
+        <div class="catalog-examples">Cold plunge &middot; Meditation &middot; Post-meal walking &middot; Contrast therapy &middot; L-Theanine &amp; coffee</div>
       </a>
 
     </div>
@@ -1729,22 +1623,11 @@
   </section>
 </div>
 
-<!-- ───── Final CTA ───── -->
-<div class="container">
-  <div class="final-cta" id="download">
-    <h2>Be among the first to experiment.</h2>
-    <p>Private beta via TestFlight. Free. Statistically rigorous.</p>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUIUJBtQCGMjL7C8JgCRhozEFw1dMqrdEfdmFISsPyiO5ZXQ/viewform?usp=dialog" target="_blank" class="btn-primary">
-      Request Early Access
-    </a>
-  </div>
-</div>
-
 <!-- ───── Blog Posts ───── -->
 <div class="container">
   <section class="posts-section">
     <div class="section-tag">From the Blog</div>
-    <div class="section-title">The science behind common interventions.</div>
+    <h2 class="section-title">The science behind common interventions.</h2>
     <p class="section-sub">Deep dives on the research behind popular interventions &mdash; what the studies show, what the typical effect sizes look like, and why averages may not predict your personal response.</p>
     <div class="posts-grid">
 
@@ -1829,7 +1712,7 @@
 <div class="container">
   <section class="manifesto-section">
     <div class="section-tag">Why ABMe Exists</div>
-    <div class="section-title">Evidence over anecdotes.</div>
+    <h2 class="section-title">Evidence over anecdotes.</h2>
     <div class="manifesto-body">
       <p>There's no shortage of wellness advice. Podcasters, coaches, and influencers recommend protocols they believe in, often based on personal experience or emerging research. The challenge is that personal experience is unreliable. Without controlled comparison, it's difficult to separate real effects from personal bias or the dozen other things that changed the same week you started a new supplement.</p>
       <p>Clinical trials address this with randomization and statistical inference, but they're designed for populations. They estimate the <strong>average treatment effect (ATE)</strong> across many people. That's valuable, but it doesn't tell you much about you specifically. Individual responses to interventions vary widely &mdash; a protocol that helps most people may not help you, and one that fails on average may work well for your particular biology.</p>
@@ -1840,10 +1723,21 @@
   </section>
 </div>
 
+<!-- ───── Final CTA ───── -->
+<div class="container">
+  <div class="final-cta">
+    <h2>Be among the first to experiment.</h2>
+    <p>Private beta via TestFlight. Free. Statistically rigorous.</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUIUJBtQCGMjL7C8JgCRhozEFw1dMqrdEfdmFISsPyiO5ZXQ/viewform?usp=dialog" target="_blank" rel="noopener" class="btn-primary">
+      Request Early Access
+    </a>
+  </div>
+</div>
+
 <div class="container">
   <footer>
     <span>&copy; 2026 ABMe</span>
-    <span><a href="#">Privacy</a> &middot; <a href="#">Contact</a></span>
+    <span><a href="index.html">Home</a> &middot; <a href="how-it-works/index.html">How It Works</a> &middot; <a href="experiments/index.html">Experiments</a> &middot; <a href="blog/index.html">Blog</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="mailto:feedback@getabme.com">Contact</a></span>
   </footer>
 </div>
 
@@ -1882,6 +1776,8 @@
   tickerEl.innerHTML = html;
 
   /* ── Treatment Assignment Animation ── */
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   const stripEl = document.getElementById('assignmentStrip');
   const COLS = 60;
   const assignments = [];
@@ -1901,6 +1797,10 @@
 
   function animateAssignment() {
     const cols = stripEl.querySelectorAll('.assignment-col');
+    if (reduceMotion) {
+      cols.forEach((col, i) => col.querySelector(`[data-row="${assignments[i]}"]`).classList.add(assignments[i]));
+      return;
+    }
     let i = 0;
     function fillNext() {
       if (i >= cols.length) {
@@ -2006,7 +1906,7 @@
   const tsObs = new IntersectionObserver((entries) => {
     if (entries[0].isIntersecting) {
       tsStarted = true;
-      tsFrame = 0;
+      tsFrame = reduceMotion ? tsN + 5 : 0;
       drawTS();
       tsObs.disconnect();
     }
@@ -2242,7 +2142,7 @@
   const csObs = new IntersectionObserver((entries) => {
     if (entries[0].isIntersecting) {
       csStarted = true;
-      csFrame = 0;
+      csFrame = reduceMotion ? N + 5 : 0;
       drawCS();
       csObs.disconnect();
     }
@@ -2253,5 +2153,6 @@
 })();
 </script>
 
+<script src="assets/site.js" defer></script>
 </body>
 </html>
