@@ -1,0 +1,239 @@
+/* ABMe — shared styles for every page: tokens, reset, nav, buttons, footer.
+   Page-specific rules stay in each page's own <style> block. */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0b0f1a;
+  --surface: #111726;
+  --surface-2: #171e30;
+  --border: #1f2940;
+  --border-light: #2a3654;
+  --text: #eae6df;
+  --text-muted: #8892a8;
+  --accent: #e8a838;
+  --accent-hover: #d69a2e;
+  --accent-dim: rgba(232, 168, 56, 0.1);
+  --accent-mid: rgba(232, 168, 56, 0.25);
+  --blue: #4a8fe7;
+  --treatment: #4a8fe7;
+  --control: #e0884e;
+  --good: #4ade80;
+  --bad: #f87171;
+  --sleep: #818cf8;
+  --running: #f87171;
+  --recovery: #4ade80;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Manrope', -apple-system, sans-serif;
+  --nav-height: 71px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.container { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+
+/* Keyboard focus: hover styles exist everywhere, so make focus visible too. */
+a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ───── Nav ───── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background: rgba(11, 15, 26, 0.88);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.logo {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 17px;
+  letter-spacing: -0.5px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo svg { flex-shrink: 0; }
+.logo .a { color: var(--control); }
+.logo .b { color: var(--treatment); }
+
+.nav-links { display: flex; gap: 28px; align-items: center; margin-left: auto; }
+
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.15s;
+  white-space: nowrap;
+}
+
+.nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+.nav-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+
+.nav-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 1px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ───── Buttons ───── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-primary:hover { background: var(--accent-hover); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.btn-secondary:hover { color: var(--text); border-color: var(--text-muted); }
+
+/* ───── Footer ───── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+footer a { color: var(--text-muted); text-decoration: none; }
+footer a:hover { color: var(--text); }
+
+/* ───── Responsive nav ───── */
+/* Eight nav items do not fit between 768px and 960px; drop the three home-page anchors first. */
+@media (max-width: 960px) {
+  .nav-links a.nav-anchor { display: none; }
+}
+
+@media (max-width: 768px) {
+  :root { --nav-height: 69px; }
+  .nav-inner { gap: 12px; }
+  .nav-toggle { display: flex; }
+  .nav-right { margin-left: auto; }
+  .nav-right .btn-primary { padding: 9px 14px; font-size: 13px; }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin: 0;
+    padding: 4px 28px 12px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  }
+
+  .nav-links.open { display: flex; }
+
+  .nav-links a, .nav-links a.nav-anchor {
+    display: block;
+    padding: 13px 0;
+    font-size: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-links a:last-child { border-bottom: none; }
+
+  footer { flex-direction: column; gap: 8px; }
+}
+
+@media (max-width: 360px) {
+  .nav-right .btn-primary { padding: 9px 10px; font-size: 12px; }
+}
+
+/* Respect the OS "reduce motion" setting: no looping ticker, no scroll-driven drawing. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
