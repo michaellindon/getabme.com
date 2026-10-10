@@ -413,6 +413,10 @@ const EXPERIMENTS = [
         {
           "identifier": "deepSleepDuration",
           "aggregation": "Sum"
+        },
+        {
+          "identifier": "sleepDuration",
+          "aggregation": "Sum"
         }
       ],
       "propensity": 0.5,
@@ -428,7 +432,7 @@ const EXPERIMENTS = [
       "windowEndMinute": null,
       "publicExperimentID": null
     },
-    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiQWxjb2hvbCAmIFNsZWVwIFF1YWxpdHkiLCJoeXBvdGhlc2lzIjoiRG9lcyBhIHNpbmdsZSBldmVuaW5nIGRyaW5rIGltcGFpciBzbGVlcD8iLCJpbnRlcnZlbnRpb25EZXNjcmlwdGlvbiI6Ik9uZSBzdGFuZGFyZCBhbGNvaG9saWMgZHJpbmsgd2l0aCBkaW5uZXIiLCJjb250cm9sRGVzY3JpcHRpb24iOiJBYnN0YWluIGZyb20gYWxjb2hvbCIsInByaW1hcnlNZXRyaWMiOnsiaWRlbnRpZmllciI6InJlbVNsZWVwRHVyYXRpb24iLCJhZ2dyZWdhdGlvbiI6IlN1bSJ9LCJzZWNvbmRhcnlNZXRyaWNzIjpbeyJpZGVudGlmaWVyIjoiSEtRdWFudGl0eVR5cGVJZGVudGlmaWVySGVhcnRSYXRlVmFyaWFiaWxpdHlTRE5OIiwiYWdncmVnYXRpb24iOiJBdmVyYWdlIn0seyJpZGVudGlmaWVyIjoiSEtRdWFudGl0eVR5cGVJZGVudGlmaWVyUmVzdGluZ0hlYXJ0UmF0ZSIsImFnZ3JlZ2F0aW9uIjoiQXZlcmFnZSJ9LHsiaWRlbnRpZmllciI6ImRlZXBTbGVlcER1cmF0aW9uIiwiYWdncmVnYXRpb24iOiJTdW0ifV0sInByb3BlbnNpdHkiOjAuNSwiYWxwaGEiOjAuMDUsImV0YSI6MC43NywicGVyaW9kRGF5cyI6MSwid2FzaG91dERheXMiOjAsIndpbmRvd1N0YXJ0IjoiQmVkdGltZSIsIndpbmRvd0VuZCI6IlJpc2luZyB0aW1lIiwid2luZG93U3RhcnRIb3VyIjpudWxsLCJ3aW5kb3dTdGFydE1pbnV0ZSI6bnVsbCwid2luZG93RW5kSG91ciI6bnVsbCwid2luZG93RW5kTWludXRlIjpudWxsLCJwdWJsaWNFeHBlcmltZW50SUQiOm51bGx9",
+    "url": "abme://template/eyJ2ZXJzaW9uIjoxLCJuYW1lIjoiQWxjb2hvbCAmIFNsZWVwIFF1YWxpdHkiLCJoeXBvdGhlc2lzIjoiRG9lcyBhIHNpbmdsZSBldmVuaW5nIGRyaW5rIGltcGFpciBzbGVlcD8iLCJpbnRlcnZlbnRpb25EZXNjcmlwdGlvbiI6Ik9uZSBzdGFuZGFyZCBhbGNvaG9saWMgZHJpbmsgd2l0aCBkaW5uZXIiLCJjb250cm9sRGVzY3JpcHRpb24iOiJBYnN0YWluIGZyb20gYWxjb2hvbCIsInByaW1hcnlNZXRyaWMiOnsiaWRlbnRpZmllciI6InJlbVNsZWVwRHVyYXRpb24iLCJhZ2dyZWdhdGlvbiI6IlN1bSJ9LCJzZWNvbmRhcnlNZXRyaWNzIjpbeyJpZGVudGlmaWVyIjoiSEtRdWFudGl0eVR5cGVJZGVudGlmaWVySGVhcnRSYXRlVmFyaWFiaWxpdHlTRE5OIiwiYWdncmVnYXRpb24iOiJBdmVyYWdlIn0seyJpZGVudGlmaWVyIjoiSEtRdWFudGl0eVR5cGVJZGVudGlmaWVyUmVzdGluZ0hlYXJ0UmF0ZSIsImFnZ3JlZ2F0aW9uIjoiQXZlcmFnZSJ9LHsiaWRlbnRpZmllciI6ImRlZXBTbGVlcER1cmF0aW9uIiwiYWdncmVnYXRpb24iOiJTdW0ifSx7ImlkZW50aWZpZXIiOiJzbGVlcER1cmF0aW9uIiwiYWdncmVnYXRpb24iOiJTdW0ifV0sInByb3BlbnNpdHkiOjAuNSwiYWxwaGEiOjAuMDUsImV0YSI6MC43NywicGVyaW9kRGF5cyI6MSwid2FzaG91dERheXMiOjAsIndpbmRvd1N0YXJ0IjoiQmVkdGltZSIsIndpbmRvd0VuZCI6IlJpc2luZyB0aW1lIiwid2luZG93U3RhcnRIb3VyIjpudWxsLCJ3aW5kb3dTdGFydE1pbnV0ZSI6bnVsbCwid2luZG93RW5kSG91ciI6bnVsbCwid2luZG93RW5kTWludXRlIjpudWxsLCJwdWJsaWNFeHBlcmltZW50SUQiOm51bGx9",
     "effectSummary": "REM Sleep \u221211 min, HRV \u22125.7 ms, RHR +4 bpm",
     "citations": [
       {
