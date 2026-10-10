@@ -36,7 +36,7 @@ nav a:hover { color: var(--text); }
 .page-header p { font-size: 15px; color: var(--text-muted); max-width: 540px; }
 
 /* Category nav */
-.cat-nav { display: flex; gap: 8px; padding: 16px 0 32px; position: sticky; top: 52px; z-index: 50; background: var(--bg); border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+.cat-nav { display: flex; gap: 8px; padding: 16px 0 32px; position: sticky; top: 72px; z-index: 50; background: var(--bg); border-bottom: 1px solid var(--border); flex-wrap: wrap; }
 .cat-pill { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border); color: var(--text-muted); text-decoration: none; cursor: pointer; background: none; transition: all 0.15s; }
 .cat-pill:hover, .cat-pill.active { border-color: var(--accent-mid); color: var(--text); background: var(--accent-dim); }
 
@@ -146,7 +146,12 @@ const catClass = c => c.toLowerCase().replace(/\s+/g, '');
 
 function loadTemplate(url) {
   window.location = url;
-  setTimeout(() => { window.location = APP_STORE; }, 1500);
+  // Fall back to the App Store only if the abme:// link did not open the app.
+  // When the app opens, the page is hidden and the redirect is cancelled.
+  const fallback = setTimeout(() => { window.location = APP_STORE; }, 1500);
+  const cancel = () => { if (document.hidden) clearTimeout(fallback); };
+  document.addEventListener('visibilitychange', cancel, { once: true });
+  window.addEventListener('pagehide', () => clearTimeout(fallback), { once: true });
 }
 
 function toggleCard(el) {

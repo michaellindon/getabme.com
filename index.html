@@ -1309,7 +1309,7 @@
 <!-- ───── Nav ───── -->
 <nav>
   <div class="nav-inner">
-    <div class="logo"><svg width="22" height="24" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="nl"><rect x="0" y="0" width="100" height="220"/></clipPath><clipPath id="nr"><rect x="100" y="0" width="100" height="220"/></clipPath></defs><circle cx="100" cy="62" r="36" clip-path="url(#nl)" fill="rgb(224,135,79)"/><circle cx="100" cy="62" r="36" clip-path="url(#nr)" fill="rgb(74,143,232)"/><path d="M100,110 C65,110 38,138 38,168 L38,195 C38,203 44,209 52,209 L100,209 Z" clip-path="url(#nl)" fill="rgb(224,135,79)"/><path d="M100,110 C135,110 162,138 162,168 L162,195 C162,203 156,209 148,209 L100,209 Z" clip-path="url(#nr)" fill="rgb(74,143,232)"/></svg><span><span class="a">A</span><span class="b">B</span>Me</span></div>
+    <a class="logo" href="index.html"><svg width="22" height="24" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="nl"><rect x="0" y="0" width="100" height="220"/></clipPath><clipPath id="nr"><rect x="100" y="0" width="100" height="220"/></clipPath></defs><circle cx="100" cy="62" r="36" clip-path="url(#nl)" fill="rgb(224,135,79)"/><circle cx="100" cy="62" r="36" clip-path="url(#nr)" fill="rgb(74,143,232)"/><path d="M100,110 C65,110 38,138 38,168 L38,195 C38,203 44,209 52,209 L100,209 Z" clip-path="url(#nl)" fill="rgb(224,135,79)"/><path d="M100,110 C135,110 162,138 162,168 L162,195 C162,203 156,209 148,209 L100,209 Z" clip-path="url(#nr)" fill="rgb(74,143,232)"/></svg><span><span class="a">A</span><span class="b">B</span>Me</span></a>
     <div class="nav-links">
       <a href="#how">How It Works</a>
       <a href="#hardware">Devices</a>
@@ -1497,7 +1497,7 @@
 
     <div class="devices-grid">
       <div class="device-card">
-        <div class="device-icon apple">&#x2328;</div>
+        <div class="device-icon apple">&#x231A;</div>
         <div class="device-info">
           <h4>Apple Watch</h4>
           <p>Series 4+ / SE / Ultra</p>
@@ -1934,12 +1934,15 @@
   const tsCanvas = document.getElementById('timeseriesCanvas');
   const tsCtx = tsCanvas.getContext('2d');
 
+  let tsStarted = false;
   function resizeTS() {
     const rect = tsCanvas.parentElement.getBoundingClientRect();
+    if (tsCanvas.width === rect.width * 2) return; // height-only resize (mobile toolbar): nothing to do
     tsCanvas.width = rect.width * 2;
     tsCanvas.height = 60 * 2;
     tsCanvas.style.width = rect.width + 'px';
     tsCanvas.style.height = '60px';
+    if (tsStarted) { tsFrame = tsN + 5; drawTS(); } // setting width cleared the canvas; redraw the finished chart
   }
   resizeTS();
   window.addEventListener('resize', resizeTS);
@@ -2001,6 +2004,7 @@
 
   const tsObs = new IntersectionObserver((entries) => {
     if (entries[0].isIntersecting) {
+      tsStarted = true;
       tsFrame = 0;
       drawTS();
       tsObs.disconnect();
@@ -2013,10 +2017,14 @@
   if (csCanvas) {
   const csCtx = csCanvas.getContext('2d');
 
+  let csStarted = false;
   function resizeCS() {
     const rect = csCanvas.parentElement.getBoundingClientRect();
-    csCanvas.width = rect.width * 2;
+    const w = (rect.width - 56) * 2; // card padding is 28px each side
+    if (csCanvas.width === w) return;
+    csCanvas.width = w;
     csCanvas.height = 140 * 2;
+    if (csStarted) { csFrame = N + 5; drawCS(); }
   }
   resizeCS();
   window.addEventListener('resize', resizeCS);
@@ -2232,6 +2240,7 @@
 
   const csObs = new IntersectionObserver((entries) => {
     if (entries[0].isIntersecting) {
+      csStarted = true;
       csFrame = 0;
       drawCS();
       csObs.disconnect();
