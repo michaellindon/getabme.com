@@ -879,7 +879,8 @@
   }
 
   .community-diagram {
-    width: 240px;
+    width: 280px;
+    max-width: 100%;
     height: auto;
     margin: 0 auto 40px;
     display: block;
@@ -1508,56 +1509,117 @@
     <h2 class="section-title">Share results. Replicate experiments. Build evidence.</h2>
     <p class="community-sub">ABMe isn't just a personal tool. When you share your results, you contribute to a growing body of independent evidence. Followers can replicate your experiment with a single tap — no setup, no configuration. Over time, the community separates what works from what doesn't.</p>
 
-    <svg class="community-diagram" viewBox="0 0 320 290" xmlns="http://www.w3.org/2000/svg">
+    <svg class="community-diagram cd-d" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Five independent experiments each narrow their own confidence sequence and send the result to a central pooled estimate of the average treatment effect">
+      <style>
+        /* 10 s cycle, each experiment on its own offset: its interval narrows over 3 s, then a result travels to the hub, where the pooled interval narrows tighter than any single one */
+        .cd-d .cdd-ci { animation: cddCi 10s linear infinite; opacity: 0; }
+        @keyframes cddCi { 0% { opacity: 0; } 4% { opacity: 1; } 90% { opacity: 1; } 95%,100% { opacity: 0; } }
+        .cd-d .cdd-bar { transform-box: fill-box; transform-origin: center; animation: cddBar 10s linear infinite; }
+        @keyframes cddBar { 0% { transform: scaleX(1); animation-timing-function: ease-out; } 32% { transform: scaleX(var(--s)); } 100% { transform: scaleX(var(--s)); } }
+        .cd-d .cdd-send { animation: cddSend 10s linear infinite; opacity: 0; }
+        @keyframes cddSend { 0%,34% { opacity: 0; } 36% { opacity: 1; } 42% { opacity: 1; } 44%,100% { opacity: 0; } }
+        .cd-d .cdd-spoke { stroke-dasharray: 3 5; animation: cddSpoke 10s linear infinite; }
+        @keyframes cddSpoke { 0%,34% { stroke: #1f2940; } 36% { stroke: rgba(74,143,232,0.6); } 46% { stroke: #1f2940; } 100% { stroke: #1f2940; } }
+        .cd-d .cdd-hubflash { transform-box: fill-box; transform-origin: center; animation: cddFlash 10s ease-out infinite; opacity: 0; }
+        @keyframes cddFlash { 0%,43% { transform: scale(0.9); opacity: 0; } 44% { opacity: 0.5; } 54% { transform: scale(1.25); opacity: 0; } 100% { opacity: 0; } }
+        .cd-d .cdd-pool { animation: cddPool 10s linear infinite; opacity: 0; }
+        @keyframes cddPool { 0%,40% { opacity: 0; } 44% { opacity: 1; } 92% { opacity: 1; } 97%,100% { opacity: 0; } }
+        .cd-d .cdd-poolbar { transform-box: fill-box; transform-origin: center; animation: cddPoolBar 10s linear infinite; }
+        @keyframes cddPoolBar { 0%,42% { transform: scaleX(1); animation-timing-function: ease-out; } 68% { transform: scaleX(0.2); } 100% { transform: scaleX(0.2); } }
+        .cd-d .cdd-ring { transform-origin: 160px 160px; animation: cddSpin 90s linear infinite; }
+        @keyframes cddSpin { to { transform: rotate(360deg); } }
+        .cd-d .cdd-o1 { animation-delay: 0.0s; }
+        .cd-d .cdd-o2 { animation-delay: 0.9s; }
+        .cd-d .cdd-o3 { animation-delay: 1.7s; }
+        .cd-d .cdd-o4 { animation-delay: 0.4s; }
+        .cd-d .cdd-o5 { animation-delay: 1.3s; }
+        .static .cdd-send { display: none; }
+        .static .cdd-ci, .static .cdd-pool { opacity: 1; }
+        .static .cdd-bar { transform: scaleX(var(--s)); }
+        .static .cdd-poolbar { transform: scaleX(0.2); }
+      </style>
       <defs>
-        <marker id="arrowControl" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M0,0 L8,4 L0,8 Z" fill="rgba(224,135,79,0.6)"/>
-        </marker>
-        <marker id="arrowTreatment" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M0,0 L8,4 L0,8 Z" fill="rgba(74,143,232,0.6)"/>
-        </marker>
+        <g id="cddPerson">
+          <circle r="14"/>
+          <path d="M0,20 C-15,20 -26,32 -26,46 L-26,54 C-26,56 -24,58 -22,58 L22,58 C24,58 26,56 26,54 L26,46 C26,32 15,20 0,20 Z"/>
+        </g>
+        <path id="cddTo1" d="M160.0,68.0 L160.0,110.0"/>
+        <path id="cddTo2" d="M247.5,131.6 L207.6,144.5"/>
+        <path id="cddTo3" d="M214.1,234.4 L189.4,200.5"/>
+        <path id="cddTo4" d="M105.9,234.4 L130.6,200.5"/>
+        <path id="cddTo5" d="M72.5,131.6 L112.4,144.5"/>
       </defs>
 
-      <!-- Outer ring -->
-      <circle cx="160" cy="145" r="112" fill="none" stroke="#1f2940" stroke-width="1" stroke-dasharray="4,4"/>
+      <!-- Outer ring, slowly turning -->
+      <circle class="cdd-ring" cx="160" cy="160" r="128" fill="none" stroke="#1f2940" stroke-width="1" stroke-dasharray="4,4"/>
 
-      <!-- Center globe -->
-      <circle cx="160" cy="145" r="28" fill="rgba(31,41,64,0.4)" stroke="#3a4a66" stroke-width="2"/>
-      <ellipse cx="160" cy="145" rx="12" ry="28" fill="none" stroke="#3a4a66" stroke-width="1.2"/>
-      <ellipse cx="160" cy="145" rx="22" ry="10" fill="none" stroke="#3a4a66" stroke-width="0.8"/>
-      <line x1="132" y1="145" x2="188" y2="145" stroke="#3a4a66" stroke-width="1.2"/>
-      <line x1="136" y1="132" x2="184" y2="132" stroke="#3a4a66" stroke-width="0.6"/>
-      <line x1="136" y1="158" x2="184" y2="158" stroke="#3a4a66" stroke-width="0.6"/>
+      <!-- Spokes: each lights up when a result is sent -->
+      <use class="cdd-spoke cdd-o1" href="#cddTo1" fill="none" stroke="#1f2940" stroke-width="1"/>
+      <use class="cdd-spoke cdd-o2" href="#cddTo2" fill="none" stroke="#1f2940" stroke-width="1"/>
+      <use class="cdd-spoke cdd-o3" href="#cddTo3" fill="none" stroke="#1f2940" stroke-width="1"/>
+      <use class="cdd-spoke cdd-o4" href="#cddTo4" fill="none" stroke="#1f2940" stroke-width="1"/>
+      <use class="cdd-spoke cdd-o5" href="#cddTo5" fill="none" stroke="#1f2940" stroke-width="1"/>
 
-      <!-- Arrows: Sharer → Replicator Left -->
-      <path d="M140,95 Q100,130 85,180" fill="none" stroke="rgba(224,135,79,0.5)" stroke-width="1.5" marker-end="url(#arrowControl)"/>
-      <!-- Arrows: Sharer → Replicator Right -->
-      <path d="M180,95 Q220,130 235,180" fill="none" stroke="rgba(224,135,79,0.5)" stroke-width="1.5" marker-end="url(#arrowControl)"/>
+      <!-- Independent experiments, each with its own confidence sequence -->
+      <g class="cdd-exp">
+        <use href="#cddPerson" transform="translate(160.0,42.0) scale(0.5) translate(0,-14)" fill="rgb(74,143,232)"/>
+        <g class="cdd-ci cdd-o1">
+          <line x1="160.0" y1="81.0" x2="160.0" y2="91.0" stroke="#2a3654" stroke-width="1"/>
+          <line class="cdd-bar cdd-o1" style="--s:0.42" x1="139.0" y1="86.0" x2="195.0" y2="86.0" stroke="#4a8fe7" stroke-width="2" stroke-linecap="round" opacity="0.75"/>
+          <circle cx="167.0" cy="86.0" r="2.8" fill="#4a8fe7"/>
+        </g>
+        <g class="cdd-send cdd-o1"><circle r="3.5" fill="#4a8fe7"/><animateMotion dur="10s" begin="0.0s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.35;0.43;1" calcMode="linear"><mpath href="#cddTo1"/></animateMotion></g>
+      </g>
+      <g class="cdd-exp">
+        <use href="#cddPerson" transform="translate(272.2,123.5) scale(0.5) translate(0,-14)" fill="rgb(74,143,232)"/>
+        <g class="cdd-ci cdd-o2">
+          <line x1="272.2" y1="162.5359946637562" x2="272.2" y2="172.5359946637562" stroke="#2a3654" stroke-width="1"/>
+          <line class="cdd-bar cdd-o2" style="--s:0.5" x1="240.2" y1="167.5359946637562" x2="296.2" y2="167.5359946637562" stroke="#4a8fe7" stroke-width="2" stroke-linecap="round" opacity="0.75"/>
+          <circle cx="268.2" cy="167.5359946637562" r="2.8" fill="#4a8fe7"/>
+        </g>
+        <g class="cdd-send cdd-o2"><circle r="3.5" fill="#4a8fe7"/><animateMotion dur="10s" begin="0.9s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.35;0.43;1" calcMode="linear"><mpath href="#cddTo2"/></animateMotion></g>
+      </g>
+      <g class="cdd-exp">
+        <use href="#cddPerson" transform="translate(229.4,255.5) scale(0.5) translate(0,-14)" fill="rgb(74,143,232)"/>
+        <g class="cdd-ci cdd-o3">
+          <line x1="229.4" y1="294.4640053362438" x2="229.4" y2="304.4640053362438" stroke="#2a3654" stroke-width="1"/>
+          <line class="cdd-bar cdd-o3" style="--s:0.38" x1="211.4" y1="299.4640053362438" x2="267.4" y2="299.4640053362438" stroke="#4a8fe7" stroke-width="2" stroke-linecap="round" opacity="0.75"/>
+          <circle cx="239.4" cy="299.4640053362438" r="2.8" fill="#4a8fe7"/>
+        </g>
+        <g class="cdd-send cdd-o3"><circle r="3.5" fill="#4a8fe7"/><animateMotion dur="10s" begin="1.7s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.35;0.43;1" calcMode="linear"><mpath href="#cddTo3"/></animateMotion></g>
+      </g>
+      <g class="cdd-exp">
+        <use href="#cddPerson" transform="translate(90.6,255.5) scale(0.5) translate(0,-14)" fill="rgb(74,143,232)"/>
+        <g class="cdd-ci cdd-o4">
+          <line x1="90.6" y1="294.4640053362438" x2="90.6" y2="304.4640053362438" stroke="#2a3654" stroke-width="1"/>
+          <line class="cdd-bar cdd-o4" style="--s:0.46" x1="64.6" y1="299.4640053362438" x2="120.6" y2="299.4640053362438" stroke="#4a8fe7" stroke-width="2" stroke-linecap="round" opacity="0.75"/>
+          <circle cx="92.6" cy="299.4640053362438" r="2.8" fill="#4a8fe7"/>
+        </g>
+        <g class="cdd-send cdd-o4"><circle r="3.5" fill="#4a8fe7"/><animateMotion dur="10s" begin="0.4s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.35;0.43;1" calcMode="linear"><mpath href="#cddTo4"/></animateMotion></g>
+      </g>
+      <g class="cdd-exp">
+        <use href="#cddPerson" transform="translate(47.8,123.5) scale(0.5) translate(0,-14)" fill="rgb(74,143,232)"/>
+        <g class="cdd-ci cdd-o5">
+          <line x1="47.8" y1="162.5359946637562" x2="47.8" y2="172.5359946637562" stroke="#2a3654" stroke-width="1"/>
+          <line class="cdd-bar cdd-o5" style="--s:0.44" x1="24.8" y1="167.5359946637562" x2="80.8" y2="167.5359946637562" stroke="#4a8fe7" stroke-width="2" stroke-linecap="round" opacity="0.75"/>
+          <circle cx="52.8" cy="167.5359946637562" r="2.8" fill="#4a8fe7"/>
+        </g>
+        <g class="cdd-send cdd-o5"><circle r="3.5" fill="#4a8fe7"/><animateMotion dur="10s" begin="1.3s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.35;0.43;1" calcMode="linear"><mpath href="#cddTo5"/></animateMotion></g>
+      </g>
 
-      <!-- Arrows: Replicator Left → Sharer -->
-      <path d="M78,185 Q70,120 135,55" fill="none" stroke="rgba(74,143,232,0.5)" stroke-width="1.5" marker-end="url(#arrowTreatment)"/>
-      <!-- Arrows: Replicator Right → Sharer -->
-      <path d="M242,185 Q250,120 185,55" fill="none" stroke="rgba(74,143,232,0.5)" stroke-width="1.5" marker-end="url(#arrowTreatment)"/>
-
-      <!-- Arrows: Replicator Left → Replicator Right -->
-      <path d="M98,230 Q160,260 222,230" fill="none" stroke="rgba(74,143,232,0.5)" stroke-width="1.5" marker-end="url(#arrowTreatment)"/>
-      <!-- Arrows: Replicator Right → Replicator Left -->
-      <path d="M222,240 Q160,270 98,240" fill="none" stroke="rgba(74,143,232,0.5)" stroke-width="1.5" marker-end="url(#arrowTreatment)"/>
-
-      <!-- Person 1: top center (Sharer) — control color -->
-      <circle cx="160" cy="38" r="14" fill="rgb(224,135,79)"/>
-      <path d="M160,58 C145,58 134,70 134,84 L134,92 C134,94 136,96 138,96 L182,96 C184,96 186,94 186,92 L186,84 C186,70 175,58 160,58 Z" fill="rgb(224,135,79)"/>
-      <text x="160" y="115" text-anchor="middle" fill="#8892a8" font-family="JetBrains Mono,monospace" font-size="9">Share</text>
-
-      <!-- Person 2: bottom left (Replicator) — treatment color -->
-      <circle cx="72" cy="203" r="14" fill="rgb(74,143,232)"/>
-      <path d="M72,223 C57,223 46,235 46,249 L46,257 C46,259 48,261 50,261 L94,261 C96,261 98,259 98,257 L98,249 C98,235 87,223 72,223 Z" fill="rgb(74,143,232)"/>
-      <text x="72" y="280" text-anchor="middle" fill="#8892a8" font-family="JetBrains Mono,monospace" font-size="9">Replicate</text>
-
-      <!-- Person 3: bottom right (Replicator) — treatment color -->
-      <circle cx="248" cy="203" r="14" fill="rgb(74,143,232)"/>
-      <path d="M248,223 C233,223 222,235 222,249 L222,257 C222,259 224,261 226,261 L270,261 C272,261 274,259 274,257 L274,249 C274,235 263,223 248,223 Z" fill="rgb(74,143,232)"/>
-      <text x="248" y="280" text-anchor="middle" fill="#8892a8" font-family="JetBrains Mono,monospace" font-size="9">Replicate</text>
+      <!-- The hub: pooled estimate of the average treatment effect -->
+      <circle class="cdd-hubflash cdd-o1" cx="160" cy="160" r="46" fill="none" stroke="#e8a838" stroke-width="1.5"/>
+      <circle class="cdd-hubflash cdd-o2" cx="160" cy="160" r="46" fill="none" stroke="#e8a838" stroke-width="1.5"/>
+      <circle class="cdd-hubflash cdd-o3" cx="160" cy="160" r="46" fill="none" stroke="#e8a838" stroke-width="1.5"/>
+      <circle class="cdd-hubflash cdd-o4" cx="160" cy="160" r="46" fill="none" stroke="#e8a838" stroke-width="1.5"/>
+      <circle class="cdd-hubflash cdd-o5" cx="160" cy="160" r="46" fill="none" stroke="#e8a838" stroke-width="1.5"/>
+      <circle cx="160" cy="160" r="46" fill="rgba(31,41,64,0.4)" stroke="#3a4a66" stroke-width="2"/>
+      <line x1="160" y1="128" x2="160" y2="172" stroke="#3a4a66" stroke-width="1" stroke-dasharray="3,3"/>
+      <g class="cdd-pool">
+        <line class="cdd-poolbar" x1="126" y1="160" x2="206" y2="160" stroke="#e8a838" stroke-width="3" stroke-linecap="round" opacity="0.85"/>
+        <path d="M166,154 L172,160 L166,166 L160,160 Z" fill="#e8a838"/>
+      </g>
+      <text x="160" y="182" text-anchor="middle" fill="#8892a8" font-family="JetBrains Mono,monospace" font-size="8">average effect</text>
     </svg>
 
     <div class="community-grid">
@@ -1777,6 +1839,14 @@
 
   /* ── Treatment Assignment Animation ── */
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Community diagram: with reduced motion, show its finished frame and stop the SMIL motion paths. */
+  if (reduceMotion) {
+    document.querySelectorAll('.community-diagram').forEach((svg) => {
+      svg.classList.add('static');
+      try { svg.pauseAnimations(); svg.setCurrentTime(0); } catch (e) {}
+    });
+  }
 
   const stripEl = document.getElementById('assignmentStrip');
   const COLS = 60;
