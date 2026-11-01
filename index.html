@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ABMe — The Personal Experimentation Platform</title>
-<meta name="description" content="ABMe runs randomized experiments on yourself. It assigns each day to treatment or control, reads the result from Apple Health, and estimates the effect with anytime-valid confidence sequences.">
+<meta name="description" content="ABMe runs randomized N-of-1 experiments on your iPhone. It randomizes each unit to treatment or control, reads outcomes from HealthKit, and estimates your individual treatment effect with an anytime-valid confidence sequence.">
 <link rel="canonical" href="https://getabme.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ABMe">
 <meta property="og:title" content="ABMe — The Personal Experimentation Platform">
-<meta property="og:description" content="ABMe runs randomized experiments on yourself. It assigns each day to treatment or control, reads the result from Apple Health, and estimates the effect with anytime-valid confidence sequences.">
+<meta property="og:description" content="ABMe runs randomized N-of-1 experiments on your iPhone. It randomizes each unit to treatment or control, reads outcomes from HealthKit, and estimates your individual treatment effect with an anytime-valid confidence sequence.">
 <meta property="og:url" content="https://getabme.com/">
 <meta property="og:image" content="https://getabme.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ABMe — The Personal Experimentation Platform">
-<meta name="twitter:description" content="ABMe runs randomized experiments on yourself. It assigns each day to treatment or control, reads the result from Apple Health, and estimates the effect with anytime-valid confidence sequences.">
+<meta name="twitter:description" content="ABMe runs randomized N-of-1 experiments on your iPhone. It randomizes each unit to treatment or control, reads outcomes from HealthKit, and estimates your individual treatment effect with an anytime-valid confidence sequence.">
 <meta name="twitter:image" content="https://getabme.com/og-image.png">
 <link rel="icon" type="image/svg+xml" href="logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1233,7 +1233,7 @@
   <div class="hero">
     <div class="hero-text">
       <h1>The <em>personal</em> experimentation platform.</h1>
-      <p class="hero-sub">Run randomized experiments on yourself. ABMe assigns each day to treatment or control, reads the result from your wearable, and tells you how big the difference is.</p>
+      <p class="hero-sub">Randomized N-of-1 experiments with anytime-valid inference. ABMe randomizes each unit to treatment or control, reads the outcome from your wearable through HealthKit, and estimates your individual treatment effect with a confidence sequence you can monitor continuously.</p>
       <div class="hero-actions">
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUIUJBtQCGMjL7C8JgCRhozEFw1dMqrdEfdmFISsPyiO5ZXQ/viewform?usp=dialog" target="_blank" rel="noopener" class="btn-primary">
           Request Early Access
@@ -1270,7 +1270,7 @@
       <div class="cause-card highlight">
         <div class="card-label">ABMe</div>
         <h3>Randomized Experimentation</h3>
-        <p>Each unit is randomly assigned to treatment or control, so everything else that changes in your life is spread evenly across both.</p>
+        <p>Each unit is randomly assigned to treatment or control. Randomization balances confounders in expectation, so the treatment–control contrast is an unbiased estimate of the causal effect.</p>
         <ul class="cause-list">
           <li><span class="icon-yes">&#10003;</span> True randomization per unit</li>
           <li><span class="icon-yes">&#10003;</span> Causal inference, not correlation</li>
@@ -1328,7 +1328,7 @@
       <div class="step-card">
         <div class="step-num">04</div>
         <h3>Learn</h3>
-        <p>The confidence interval narrows as units come in. When it excludes zero, the effect is unlikely to be chance.</p>
+        <p>The confidence sequence narrows as units accrue. It holds at every sample size, so you can check it daily and stop once it excludes zero, with the type I error rate still controlled.</p>
       </div>
     </div>
     <div class="posts-footer"><a href="how-it-works/index.html">New to experimenting? Read the plain-English guide &rarr;</a></div>
@@ -1345,26 +1345,26 @@
 <!-- ───── ML Variance Reduction ───── -->
 <div class="container">
   <section class="ml-section">
-    <div class="section-tag">Regression Adjustment</div>
-    <h2 class="section-title">A forecast of each day makes the estimate <em style="font-style:normal;color:var(--accent)">tighter.</em></h2>
+    <div class="section-tag">Variance Reduction</div>
+    <h2 class="section-title">Regression adjustment makes the estimate <em style="font-style:normal;color:var(--accent)">tighter.</em></h2>
 
     <div class="ml-split">
       <div class="ml-text">
-        <p>Health metrics drift from day to day for reasons unrelated to your experiment, and that noise makes a real effect harder to see.</p>
-        <p>Before each unit starts, ABMe forecasts the metric from <strong>your own history on that device</strong>, using a simple time-series model fitted to your past data. It then compares each result with that forecast rather than with nothing. This is regression adjustment: it removes some of the drift, so the confidence band narrows faster.</p>
-        <p>The forecast is made before treatment is assigned, so the estimate stays valid even when the forecast is poor. A poor forecast just helps less.</p>
+        <p>Health metrics are autocorrelated and drift from day to day for reasons unrelated to the experiment. That variation inflates the variance of the effect estimate.</p>
+        <p>Before each unit is randomized, ABMe makes a one-step-ahead forecast of the outcome from a <strong>local-level state-space model fitted to your own history on that device</strong>. The forecast enters an augmented inverse-propensity-weighted (AIPW) estimator as a regression adjustment, removing the predictable part of the variation so the confidence sequence narrows faster.</p>
+        <p>The forecast uses only pre-treatment data and the assignment probabilities are known, so the estimator stays unbiased and the confidence sequence keeps its coverage however good or bad the forecast is. A better forecast only lowers the variance.</p>
       </div>
       <div class="ml-card">
         <div class="ml-metrics-flow">
-          <span class="ml-chip">Your past data</span>
+          <span class="ml-chip">Pre-treatment history</span>
           <span class="ml-arrow">&rarr;</span>
-          <span class="ml-chip result">Forecast</span>
+          <span class="ml-chip result">One-step forecast</span>
           <span class="ml-arrow">&rarr;</span>
-          <span class="ml-chip result">Less noise</span>
+          <span class="ml-chip result">Lower variance</span>
         </div>
         <div style="margin-top: 16px;">
           <div class="ml-row">
-            <span class="ml-label">Standard</span>
+            <span class="ml-label">Unadjusted</span>
             <div class="ml-bar-track"><div class="ml-bar wide">wider uncertainty</div></div>
           </div>
         </div>
@@ -1374,10 +1374,10 @@
             <div class="ml-bar-track"><div class="ml-bar narrow">tighter bounds</div></div>
           </div>
         </div>
-        <div class="ml-diagram-label">Same data, narrower interval</div>
+        <div class="ml-diagram-label">Same data, same coverage, narrower interval</div>
         <canvas id="csCanvas" style="width:100%;height:140px;display:block;margin-top:20px;"></canvas>
         <div class="ml-cs-legend">
-          <span><span class="leg-swatch" style="background:rgba(232,168,56,0.25)"></span> Standard</span>
+          <span><span class="leg-swatch" style="background:rgba(232,168,56,0.25)"></span> Unadjusted</span>
           <span><span class="leg-swatch" style="background:rgba(74,143,232,0.5)"></span> Adjusted</span>
         </div>
       </div>
@@ -1498,7 +1498,7 @@
   <section class="community-section" id="community">
     <div class="section-tag">Community</div>
     <h2 class="section-title">Share an experiment, or run one someone else shared.</h2>
-    <p class="community-sub">Each person's experiment is independent. When several people run the same design, their results can be pooled into an estimate of the average effect across people.</p>
+    <p class="community-sub">Each person's experiment is independent. When several people run the same design, their individual treatment effects can be pooled into an estimate of the population average treatment effect.</p>
 
     <svg class="community-diagram cd-d" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Five independent experiments each narrow their own confidence sequence and send the result to a central pooled estimate of the average treatment effect">
       <style>
@@ -1769,7 +1769,7 @@
     <div class="manifesto-body">
       <p>Most health advice rests on personal experience, and personal experience is hard to read: when you start something new, a dozen other things change the same week.</p>
       <p>Clinical trials address this with randomization and statistical inference, but they're designed for populations. They estimate the <strong>average treatment effect (ATE)</strong> across many people. That's valuable, but it doesn't tell you much about you specifically. Responses vary, so something that helps most people may not help you, and the reverse.</p>
-      <p>ABMe runs the same kind of randomized comparison on one person. You define treatment and control, the app randomizes you across periods, your wearable records the outcome, and you get an estimate of your own <strong>individual treatment effect</strong>.</p>
+      <p>ABMe runs the same kind of randomized comparison on one person. You define treatment and control, the app randomizes you across periods, your wearable records the outcome, and an anytime-valid confidence sequence estimates your own <strong>individual treatment effect (ITE)</strong>: a causal effect estimated from your data alone.</p>
             <p>To see what this looks like, browse the <a href="experiments/index.html">existing experiment templates</a> or read the <a href="blog/index.html">blog</a>.</p>
     </div>
   </section>
