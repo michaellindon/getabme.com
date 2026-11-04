@@ -1209,20 +1209,23 @@
     .device-info p { font-size: 11px; }
   }
 </style>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://getabme.com/#organization", "name": "ABMe", "url": "https://getabme.com/", "logo": {"@type": "ImageObject", "url": "https://getabme.com/logo.svg"}, "email": "support@getabme.com"}, {"@type": "WebSite", "@id": "https://getabme.com/#website", "url": "https://getabme.com/", "name": "ABMe", "description": "The personal experimentation platform.", "publisher": {"@id": "https://getabme.com/#organization"}, "inLanguage": "en"}, {"@type": "SoftwareApplication", "@id": "https://getabme.com/#app", "name": "ABMe", "operatingSystem": "iOS", "applicationCategory": "HealthApplication", "description": "ABMe is an iPhone app for randomized N-of-1 experiments. It randomizes each unit (a night, a day, a workout or another period) to treatment or control, reads the outcome from Apple HealthKit, and estimates the individual treatment effect with an anytime-valid confidence sequence. Regression adjustment from a forecast of each unit's outcome reduces the variance of the estimate.", "url": "https://getabme.com/", "installUrl": "https://testflight.apple.com/join/bu77RnGP", "softwareVersion": "beta", "screenshot": "https://getabme.com/app-screenshot.png", "featureList": ["Randomized assignment of each unit to treatment or control", "Outcomes read from Apple HealthKit", "Anytime-valid confidence sequences for the individual treatment effect", "Regression adjustment with a one-step-ahead forecast", "26 ready-made experiment templates", "On-device storage, no accounts"], "author": {"@id": "https://getabme.com/#organization"}, "publisher": {"@id": "https://getabme.com/#organization"}}, {"@type": "WebPage", "@id": "https://getabme.com/#webpage", "url": "https://getabme.com/", "name": "The Experimentation Platform That Fits in Your Pocket", "description": "ABMe turns your iPhone and wearable into a personal experimentation platform. Randomize what you do, let HealthKit measure the result, and get anytime-valid answers about what actually works for you.", "isPartOf": {"@id": "https://getabme.com/#website"}, "about": {"@id": "https://getabme.com/#app"}, "inLanguage": "en"}]}
+</script>
 </head>
 <body>
 
 <!-- ───── Nav ───── -->
 <nav>
   <div class="nav-inner">
-    <a class="logo" href="index.html"><svg width="22" height="24" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><clipPath id="nl"><rect x="0" y="0" width="100" height="220"/></clipPath><clipPath id="nr"><rect x="100" y="0" width="100" height="220"/></clipPath></defs><circle cx="100" cy="62" r="36" clip-path="url(#nl)" fill="rgb(224,135,79)"/><circle cx="100" cy="62" r="36" clip-path="url(#nr)" fill="rgb(74,143,232)"/><path d="M100,110 C65,110 38,138 38,168 L38,195 C38,203 44,209 52,209 L100,209 Z" clip-path="url(#nl)" fill="rgb(224,135,79)"/><path d="M100,110 C135,110 162,138 162,168 L162,195 C162,203 156,209 148,209 L100,209 Z" clip-path="url(#nr)" fill="rgb(74,143,232)"/></svg><span><span class="a">A</span><span class="b">B</span>Me</span></a>
+    <a class="logo" href="/"><svg width="22" height="24" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><clipPath id="nl"><rect x="0" y="0" width="100" height="220"/></clipPath><clipPath id="nr"><rect x="100" y="0" width="100" height="220"/></clipPath></defs><circle cx="100" cy="62" r="36" clip-path="url(#nl)" fill="rgb(224,135,79)"/><circle cx="100" cy="62" r="36" clip-path="url(#nr)" fill="rgb(74,143,232)"/><path d="M100,110 C65,110 38,138 38,168 L38,195 C38,203 44,209 52,209 L100,209 Z" clip-path="url(#nl)" fill="rgb(224,135,79)"/><path d="M100,110 C135,110 162,138 162,168 L162,195 C162,203 156,209 148,209 L100,209 Z" clip-path="url(#nr)" fill="rgb(74,143,232)"/></svg><span><span class="a">A</span><span class="b">B</span>Me</span></a>
     <div class="nav-links" id="nav-menu">
-      <a href="how-it-works/index.html">How It Works</a>
+      <a href="/how-it-works/">How It Works</a>
       <a href="#hardware" class="nav-anchor">Devices</a>
       <a href="#privacy" class="nav-anchor">Privacy</a>
       <a href="#community" class="nav-anchor">Community</a>
-      <a href="experiments/index.html">Experiments</a>
-      <a href="blog/index.html">Blog</a>
+      <a href="/experiments/">Experiments</a>
+      <a href="/blog/">Blog</a>
     </div>
     <div class="nav-right">
       <a href="https://testflight.apple.com/join/bu77RnGP" target="_blank" rel="noopener" class="btn-primary">Join the Beta</a>
@@ -1248,7 +1251,7 @@
     <div class="iphone">
       <div class="iphone-notch"></div>
       <div class="iphone-screen">
-        <img src="app-screenshot.png" alt="ABMe showing a statistically significant +14 minute deep sleep increase from a 10 AM caffeine curfew" width="1206" height="2622" style="width:100%;height:auto;display:block;">
+        <picture><source type="image/webp" srcset="app-screenshot.webp"><img src="app-screenshot.png" alt="ABMe showing a statistically significant +14 minute deep sleep increase from a 10 AM caffeine curfew" fetchpriority="high" width="1206" height="2622" style="width:100%;height:auto;display:block;"></picture>
       </div>
     </div>
   </div>
@@ -1333,7 +1336,7 @@
         <p>Watch the confidence interval tighten over time. When it excludes zero, you've found a real personal effect.</p>
       </div>
     </div>
-    <div class="posts-footer"><a href="how-it-works/index.html">New to experimenting? Read the plain-English guide &rarr;</a></div>
+    <div class="posts-footer"><a href="/how-it-works/">New to experimenting? Read the plain-English guide &rarr;</a></div>
   </section>
 </div>
 
@@ -1477,7 +1480,7 @@
       <span class="line">Your experiment.</span>
       <span class="line">Your <span class="em">data.</span></span>
     </h2>
-    <p class="privacy-sub">ABMe runs without a backend, accounts, or analytics. Your health data never leaves your phone unless you choose to publish an experiment, and even then only that experiment's results are shared. <a href="privacy.html">Read the privacy policy.</a></p>
+    <p class="privacy-sub">ABMe runs without a backend, accounts, or analytics. Your health data never leaves your phone unless you choose to publish an experiment, and even then only that experiment's results are shared. <a href="/privacy.html">Read the privacy policy.</a></p>
 
     <div class="privacy-features">
       <div class="privacy-feat">
@@ -1654,7 +1657,7 @@
 
     <div class="catalog-grid">
 
-      <a class="catalog-tile" href="experiments/index.html#sleep">
+      <a class="catalog-tile" href="/experiments/#sleep">
         <div class="catalog-tile-head">
           <span class="catalog-dot cat-sleep-bg"></span>
           <span class="catalog-name">Sleep</span>
@@ -1663,7 +1666,7 @@
         <div class="catalog-examples">Caffeine curfew &middot; Magnesium glycinate &middot; Glycine &middot; Blue light glasses &middot; Tart cherry juice &middot; Alcohol &middot; Late eating cutoff &middot; Melatonin microdose &middot; No screens &middot; Warm shower &middot; Morning sunlight &middot; Apigenin &middot; Huberman Sleep Stack</div>
       </a>
 
-      <a class="catalog-tile" href="experiments/index.html#running">
+      <a class="catalog-tile" href="/experiments/#running">
         <div class="catalog-tile-head">
           <span class="catalog-dot cat-running-bg"></span>
           <span class="catalog-name">Running</span>
@@ -1672,7 +1675,7 @@
         <div class="catalog-examples">Carbon-plated shoes &middot; Pre-run caffeine &middot; Beetroot juice &middot; Nasal vs mouth breathing &middot; Fasted vs fed &middot; Electrolytes vs water &middot; Sodium pre-loading &middot; Music vs silence</div>
       </a>
 
-      <a class="catalog-tile" href="experiments/index.html#recovery">
+      <a class="catalog-tile" href="/experiments/#recovery">
         <div class="catalog-tile-head">
           <span class="catalog-dot cat-recovery-bg"></span>
           <span class="catalog-name">Recovery</span>
@@ -1683,7 +1686,7 @@
 
     </div>
 
-    <div class="posts-footer"><a href="experiments/index.html">Browse all 26 experiments &rarr;</a></div>
+    <div class="posts-footer"><a href="/experiments/">Browse all 26 experiments &rarr;</a></div>
   </section>
 </div>
 
@@ -1695,7 +1698,7 @@
     <p class="section-sub">Deep dives on the research behind popular interventions &mdash; what the studies show, what the typical effect sizes look like, and why averages may not predict your personal response.</p>
     <div class="posts-grid">
 
-      <a href="blog/racing-shoes.html" class="post-card">
+      <a href="/blog/racing-shoes.html" class="post-card">
         <div class="post-cat cat-performance">Performance</div>
         <h3>Are Carbon-Plated Shoes Actually Faster?</h3>
         <p class="post-hyp">The Vaporfly revolution changed marathon racing forever. A 4% running economy improvement is one of the most replicated findings in sports science. But does it hold for your stride?</p>
@@ -1707,7 +1710,7 @@
         <span class="post-more">Read more &rarr;</span>
       </a>
 
-      <a href="blog/caffeine-curfew-sleep.html" class="post-card">
+      <a href="/blog/caffeine-curfew-sleep.html" class="post-card">
         <div class="post-cat cat-sleep">Sleep</div>
         <h3>Does a 10 AM Caffeine Curfew Fix My Deep Sleep?</h3>
         <p class="post-hyp">Caffeine has a 5-hour half-life, but genetic variation means yours could be 3 or 10. This experiment produced the largest detectable effect of any sleep intervention we tested.</p>
@@ -1719,7 +1722,7 @@
         <span class="post-more">Read more &rarr;</span>
       </a>
 
-      <a href="blog/cold-plunge-recovery.html" class="post-card">
+      <a href="/blog/cold-plunge-recovery.html" class="post-card">
         <div class="post-cat cat-recovery">Recovery</div>
         <h3>Does Cold Plunging Improve My HRV?</h3>
         <p class="post-hyp">Cold water immersion has exploded in popularity with 334% search growth. The parasympathetic activation is real &mdash; but is 2 minutes enough to move your heart rate variability?</p>
@@ -1731,7 +1734,7 @@
         <span class="post-more">Read more &rarr;</span>
       </a>
 
-      <a href="blog/pre-workout-running.html" class="post-card">
+      <a href="/blog/pre-workout-running.html" class="post-card">
         <div class="post-cat cat-performance">Performance</div>
         <h3>Does Caffeine Actually Make Me Run Faster?</h3>
         <p class="post-hyp">The most studied ergogenic aid in sports science meets Apple Watch running metrics. A meta-analysis of 21 studies shows 2&ndash;5% endurance improvement &mdash; can you detect it in your own pace data?</p>
@@ -1743,7 +1746,7 @@
         <span class="post-more">Read more &rarr;</span>
       </a>
 
-      <a href="blog/alcohol-sleep.html" class="post-card">
+      <a href="/blog/alcohol-sleep.html" class="post-card">
         <div class="post-cat cat-sleep">Sleep</div>
         <h3>Does a Single Drink Impair My Sleep?</h3>
         <p class="post-hyp">Alcohol's effect on sleep is surprisingly complex: it increases deep sleep but devastates REM. Five metrics tracked over 120 days reveal a nuanced picture most sleep trackers miss.</p>
@@ -1755,7 +1758,7 @@
         <span class="post-more">Read more &rarr;</span>
       </a>
 
-      <a href="blog/magnesium-deep-sleep.html" class="post-card">
+      <a href="/blog/magnesium-deep-sleep.html" class="post-card">
         <div class="post-cat cat-sleep">Sleep</div>
         <h3>Does Magnesium Glycinate Deepen My Sleep?</h3>
         <p class="post-hyp">Huberman's #1 sleep supplement recommendation has plausible biochemistry and growing trial evidence. Instead of trusting a population average, run the experiment on yourself.</p>
@@ -1768,7 +1771,7 @@
       </a>
 
     </div>
-    <div class="posts-footer"><a href="blog/index.html">Read all posts &rarr;</a></div>
+    <div class="posts-footer"><a href="/blog/">Read all posts &rarr;</a></div>
   </section>
 </div>
 
@@ -1799,7 +1802,7 @@
 <div class="container">
   <footer>
     <span>&copy; 2026 ABMe</span>
-    <span><a href="index.html">Home</a> &middot; <a href="how-it-works/index.html">How It Works</a> &middot; <a href="experiments/index.html">Experiments</a> &middot; <a href="blog/index.html">Blog</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="mailto:support@getabme.com">Contact</a></span>
+    <span><a href="/">Home</a> &middot; <a href="/how-it-works/">How It Works</a> &middot; <a href="/experiments/">Experiments</a> &middot; <a href="/blog/">Blog</a> &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="mailto:support@getabme.com">Contact</a></span>
   </footer>
 </div>
 

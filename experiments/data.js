@@ -1,6 +1,8 @@
 // Experiment templates shown on the catalogue page. Each entry is filed under the
 // outcome it measures (Sleep, Running or Recovery). The abme://template/ deep link is
 // derived from `template` at render time, so the JSON here is the single source of truth.
+// After editing this file run `node scripts/build.js`, which pre-renders the catalogue into
+// index.html (so crawlers can read it) and refreshes llms-full.txt and sitemap.xml.
 
 const CATEGORY_ORDER = ['Sleep', 'Running', 'Recovery'];
 

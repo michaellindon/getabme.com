@@ -1,0 +1,28 @@
+# ABMe
+
+> ABMe is an iPhone app for randomized N-of-1 experiments. The personal experimentation platform. It randomizes each unit (a night, a day, a workout or another period) to treatment or control, reads the outcome from Apple HealthKit, and estimates the individual treatment effect with an anytime-valid confidence sequence. Regression adjustment from a forecast of each unit's outcome reduces the variance of the estimate.
+
+Key facts: iPhone only, currently a public TestFlight beta (https://testflight.apple.com/join/bu77RnGP). Works with any wearable that writes to Apple HealthKit (Apple Watch, Oura, WHOOP, Garmin, Fitbit, Polar, Withings, COROS). No accounts, no servers, no analytics; data stays on the phone unless the user publishes an experiment. Contact: support@getabme.com.
+
+The full text of the site, including all 26 experiment templates, is at https://getabme.com/llms-full.txt.
+
+## Pages
+
+- [Home](https://getabme.com/): what ABMe does, why randomization rather than tracking, the four steps of an experiment, how regression adjustment tightens the confidence sequence, compatible devices, privacy, community.
+- [How It Works](https://getabme.com/how-it-works/): plain-language explanation of randomized self-experiments, how to read a narrowing confidence sequence, a worked caffeine-curfew example, common questions.
+- [Experiment catalogue](https://getabme.com/experiments/): 26 ready-made templates for sleep, running and recovery, each with hypothesis, treatment, control, outcome metrics, unit length and literature citations. Each template loads into the app through an abme://template/ deep link.
+- [Privacy policy](https://getabme.com/privacy.html): what the app reads from HealthKit, where data lives, what sharing and publishing send.
+
+## Blog
+
+- [Does Magnesium Glycinate Deepen My Sleep?](https://getabme.com/blog/magnesium-deep-sleep.html): the trial evidence and a 90-day N-of-1 design.
+- [Does a 10 AM Caffeine Curfew Fix My Deep Sleep?](https://getabme.com/blog/caffeine-curfew-sleep.html): caffeine half-life and a 75-day design.
+- [Does a Single Drink Impair My Sleep?](https://getabme.com/blog/alcohol-sleep.html): evening alcohol, REM sleep and a 120-day design.
+- [Does Cold Plunging Improve My HRV?](https://getabme.com/blog/cold-plunge-recovery.html): cold-water immersion, HRV and a 90-day design.
+- [Does Caffeine Actually Make Me Run Faster?](https://getabme.com/blog/pre-workout-running.html): pre-run caffeine, pace and a 90-day design.
+- [Are Carbon-Plated Shoes Actually Faster?](https://getabme.com/blog/racing-shoes.html): running economy, race pace and a 60-day design.
+
+## Optional
+
+- [Sitemap](https://getabme.com/sitemap.xml)
+- [Join the beta on TestFlight](https://testflight.apple.com/join/bu77RnGP)

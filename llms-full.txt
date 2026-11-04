@@ -1,0 +1,361 @@
+# ABMe: the personal experimentation platform
+
+Source: https://getabme.com/ (full-text version for language models; the HTML pages are canonical)
+
+ABMe is an iPhone app for randomized N-of-1 experiments on one person. It randomizes each experimental unit to treatment or control, reads the outcome from Apple HealthKit, and estimates the individual treatment effect with an anytime-valid confidence sequence that the user can monitor continuously. It is distributed as a public TestFlight beta (https://testflight.apple.com/join/bu77RnGP; requires the TestFlight app). Contact: support@getabme.com.
+
+## Why experiment rather than track
+
+Tracking tells you what happened. Experimentation tells you what caused it. If you try creatine for a month and your HRV seems better, the change could be the creatine, extra sleep, or the season. Randomizing which days you take it separates those explanations.
+
+In ABMe each unit is randomly assigned to treatment or control. Randomization balances confounders in expectation, so the treatment-control contrast is an unbiased estimate of the causal effect. A typical health tracker, by contrast, records observational data: the user chooses when to try something, timing is self-selected, results are eyeballed, and there is no measure of uncertainty.
+
+## How an experiment runs
+
+1. Design. Name the experiment, define treatment and control, and pick HealthKit metrics, a measurement window and a unit duration. A unit may be a night, a day, a workout, a session or a week, depending on the question.
+2. Randomize. At the start of each unit, tap Start Next Unit. ABMe assigns the unit to treatment or control at random with a known probability (0.5 by default).
+3. Live. Follow the assigned condition. The wearable records the outcome automatically; at the end of the unit the data flows into the experiment. Outcomes that no device measures can be entered by hand.
+4. Learn. The confidence sequence narrows as units accrue. Because it is anytime-valid it holds at every sample size, so the user can check it daily and stop once it excludes zero while the type I error rate stays controlled.
+
+## Variance reduction by regression adjustment
+
+Health metrics are autocorrelated and drift from day to day for reasons unrelated to the experiment, which inflates the variance of the effect estimate. Before each unit is randomized, ABMe makes a one-step-ahead forecast of the outcome from a local-level state-space model fitted to the user's own history on that device. The forecast enters an augmented inverse-propensity-weighted (AIPW) estimator as a regression adjustment, removing the predictable part of the variation so the confidence sequence narrows faster. The forecast uses only pre-treatment data and the assignment probabilities are known, so the estimator stays unbiased and the confidence sequence keeps its coverage however good or bad the forecast is. A better forecast only lowers the variance.
+
+## How to read the result
+
+ABMe shows a range (the confidence sequence) rather than a single number: the smallest and largest treatment effect still compatible with the data so far. Early on the range is wide; each new unit narrows it. Three outcomes are possible: the range ends up entirely on the beneficial side (the intervention works for this person, by roughly the amount shown); entirely on the harmful side; or it hugs zero (any effect is too small to matter). Because the sequence is anytime-valid, the user does not need to fix the number of units in advance and may stop when the picture is clear.
+
+For interventions that linger in the body, a washout gap between units can be configured so one unit does not bleed into the next. The ready-made templates carry sensible settings for this.
+
+## Worked example: the 10 AM caffeine curfew
+
+Question: does cutting caffeine after 10 AM increase deep sleep? Treatment: no caffeine of any kind after 10 AM; morning coffee is fine. Control: coffee and tea whenever the person normally would. Unit: one day and the night that follows. Outcome: minutes of deep sleep that night, read from the watch or ring. Each morning the app says whether today is treatment or control. The result is the number of extra minutes of deep sleep the curfew is worth to this person, if any, with its confidence sequence.
+
+## Compatible devices
+
+ABMe reads from Apple HealthKit, so any device that writes health data to the iPhone is compatible: Apple Watch (Series 4 and later, SE, Ultra), Oura Ring (Gen 3 and 4), WHOOP (4.0 and 5.0), Garmin (Forerunner, Fenix, Venu), Fitbit (Sense, Versa, Charge), Polar (Vantage, Grit X, Ignite), Withings (ScanWatch, Steel HR), COROS (PACE, APEX, VERTIX). ABMe reads nearly 70 HealthKit metric types, including heart rate, HRV, sleep stages, blood oxygen, respiratory rate, VO2 max, steps and workouts.
+
+## Privacy
+
+ABMe runs without a backend, accounts or analytics. Experiment designs, randomization assignments, measurements and all statistics are stored and computed on the iPhone. If the user enables it, Apple CloudKit syncs experiments between the user's own devices through their private iCloud database. Two features send data off the phone, both only when the user starts them: sharing a template link (abme://template/...) or a result card image, which contain the experiment design or result but no raw health data; and publishing an experiment, which makes that experiment's daily values and assignments public and nothing else. Experiment data can be exported as CSV. The website getabme.com is a static site on GitHub Pages with no cookies or analytics; fonts load from Google Fonts. ABMe is not a medical device and does not replace medical advice. Full policy: https://getabme.com/privacy.html
+
+## Community
+
+Each person's experiment is independent. A result card with the confidence sequence chart and effect size can be shared through the iOS share sheet, and a shared experiment link loads the same design into another person's ABMe so they can run it on themselves. Roadmap: pool independent experiments on the same design into an estimate of the population average treatment effect.
+
+## Common questions
+
+- Why not pick the days myself? Because people start new habits on good days, skip them when stressed and try harder when measured. Handing the choice to randomization removes that selection, which is the only way to be sure the difference is real.
+- How long does an experiment take? It depends on the effect size and the noise in the measurement. Large effects show in a couple of weeks; subtle ones take longer. The confidence sequence narrows as you go and you stop when it is clear enough.
+- What if I forget or do not follow the assignment? Carry on with the next unit. Occasional non-compliance makes the estimated effect look a little smaller than it really is but does not break the experiment.
+- Do I need a wearable? For sleep, heart rate, recovery or exercise outcomes, yes; any device that syncs to Apple Health works. Outcomes no device measures can be typed in after each unit.
+- Is this a medical study? It uses the same core idea, randomization, that clinical trials rely on, but the subject is one person. A trial estimates the average effect across many people; ABMe estimates the effect for one person, and the two can differ. ABMe is a tool for curiosity and self-knowledge, not a medical device.
+
+## Experiment templates
+
+Twenty-six ready-made experiment templates, each loadable into the app from https://getabme.com/experiments/ through an abme://template/ deep link. The effect sizes listed are the illustrative values used to generate each template's synthetic preview chart; they are drawn from the cited literature, not from ABMe users.
+<!-- build:catalogue -->
+
+### Sleep (13 templates)
+
+#### Caffeine Curfew & Deep Sleep
+
+- Hypothesis: Does cutting afternoon caffeine increase deep sleep?
+- Treatment: No caffeine after 10 AM (coffee, tea, pre-workout, energy drinks)
+- Control: Normal caffeine habits including afternoon coffee
+- Measurement window: Bedtime to Rising time
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Deep Sleep (sum, primary); Sleep Duration (sum); Sleep Efficiency (average); Core Sleep (sum)
+- Illustrative effect sizes used for the synthetic preview: Deep Sleep +12 min, Sleep Duration +25 min, Sleep Efficiency +5%
+- Literature: Clark & Landolt (2017), "Coffee, caffeine, and sleep", Sleep Medicine Reviews, https://doi.org/10.1016/j.smrv.2016.01.006; Drake et al. (2013), "Caffeine effects on sleep taken 0, 3, or 6 hours before going to bed", Journal of Clinical Sleep Medicine, https://doi.org/10.5664/jcsm.3170
+
+#### Magnesium & Deep Sleep
+
+- Hypothesis: Does magnesium glycinate before bed increase deep sleep?
+- Treatment: 400 mg magnesium glycinate 30 min before bed
+- Control: No magnesium supplement
+- Measurement window: Bedtime to Rising time
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Deep Sleep (sum, primary); HRV (SDNN) (average); Resting HR (average)
+- Illustrative effect sizes used for the synthetic preview: Deep Sleep +10 min, HRV +4.5 ms, RHR −2.5 bpm
+- Literature: Hausenblas et al. (2024), "Magnesium-L-threonate improves sleep quality and daytime functioning in adults", Sleep Medicine: X, https://doi.org/10.1016/j.sleepx.2024.100121; Abbasi et al. (2012), "Effect of magnesium supplementation on primary insomnia in elderly", Journal of Research in Medical Sciences
+
+#### Glycine & Sleep Quality
+
+- Hypothesis: Does glycine before bed improve sleep onset and deep sleep?
+- Treatment: 3 g glycine powder 30 min before bed
+- Control: No glycine
+- Measurement window: Bedtime to Rising time
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Deep Sleep (sum, primary); Sleep Duration (sum); Sleep Efficiency (average)
+- Illustrative effect sizes used for the synthetic preview: Faster sleep onset, improved deep sleep quality
+- Literature: Bannai et al. (2012), "The effects of glycine on subjective daytime performance in partially sleep-restricted healthy volunteers", Frontiers in Neurology, https://doi.org/10.3389/fneur.2012.00061; Inagawa et al. (2006), "Subjective effects of glycine ingestion before bedtime on sleep quality", Sleep and Biological Rhythms, https://doi.org/10.1111/j.1479-8425.2006.00193.x
+
+#### No Screens Before Bed
+
+- Hypothesis: Does avoiding screens for 1 hour before bed improve sleep?
+- Treatment: No phone, laptop, or TV for 60 min before bed
+- Control: Normal screen use until bedtime
+- Measurement window: Bedtime to Rising time
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Sleep Duration (sum, primary); Deep Sleep (sum); Sleep Efficiency (average)
+- Illustrative effect sizes used for the synthetic preview: Earlier sleep onset, longer total sleep
+- Literature: Exelmans & Van den Bulck (2016), "Bedtime mobile phone use and sleep in adults", Social Science & Medicine, https://doi.org/10.1016/j.socscimed.2015.11.037
+
+#### Blue Light Blocking Glasses
+
+- Hypothesis: Do blue light blocking glasses after sunset improve sleep?
+- Treatment: Wear amber-lens blue-blocking glasses from sunset until bed
+- Control: No glasses, normal screen use
+- Measurement window: Bedtime to Rising time
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Sleep Duration (sum, primary); Deep Sleep (sum); Sleep Efficiency (average)
+- Illustrative effect sizes used for the synthetic preview: Earlier melatonin onset, improved sleep duration
+- Literature: Shechter et al. (2018), "Blocking nocturnal blue light for insomnia", Journal of Psychiatric Research, https://doi.org/10.1016/j.jpsychires.2017.10.015
+
+#### Warm Shower Before Bed
+
+- Hypothesis: Does a warm shower 90 min before bed improve sleep onset?
+- Treatment: Warm shower (104–108°F) 90 min before bed
+- Control: No pre-bed shower
+- Measurement window: Bedtime to Rising time
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Sleep Duration (sum, primary); Deep Sleep (sum); Sleep Efficiency (average)
+- Illustrative effect sizes used for the synthetic preview: Faster sleep onset via core temperature drop
+- Literature: Haghayegh et al. (2019), "Before-bedtime passive body heating by warm shower or bath to improve sleep", Sleep Medicine Reviews, https://doi.org/10.1016/j.smrv.2019.04.008
+
+#### Late Eating Cutoff
+
+- Hypothesis: Does stopping food 3+ hours before bed improve overnight recovery?
+- Treatment: No food after 7 PM
+- Control: Eat normally until bedtime
+- Measurement window: Bedtime to Rising time
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Resting HR (average, primary); HRV (SDNN) (average); Deep Sleep (sum)
+- Illustrative effect sizes used for the synthetic preview: Lower overnight RHR, improved HRV
+- Literature: Crispim et al. (2011), "Relationship between food intake and sleep pattern in healthy individuals", Journal of Clinical Sleep Medicine, https://doi.org/10.5664/jcsm.1476
+
+#### Tart Cherry Juice & Sleep
+
+- Hypothesis: Does tart cherry juice before bed extend sleep duration?
+- Treatment: 8 oz Montmorency tart cherry juice 1 hr before bed
+- Control: No cherry juice
+- Measurement window: Bedtime to Rising time
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Sleep Duration (sum, primary); Deep Sleep (sum); Sleep Efficiency (average)
+- Illustrative effect sizes used for the synthetic preview: Sleep Duration +84 min in one study, natural melatonin source
+- Literature: Losso et al. (2018), "Pilot study of tart cherry juice for the treatment of insomnia", American Journal of Therapeutics, https://doi.org/10.1097/MJT.0000000000000584
+
+#### Alcohol & Sleep Quality
+
+- Hypothesis: Does a single evening drink impair sleep?
+- Treatment: One standard alcoholic drink with dinner
+- Control: Abstain from alcohol
+- Measurement window: Bedtime to Rising time
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: REM Sleep (sum, primary); HRV (SDNN) (average); Resting HR (average); Deep Sleep (sum); Sleep Duration (sum)
+- Illustrative effect sizes used for the synthetic preview: REM Sleep −11 min, HRV −5.7 ms, RHR +4 bpm
+- Literature: Gardiner et al. (2025), "Effect of alcohol on subsequent sleep: systematic review and meta-analysis", Sleep Medicine Reviews, https://doi.org/10.1016/j.smrv.2024.102030; Pietilä et al. (2018), "Acute effect of alcohol intake on cardiovascular autonomic regulation", JMIR Mental Health, https://doi.org/10.2196/mental.9519
+
+#### Melatonin Microdose
+
+- Hypothesis: Does 0.3 mg melatonin improve sleep onset without grogginess?
+- Treatment: 0.3 mg melatonin 30 min before bed
+- Control: No melatonin
+- Measurement window: Bedtime to Rising time
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Sleep Duration (sum, primary); Deep Sleep (sum); Sleep Efficiency (average)
+- Illustrative effect sizes used for the synthetic preview: Physiological dose — may outperform standard 3–5 mg
+- Literature: Zhdanova et al. (2001), "Melatonin treatment for age-related insomnia", Journal of Clinical Endocrinology & Metabolism, https://doi.org/10.1210/jcem.86.10.7901; Ferracioli-Oda et al. (2013), "Meta-analysis: melatonin for the treatment of primary sleep disorders", PLoS ONE, https://doi.org/10.1371/journal.pone.0063773
+
+#### Morning Sunlight & Sleep
+
+- Hypothesis: Does morning sunlight exposure improve that night's sleep?
+- Treatment: 10–15 min outdoor sunlight within 1 hr of waking (no sunglasses)
+- Control: Stay indoors, normal morning routine
+- Measurement window: Bedtime to Rising time
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Sleep Duration (sum, primary); Deep Sleep (sum); HRV (SDNN) (average)
+- Illustrative effect sizes used for the synthetic preview: Sets circadian clock; effects on melatonin timing 14–16 hr later
+- Literature: Blume et al. (2019), "Effects of light on human circadian rhythms, sleep and mood", Somnologie, https://doi.org/10.1007/s11818-019-00215-x
+
+#### Apigenin & Sleep
+
+- Hypothesis: Does apigenin before bed improve sleep onset?
+- Treatment: 50 mg apigenin 30–60 min before bed
+- Control: No apigenin
+- Measurement window: Bedtime to Rising time
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Sleep Duration (sum, primary); Deep Sleep (sum); Sleep Efficiency (average)
+- Illustrative effect sizes used for the synthetic preview: Mild sedative via GABA-A; part of Huberman's sleep stack
+- Literature: Salehi et al. (2019), "The therapeutic potential of apigenin", International Journal of Molecular Sciences, https://doi.org/10.3390/ijms20061305
+
+#### Huberman Sleep Stack
+
+- Hypothesis: Does the full Huberman sleep cocktail improve deep sleep?
+- Treatment: Mg threonate (145 mg) + L-theanine (200 mg) + apigenin (50 mg) before bed
+- Control: No supplements before bed
+- Measurement window: Bedtime to Rising time
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Deep Sleep (sum, primary); HRV (SDNN) (average); Sleep Duration (sum)
+- Illustrative effect sizes used for the synthetic preview: Combined stack targeting GABA, glycine, and parasympathetic pathways
+- Literature: Huberman Lab (2021), "Toolkit for Sleep", Huberman Lab Podcast; Hausenblas et al. (2024), "Magnesium-L-threonate improves sleep quality and daytime functioning in adults", Sleep Medicine: X, https://doi.org/10.1016/j.sleepx.2024.100121
+
+### Running (8 templates)
+
+#### Carbon-Plated Shoes vs Trainers
+
+- Hypothesis: Do carbon-plated racing shoes actually make you faster?
+- Treatment: Carbon-plated racer (e.g. Nike Vaporfly, Adidas Adios Pro)
+- Control: Daily trainer (e.g. ASICS Gel Nimbus, Brooks Ghost)
+- Measurement window: Workout start to Workout end
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Running Pace (average, primary); Ground Contact Time (average); Stride Length (average)
+- Illustrative effect sizes used for the synthetic preview: Pace +4.3%, Ground Contact Time −8 ms
+- Literature: Hoogkamer et al. (2018), "A comparison of the energetic cost of running in marathon racing shoes", Sports Medicine, https://doi.org/10.1007/s40279-017-0811-2; Barnes & Kilding (2019), "A randomized crossover study investigating the running economy in marathon racing shoes versus track spikes", Sports Medicine, https://doi.org/10.1007/s40279-018-1012-3
+
+#### Pre-Run Caffeine & Pace
+
+- Hypothesis: Does caffeine before a run improve your pace?
+- Treatment: 200 mg caffeine capsule 45 min before running
+- Control: Placebo capsule (no caffeine) before running
+- Measurement window: Workout start to Workout end
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Running Pace (average, primary); Workout Duration (sum); Workout Calories (sum)
+- Illustrative effect sizes used for the synthetic preview: Pace +2–5%, Workout Duration +5 min
+- Literature: Southward et al. (2018), "Effect of acute caffeine ingestion on endurance performance: systematic review and meta-analysis", Sports Medicine, https://doi.org/10.1007/s40279-018-0939-8; Guest et al. (2021), "International Society of Sports Nutrition position stand: caffeine and exercise performance", Journal of the International Society of Sports Nutrition, https://doi.org/10.1186/s12970-020-00383-4
+
+#### Beetroot Juice & Running Pace
+
+- Hypothesis: Does beetroot juice before a run make you faster?
+- Treatment: Concentrated beetroot shot (~400 mg nitrate) 2–3 hr before running
+- Control: No beetroot juice
+- Measurement window: Workout start to Workout end
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Running Pace (average, primary); Heart Rate (average); Workout Duration (sum)
+- Illustrative effect sizes used for the synthetic preview: 2–4% time-to-exhaustion improvement; 15–20% are genetic non-responders
+- Literature: Jones et al. (2018), "Dietary nitrate and physical performance", Annual Review of Nutrition, https://doi.org/10.1146/annurev-nutr-082117-051622; Domínguez et al. (2017), "Effects of beetroot juice supplementation on cardiorespiratory endurance", Nutrients, https://doi.org/10.3390/nu9010043
+
+#### Music vs Silence Running
+
+- Hypothesis: Does listening to music improve running performance?
+- Treatment: Upbeat playlist (120–140 BPM) during run
+- Control: No headphones, run in silence
+- Measurement window: Workout start to Workout end
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Running Pace (average, primary); Distance (sum); Heart Rate (average)
+- Illustrative effect sizes used for the synthetic preview: +10% distance in time-limited runs, cadence sync with BPM
+- Literature: Terry et al. (2020), "Effects of music in exercise and sport: a meta-analytic review", Psychological Bulletin, https://doi.org/10.1037/bul0000216
+
+#### Nasal vs Mouth Breathing
+
+- Hypothesis: Does nose-only breathing during easy runs change heart rate or pace?
+- Treatment: Nasal-only breathing during easy runs
+- Control: Normal mouth breathing
+- Measurement window: Workout start to Workout end
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Heart Rate (average, primary); Running Pace (average); Respiratory Rate (average)
+- Illustrative effect sizes used for the synthetic preview: Comparable VO2 at submaximal intensity; high individual variation
+- Literature: Dallam et al. (2018), "Effect of nasal versus oral breathing on exercise in trained runners", International Journal of Kinesiology and Sports Science; Nestor (2020), "Breath: The New Science of a Lost Art", Riverhead Books
+
+#### Fasted vs Fed Running
+
+- Hypothesis: Does running on an empty stomach change heart rate or energy burn?
+- Treatment: Morning run after 12+ hr overnight fast
+- Control: Same run 60 min after a 400 kcal meal
+- Measurement window: Workout start to Workout end
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Heart Rate (average, primary); Active Energy (sum); Running Pace (average)
+- Illustrative effect sizes used for the synthetic preview: Higher fat oxidation fasted; heart rate tends higher fasted
+- Literature: Vieira et al. (2016), "Effects of aerobic exercise in fasted vs fed state on fat and carbohydrate metabolism", British Journal of Nutrition, https://doi.org/10.1017/S0007114516003160
+
+#### Electrolytes vs Water
+
+- Hypothesis: Does an electrolyte mix before running lower exercise heart rate?
+- Treatment: 1 packet LMNT (1000 mg sodium) in 16 oz water pre-run
+- Control: 16 oz plain water pre-run
+- Measurement window: Workout start to Workout end
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Heart Rate (average, primary); Running Pace (average); Workout Duration (sum)
+- Illustrative effect sizes used for the synthetic preview: Lower exercise HR when sodium-loaded; plasma volume expansion
+- Literature: Sims et al. (2007), "Sodium loading aids fluid balance and reduces physiological strain of trained men exercising in the heat", Medicine & Science in Sports & Exercise, https://doi.org/10.1249/mss.0b013e318046eb2c
+
+#### Sodium Pre-Loading
+
+- Hypothesis: Does sodium before exercise lower heart rate in heat?
+- Treatment: 1500 mg sodium in 750 ml water 60–90 min before exercise
+- Control: 750 ml plain water 60–90 min before exercise
+- Measurement window: Workout start to Workout end
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Heart Rate (average, primary); Running Pace (average); Active Energy (sum)
+- Illustrative effect sizes used for the synthetic preview: Measurable plasma volume expansion; lower exercise HR in heat
+- Literature: Sims et al. (2007), "Sodium loading aids fluid balance and reduces physiological strain of trained men exercising in the heat", Medicine & Science in Sports & Exercise, https://doi.org/10.1249/01.mss.0000241639.97972.4a
+
+### Recovery (5 templates)
+
+#### Cold Plunge & Recovery
+
+- Hypothesis: Does morning cold water immersion improve HRV and lower resting heart rate?
+- Treatment: 2-min cold plunge (50–59°F / 10–15°C) within 1 hr of waking
+- Control: Normal morning routine, no cold exposure
+- Measurement window: Midnight to Midnight
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: HRV (SDNN) (average, primary); Resting HR (average); Deep Sleep (sum)
+- Illustrative effect sizes used for the synthetic preview: HRV +8 ms (SMD 0.61), RHR −3 bpm
+- Literature: Mäkinen et al. (2008), "Autonomic nervous function during whole-body cold exposure before and after cold acclimation", Aviation, Space, and Environmental Medicine, https://doi.org/10.3357/ASEM.2235.2008; Esperland et al. (2022), "Health effects of voluntary exposure to cold water", International Journal of Circumpolar Health, https://doi.org/10.1080/22423982.2022.2111789
+
+#### Meditation & HRV
+
+- Hypothesis: Does 10 min of morning meditation improve heart rate variability?
+- Treatment: 10 min guided meditation or box breathing in the morning
+- Control: No meditation, normal morning routine
+- Measurement window: Midnight to Midnight
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: HRV (SDNN) (average, primary); Resting HR (average)
+- Illustrative effect sizes used for the synthetic preview: HRV increase, RHR decrease; cumulative benefits over weeks
+- Literature: Ahani et al. (2014), "Quantitative change of EEG and respiration signals during mindfulness meditation", Journal of NeuroEngineering and Rehabilitation, https://doi.org/10.1186/1743-0003-11-87; Krygier et al. (2013), "Mindfulness meditation, well-being, and heart rate variability", International Journal of Psychophysiology, https://doi.org/10.1016/j.ijpsycho.2013.06.017
+
+#### Post-Meal Walking
+
+- Hypothesis: Does a 10-min walk after meals improve daily activity and heart rate?
+- Treatment: 10–15 min walk within 30 min of eating (after each main meal)
+- Control: Sit or rest after meals
+- Measurement window: Midnight to Midnight
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Steps (sum, primary); Walking HR (average); Active Energy (sum)
+- Illustrative effect sizes used for the synthetic preview: +3000 daily steps; glucose response flattened ~30%
+- Literature: Buffey et al. (2022), "The acute effects of interrupting prolonged sitting time in adults with standing and light-intensity walking", Sports Medicine, https://doi.org/10.1007/s40279-022-01649-4
+
+#### Contrast Therapy & Recovery
+
+- Hypothesis: Does alternating hot and cold after exercise improve overnight recovery?
+- Treatment: Alternate 1 min cold / 1 min hot for 12–15 min total post-workout
+- Control: No contrast therapy post-workout
+- Measurement window: Midnight to Midnight
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: HRV (SDNN) (average, primary); Resting HR (average)
+- Illustrative effect sizes used for the synthetic preview: Greater parasympathetic recovery than passive rest
+- Literature: Bieuzen et al. (2013), "Contrast water therapy and exercise induced muscle damage: a systematic review and meta-analysis", PLoS ONE, https://doi.org/10.1371/journal.pone.0062356
+
+#### L-Theanine & Coffee
+
+- Hypothesis: Does adding L-theanine to coffee improve focus without jitters?
+- Treatment: 200 mg L-theanine with morning coffee
+- Control: Morning coffee alone (no L-theanine)
+- Measurement window: Midnight to Midnight
+- Unit: 1 day, no washout; randomization probability 0.5; alpha 0.05
+- Outcomes: Resting HR (average, primary); HRV (SDNN) (average)
+- Illustrative effect sizes used for the synthetic preview: Lower RHR, higher HRV; reduced caffeine jitteriness
+- Literature: Nobre et al. (2008), "L-theanine, a natural constituent in tea, and its effect on mental state", Asia Pacific Journal of Clinical Nutrition; Owen et al. (2008), "The combined effects of L-theanine and caffeine on cognitive performance and mood", Nutritional Neuroscience, https://doi.org/10.1179/147683008X301513
+<!-- /build:catalogue -->
+
+## Blog
+
+Each post reviews what published studies say about an intervention and lays out an N-of-1 design to test it on yourself. The results sections show simulated data, labelled as synthetic, using effect sizes from the literature.
+
+- Does Magnesium Glycinate Deepen My Sleep? https://getabme.com/blog/magnesium-deep-sleep.html. 400 mg magnesium glycinate 30 minutes before bed versus no supplement; primary outcome deep sleep duration; secondary HRV (SDNN) and resting heart rate; 90 days, daily randomization, no washout.
+- Does a 10 AM Caffeine Curfew Fix My Deep Sleep? https://getabme.com/blog/caffeine-curfew-sleep.html. No caffeine after 10 AM versus normal caffeine habits; primary outcome deep sleep; secondary sleep duration, core sleep and sleep efficiency; 75 days, daily randomization, no washout.
+- Does a Single Drink Impair My Sleep? https://getabme.com/blog/alcohol-sleep.html. One standard drink with dinner versus no alcohol that day; primary outcome REM sleep; secondary HRV, resting heart rate, deep sleep and sleep duration; 120 days, daily randomization, no washout.
+- Does Cold Plunging Improve My HRV? https://getabme.com/blog/cold-plunge-recovery.html. A two-minute cold plunge at 10 to 15 C within an hour of waking versus the normal morning routine; primary outcome HRV (SDNN); secondary resting heart rate and deep sleep; 90 days, daily randomization, no washout.
+- Does Caffeine Actually Make Me Run Faster? https://getabme.com/blog/pre-workout-running.html. A 200 mg caffeine capsule 45 minutes before running versus a placebo capsule; primary outcome running pace; secondary workout duration and calories; measured from workout start to end; 90 days, daily randomization, no washout.
+- Are Carbon-Plated Shoes Actually Faster? https://getabme.com/blog/racing-shoes.html. A carbon-plated racer versus a daily trainer; primary outcome running pace; secondary ground contact time and stride length; measured from workout start to end; 60 days, daily randomization, no washout.
