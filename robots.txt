@@ -1,4 +1,62 @@
+# getabme.com
+# Everything on this site is public and may be crawled. The groups below restate the
+# wildcard rule for the main AI crawlers so the policy is explicit per crawler.
+# To stop a crawler, change its Allow: / to Disallow: /.
+
 User-agent: *
+Allow: /
+
+# Search and answer engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# OpenAI: search index, live browsing on behalf of a user, and model training
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+# Anthropic: search index, live fetches on behalf of a user, and model training
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity: index and live fetches
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Training-only controls. These do not affect Google Search or Siri results.
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
 Allow: /
 
 Sitemap: https://getabme.com/sitemap.xml
