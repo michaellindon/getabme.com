@@ -360,7 +360,6 @@ A screen-by-screen manual with iPhone screenshots. Summary of what it documents:
 - Data tab: chart of measured values by unit with the fitted level and next forecast, and the measurement log (unit, window, condition, value).
 - Regression adjustment: a one-step-ahead forecast from a local-level model fitted to the user's pre-experiment history for the metric and device, made before each unit and identical for both arms, is subtracted from the outcome before inverse-probability weighting. It reduces variance and cannot bias the estimate.
 - Editing, stopping, deleting; publishing to a public iCloud database with a researcher profile (Sign in with Apple), sharing a template or a result card; Settings (Health access, retrain proxy models, iCloud Sync, Export All Data as CSV, Restore Example Experiments, Report a Problem with a readable diagnostics report).
-- The statistics: the estimand is the average over the units run so far of Y_t(1) - Y_t(0); the estimator is the running mean of inverse-probability-weighted, forecast-adjusted contributions; the confidence sequence is centred on it with half-width (1/t) sqrt((S_t eta^2 + 1)/eta^2 log((S_t eta^2 + 1)/alpha^2)), valid at every t simultaneously, so stopping at any data-dependent time keeps the error rate at alpha.
 
 ## Blog
 

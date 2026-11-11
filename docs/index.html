@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Docs — ABMe</title>
-<meta name="description" content="The ABMe manual, screen by screen: the Today tab, the experiment wizard, running a unit, the Analysis and Data tabs, sharing, settings, and the statistics behind the confidence sequences.">
+<meta name="description" content="The ABMe manual, screen by screen: the Today tab, the experiment wizard, running a unit, the Analysis and Data tabs, regression adjustment, sharing and settings.">
 <link rel="canonical" href="https://getabme.com/docs/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ABMe">
 <meta property="og:title" content="Docs — ABMe">
-<meta property="og:description" content="The ABMe manual, screen by screen: every screen in the app, what it shows, and the statistics behind it.">
+<meta property="og:description" content="The ABMe manual, screen by screen: every screen in the app and what it shows.">
 <meta property="og:url" content="https://getabme.com/docs/">
 <meta property="og:image" content="https://getabme.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Docs — ABMe">
-<meta name="twitter:description" content="The ABMe manual, screen by screen: every screen in the app, what it shows, and the statistics behind it.">
+<meta name="twitter:description" content="The ABMe manual, screen by screen: every screen in the app and what it shows.">
 <meta name="twitter:image" content="https://getabme.com/og-image.png">
 <link rel="icon" type="image/svg+xml" href="../logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +24,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css">
 <script type="application/ld+json">
-{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://getabme.com/docs/#article", "url": "https://getabme.com/docs/", "headline": "ABMe documentation", "description": "The ABMe manual, screen by screen: every screen in the app, what it shows, and the statistics behind it.", "isPartOf": {"@id": "https://getabme.com/#website"}, "publisher": {"@id": "https://getabme.com/#organization"}, "inLanguage": "en"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://getabme.com/"}, {"@type": "ListItem", "position": 2, "name": "Docs", "item": "https://getabme.com/docs/"}]}]}
+{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://getabme.com/docs/#article", "url": "https://getabme.com/docs/", "headline": "ABMe documentation", "description": "The ABMe manual, screen by screen: every screen in the app and what it shows.", "isPartOf": {"@id": "https://getabme.com/#website"}, "publisher": {"@id": "https://getabme.com/#organization"}, "inLanguage": "en"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://getabme.com/"}, {"@type": "ListItem", "position": 2, "name": "Docs", "item": "https://getabme.com/docs/"}]}]}
 </script>
 <style>
   /* Page header */
@@ -83,7 +83,6 @@
   .tbl-wrap { overflow-x: auto; }
   ul.plain { padding-left: 20px; margin: 0 0 16px; }
   ul.plain li { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 6px; }
-  .formula { font-family: var(--mono); font-size: 13.5px; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; margin: 14px 0 18px; overflow-x: auto; white-space: nowrap; }
   dl.gloss { display: grid; grid-template-columns: 180px minmax(0,1fr); gap: 10px 20px; margin-top: 10px; }
   dl.gloss dt { color: var(--text); font-weight: 600; font-size: 15px; }
   dl.gloss dd { color: var(--text-muted); font-size: 15px; line-height: 1.65; }
@@ -128,7 +127,7 @@
   <header class="page-hero">
     <div class="overline">Documentation</div>
     <h1>The ABMe manual, screen by screen</h1>
-    <p class="lede">Every screen in the app, what it shows, and the statistics behind it. Each section starts with the screen itself; the numbered notes explain what you are looking at. The screens are the iPhone app with its example experiments, which carry synthetic data.</p>
+    <p class="lede">Every screen in the app and what it shows. Each section starts with the screen itself; the numbered notes explain what you are looking at. The screens are the iPhone app with its example experiments, which carry synthetic data.</p>
   </header>
 
   <div class="docs">
@@ -154,7 +153,6 @@
         <li><a href="#manage">7. Editing, stopping, deleting</a></li>
         <li><a href="#share">8. Publishing and sharing</a></li>
         <li><a href="#settings">9. Settings</a></li>
-        <li><a href="#statistics">10. The statistics</a></li>
         <li><a href="#glossary">Glossary</a></li>
       </ol>
     </aside>
@@ -674,50 +672,6 @@
         </div>
       </section>
 
-      <!-- ───────── 10. Statistics ───────── -->
-      <section id="statistics">
-        <h2><span class="n">10</span>The statistics</h2>
-        <p>This section states what the app computes, without the screens. It assumes you are comfortable with an expectation and a standard deviation.</p>
-
-        <h3>The estimand</h3>
-        <p>Label the units <code>t = 1, 2, 3, …</code> in the order they are randomized. Each unit has two potential outcomes for a metric: <code>Y_t(1)</code> under treatment and <code>Y_t(0)</code> under control. Only one is observed. The quantity ABMe estimates after <code>t</code> units is the average treatment effect over the units run so far,</p>
-        <div class="formula">τ̄_t = (1/t) Σ_{j=1}^{t} [ Y_j(1) − Y_j(0) ]</div>
-        <p>This is a quantity about you over this stretch of your life, not about a population. Nothing is assumed about how the potential outcomes are distributed or whether they drift over time.</p>
-
-        <h3>The estimator</h3>
-        <p>Each unit's condition <code>W_t</code> is drawn independently with probability one half. Before the unit runs, a forecast <code>m̂_t</code> of the metric is made from information available at that time, the same number for both arms. The unit's contribution is the inverse-probability-weighted difference from the forecast,</p>
-        <div class="formula">τ̂_t = m̂_t − m̂_t + [ W_t / 0.5 − (1 − W_t) / 0.5 ] · ( Y_t − m̂_t )</div>
-        <p>and the running estimate is their mean, <code>(1/t) Σ τ̂_j</code>. Because <code>W_t</code> is independent of everything before it and of the potential outcomes, each <code>τ̂_t</code> has expectation <code>Y_t(1) − Y_t(0)</code> given the past, whatever <code>m̂_t</code> is. The forecast only changes the variance: the closer it tracks the outcomes, the smaller the spread of <code>Y_t − m̂_t</code> and the narrower the band.</p>
-
-        <h3>The confidence sequence</h3>
-        <p>A confidence sequence is a sequence of intervals, one after each unit, with the property that the probability the true <code>τ̄_t</code> lies outside the interval at <em>any</em> <code>t</code> is at most <code>α</code>. ABMe's is centred on the running estimate with half-width</p>
-        <div class="formula">(1/t) · √( (S_t η² + 1) / η² · log( (S_t η² + 1) / α² ) )</div>
-        <p>where <code>S_t</code> is a running estimate of the accumulated variance of the <code>τ̂_j</code> and <code>η</code> is a tuning parameter fixed before the first unit (it sets the number of units at which the band is tightest). The half-width grows like <code>√(S_t log S_t) / t</code>, so it shrinks at nearly the rate of a fixed-sample interval while holding at every time at once. <code>α</code> can be changed after the fact because the estimate and <code>S_t</code> do not depend on it; only <code>η</code> and the set of metrics must stay fixed.</p>
-
-        <h3>Stopping</h3>
-        <p>Because the coverage is uniform over time, you may look after every unit and stop at any data-dependent moment: when the band excludes zero, when it is narrower than an effect you would care about, or when you have had enough. None of these rules inflates the error rate above <code>α</code>. There is no required sample size, and no penalty for continuing.</p>
-
-        <h3>Several metrics</h3>
-        <p>With <code>K</code> metrics there are <code>K</code> sequences and the chance that at least one of them misses is larger than <code>α</code>. The Correction control offers three positions on this:</p>
-        <ul class="plain">
-          <li><strong>None.</strong> Each sequence at level <code>α</code> on its own. The guarantee is per metric.</li>
-          <li><strong>Bonferroni.</strong> Each sequence at level <code>α / K</code>, so with probability at least <code>1 − α</code> every band covers its effect at every time. The guarantee is across metrics, and the bands are wider.</li>
-          <li><strong>e-BY.</strong> Each sequence gives an e-value against a zero effect. The e-BH rule marks the <code>k</code> metrics with the largest e-values, where <code>k</code> is the largest number such that the <code>k</code>-th largest e-value is at least <code>K / (α k)</code>. The bands are drawn at the e-BY level, which bounds the expected share of marked metrics whose band misses its effect by <code>α</code>. This is the false coverage rate analogue of controlling the false discovery rate.</li>
-        </ul>
-        <p>All three are read off the same stored sequences, so, like the level, the choice can be made after looking. <code>K</code> is every metric declared at setup, including ones with no result yet.</p>
-
-        <h3>The shared axis</h3>
-        <p>The Analysis table divides each metric's estimate and interval by that metric's usual unit-to-unit spread: the standard deviation of its last 30 pre-experiment values, fixed from the first unit on. A manual metric or a new device without that history uses the pooled within-arm standard deviation of the experiment's own results, which leaves the treatment effect out of the spread. The axis spans ±2.5 spreads and never changes, which is what lets you watch a band narrow.</p>
-
-        <h3>What is not done</h3>
-        <ul class="plain">
-          <li>No carryover model. If a treatment lingers, use a washout or a longer unit; the estimate is of the effect under the schedule you actually ran.</li>
-          <li>No imputation. A unit with no data for a metric contributes nothing to that metric's sequence.</li>
-          <li>No pooling across devices or across people. Each sequence is one person, one metric, one device.</li>
-          <li>No adjustment that uses the assignment. Every forecast is made before the unit and is identical for both arms.</li>
-        </ul>
-      </section>
-
       <!-- ───────── Glossary ───────── -->
       <section id="glossary">
         <h2>Glossary</h2>
@@ -728,7 +682,7 @@
           <dt>Metric</dt><dd>An Apple Health type together with one fixed aggregation (average, sum or maximum over the unit), or a value you enter yourself.</dd>
           <dt>Primary metric</dt><dd>The metric shown on the Today card and the result card. It is analysed like every other.</dd>
           <dt>Device</dt><dd>The one Apple Health source a metric is read from for the whole experiment.</dd>
-          <dt>Washout</dt><dd>A gap between calendar-day units so a treatment can clear before the next coin flip.</dd>
+          <dt>Washout</dt><dd>An optional gap between units so a treatment can clear before the next coin flip.</dd>
           <dt>Average treatment effect</dt><dd>The mean over the units run so far of the treatment outcome minus the control outcome. The number the app estimates.</dd>
           <dt>Confidence sequence</dt><dd>A sequence of intervals valid at every time simultaneously, so it can be checked after every unit and stopped on at will.</dd>
           <dt>Anytime-valid</dt><dd>The property that the error probability is controlled over all stopping times, not just one fixed one.</dd>
