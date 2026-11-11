@@ -10,6 +10,7 @@ The full text of the site, including all 26 experiment templates, is at https://
 
 - [Home](https://getabme.com/): what ABMe does, why randomization rather than tracking, the four steps of an experiment, how regression adjustment tightens the confidence sequence, compatible devices, privacy, community.
 - [How It Works](https://getabme.com/how-it-works/): plain-language explanation of randomized self-experiments, how to read a narrowing confidence sequence, a worked caffeine-curfew example, common questions.
+- [Docs](https://getabme.com/docs/): the manual, screen by screen: the Today tab, the seven-step experiment wizard (question, arms, unit kind, metrics, devices, reminders, review), running a unit, the Analysis tab (confidence level, Bonferroni and e-BY corrections, the shared standard-deviation axis), the Data tab, regression adjustment from pre-experiment forecasts, editing and sharing, settings, and the statistics of the anytime-valid confidence sequence.
 - [Experiment catalogue](https://getabme.com/experiments/): 26 ready-made templates for sleep, running and recovery, each with hypothesis, treatment, control, outcome metrics, unit length and literature citations. Each template loads into the app through an abme://template/ deep link.
 - [Privacy policy](https://getabme.com/privacy.html): what the app reads from HealthKit, where data lives, what sharing and publishing send.
 

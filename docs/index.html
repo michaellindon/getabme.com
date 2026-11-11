@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Docs — ABMe</title>
+<meta name="description" content="The ABMe manual, screen by screen: the Today tab, the experiment wizard, running a unit, the Analysis and Data tabs, sharing, settings, and the statistics behind the confidence sequences.">
+<link rel="canonical" href="https://getabme.com/docs/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ABMe">
+<meta property="og:title" content="Docs — ABMe">
+<meta property="og:description" content="The ABMe manual, screen by screen: every screen in the app, what it shows, and the statistics behind it.">
+<meta property="og:url" content="https://getabme.com/docs/">
+<meta property="og:image" content="https://getabme.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Docs — ABMe">
+<meta name="twitter:description" content="The ABMe manual, screen by screen: every screen in the app, what it shows, and the statistics behind it.">
+<meta name="twitter:image" content="https://getabme.com/og-image.png">
+<link rel="icon" type="image/svg+xml" href="../logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://getabme.com/docs/#article", "url": "https://getabme.com/docs/", "headline": "ABMe documentation", "description": "The ABMe manual, screen by screen: every screen in the app, what it shows, and the statistics behind it.", "isPartOf": {"@id": "https://getabme.com/#website"}, "publisher": {"@id": "https://getabme.com/#organization"}, "inLanguage": "en"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://getabme.com/"}, {"@type": "ListItem", "position": 2, "name": "Docs", "item": "https://getabme.com/docs/"}]}]}
+</script>
+<style>
+  /* Page header */
+  .page-hero { padding: 130px 0 40px; max-width: 760px; }
+  .overline { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); margin-bottom: 14px; }
+  .page-hero h1 { font-size: clamp(32px, 5vw, 50px); font-weight: 800; letter-spacing: -1.4px; line-height: 1.1; margin-bottom: 18px; text-wrap: balance; }
+  .page-hero .lede { font-size: 18px; color: var(--text-muted); line-height: 1.7; max-width: 620px; }
+
+  /* Two columns: contents rail and the manual */
+  .docs { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 56px; align-items: start; padding-bottom: 60px; }
+  .docs > * { min-width: 0; }
+  .toc { position: sticky; top: calc(var(--nav-height) + 20px); font-size: 13.5px; max-height: calc(100vh - var(--nav-height) - 40px); overflow-y: auto; }
+  .toc-title { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); margin-bottom: 10px; }
+  .toc ol { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+  .toc a { display: block; color: var(--text-muted); text-decoration: none; padding: 5px 10px; border-left: 2px solid var(--border); line-height: 1.4; }
+  .toc a:hover, .toc a.on { color: var(--text); border-left-color: var(--accent); }
+  .toc .sub a { padding-left: 22px; font-size: 12.5px; }
+
+  /* Sections */
+  section { padding: 44px 0; border-top: 1px solid var(--border); }
+  section:first-of-type { border-top: 0; padding-top: 0; }
+  h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 8px; text-wrap: balance; }
+  h2 .n, h3 .n { font-family: var(--mono); font-size: 13px; color: var(--accent); font-weight: 500; margin-right: 10px; vertical-align: 3px; }
+  h3 { font-size: 19px; font-weight: 700; margin: 0 0 8px; }
+  .sub-section { margin-top: 40px; }
+  p { font-size: 15.5px; color: var(--text-muted); line-height: 1.75; margin-bottom: 14px; }
+  p strong, li strong { color: var(--text); font-weight: 600; }
+  p a, li a { color: var(--accent); text-decoration: none; }
+  p a:hover, li a:hover { text-decoration: underline; }
+  code { font-family: var(--mono); font-size: 0.9em; color: var(--text); }
+
+  /* Screenshot + callouts */
+  .pair { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 40px; align-items: start; margin-top: 20px; }
+  .pair + .pair { margin-top: 44px; }
+  .pair.two { grid-template-columns: 280px 280px; }
+  .shot { position: sticky; top: calc(var(--nav-height) + 20px); }
+  .frame { position: relative; border-radius: 34px; overflow: hidden; border: 1px solid var(--border-light); background: #000; box-shadow: 0 24px 50px rgba(0,0,0,.45); }
+  .frame img { display: block; width: 100%; height: auto; }
+  .frame.cut { border-radius: 34px 34px 10px 10px; }
+  .frame.cut::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 48px; background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.85)); pointer-events: none; }
+  .frame .mk { position: absolute; width: 24px; height: 24px; margin: -12px 0 0 -12px; border-radius: 50%; background: var(--accent); color: #0b0f1a; font-family: var(--mono); font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 3px rgba(232,168,56,.35), 0 2px 6px rgba(0,0,0,.5); }
+  figcaption { font-family: var(--mono); font-size: 11px; color: var(--text-muted); margin-top: 12px; line-height: 1.5; }
+  .callouts { list-style: none; display: flex; flex-direction: column; gap: 14px; margin: 4px 0 18px; }
+  .callouts li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 12px; align-items: start; font-size: 15px; color: var(--text-muted); line-height: 1.7; }
+  .num { width: 24px; height: 24px; margin-top: 2px; border-radius: 50%; background: var(--accent); color: #0b0f1a; font-family: var(--mono); font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .note { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 20px 0; }
+  .note p { margin: 0; font-size: 14.5px; }
+  .note p + p { margin-top: 8px; }
+  .note .k { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--accent); margin-bottom: 6px; }
+
+  /* Tables and lists */
+  .tbl { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 14px; }
+  .tbl th, .tbl td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; color: var(--text-muted); line-height: 1.5; }
+  .tbl th { color: var(--text); font-weight: 600; font-size: 13px; }
+  .tbl td:first-child { color: var(--text); font-weight: 500; white-space: nowrap; }
+  .tbl-wrap { overflow-x: auto; }
+  ul.plain { padding-left: 20px; margin: 0 0 16px; }
+  ul.plain li { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 6px; }
+  .formula { font-family: var(--mono); font-size: 13.5px; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; margin: 14px 0 18px; overflow-x: auto; white-space: nowrap; }
+  dl.gloss { display: grid; grid-template-columns: 180px minmax(0,1fr); gap: 10px 20px; margin-top: 10px; }
+  dl.gloss dt { color: var(--text); font-weight: 600; font-size: 15px; }
+  dl.gloss dd { color: var(--text-muted); font-size: 15px; line-height: 1.65; }
+
+  @media (max-width: 900px) {
+    .docs { grid-template-columns: 1fr; gap: 24px; }
+    .toc { position: static; max-height: none; }
+    .toc ol { flex-direction: row; flex-wrap: wrap; gap: 6px; }
+    .toc a { border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; }
+    .toc .sub { display: none; }
+    .pair, .pair.two { grid-template-columns: 1fr; gap: 20px; }
+    .shot { position: static; max-width: 300px; }
+    .page-hero { padding-top: 110px; }
+    dl.gloss { grid-template-columns: 1fr; gap: 4px 0; }
+    dl.gloss dd { margin-bottom: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="/"><svg width="22" height="24" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><clipPath id="nl"><rect x="0" y="0" width="100" height="220"/></clipPath><clipPath id="nr"><rect x="100" y="0" width="100" height="220"/></clipPath></defs><circle cx="100" cy="62" r="36" clip-path="url(#nl)" fill="rgb(224,135,79)"/><circle cx="100" cy="62" r="36" clip-path="url(#nr)" fill="rgb(74,143,232)"/><path d="M100,110 C65,110 38,138 38,168 L38,195 C38,203 44,209 52,209 L100,209 Z" clip-path="url(#nl)" fill="rgb(224,135,79)"/><path d="M100,110 C135,110 162,138 162,168 L162,195 C162,203 156,209 148,209 L100,209 Z" clip-path="url(#nr)" fill="rgb(74,143,232)"/></svg><span><span class="a">A</span><span class="b">B</span>Me</span></a>
+    <div class="nav-links" id="nav-menu">
+      <a href="/how-it-works/">How It Works</a>
+      <a href="/docs/" class="active">Docs</a>
+      <a href="/#hardware" class="nav-anchor">Devices</a>
+      <a href="/#privacy" class="nav-anchor">Privacy</a>
+      <a href="/#community" class="nav-anchor">Community</a>
+      <a href="/experiments/">Experiments</a>
+      <a href="/blog/">Blog</a>
+    </div>
+    <div class="nav-right">
+      <a href="https://testflight.apple.com/join/bu77RnGP" target="_blank" rel="noopener" class="btn-primary">Join the Beta</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <header class="page-hero">
+    <div class="overline">Documentation</div>
+    <h1>The ABMe manual, screen by screen</h1>
+    <p class="lede">Every screen in the app, what it shows, and the statistics behind it. Each section starts with the screen itself; the numbered notes explain what you are looking at. The screens are the iPhone app with its example experiments, which carry synthetic data.</p>
+  </header>
+
+  <div class="docs">
+    <aside class="toc" aria-label="Contents">
+      <div class="toc-title">Contents</div>
+      <ol>
+        <li><a href="#today">1. The Today tab</a></li>
+        <li><a href="#create">2. Creating an experiment</a>
+          <ol class="sub">
+            <li><a href="#create-question">2.1 The question</a></li>
+            <li><a href="#create-arms">2.2 Treatment and control</a></li>
+            <li><a href="#create-unit">2.3 The unit</a></li>
+            <li><a href="#create-metrics">2.4 Metrics</a></li>
+            <li><a href="#create-devices">2.5 Devices</a></li>
+            <li><a href="#create-reminders">2.6 Reminders</a></li>
+            <li><a href="#create-review">2.7 Review</a></li>
+          </ol>
+        </li>
+        <li><a href="#run">3. Running a unit</a></li>
+        <li><a href="#analysis">4. The Analysis tab</a></li>
+        <li><a href="#data">5. The Data tab</a></li>
+        <li><a href="#adjustment">6. Regression adjustment</a></li>
+        <li><a href="#manage">7. Editing, stopping, deleting</a></li>
+        <li><a href="#share">8. Publishing and sharing</a></li>
+        <li><a href="#settings">9. Settings</a></li>
+        <li><a href="#statistics">10. The statistics</a></li>
+        <li><a href="#glossary">Glossary</a></li>
+      </ol>
+    </aside>
+
+    <main>
+
+      <!-- ───────── 1. Today ───────── -->
+      <section id="today">
+        <h2><span class="n">01</span>The Today tab</h2>
+        <p>The Today tab is the home screen. It lists every running experiment as a card and tells you what the app needs from you right now. Most of the time that is nothing, or one tap.</p>
+
+        <div class="pair">
+          <figure class="shot">
+            <div class="frame cut">
+              <img src="/docs/images/today-randomize-cut.webp" alt="The Today tab with one running experiment whose card shows a Randomize button" width="804" height="769" loading="lazy">
+              <span class="mk" style="left:6%;top:59%">1</span>
+              <span class="mk" style="left:94%;top:59%">2</span>
+              <span class="mk" style="left:14%;top:73%">3</span>
+              <span class="mk" style="left:6%;top:85%">4</span>
+            </div>
+            <figcaption>Today tab, top card. A session experiment waiting for its next unit.</figcaption>
+          </figure>
+          <div>
+            <ol class="callouts">
+              <li><span class="num">1</span><div><strong>The experiment card.</strong> One card per running experiment, headed by its name. Finished and stopped experiments live in the Experiments tab, not here. The third tab, Settings, holds Health access, iCloud sync and export.</div></li>
+              <li><span class="num">2</span><div><strong>The unit counter.</strong> How many units have been randomized so far, labelled by the unit kind: Night 12, Day 5, Workout 3, Session 8. The label follows the kind you chose at setup.</div></li>
+              <li><span class="num">3</span><div><strong>Randomize.</strong> A unit begins only when you tap this. ABMe draws the condition from a seeded fair coin flip at that moment. You cannot see or choose the outcome in advance, and until you tap, no unit is running and nothing is measured.</div></li>
+              <li><span class="num">4</span><div><strong>The primary metric and its state.</strong> What the card is tracking and where the last unit stands: awaiting data, a value, or the current estimate once both arms have one.</div></li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="pair">
+          <figure class="shot">
+            <div class="frame cut">
+              <img src="/docs/images/today-assigned-cut.webp" alt="The same card after tapping Randomize: a Control badge, the session in progress and an End Session button" width="804" height="908" loading="lazy">
+              <span class="mk" style="left:6%;top:60%">1</span>
+              <span class="mk" style="left:6%;top:76%">2</span>
+              <span class="mk" style="left:14%;top:84%">3</span>
+              <span class="mk" style="left:6%;top:92%">4</span>
+            </div>
+            <figcaption>The same card after Randomize drew Control.</figcaption>
+          </figure>
+          <div>
+            <ol class="callouts">
+              <li><span class="num">1</span><div><strong>The assignment badge.</strong> Treatment or Control, with the description you wrote at setup so there is no ambiguity about what to do. Blue is treatment and orange is control, everywhere in the app.</div></li>
+              <li><span class="num">2</span><div><strong>The unit's status line.</strong> When the unit is measured and when its result will be in. A night reads "Measured while you sleep tonight, results by noon tomorrow". A session reads "Measuring now" until you end it.</div></li>
+              <li><span class="num">3</span><div><strong>The one action, if any.</strong> A session shows End Session. A workout shows Log Workout so you can link the recorded workout. A manual metric shows Enter Result once the unit has ended. Nights and days need nothing: the result is read from Apple Health when it is due.</div></li>
+              <li><span class="num">4</span><div><strong>Awaiting data.</strong> The primary metric's state for this unit. It changes to the value once it has been read or entered.</div></li>
+            </ol>
+            <div class="note">
+              <div class="k">Why randomize each unit</div>
+              <p>The assignment is independent of everything else that varies from one unit to the next: how you slept, what you ate, how stressed you were. So the difference between the treatment and control units is an unbiased estimate of the treatment's causal effect on you, with no model of your physiology needed for that to hold.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───────── 2. Create ───────── -->
+      <section id="create">
+        <h2><span class="n">02</span>Creating an experiment</h2>
+        <p>Tap the plus button on the Today or Experiments tab to open the wizard. It has seven steps, and every choice it fixes is a design choice: made before the data, kept for the whole experiment. Nothing in it can be changed after the fact except the names and descriptions.</p>
+
+        <div class="sub-section" id="create-question">
+          <h3><span class="n">2.1</span>The question</h3>
+          <div class="pair">
+            <figure class="shot">
+              <div class="frame">
+              <img src="/docs/images/03-wizard-1-name.webp" alt="Step 1 of the wizard: experiment name and hypothesis" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:6%;top:27%">1</span>
+              <span class="mk" style="left:6%;top:36%">2</span>
+            </div>
+              <figcaption>New Experiment, step 1 of 7.</figcaption>
+            </figure>
+            <div>
+              <ol class="callouts">
+                <li><span class="num">1</span><div><strong>Name.</strong> Short and recognisable; it heads the card, the Analysis screen and the result card.</div></li>
+                <li><span class="num">2</span><div><strong>Hypothesis.</strong> One sentence with a direction in it, such as "Magnesium before bed lowers my average heart rate over the night". The analysis does not read it, but writing the direction down before you start is the point: the result will either agree with it or not.</div></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-section" id="create-arms">
+          <h3><span class="n">2.2</span>Treatment and control</h3>
+          <div class="pair">
+            <figure class="shot">
+              <div class="frame">
+              <img src="/docs/images/03-wizard-2-treatment-control.webp" alt="Step 2 of the wizard: what you will do under treatment and under control" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:6%;top:28%">1</span>
+              <span class="mk" style="left:6%;top:43%">2</span>
+            </div>
+              <figcaption>Step 2 of 7.</figcaption>
+            </figure>
+            <div>
+              <ol class="callouts">
+                <li><span class="num">1</span><div><strong>Treatment.</strong> What you do when the coin says treatment. Be specific about dose and timing, because the badge will show exactly this text each time.</div></li>
+                <li><span class="num">2</span><div><strong>Control.</strong> What you do instead. Usually your normal routine, but it can be an active comparison: trainers versus racing shoes, tea versus coffee.</div></li>
+              </ol>
+              <div class="note">
+                <div class="k">Two arms, one contrast</div>
+                <p>The estimate ABMe reports is the average difference, treatment minus control, in each metric. Every unit is one or the other with probability one half.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-section" id="create-unit">
+          <h3><span class="n">2.3</span>The unit</h3>
+          <p>The unit is the thing that gets randomized and the window over which one result is measured. It is the most consequential choice in the design, so the wizard gives it a whole step.</p>
+          <div class="pair">
+            <figure class="shot">
+              <div class="frame">
+              <img src="/docs/images/03-wizard-3-unit-night.webp" alt="Step 3 of the wizard: the five unit kinds, with Night selected" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:29%">1</span>
+              <span class="mk" style="left:5%;top:37%">2</span>
+              <span class="mk" style="left:5%;top:45%">3</span>
+              <span class="mk" style="left:5%;top:53%">4</span>
+              <span class="mk" style="left:5%;top:61%">5</span>
+              <span class="mk" style="left:5%;top:86%">6</span>
+            </div>
+              <figcaption>Step 3 of 7, Night selected. The screens in this manual use a Session experiment with a manual metric.</figcaption>
+            </figure>
+            <div>
+              <ol class="callouts">
+                <li><span class="num">1</span><div><strong>Night.</strong> Bedtime to rising, taken from your sleep tracker's samples. For anything you do in the evening and measure in your sleep. A night is dated by the evening it starts, because that is when the assignment applies.</div></li>
+                <li><span class="num">2</span><div><strong>Day.</strong> Rising to bedtime, your waking hours, again from the sleep tracker. You set a typical rising time and bedtime as the fallback for days with no sleep record.</div></li>
+                <li><span class="num">3</span><div><strong>Workout.</strong> One recorded workout is one unit, measured from its start to its end. Randomize before you set off, then link the workout afterwards.</div></li>
+                <li><span class="num">4</span><div><strong>Session.</strong> You start it with Randomize and end it yourself. For things measured on your own equipment and typed in: blood pressure, blood glucose, a reaction-time test.</div></li>
+                <li><span class="num">5</span><div><strong>Calendar days.</strong> Midnight to midnight, one or more days per unit. Metrics are averaged over the days to give one result per unit.</div></li>
+                <li><span class="num">6</span><div><strong>Washout.</strong> An optional gap between units, for every kind, so that a treatment with a long half-life has cleared before the next coin flip. Below the unit list, each kind also explains when its reminders fire and over what hours its metrics are read.</div></li>
+              </ol>
+              <div class="note">
+                <div class="k">What the choice fixes</div>
+                <p>The unit kind decides which metric categories the next step offers (sleep metrics for nights, workout metrics for workouts) and when reminders fire. The window is fixed for the whole experiment and is never chosen after seeing the data.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-section" id="create-metrics">
+          <h3><span class="n">2.4</span>Metrics</h3>
+          <div class="pair">
+            <figure class="shot">
+              <div class="frame">
+              <img src="/docs/images/03-wizard-4-metrics-selected.webp" alt="Step 4 of the wizard: the metric picker with a manual metric added and the Health categories below" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:55%">1</span>
+              <span class="mk" style="left:5%;top:73%">2</span>
+              <span class="mk" style="left:5%;top:33%">3</span>
+            </div>
+              <figcaption>Step 4 of 7.</figcaption>
+            </figure>
+            <div>
+              <ol class="callouts">
+                <li><span class="num">1</span><div><strong>Manual entry.</strong> A metric you measure yourself and type in after each unit, with a name, a unit and a note on how you measure it. Keep the method the same for the whole experiment.</div></li>
+                <li><span class="num">2</span><div><strong>Apple Health categories.</strong> Sleep, Heart, Respiratory, Body, Activity, Workout and so on, filtered to the ones that make sense for the unit kind. Tap a name for a description; switch it on to measure it.</div></li>
+                <li><span class="num">3</span><div><strong>Availability.</strong> The dot beside each Health metric: green, "Data found in last 7 days", means a device has been writing this type recently; grey, "No recent data", means nothing has arrived or Health access for the type has not been granted. The link opens the Health app to change it. (The screens here are from a phone with no wearable, so every Health metric shows grey.)</div></li>
+              </ol>
+              <div class="note">
+                <div class="k">One aggregation per metric</div>
+                <p>Each metric has one fixed way of turning the samples inside a unit into a single number: heart rate is averaged, steps are summed, deep sleep is summed, maximum heart rate takes the maximum. The aggregation is part of the metric, so two experiments on the same type always measure the same quantity. Every selected metric gets its own confidence sequence.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-section" id="create-devices">
+          <h3><span class="n">2.5</span>Devices</h3>
+          <div class="pair">
+            <figure class="shot">
+              <div class="frame">
+              <img src="/docs/images/03-wizard-5-devices.webp" alt="Step 5 of the wizard: the primary metric picker; Health metrics would list their devices here" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:26%">1</span>
+            </div>
+              <figcaption>Step 5 of 7.</figcaption>
+            </figure>
+            <div>
+              <ol class="callouts">
+                <li><span class="num">1</span><div><strong>Primary metric.</strong> The one shown on the Today card and on the result card. The others are analysed in exactly the same way; this only decides what is shown first.</div></li>
+              </ol>
+              <p><strong>One device per metric.</strong> Below the picker, each Health metric lists the devices that have written it, and you choose one for the whole experiment. The device that wrote it most recently is picked for you, with the date of its last data, so a replaced watch gives itself away. A manual metric, as in this screen, has no device to choose.</p>
+              <div class="note">
+                <div class="k">Why not combine devices</div>
+                <p>Two devices that write the same Health type often measure different things. One ring reports an overnight minimum as resting heart rate while a watch reports a daytime estimate. Averaging them would mix two quantities, and switching between them mid-experiment would let the device, not the treatment, move the result. So the source is fixed before the first unit.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-section" id="create-reminders">
+          <h3><span class="n">2.6</span>Reminders</h3>
+          <div class="pair">
+            <figure class="shot">
+              <div class="frame">
+              <img src="/docs/images/03-wizard-6-reminders.webp" alt="Step 6 of the wizard: reminder times for starting the next unit and for when its data should be in" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:39%">1</span>
+              <span class="mk" style="left:5%;top:52%">2</span>
+            </div>
+              <figcaption>Step 6 of 7.</figcaption>
+            </figure>
+            <div>
+              <ol class="callouts">
+                <li><span class="num">1</span><div><strong>Start the next unit.</strong> When ABMe nudges you to tap Randomize: in the evening for nights, in the morning for days. Workouts have no start reminder, since you randomize when you are about to train.</div></li>
+                <li><span class="num">2</span><div><strong>Data should be in.</strong> When ABMe expects the unit's measurements to have reached Apple Health and reads them: a time of day on the morning after a night, or a delay after a workout or session ends. Both times can be changed later from the experiment's share menu; they move notifications and fetches, never the analysis.</div></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-section" id="create-review">
+          <h3><span class="n">2.7</span>Review</h3>
+          <div class="pair">
+            <figure class="shot">
+              <div class="frame">
+              <img src="/docs/images/03-wizard-7-review-bottom.webp" alt="Step 7 of the wizard: the full design summarised before starting" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:38%">1</span>
+              <span class="mk" style="left:5%;top:52%">2</span>
+              <span class="mk" style="left:5%;top:70%">3</span>
+              <span class="mk" style="left:60%;top:91%">4</span>
+            </div>
+              <figcaption>Step 7 of 7, scrolled to the design.</figcaption>
+            </figure>
+            <div>
+              <ol class="callouts">
+                <li><span class="num">1</span><div><strong>Design.</strong> The unit, any washout, and the randomization probability, which is 50/50.</div></li>
+                <li><span class="num">2</span><div><strong>Reminders.</strong> The two times from the previous step, as they will be scheduled.</div></li>
+                <li><span class="num">3</span><div><strong>Metrics.</strong> Every metric with its device, or "Entered by you" for manual ones, and which is primary.</div></li>
+                <li><span class="num">4</span><div><strong>Start Experiment.</strong> From here the design is locked. ABMe fits a forecasting model to your pre-experiment history for each Health metric (see <a href="#adjustment">regression adjustment</a>) and takes you to the Today tab, where the first Randomize is waiting.</div></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───────── 3. Running ───────── -->
+      <section id="run">
+        <h2><span class="n">03</span>Running a unit</h2>
+        <p>A unit goes through a short life: randomized, measured, collected. The card on the Today tab and the top of the experiment screen both show where it is and the one thing it might need from you.</p>
+
+        <div class="pair">
+          <figure class="shot">
+            <div class="frame">
+              <img src="/docs/images/05-unit-in-progress.webp" alt="An experiment screen with a session in progress under a Control badge" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:41%">1</span>
+              <span class="mk" style="left:5%;top:47%">2</span>
+              <span class="mk" style="left:16%;top:51%">3</span>
+            </div>
+            <figcaption>Experiment screen, with the Today card's content at the top.</figcaption>
+          </figure>
+          <div>
+            <ol class="callouts">
+              <li><span class="num">1</span><div><strong>Current assignment.</strong> The same badge as on the Today card, with Live while the window is open.</div></li>
+              <li><span class="num">2</span><div><strong>In progress.</strong> The unit has been randomized and its window is open, here since 7:15 pm. For a night or a day the window is cut from your sleep record once it exists; until then a night is planned from 6 pm to noon the next day.</div></li>
+              <li><span class="num">3</span><div><strong>End Session.</strong> Only sessions and workouts need you to close the window. Nights, days and calendar days close on the clock.</div></li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="pair">
+          <figure class="shot">
+            <div class="frame">
+              <img src="/docs/images/05-enter-result-sheet.webp" alt="The Enter Result sheet with one manual metric and a number pad" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:26%">1</span>
+            </div>
+            <figcaption>Enter Result, shown for manual metrics once the unit has ended.</figcaption>
+          </figure>
+          <div>
+            <ol class="callouts">
+              <li><span class="num">1</span><div><strong>One value per manual metric per unit.</strong> The sheet names the unit and its condition, and takes one number in the metric's own unit. ABMe never aggregates manual values; what you type is the unit's result, and you can correct it later from the unit's card. While a manual value is missing, Randomize is withheld, so you cannot run ahead of your own measurements.</div></li>
+            </ol>
+            <p>Health metrics need nothing from you. At the unit's data-ready time ABMe reads Apple Health over the unit's window and stores one aggregated value per metric. If the data has not arrived yet, the unit shows "waiting for data" and is re-checked each time you open the app; a Check HealthKit button forces it.</p>
+            <div class="tbl-wrap">
+            <table class="tbl">
+              <tr><th>Unit state</th><th>Meaning</th></tr>
+              <tr><td>In progress</td><td>Window open. Shows Live while the current time is inside it (never for nights).</td></tr>
+              <tr><td>Awaiting entry</td><td>Window closed, a manual metric still needs its value.</td></tr>
+              <tr><td>Waiting for data</td><td>Window closed, Apple Health has not yet delivered every metric.</td></tr>
+              <tr><td>Partial</td><td>Some metrics arrived, some did not. The ones that did are already in their sequences.</td></tr>
+              <tr><td>Collected</td><td>Every metric has a value. The unit is in the analysis.</td></tr>
+              <tr><td>No data</td><td>Nothing arrived for the window. The unit counts for nothing; it is not imputed.</td></tr>
+            </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───────── 4. Analysis ───────── -->
+      <section id="analysis">
+        <h2><span class="n">04</span>The Analysis tab</h2>
+        <p>Open an experiment and the Analysis tab shows every metric on one axis, so you can see at a glance which effects are resolved, which are still wide open, and in which direction each one points.</p>
+
+        <div class="pair">
+          <figure class="shot">
+            <div class="frame">
+              <img src="/docs/images/07-analysis-collapsed.webp" alt="The Analysis tab: confidence and correction controls above one row per metric, each with a band on a shared axis" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:42%">1</span>
+              <span class="mk" style="left:5%;top:46%">2</span>
+              <span class="mk" style="left:5%;top:50%">3</span>
+              <span class="mk" style="left:31%;top:56%">4</span>
+              <span class="mk" style="left:94%;top:56%">5</span>
+            </div>
+            <figcaption>Analysis tab of the Evening Alcohol &amp; Sleep example, 95% confidence, no correction.</figcaption>
+          </figure>
+          <div>
+            <ol class="callouts">
+              <li><span class="num">1</span><div><strong>The count.</strong> Units with a result so far, split by arm: here 120 nights, 66 treatment and 54 control. The split is whatever the coin produced; it is not forced to be even.</div></li>
+              <li><span class="num">2</span><div><strong>Confidence.</strong> 90, 95 or 99%. Each metric's stored sequence is redrawn at the chosen level. A higher level widens every band and changes no estimate. The choice is yours to make and change after looking, because the sequence is valid at every level at once; what cannot change after the fact is the set of metrics and each sequence's tuning parameter.</div></li>
+              <li><span class="num">3</span><div><strong>Correction.</strong> How the bands account for there being several metrics. <strong>None</strong> draws each at the chosen level on its own. <strong>Bonferroni</strong> draws each at the level divided by the number of metrics, so all of them hold at once. <strong>e-BY</strong> marks the metrics whose evidence clears an e-value threshold and draws the bands at a level that bounds the expected share of marked metrics whose band misses its true effect.</div></li>
+              <li><span class="num">4</span><div><strong>The band.</strong> The metric's current confidence sequence, with a dot at the estimate, drawn in units of that metric's usual unit-to-unit spread so that minutes of sleep and beats per minute can share one axis. The axis is centred on zero, no effect: left of centre the treatment lowers the metric, right of centre it raises it. It always spans the same number of spreads and never rescales, so a band visibly narrows as results arrive, and an early band wider than the axis runs off its edge.</div></li>
+              <li><span class="num">5</span><div><strong>The estimate.</strong> The current average treatment effect in the metric's own units, with its interval beneath. A seal marks a band that excludes zero at the displayed level. The first metric chosen at setup is tagged primary.</div></li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="pair">
+          <figure class="shot">
+            <div class="frame">
+              <img src="/docs/images/07-analysis-expanded.webp" alt="A metric row expanded to show its confidence sequence over time" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:55%">1</span>
+              <span class="mk" style="left:58%;top:66%">2</span>
+              <span class="mk" style="left:14%;top:63%">3</span>
+              <span class="mk" style="left:88%;top:75%">4</span>
+            </div>
+            <figcaption>Tap a row to open its confidence sequence beneath it.</figcaption>
+          </figure>
+          <div>
+            <ol class="callouts">
+              <li><span class="num">1</span><div><strong>The open row.</strong> Tap a metric to open it; tap again to close. One row is open at a time, and the Data tab follows the same metric.</div></li>
+              <li><span class="num">2</span><div><strong>The running estimate.</strong> The line is the average treatment effect after each unit. It moves a lot in the first few units and settles as they accumulate.</div></li>
+              <li><span class="num">3</span><div><strong>The band over time.</strong> The shaded area is the interval after each unit. It is wide at the start and shrinks at roughly one over the square root of the number of units, faster when the metric is quiet and the forecasts are good.</div></li>
+              <li><span class="num">4</span><div><strong>Zero.</strong> The dashed line at no effect. The experiment has an answer for this metric once the band sits on one side of it and stays there; the band's edges then say how big the effect is, at least and at most. Beneath the chart, the same reading is written out in a sentence: at least this much, at most that much, and whether there is clear evidence of a nonzero effect.</div></li>
+            </ol>
+            <div class="note">
+              <div class="k">Anytime-valid</div>
+              <p>An ordinary confidence interval is only honest if you fix the sample size in advance and look once. These bands are anytime-valid confidence sequences: at the 95% level, the probability that the true effect ever leaves the band, at any unit, now or in the future, is at most 5%. That is what makes "check every morning and stop when it is clear" a legitimate rule rather than a way of fooling yourself.</p>
+              <p>The estimate is hidden until at least one treatment unit and one control unit have a result. With one arm only, the estimator is still defined but is driven by the empty arm's forecast, and the number would mislead.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───────── 5. Data ───────── -->
+      <section id="data">
+        <h2><span class="n">05</span>The Data tab</h2>
+        <p>The Data tab is the measurement log: what was read for each unit and from which window, beneath a chart of the values over time that the next section explains.</p>
+
+        <div class="pair">
+          <figure class="shot">
+            <div class="frame">
+              <img src="/docs/images/08-data-measurements.webp" alt="The Data tab scrolled to the Measurements list: one row per night with its condition and value" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:18%">1</span>
+              <span class="mk" style="left:5%;top:24%">2</span>
+              <span class="mk" style="left:60%;top:24%">3</span>
+              <span class="mk" style="left:94%;top:24%">4</span>
+            </div>
+            <figcaption>Data tab, scrolled to the Measurements list.</figcaption>
+          </figure>
+          <div>
+            <ol class="callouts">
+              <li><span class="num">1</span><div><strong>Which metric.</strong> The list shows one metric at a time, named with its aggregation: "REM Sleep, total over the night". Experiments with several metrics have a selector at the top of the tab.</div></li>
+              <li><span class="num">2</span><div><strong>The unit.</strong> Its index and date, newest first, and the window it was measured over. A night or day cut from a sleep record shows the resolved span, such as 23:12 to 06:48, with the sleep tracker that set it.</div></li>
+              <li><span class="num">3</span><div><strong>The condition.</strong> Treatment or control, as the coin decided. This is the only place the full sequence of assignments is listed.</div></li>
+              <li><span class="num">4</span><div><strong>The value.</strong> The aggregated result in the metric's unit, or the unit's state instead: "waiting for data", "no data", or "No entry" for a manual metric still to be typed in.</div></li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───────── 6. Adjustment ───────── -->
+      <section id="adjustment">
+        <h2><span class="n">06</span>Regression adjustment</h2>
+        <p>Randomization makes the estimate unbiased. What makes it precise, so that the band narrows in weeks rather than months, is regression adjustment: before each unit, ABMe forecasts what the metric would be, and the unit's contribution to the estimate is the difference between what was measured and what was forecast, scaled by the assignment.</p>
+        <div class="pair">
+          <figure class="shot">
+            <div class="frame">
+              <img src="/docs/images/08-data-top.webp" alt="The Data tab chart: measured values by night in treatment and control colours, with forecasts switched on" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:40%">1</span>
+              <span class="mk" style="left:50%;top:47%">2</span>
+              <span class="mk" style="left:5%;top:69%">3</span>
+              <span class="mk" style="left:94%;top:83%">4</span>
+            </div>
+            <figcaption>Data tab, the chart at the top.</figcaption>
+          </figure>
+          <div>
+            <ol class="callouts">
+              <li><span class="num">1</span><div><strong>Metric selector.</strong> The chart, the list below it and the Analysis tab's open row all follow this choice.</div></li>
+              <li><span class="num">2</span><div><strong>Measured values by unit.</strong> Blue points are treatment units, orange are control, in time order, in the metric's own units. With a treatment effect, the two colours sit at different heights.</div></li>
+              <li><span class="num">3</span><div><strong>Forecasts.</strong> With forecasts switched on, the chart also draws the model's fitted level through the points and the forecast for the next unit, and you can tap a unit to compare it with the forecast made for it: "Forecast 84.1, Measured 96.3, 12.2 above". Each forecast is a one-step-ahead prediction from a local-level model fitted to your own pre-experiment history for this metric and device. It is made before the unit's value is seen and is the same whichever arm the unit lands in, so it cannot depend on the assignment.</div></li>
+              <li><span class="num">4</span><div><strong>Show forecasts.</strong> Hides or shows the model's lines. A note explains when the model had no pre-experiment history to start from, as here, and so began at the first unit.</div></li>
+            </ol>
+            <div class="note">
+              <div class="k">Why this is safe</div>
+              <p>Because the forecast is fixed before the unit runs and does not use the assignment, subtracting it cannot bias the estimate. It only removes variance you would otherwise be paying for: slow drifts in fitness, season or routine. Treatment units systematically above their forecasts and control units systematically below is what a positive effect looks like once that drift has been forecast away. A poor forecast costs precision, never validity. Metrics without enough history fall back to a running mean of the experiment's own units, which has the same property.</p>
+              <p>The models are fitted when the experiment is created, one per metric and device, and kept for its whole run. Settings offers to retrain them for future experiments after a long gap in data or a change of routine.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───────── 7. Manage ───────── -->
+      <section id="manage">
+        <h2><span class="n">07</span>Editing, stopping, deleting</h2>
+        <div class="pair">
+          <figure class="shot">
+            <div class="frame">
+              <img src="/docs/images/09-edit-details.webp" alt="The Edit Details sheet with name, hypothesis, treatment and control fields" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:25%">1</span>
+              <span class="mk" style="left:5%;top:66%">2</span>
+            </div>
+            <figcaption>Edit Details, from the pencil button on the experiment screen.</figcaption>
+          </figure>
+          <div>
+            <ol class="callouts">
+              <li><span class="num">1</span><div><strong>Names and descriptions only.</strong> The name, hypothesis, treatment and control text can be corrected at any time. Nothing that affects the analysis is editable here: not the unit, the metrics, the devices or the randomization. Renaming reschedules the experiment's reminders and updates its public copy if it has been published.</div></li>
+              <li><span class="num">2</span><div><strong>The guarantee.</strong> Only the wording changes. Past and future assignments, the data and the analysis stay the same. Reminder times are edited separately, from the share menu.</div></li>
+            </ol>
+          </div>
+        </div>
+        <div class="pair">
+          <figure class="shot">
+            <div class="frame">
+              <img src="/docs/images/06-experiments-swipe-stop.webp" alt="The Experiments list with a completed row swiped right to reveal Restart" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:63%">1</span>
+              <span class="mk" style="left:5%;top:88%">2</span>
+            </div>
+            <figcaption>Experiments tab. Swipe right on a running experiment for Stop, on a finished one for Restart.</figcaption>
+          </figure>
+          <div>
+            <ol class="callouts">
+              <li><span class="num">1</span><div><strong>Stop and Restart.</strong> Stopping ends the experiment where it is and keeps every unit and its analysis. Restart picks it up again with the next unit index; the sequence continues, it does not start over.</div></li>
+              <li><span class="num">2</span><div><strong>The hint.</strong> Each section of the list says what its swipes do.</div></li>
+            </ol>
+            <p><strong>Delete</strong>, by swiping left, removes the experiment and all its data from the phone and from your private iCloud. A published copy stays public. Deleted example experiments stay deleted; Settings can restore the set.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───────── 8. Share ───────── -->
+      <section id="share">
+        <h2><span class="n">08</span>Publishing and sharing</h2>
+        <p>ABMe has no accounts and no servers of its own. Everything is stored and analysed on the phone, with a copy in your private iCloud. Sharing is opt-in, per experiment, and the share menu says exactly what leaves the phone each time.</p>
+        <div class="pair">
+          <figure class="shot">
+            <div class="frame">
+              <img src="/docs/images/10-share-menu.webp" alt="The share menu on an experiment: Publish Experiment, Share Template, Share Result Card, Reminders" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:92%;top:14%">1</span>
+              <span class="mk" style="left:92%;top:19%">2</span>
+              <span class="mk" style="left:92%;top:23%">3</span>
+              <span class="mk" style="left:92%;top:30%">4</span>
+            </div>
+            <figcaption>The share menu.</figcaption>
+          </figure>
+          <div>
+            <ol class="callouts">
+              <li><span class="num">1</span><div><strong>Publish Experiment.</strong> Writes the design, the per-unit assignments and the per-unit observation values for this experiment's metrics to a public iCloud database, under a researcher profile created with Sign in with Apple the first time. Others can follow it and run the same design on themselves. Raw Health data outside the experiment's units and metrics is never included. There is no unpublish.</div></li>
+              <li><span class="num">2</span><div><strong>Share Template.</strong> Sends the design only: question, arms, unit, metrics, aggregation. No results. Whoever receives it can start the same experiment with one tap.</div></li>
+              <li><span class="num">3</span><div><strong>Share Result Card.</strong> An image of one metric's confidence sequence with the estimate and interval at the experiment's 95% level, for a message or a post. It carries the chart, not the measurements.</div></li>
+              <li><span class="num">4</span><div><strong>Reminders.</strong> The two times set in the wizard, editable while the experiment runs.</div></li>
+            </ol>
+          </div>
+        </div>
+        <div class="pair">
+          <figure class="shot">
+            <div class="frame">
+              <img src="/docs/images/10-result-card.webp" alt="The Result Card preview sheet" width="804" height="1748" loading="lazy">
+            </div>
+            <figcaption>Result Card Preview, from Share Result Card.</figcaption>
+          </figure>
+          <div>
+            <p>The card shows the experiment's name, the two arms, the metric, the number of units, the confidence sequence, the estimate with its interval and the same written interpretation as the Analysis tab. It is rendered on the phone from the same stored sequence, and shared as an image.</p>
+            <p>Before anything is published, the sheet lists exactly what will be shared: the experiment's name and hypothesis, its metrics, the number of units of observation data and the confidence sequence results, with a privacy note that raw Health data from other metrics or periods never leaves the phone.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───────── 9. Settings ───────── -->
+      <section id="settings">
+        <h2><span class="n">09</span>Settings</h2>
+        <div class="pair">
+          <figure class="shot">
+            <div class="frame">
+              <img src="/docs/images/11-settings-top.webp" alt="The Settings tab: Appearance, Apple Health, Variance-Reduction Proxies and Data" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:42%">1</span>
+              <span class="mk" style="left:5%;top:63%">2</span>
+              <span class="mk" style="left:5%;top:78%">3</span>
+              <span class="mk" style="left:5%;top:84%">4</span>
+              <span class="mk" style="left:5%;top:89%">5</span>
+            </div>
+            <figcaption>Settings tab.</figcaption>
+          </figure>
+          <div>
+            <ol class="callouts">
+              <li><span class="num">1</span><div><strong>Apple Health.</strong> iOS asks for each data type once. To add or remove the types ABMe can read, this row opens the Health app; the change takes effect when you come back.</div></li>
+              <li><span class="num">2</span><div><strong>Retrain proxy models.</strong> Refits the forecasting models from your Health history for future experiments. Running experiments keep the models they started with.</div></li>
+              <li><span class="num">3</span><div><strong>iCloud Sync.</strong> On, Off, Checking or Unavailable, with the last sync time, and a footer saying what to do about it. Experiments live in your private iCloud database and come back if you reinstall or add an iPad. Nobody else can read that database.</div></li>
+              <li><span class="num">4</span><div><strong>Export All Data.</strong> Every experiment as CSV files, one row per unit and metric with the assignment, the window and the value, for R, Python or a spreadsheet.</div></li>
+              <li><span class="num">5</span><div><strong>Restore Example Experiments.</strong> Reloads the six worked examples with their synthetic data, for exploring the Analysis and Data tabs before you have results of your own.</div></li>
+            </ol>
+            <p>Above these, Appearance switches the app between System, Light and Dark.</p>
+          </div>
+        </div>
+        <div class="pair">
+          <figure class="shot">
+            <div class="frame">
+              <img src="/docs/images/11-report-problem.webp" alt="The Report a Problem sheet with a description field and an attached diagnostics report" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:21%">1</span>
+              <span class="mk" style="left:5%;top:50%">2</span>
+            </div>
+            <figcaption>Report a Problem, from the Help section of Settings.</figcaption>
+          </figure>
+          <div>
+            <ol class="callouts">
+              <li><span class="num">1</span><div><strong>What happened.</strong> What you expected and what you saw instead. Send opens your email app with the message addressed to support; it goes when you send it there.</div></li>
+              <li><span class="num">2</span><div><strong>The diagnostics report.</strong> App and iOS versions, which devices have written to Apple Health and when, and your experiments' recent units with the values ABMe fetched. No Health data outside those units is included, and you can read the whole report before sending.</div></li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───────── 10. Statistics ───────── -->
+      <section id="statistics">
+        <h2><span class="n">10</span>The statistics</h2>
+        <p>This section states what the app computes, without the screens. It assumes you are comfortable with an expectation and a standard deviation.</p>
+
+        <h3>The estimand</h3>
+        <p>Label the units <code>t = 1, 2, 3, …</code> in the order they are randomized. Each unit has two potential outcomes for a metric: <code>Y_t(1)</code> under treatment and <code>Y_t(0)</code> under control. Only one is observed. The quantity ABMe estimates after <code>t</code> units is the average treatment effect over the units run so far,</p>
+        <div class="formula">τ̄_t = (1/t) Σ_{j=1}^{t} [ Y_j(1) − Y_j(0) ]</div>
+        <p>This is a quantity about you over this stretch of your life, not about a population. Nothing is assumed about how the potential outcomes are distributed or whether they drift over time.</p>
+
+        <h3>The estimator</h3>
+        <p>Each unit's condition <code>W_t</code> is drawn independently with probability one half. Before the unit runs, a forecast <code>m̂_t</code> of the metric is made from information available at that time, the same number for both arms. The unit's contribution is the inverse-probability-weighted difference from the forecast,</p>
+        <div class="formula">τ̂_t = m̂_t − m̂_t + [ W_t / 0.5 − (1 − W_t) / 0.5 ] · ( Y_t − m̂_t )</div>
+        <p>and the running estimate is their mean, <code>(1/t) Σ τ̂_j</code>. Because <code>W_t</code> is independent of everything before it and of the potential outcomes, each <code>τ̂_t</code> has expectation <code>Y_t(1) − Y_t(0)</code> given the past, whatever <code>m̂_t</code> is. The forecast only changes the variance: the closer it tracks the outcomes, the smaller the spread of <code>Y_t − m̂_t</code> and the narrower the band.</p>
+
+        <h3>The confidence sequence</h3>
+        <p>A confidence sequence is a sequence of intervals, one after each unit, with the property that the probability the true <code>τ̄_t</code> lies outside the interval at <em>any</em> <code>t</code> is at most <code>α</code>. ABMe's is centred on the running estimate with half-width</p>
+        <div class="formula">(1/t) · √( (S_t η² + 1) / η² · log( (S_t η² + 1) / α² ) )</div>
+        <p>where <code>S_t</code> is a running estimate of the accumulated variance of the <code>τ̂_j</code> and <code>η</code> is a tuning parameter fixed before the first unit (it sets the number of units at which the band is tightest). The half-width grows like <code>√(S_t log S_t) / t</code>, so it shrinks at nearly the rate of a fixed-sample interval while holding at every time at once. <code>α</code> can be changed after the fact because the estimate and <code>S_t</code> do not depend on it; only <code>η</code> and the set of metrics must stay fixed.</p>
+
+        <h3>Stopping</h3>
+        <p>Because the coverage is uniform over time, you may look after every unit and stop at any data-dependent moment: when the band excludes zero, when it is narrower than an effect you would care about, or when you have had enough. None of these rules inflates the error rate above <code>α</code>. There is no required sample size, and no penalty for continuing.</p>
+
+        <h3>Several metrics</h3>
+        <p>With <code>K</code> metrics there are <code>K</code> sequences and the chance that at least one of them misses is larger than <code>α</code>. The Correction control offers three positions on this:</p>
+        <ul class="plain">
+          <li><strong>None.</strong> Each sequence at level <code>α</code> on its own. The guarantee is per metric.</li>
+          <li><strong>Bonferroni.</strong> Each sequence at level <code>α / K</code>, so with probability at least <code>1 − α</code> every band covers its effect at every time. The guarantee is across metrics, and the bands are wider.</li>
+          <li><strong>e-BY.</strong> Each sequence gives an e-value against a zero effect. The e-BH rule marks the <code>k</code> metrics with the largest e-values, where <code>k</code> is the largest number such that the <code>k</code>-th largest e-value is at least <code>K / (α k)</code>. The bands are drawn at the e-BY level, which bounds the expected share of marked metrics whose band misses its effect by <code>α</code>. This is the false coverage rate analogue of controlling the false discovery rate.</li>
+        </ul>
+        <p>All three are read off the same stored sequences, so, like the level, the choice can be made after looking. <code>K</code> is every metric declared at setup, including ones with no result yet.</p>
+
+        <h3>The shared axis</h3>
+        <p>The Analysis table divides each metric's estimate and interval by that metric's usual unit-to-unit spread: the standard deviation of its last 30 pre-experiment values, fixed from the first unit on. A manual metric or a new device without that history uses the pooled within-arm standard deviation of the experiment's own results, which leaves the treatment effect out of the spread. The axis spans ±2.5 spreads and never changes, which is what lets you watch a band narrow.</p>
+
+        <h3>What is not done</h3>
+        <ul class="plain">
+          <li>No carryover model. If a treatment lingers, use a washout or a longer unit; the estimate is of the effect under the schedule you actually ran.</li>
+          <li>No imputation. A unit with no data for a metric contributes nothing to that metric's sequence.</li>
+          <li>No pooling across devices or across people. Each sequence is one person, one metric, one device.</li>
+          <li>No adjustment that uses the assignment. Every forecast is made before the unit and is identical for both arms.</li>
+        </ul>
+      </section>
+
+      <!-- ───────── Glossary ───────── -->
+      <section id="glossary">
+        <h2>Glossary</h2>
+        <dl class="gloss">
+          <dt>Unit</dt><dd>The thing that is randomized and over which one result per metric is measured: a night, a day, a workout, a session or a block of calendar days.</dd>
+          <dt>Treatment, control</dt><dd>The two arms of the experiment. Blue and orange throughout the app.</dd>
+          <dt>Randomize</dt><dd>The tap that starts a unit by drawing its condition from a seeded fair coin.</dd>
+          <dt>Metric</dt><dd>An Apple Health type together with one fixed aggregation (average, sum or maximum over the unit), or a value you enter yourself.</dd>
+          <dt>Primary metric</dt><dd>The metric shown on the Today card and the result card. It is analysed like every other.</dd>
+          <dt>Device</dt><dd>The one Apple Health source a metric is read from for the whole experiment.</dd>
+          <dt>Washout</dt><dd>A gap between calendar-day units so a treatment can clear before the next coin flip.</dd>
+          <dt>Average treatment effect</dt><dd>The mean over the units run so far of the treatment outcome minus the control outcome. The number the app estimates.</dd>
+          <dt>Confidence sequence</dt><dd>A sequence of intervals valid at every time simultaneously, so it can be checked after every unit and stopped on at will.</dd>
+          <dt>Anytime-valid</dt><dd>The property that the error probability is controlled over all stopping times, not just one fixed one.</dd>
+          <dt>Regression adjustment</dt><dd>Subtracting a pre-unit forecast from each outcome before weighting, to reduce variance without affecting validity.</dd>
+          <dt>Forecast</dt><dd>The one-step-ahead prediction of a metric from a local-level model fitted to your pre-experiment history.</dd>
+          <dt>e-value</dt><dd>A measure of evidence against a zero effect whose expectation under no effect is at most one. Used by the e-BY correction.</dd>
+          <dt>False coverage rate</dt><dd>The expected share of reported intervals that miss their true value. The quantity e-BY controls.</dd>
+          <dt>Data-ready time</dt><dd>When ABMe expects a unit's measurements to have reached Apple Health, and reads them.</dd>
+        </dl>
+      </section>
+
+    </main>
+  </div>
+
+  <footer>
+    <span>&copy; 2026 ABMe</span>
+    <span><a href="/">Home</a> &middot; <a href="/how-it-works/">How It Works</a> &middot; <a href="/docs/">Docs</a> &middot; <a href="/experiments/">Experiments</a> &middot; <a href="/blog/">Blog</a> &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="mailto:support@getabme.com">Contact</a></span>
+  </footer>
+
+</div>
+
+<script src="../assets/site.js" defer></script>
+<script>
+(function () {
+  // Highlight the contents entry for the section in view.
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  var targets = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+  if (!('IntersectionObserver' in window)) return;
+  var current = null;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        current = e.target.id;
+        links.forEach(function (a) { a.classList.toggle('on', a.getAttribute('href') === '#' + current); });
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  targets.forEach(function (t) { if (t) io.observe(t); });
+})();
+</script>
+</body>
+</html>
