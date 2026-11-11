@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ABMe — The Experimentation Platform That Fits in Your Pocket</title>
-<meta name="description" content="ABMe turns your iPhone and wearable into a personal experimentation platform. Randomize what you do, let HealthKit measure the result, and get anytime-valid answers about what actually works for you.">
+<title>ABMe — The Personal Experimentation Platform</title>
+<meta name="description" content="ABMe runs randomized N-of-1 experiments on your iPhone. It randomizes each unit to treatment or control, reads outcomes from HealthKit, and estimates your individual treatment effect with an anytime-valid confidence sequence.">
 <link rel="canonical" href="https://getabme.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ABMe">
-<meta property="og:title" content="ABMe — The Experimentation Platform That Fits in Your Pocket">
-<meta property="og:description" content="ABMe turns your iPhone and wearable into a personal experimentation platform. Randomize what you do, let HealthKit measure the result, and get anytime-valid answers about what actually works for you.">
+<meta property="og:title" content="ABMe — The Personal Experimentation Platform">
+<meta property="og:description" content="ABMe runs randomized N-of-1 experiments on your iPhone. It randomizes each unit to treatment or control, reads outcomes from HealthKit, and estimates your individual treatment effect with an anytime-valid confidence sequence.">
 <meta property="og:url" content="https://getabme.com/">
 <meta property="og:image" content="https://getabme.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ABMe — The Experimentation Platform That Fits in Your Pocket">
-<meta name="twitter:description" content="ABMe turns your iPhone and wearable into a personal experimentation platform. Randomize what you do, let HealthKit measure the result, and get anytime-valid answers about what actually works for you.">
+<meta name="twitter:title" content="ABMe — The Personal Experimentation Platform">
+<meta name="twitter:description" content="ABMe runs randomized N-of-1 experiments on your iPhone. It randomizes each unit to treatment or control, reads outcomes from HealthKit, and estimates your individual treatment effect with an anytime-valid confidence sequence.">
 <meta name="twitter:image" content="https://getabme.com/og-image.png">
 <link rel="icon" type="image/svg+xml" href="logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1239,8 +1239,8 @@
 <div class="container">
   <div class="hero">
     <div class="hero-text">
-      <h1>The <em>experimentation platform</em> that fits in your pocket.</h1>
-      <p class="hero-sub">Built on the same research and technology that powers A/B testing at the world's largest tech companies &mdash; <strong>ABMe brings rigorous experimentation to a single subject: you.</strong> Design randomized N-of-1 experiments, collect data from your wearable, and find out what actually works.</p>
+      <h1>The <em>personal</em> experimentation platform.</h1>
+      <p class="hero-sub">Randomized N-of-1 experiments with anytime-valid inference. ABMe randomizes each unit to treatment or control, reads the outcome from your wearable through HealthKit, and estimates your individual treatment effect with a confidence sequence you can monitor continuously.</p>
       <div class="hero-actions">
         <a href="https://testflight.apple.com/join/bu77RnGP" target="_blank" rel="noopener" class="btn-primary">Join the Beta</a>
         <a href="#why" class="btn-secondary">Learn More</a>
@@ -1270,13 +1270,13 @@
   <section id="why">
     <div class="section-tag">Why Experiment?</div>
     <h2 class="section-title">Tracking tells you <em style="font-style:normal;color:var(--accent)">what happened.</em><br>Experimentation tells you <em style="font-style:normal;color:var(--accent)">what caused it.</em></h2>
-    <p class="section-sub">You tried creatine for a month and your HRV "seemed better." But was it the creatine, or the extra sleep, or the season changing? Without randomization, you'll never know.</p>
+    <p class="section-sub">You tried creatine for a month and your HRV "seemed better." Was it the creatine, the extra sleep, or the season changing? Randomizing which days you take it separates those.</p>
 
     <div class="causation-grid">
       <div class="cause-card highlight">
         <div class="card-label">ABMe</div>
         <h3>Randomized Experimentation</h3>
-        <p>Each experimental unit is randomly assigned to treatment or control. Randomization eliminates confounders, isolating the causal effect of your intervention.</p>
+        <p>Each unit is randomly assigned to treatment or control. Randomization balances confounders in expectation, so the treatment–control contrast is an unbiased estimate of the causal effect.</p>
         <ul class="cause-list">
           <li><span class="icon-yes">&#10003;</span> True randomization per unit</li>
           <li><span class="icon-yes">&#10003;</span> Causal inference, not correlation</li>
@@ -1292,7 +1292,7 @@
           <li><span class="icon-no">&#10007;</span> Self-selected conditions</li>
           <li><span class="icon-no">&#10007;</span> Correlation only</li>
           <li><span class="icon-no">&#10007;</span> Manual data entry</li>
-          <li><span class="icon-no">&#10007;</span> Gut-feel conclusions</li>
+          <li><span class="icon-no">&#10007;</span> No measure of uncertainty</li>
         </ul>
       </div>
     </div>
@@ -1313,7 +1313,7 @@
   <section id="how">
     <div class="section-tag">How It Works</div>
     <h2 class="section-title">Four steps to your first experiment.</h2>
-    <p class="section-sub">Design once, then tap to randomize each period. ABMe handles assignment, data collection, and analysis automatically.</p>
+    <p class="section-sub">Design once, then tap to randomize each period.</p>
 
     <div class="steps-grid">
       <div class="step-card">
@@ -1324,7 +1324,7 @@
       <div class="step-card">
         <div class="step-num">02</div>
         <h3>Randomize</h3>
-        <p>Tap "Start Next Unit." ABMe randomly assigns you to treatment or control. No self-selection. No bias.</p>
+        <p>Tap "Start Next Unit." ABMe randomly assigns you to treatment or control.</p>
       </div>
       <div class="step-card">
         <div class="step-num">03</div>
@@ -1334,7 +1334,7 @@
       <div class="step-card">
         <div class="step-num">04</div>
         <h3>Learn</h3>
-        <p>Watch the confidence interval tighten over time. When it excludes zero, you've found a real personal effect.</p>
+        <p>The confidence sequence narrows as units accrue. It holds at every sample size, so you can check it daily and stop once it excludes zero, with the type I error rate still controlled.</p>
       </div>
     </div>
     <div class="posts-footer"><a href="/how-it-works/">New to experimenting? Read the plain-English guide &rarr;</a></div>
@@ -1351,48 +1351,40 @@
 <!-- ───── ML Variance Reduction ───── -->
 <div class="container">
   <section class="ml-section">
-    <div class="section-tag">Smarter Estimates</div>
-    <h2 class="section-title">Machine learning makes your experiments <em style="font-style:normal;color:var(--accent)">faster.</em></h2>
+    <div class="section-tag">Variance Reduction</div>
+    <h2 class="section-title">Regression adjustment makes the estimate <em style="font-style:normal;color:var(--accent)">tighter.</em></h2>
 
     <div class="ml-split">
       <div class="ml-text">
-        <p>Your health metrics don't exist in isolation. How well you slept last night affects your resting heart rate today. Yesterday's workout intensity shapes today's HRV. These day-to-day fluctuations add noise to your experiment &mdash; making it harder to detect the signal you're looking for.</p>
-        <p>ABMe uses machine learning to account for this. It trains a model on the metrics that capture your body's daily state &mdash; <strong>how well you slept, how hard you trained, how recovered you are</strong> &mdash; to predict what your outcome would have looked like regardless of your treatment assignment. By subtracting that prediction, the noise drops and the confidence band tightens.</p>
-        <p>The result: <strong>faster answers with the same statistical rigor.</strong> This is the same augmented estimator used by the world's most sophisticated experimentation platforms &mdash; now running on your phone.</p>
+        <p>Health metrics are autocorrelated and drift from day to day for reasons unrelated to the experiment. That variation inflates the variance of the effect estimate.</p>
+        <p>Before each unit is randomized, ABMe makes a one-step-ahead forecast of the outcome from a <strong>local-level state-space model fitted to your own history on that device</strong>. The forecast enters an augmented inverse-propensity-weighted (AIPW) estimator as a regression adjustment, removing the predictable part of the variation so the confidence sequence narrows faster.</p>
+        <p>The forecast uses only pre-treatment data and the assignment probabilities are known, so the estimator stays unbiased and the confidence sequence keeps its coverage however good or bad the forecast is. A better forecast only lowers the variance.</p>
       </div>
       <div class="ml-card">
         <div class="ml-metrics-flow">
-          <span class="ml-chip">Sleep Duration</span>
-          <span class="ml-chip">Deep Sleep</span>
-          <span class="ml-chip">Sleep Efficiency</span>
-          <span class="ml-chip">Active Calories</span>
-          <span class="ml-chip">Exercise Minutes</span>
-          <span class="ml-chip">Resting HR</span>
-          <span class="ml-chip">HRV</span>
-          <span class="ml-chip">Respiratory Rate</span>
-          <span class="ml-chip">Steps</span>
+          <span class="ml-chip">Pre-treatment history</span>
           <span class="ml-arrow">&rarr;</span>
-          <span class="ml-chip result">ML predictions</span>
+          <span class="ml-chip result">One-step forecast</span>
           <span class="ml-arrow">&rarr;</span>
-          <span class="ml-chip result">Noise removed</span>
+          <span class="ml-chip result">Lower variance</span>
         </div>
         <div style="margin-top: 16px;">
           <div class="ml-row">
-            <span class="ml-label">Standard</span>
+            <span class="ml-label">Unadjusted</span>
             <div class="ml-bar-track"><div class="ml-bar wide">wider uncertainty</div></div>
           </div>
         </div>
         <div>
           <div class="ml-row">
-            <span class="ml-label">With ML</span>
+            <span class="ml-label">Adjusted</span>
             <div class="ml-bar-track"><div class="ml-bar narrow">tighter bounds</div></div>
           </div>
         </div>
-        <div class="ml-diagram-label">Same data, same rigor &mdash; faster conclusions</div>
+        <div class="ml-diagram-label">Same data, same coverage, narrower interval</div>
         <canvas id="csCanvas" style="width:100%;height:140px;display:block;margin-top:20px;"></canvas>
         <div class="ml-cs-legend">
-          <span><span class="leg-swatch" style="background:rgba(232,168,56,0.25)"></span> Standard</span>
-          <span><span class="leg-swatch" style="background:rgba(74,143,232,0.5)"></span> With ML</span>
+          <span><span class="leg-swatch" style="background:rgba(232,168,56,0.25)"></span> Unadjusted</span>
+          <span><span class="leg-swatch" style="background:rgba(74,143,232,0.5)"></span> Adjusted</span>
         </div>
       </div>
     </div>
@@ -1467,7 +1459,7 @@
 
     <div class="healthkit-note">
       <div class="hk-icon">+</div>
-      <p><strong>Any device that writes to Apple HealthKit is supported.</strong> ABMe reads nearly 70 metric types directly from HealthKit &mdash; heart rate, HRV, sleep stages, blood oxygen, respiratory rate, VO2max, steps, workouts, and more. Zero manual entry.</p>
+      <p><strong>Any device that writes to Apple HealthKit is supported.</strong> ABMe reads nearly 70 metric types from HealthKit, including heart rate, HRV, sleep stages, blood oxygen, respiratory rate, VO2max, steps and workouts.</p>
     </div>
   </section>
 </div>
@@ -1477,9 +1469,8 @@
   <section id="privacy" class="privacy-section">
     <div class="section-tag">Privacy</div>
     <h2 class="privacy-headline">
-      <span class="line">Your body.</span>
-      <span class="line">Your experiment.</span>
-      <span class="line">Your <span class="em">data.</span></span>
+      <span class="line">Your data stays</span>
+      <span class="line">on your <span class="em">phone.</span></span>
     </h2>
     <p class="privacy-sub">ABMe runs without a backend, accounts, or analytics. Your health data never leaves your phone unless you choose to publish an experiment, and even then only that experiment's results are shared. <a href="/privacy.html">Read the privacy policy.</a></p>
 
@@ -1512,8 +1503,8 @@
 <div class="container">
   <section class="community-section" id="community">
     <div class="section-tag">Community</div>
-    <h2 class="section-title">Share results. Replicate experiments. Build evidence.</h2>
-    <p class="community-sub">ABMe isn't just a personal tool. When you share your results, you contribute to a growing body of independent evidence. Followers can replicate your experiment with a single tap — no setup, no configuration. Over time, the community separates what works from what doesn't.</p>
+    <h2 class="section-title">Share an experiment, or run one someone else shared.</h2>
+    <p class="community-sub">Each person's experiment is independent. When several people run the same design, their individual treatment effects can be pooled into an estimate of the population average treatment effect.</p>
 
     <svg class="community-diagram cd-d" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Five independent experiments each narrow their own confidence sequence and send the result to a central pooled estimate of the average treatment effect">
       <style>
@@ -1632,17 +1623,17 @@
       <div class="community-card">
         <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4"/><path d="M8 8l4-4 4 4"/><path d="M5 13v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></svg></span>
         <h3>Share Your Results</h3>
-        <p>Publish your experiment as a branded result card — complete with your confidence sequence chart, effect size, and verdict. Share to Instagram, Twitter, iMessage, or anywhere.</p>
+        <p>Share a result card with your confidence sequence chart and effect size through the iOS share sheet.</p>
       </div>
       <div class="community-card">
         <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></span>
-        <h3>One-Tap Replication</h3>
-        <p>See someone's results and want to try it yourself? Tap "Replicate" to download their experiment template pre-configured. Just hit Start and begin your own trial. No setup required.</p>
+        <h3>Run the Same Design</h3>
+        <p>Open a shared experiment link to load the same design into ABMe, then run it on yourself.</p>
       </div>
       <div class="community-card">
         <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h16"/><rect x="6" y="11" width="3" height="9"/><rect x="10.5" y="6" width="3" height="14"/><rect x="15" y="14" width="3" height="6"/></svg></span>
-        <h3>Decentralized Evidence <span class="roadmap-tag">Roadmap</span></h3>
-        <p>Today, sharing and replication happen one experiment at a time. The goal is to pool independent replications so an experiment page can say "42 people tried this. 71% found a significant effect on deep sleep." That is a decentralized clinical trial.</p>
+        <h3>Pooled Results <span class="roadmap-tag">Roadmap</span></h3>
+        <p>Today, each experiment stands alone. The plan is to pool independent experiments on the same design into a population average treatment effect.</p>
       </div>
     </div>
 
@@ -1695,14 +1686,14 @@
 <div class="container">
   <section class="posts-section">
     <div class="section-tag">From the Blog</div>
-    <h2 class="section-title">The science behind common interventions.</h2>
-    <p class="section-sub">Deep dives on the research behind popular interventions &mdash; what the studies show, what the typical effect sizes look like, and why averages may not predict your personal response.</p>
+    <h2 class="section-title">What the research says.</h2>
+    <p class="section-sub">What published studies say about common interventions, and how to test each one on yourself.</p>
     <div class="posts-grid">
 
       <a href="/blog/racing-shoes.html" class="post-card">
         <div class="post-cat cat-performance">Performance</div>
         <h3>Are Carbon-Plated Shoes Actually Faster?</h3>
-        <p class="post-hyp">The Vaporfly revolution changed marathon racing forever. A 4% running economy improvement is one of the most replicated findings in sports science. But does it hold for your stride?</p>
+        <p class="post-hyp">Lab studies consistently find about a 4% running economy improvement. Does it show up in your own pace?</p>
         <div class="post-meta">
           <span class="post-tag">Running Pace</span>
           <span class="post-tag">Ground Contact Time</span>
@@ -1714,7 +1705,7 @@
       <a href="/blog/caffeine-curfew-sleep.html" class="post-card">
         <div class="post-cat cat-sleep">Sleep</div>
         <h3>Does a 10 AM Caffeine Curfew Fix My Deep Sleep?</h3>
-        <p class="post-hyp">Caffeine has a 5-hour half-life, but genetic variation means yours could be 3 or 10. This experiment produced the largest detectable effect of any sleep intervention we tested.</p>
+        <p class="post-hyp">Caffeine has a 5-hour half-life on average, but it varies from about 3 to 10 hours between people. Does stopping at 10 AM change your deep sleep?</p>
         <div class="post-meta">
           <span class="post-tag">Deep Sleep</span>
           <span class="post-tag">Sleep Efficiency</span>
@@ -1726,7 +1717,7 @@
       <a href="/blog/cold-plunge-recovery.html" class="post-card">
         <div class="post-cat cat-recovery">Recovery</div>
         <h3>Does Cold Plunging Improve My HRV?</h3>
-        <p class="post-hyp">Cold water immersion has exploded in popularity with 334% search growth. The parasympathetic activation is real &mdash; but is 2 minutes enough to move your heart rate variability?</p>
+        <p class="post-hyp">Cold water triggers a measurable parasympathetic response. Is 2 minutes a day enough to move your HRV?</p>
         <div class="post-meta">
           <span class="post-tag">HRV (SDNN)</span>
           <span class="post-tag">Resting HR</span>
@@ -1738,7 +1729,7 @@
       <a href="/blog/pre-workout-running.html" class="post-card">
         <div class="post-cat cat-performance">Performance</div>
         <h3>Does Caffeine Actually Make Me Run Faster?</h3>
-        <p class="post-hyp">The most studied ergogenic aid in sports science meets Apple Watch running metrics. A meta-analysis of 21 studies shows 2&ndash;5% endurance improvement &mdash; can you detect it in your own pace data?</p>
+        <p class="post-hyp">A meta-analysis of 21 studies found a 2&ndash;5% endurance improvement. Can you detect it in your own pace data?</p>
         <div class="post-meta">
           <span class="post-tag">Running Pace</span>
           <span class="post-tag">Workout Duration</span>
@@ -1750,7 +1741,7 @@
       <a href="/blog/alcohol-sleep.html" class="post-card">
         <div class="post-cat cat-sleep">Sleep</div>
         <h3>Does a Single Drink Impair My Sleep?</h3>
-        <p class="post-hyp">Alcohol's effect on sleep is surprisingly complex: it increases deep sleep but devastates REM. Five metrics tracked over 120 days reveal a nuanced picture most sleep trackers miss.</p>
+        <p class="post-hyp">Alcohol tends to increase deep sleep early in the night and reduce REM. This experiment tracks five sleep and recovery metrics over 120 days.</p>
         <div class="post-meta">
           <span class="post-tag">REM Sleep</span>
           <span class="post-tag">HRV (SDNN)</span>
@@ -1762,7 +1753,7 @@
       <a href="/blog/magnesium-deep-sleep.html" class="post-card">
         <div class="post-cat cat-sleep">Sleep</div>
         <h3>Does Magnesium Glycinate Deepen My Sleep?</h3>
-        <p class="post-hyp">Huberman's #1 sleep supplement recommendation has plausible biochemistry and growing trial evidence. Instead of trusting a population average, run the experiment on yourself.</p>
+        <p class="post-hyp">Magnesium glycinate has plausible biochemistry and some trial evidence. Test whether it changes your deep sleep.</p>
         <div class="post-meta">
           <span class="post-tag">Deep Sleep</span>
           <span class="post-tag">HRV (SDNN)</span>
@@ -1782,11 +1773,10 @@
     <div class="section-tag">Why ABMe Exists</div>
     <h2 class="section-title">Evidence over anecdotes.</h2>
     <div class="manifesto-body">
-      <p>There's no shortage of wellness advice. Podcasters, coaches, and influencers recommend protocols they believe in, often based on personal experience or emerging research. The challenge is that personal experience is unreliable. Without controlled comparison, it's difficult to separate real effects from personal bias or the dozen other things that changed the same week you started a new supplement.</p>
-      <p>Clinical trials address this with randomization and statistical inference, but they're designed for populations. They estimate the <strong>average treatment effect (ATE)</strong> across many people. That's valuable, but it doesn't tell you much about you specifically. Individual responses to interventions vary widely &mdash; a protocol that helps most people may not help you, and one that fails on average may work well for your particular biology.</p>
-      <p>ABMe brings this rigor to the individual through N-of-1 trials. You define a treatment and control condition, the app randomizes you across periods, your wearable collects the outcomes, and valid statistical inference gives you a real estimate of your own <strong>individual treatment effect (ITE)</strong> &mdash; not a population average, but a causal effect estimated from your own data.</p>
-      <p>The community layer makes this more useful over time. If you recommend a protocol, you can share a properly conducted experiment &mdash; not a testimonial. If you're considering trying someone else's protocol, you can run it yourself and see if the effect replicates. As more people run the same experiments, the community accumulates independent replications. Interventions that consistently produce effects across different people become easy to distinguish from those that don't.</p>
-      <p>To see what this looks like in practice, peruse our <a href="experiments/index.html">existing experiment templates</a> or read our <a href="blog/index.html">blog posts</a>.</p>
+      <p>Most health advice rests on personal experience, and personal experience is hard to read: when you start something new, a dozen other things change the same week.</p>
+      <p>Clinical trials address this with randomization and statistical inference, but they're designed for populations. They estimate the <strong>average treatment effect (ATE)</strong> across many people. That's valuable, but it doesn't tell you much about you specifically. Responses vary, so something that helps most people may not help you, and the reverse.</p>
+      <p>ABMe runs the same kind of randomized comparison on one person. You define treatment and control, the app randomizes you across periods, your wearable records the outcome, and an anytime-valid confidence sequence estimates your own <strong>individual treatment effect (ITE)</strong>: a causal effect estimated from your data alone.</p>
+            <p>To see what this looks like, browse the <a href="experiments/index.html">existing experiment templates</a> or read the <a href="blog/index.html">blog</a>.</p>
     </div>
   </section>
 </div>
