@@ -35,6 +35,7 @@
 
   /* Two columns: contents rail and the manual */
   .docs { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 56px; align-items: start; padding-bottom: 60px; }
+  .docs > * { min-width: 0; }
   .toc { position: sticky; top: calc(var(--nav-height) + 20px); font-size: 13.5px; max-height: calc(100vh - var(--nav-height) - 40px); overflow-y: auto; }
   .toc-title { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); margin-bottom: 10px; }
   .toc ol { list-style: none; display: flex; flex-direction: column; gap: 2px; }
@@ -62,6 +63,8 @@
   .shot { position: sticky; top: calc(var(--nav-height) + 20px); }
   .frame { position: relative; border-radius: 34px; overflow: hidden; border: 1px solid var(--border-light); background: #000; box-shadow: 0 24px 50px rgba(0,0,0,.45); }
   .frame img { display: block; width: 100%; height: auto; }
+  .frame.cut { border-radius: 34px 34px 10px 10px; }
+  .frame.cut::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 48px; background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.85)); pointer-events: none; }
   .frame .mk { position: absolute; width: 24px; height: 24px; margin: -12px 0 0 -12px; border-radius: 50%; background: var(--accent); color: #0b0f1a; font-family: var(--mono); font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 3px rgba(232,168,56,.35), 0 2px 6px rgba(0,0,0,.5); }
   figcaption { font-family: var(--mono); font-size: 11px; color: var(--text-muted); margin-top: 12px; line-height: 1.5; }
   .callouts { list-style: none; display: flex; flex-direction: column; gap: 14px; margin: 4px 0 18px; }
@@ -125,7 +128,7 @@
   <header class="page-hero">
     <div class="overline">Documentation</div>
     <h1>The ABMe manual, screen by screen</h1>
-    <p class="lede">Every screen in the app, what it shows, and the statistics behind it. Each section starts with the screen itself; the numbered notes explain what you are looking at. Screens are from the iPhone app with its example experiments.</p>
+    <p class="lede">Every screen in the app, what it shows, and the statistics behind it. Each section starts with the screen itself; the numbered notes explain what you are looking at. The screens are the iPhone app with its example experiments, which carry synthetic data.</p>
   </header>
 
   <div class="docs">
@@ -165,40 +168,42 @@
 
         <div class="pair">
           <figure class="shot">
-            <div class="frame">
-              <img src="/docs/images/today-randomize.webp" alt="The Today tab with one running experiment whose card shows a Randomize button" width="804" height="1748" loading="lazy">
-              <span class="mk" style="left:12%;top:19%">1</span>
-              <span class="mk" style="left:88%;top:19%">2</span>
-              <span class="mk" style="left:50%;top:27%">3</span>
-              <span class="mk" style="left:50%;top:96%">4</span>
+            <div class="frame cut">
+              <img src="/docs/images/today-randomize-cut.webp" alt="The Today tab with one running experiment whose card shows a Randomize button" width="804" height="769" loading="lazy">
+              <span class="mk" style="left:6%;top:59%">1</span>
+              <span class="mk" style="left:94%;top:59%">2</span>
+              <span class="mk" style="left:14%;top:73%">3</span>
+              <span class="mk" style="left:6%;top:85%">4</span>
             </div>
-            <figcaption>Today tab. A session experiment waiting for its next unit.</figcaption>
+            <figcaption>Today tab, top card. A session experiment waiting for its next unit.</figcaption>
           </figure>
           <div>
             <ol class="callouts">
-              <li><span class="num">1</span><div><strong>The experiment card.</strong> One card per running experiment, headed by its name. Finished and stopped experiments live in the Experiments tab, not here.</div></li>
+              <li><span class="num">1</span><div><strong>The experiment card.</strong> One card per running experiment, headed by its name. Finished and stopped experiments live in the Experiments tab, not here. The third tab, Settings, holds Health access, iCloud sync and export.</div></li>
               <li><span class="num">2</span><div><strong>The unit counter.</strong> How many units have been randomized so far, labelled by the unit kind: Night 12, Day 5, Workout 3, Session 8. The label follows the kind you chose at setup.</div></li>
               <li><span class="num">3</span><div><strong>Randomize.</strong> A unit begins only when you tap this. ABMe draws the condition from a seeded fair coin flip at that moment. You cannot see or choose the outcome in advance, and until you tap, no unit is running and nothing is measured.</div></li>
-              <li><span class="num">4</span><div><strong>The three tabs.</strong> Today for what is running, Experiments for the library and for creating new ones, Settings for Health access, iCloud sync and export.</div></li>
+              <li><span class="num">4</span><div><strong>The primary metric and its state.</strong> What the card is tracking and where the last unit stands: awaiting data, a value, or the current estimate once both arms have one.</div></li>
             </ol>
           </div>
         </div>
 
         <div class="pair">
           <figure class="shot">
-            <div class="frame">
-              <img src="/docs/images/today-assigned.webp" alt="The same card after tapping Randomize: a condition badge and the unit's status" width="804" height="1748" loading="lazy">
-              <span class="mk" style="left:20%;top:24%">1</span>
-              <span class="mk" style="left:20%;top:31%">2</span>
-              <span class="mk" style="left:50%;top:38%">3</span>
+            <div class="frame cut">
+              <img src="/docs/images/today-assigned-cut.webp" alt="The same card after tapping Randomize: a Control badge, the session in progress and an End Session button" width="804" height="908" loading="lazy">
+              <span class="mk" style="left:6%;top:60%">1</span>
+              <span class="mk" style="left:6%;top:76%">2</span>
+              <span class="mk" style="left:14%;top:84%">3</span>
+              <span class="mk" style="left:6%;top:92%">4</span>
             </div>
-            <figcaption>The same card after Randomize.</figcaption>
+            <figcaption>The same card after Randomize drew Control.</figcaption>
           </figure>
           <div>
             <ol class="callouts">
               <li><span class="num">1</span><div><strong>The assignment badge.</strong> Treatment or Control, with the description you wrote at setup so there is no ambiguity about what to do. Blue is treatment and orange is control, everywhere in the app.</div></li>
               <li><span class="num">2</span><div><strong>The unit's status line.</strong> When the unit is measured and when its result will be in. A night reads "Measured while you sleep tonight, results by noon tomorrow". A session reads "Measuring now" until you end it.</div></li>
               <li><span class="num">3</span><div><strong>The one action, if any.</strong> A session shows End Session. A workout shows Log Workout so you can link the recorded workout. A manual metric shows Enter Result once the unit has ended. Nights and days need nothing: the result is read from Apple Health when it is due.</div></li>
+              <li><span class="num">4</span><div><strong>Awaiting data.</strong> The primary metric's state for this unit. It changes to the value once it has been read or entered.</div></li>
             </ol>
             <div class="note">
               <div class="k">Why randomize each unit</div>
@@ -218,10 +223,10 @@
           <div class="pair">
             <figure class="shot">
               <div class="frame">
-                <img src="/docs/images/wizard-1-name.webp" alt="Step 1 of the wizard: experiment name and hypothesis" width="804" height="1748" loading="lazy">
-                <span class="mk" style="left:12%;top:22%">1</span>
-                <span class="mk" style="left:12%;top:29%">2</span>
-              </div>
+              <img src="/docs/images/03-wizard-1-name.webp" alt="Step 1 of the wizard: experiment name and hypothesis" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:6%;top:27%">1</span>
+              <span class="mk" style="left:6%;top:36%">2</span>
+            </div>
               <figcaption>New Experiment, step 1 of 7.</figcaption>
             </figure>
             <div>
@@ -238,10 +243,10 @@
           <div class="pair">
             <figure class="shot">
               <div class="frame">
-                <img src="/docs/images/wizard-2-treatment-control.webp" alt="Step 2 of the wizard: what you will do under treatment and under control" width="804" height="1748" loading="lazy">
-                <span class="mk" style="left:12%;top:22%">1</span>
-                <span class="mk" style="left:12%;top:33%">2</span>
-              </div>
+              <img src="/docs/images/03-wizard-2-treatment-control.webp" alt="Step 2 of the wizard: what you will do under treatment and under control" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:6%;top:28%">1</span>
+              <span class="mk" style="left:6%;top:43%">2</span>
+            </div>
               <figcaption>Step 2 of 7.</figcaption>
             </figure>
             <div>
@@ -263,15 +268,15 @@
           <div class="pair">
             <figure class="shot">
               <div class="frame">
-                <img src="/docs/images/wizard-3-unit-night.webp" alt="Step 3 of the wizard: the five unit kinds, with Night selected" width="804" height="1748" loading="lazy">
-                <span class="mk" style="left:88%;top:21%">1</span>
-                <span class="mk" style="left:88%;top:28%">2</span>
-                <span class="mk" style="left:88%;top:35%">3</span>
-                <span class="mk" style="left:88%;top:42%">4</span>
-                <span class="mk" style="left:88%;top:49%">5</span>
-                <span class="mk" style="left:12%;top:60%">6</span>
-              </div>
-              <figcaption>Step 3 of 7, Night selected.</figcaption>
+              <img src="/docs/images/03-wizard-3-unit-night.webp" alt="Step 3 of the wizard: the five unit kinds, with Night selected" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:29%">1</span>
+              <span class="mk" style="left:5%;top:37%">2</span>
+              <span class="mk" style="left:5%;top:45%">3</span>
+              <span class="mk" style="left:5%;top:53%">4</span>
+              <span class="mk" style="left:5%;top:61%">5</span>
+              <span class="mk" style="left:5%;top:86%">6</span>
+            </div>
+              <figcaption>Step 3 of 7, Night selected. The screens in this manual use a Session experiment with a manual metric.</figcaption>
             </figure>
             <div>
               <ol class="callouts">
@@ -280,7 +285,7 @@
                 <li><span class="num">3</span><div><strong>Workout.</strong> One recorded workout is one unit, measured from its start to its end. Randomize before you set off, then link the workout afterwards.</div></li>
                 <li><span class="num">4</span><div><strong>Session.</strong> You start it with Randomize and end it yourself. For things measured on your own equipment and typed in: blood pressure, blood glucose, a reaction-time test.</div></li>
                 <li><span class="num">5</span><div><strong>Calendar days.</strong> Midnight to midnight, one or more days per unit. Metrics are averaged over the days to give one result per unit.</div></li>
-                <li><span class="num">6</span><div><strong>Washout.</strong> For calendar-day units, an optional gap of days between units so that a treatment with a long half-life has cleared before the next coin flip.</div></li>
+                <li><span class="num">6</span><div><strong>Washout.</strong> An optional gap between units, for every kind, so that a treatment with a long half-life has cleared before the next coin flip. Below the unit list, each kind also explains when its reminders fire and over what hours its metrics are read.</div></li>
               </ol>
               <div class="note">
                 <div class="k">What the choice fixes</div>
@@ -295,18 +300,18 @@
           <div class="pair">
             <figure class="shot">
               <div class="frame">
-                <img src="/docs/images/wizard-4-metrics.webp" alt="Step 4 of the wizard: the metric picker with a manual metric added and Health categories below" width="804" height="1748" loading="lazy">
-                <span class="mk" style="left:12%;top:24%">1</span>
-                <span class="mk" style="left:12%;top:36%">2</span>
-                <span class="mk" style="left:88%;top:44%">3</span>
-              </div>
+              <img src="/docs/images/03-wizard-4-metrics-selected.webp" alt="Step 4 of the wizard: the metric picker with a manual metric added and the Health categories below" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:55%">1</span>
+              <span class="mk" style="left:5%;top:73%">2</span>
+              <span class="mk" style="left:5%;top:33%">3</span>
+            </div>
               <figcaption>Step 4 of 7.</figcaption>
             </figure>
             <div>
               <ol class="callouts">
                 <li><span class="num">1</span><div><strong>Manual entry.</strong> A metric you measure yourself and type in after each unit, with a name, a unit and a note on how you measure it. Keep the method the same for the whole experiment.</div></li>
                 <li><span class="num">2</span><div><strong>Apple Health categories.</strong> Sleep, Heart, Respiratory, Body, Activity, Workout and so on, filtered to the ones that make sense for the unit kind. Tap a name for a description; switch it on to measure it.</div></li>
-                <li><span class="num">3</span><div><strong>Availability.</strong> "Data found in last 7 days" means a device has been writing this type recently. "No recent data" means nothing has arrived, or that Health access for the type has not been granted; the link at the bottom opens the Health app to change it.</div></li>
+                <li><span class="num">3</span><div><strong>Availability.</strong> The dot beside each Health metric: green, "Data found in last 7 days", means a device has been writing this type recently; grey, "No recent data", means nothing has arrived or Health access for the type has not been granted. The link opens the Health app to change it. (The screens here are from a phone with no wearable, so every Health metric shows grey.)</div></li>
               </ol>
               <div class="note">
                 <div class="k">One aggregation per metric</div>
@@ -321,17 +326,16 @@
           <div class="pair">
             <figure class="shot">
               <div class="frame">
-                <img src="/docs/images/wizard-5-devices.webp" alt="Step 5 of the wizard: the primary metric picker and one device per Health metric" width="804" height="1748" loading="lazy">
-                <span class="mk" style="left:12%;top:20%">1</span>
-                <span class="mk" style="left:12%;top:32%">2</span>
-              </div>
+              <img src="/docs/images/03-wizard-5-devices.webp" alt="Step 5 of the wizard: the primary metric picker; Health metrics would list their devices here" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:26%">1</span>
+            </div>
               <figcaption>Step 5 of 7.</figcaption>
             </figure>
             <div>
               <ol class="callouts">
                 <li><span class="num">1</span><div><strong>Primary metric.</strong> The one shown on the Today card and on the result card. The others are analysed in exactly the same way; this only decides what is shown first.</div></li>
-                <li><span class="num">2</span><div><strong>One device per metric.</strong> Each Health metric is read from one source for the whole experiment. The device that wrote it most recently is picked for you, with the date of its last data so a replaced watch gives itself away.</div></li>
               </ol>
+              <p><strong>One device per metric.</strong> Below the picker, each Health metric lists the devices that have written it, and you choose one for the whole experiment. The device that wrote it most recently is picked for you, with the date of its last data, so a replaced watch gives itself away. A manual metric, as in this screen, has no device to choose.</p>
               <div class="note">
                 <div class="k">Why not combine devices</div>
                 <p>Two devices that write the same Health type often measure different things. One ring reports an overnight minimum as resting heart rate while a watch reports a daytime estimate. Averaging them would mix two quantities, and switching between them mid-experiment would let the device, not the treatment, move the result. So the source is fixed before the first unit.</p>
@@ -345,10 +349,10 @@
           <div class="pair">
             <figure class="shot">
               <div class="frame">
-                <img src="/docs/images/wizard-6-reminders.webp" alt="Step 6 of the wizard: reminder times for starting the next unit and for when its data should be in" width="804" height="1748" loading="lazy">
-                <span class="mk" style="left:12%;top:22%">1</span>
-                <span class="mk" style="left:12%;top:32%">2</span>
-              </div>
+              <img src="/docs/images/03-wizard-6-reminders.webp" alt="Step 6 of the wizard: reminder times for starting the next unit and for when its data should be in" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:39%">1</span>
+              <span class="mk" style="left:5%;top:52%">2</span>
+            </div>
               <figcaption>Step 6 of 7.</figcaption>
             </figure>
             <div>
@@ -365,13 +369,13 @@
           <div class="pair">
             <figure class="shot">
               <div class="frame">
-                <img src="/docs/images/wizard-7-review.webp" alt="Step 6 of the wizard: the full design summarised before starting" width="804" height="1748" loading="lazy">
-                <span class="mk" style="left:12%;top:40%">1</span>
-                <span class="mk" style="left:12%;top:54%">2</span>
-                <span class="mk" style="left:12%;top:68%">3</span>
-                <span class="mk" style="left:50%;top:92%">4</span>
-              </div>
-              <figcaption>Step 7 of 7.</figcaption>
+              <img src="/docs/images/03-wizard-7-review-bottom.webp" alt="Step 7 of the wizard: the full design summarised before starting" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:38%">1</span>
+              <span class="mk" style="left:5%;top:52%">2</span>
+              <span class="mk" style="left:5%;top:70%">3</span>
+              <span class="mk" style="left:60%;top:91%">4</span>
+            </div>
+              <figcaption>Step 7 of 7, scrolled to the design.</figcaption>
             </figure>
             <div>
               <ol class="callouts">
@@ -393,16 +397,18 @@
         <div class="pair">
           <figure class="shot">
             <div class="frame">
-              <img src="/docs/images/unit-in-progress.webp" alt="An experiment screen with a session in progress under a Treatment badge" width="804" height="1748" loading="lazy">
-              <span class="mk" style="left:12%;top:18%">1</span>
-              <span class="mk" style="left:50%;top:28%">2</span>
+              <img src="/docs/images/05-unit-in-progress.webp" alt="An experiment screen with a session in progress under a Control badge" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:41%">1</span>
+              <span class="mk" style="left:5%;top:47%">2</span>
+              <span class="mk" style="left:16%;top:51%">3</span>
             </div>
-            <figcaption>Experiment screen, session running.</figcaption>
+            <figcaption>Experiment screen, with the Today card's content at the top.</figcaption>
           </figure>
           <div>
             <ol class="callouts">
-              <li><span class="num">1</span><div><strong>In progress.</strong> The unit has been randomized and its window is open. For a night or a day the window is cut from your sleep record once it exists; until then a night is planned from 6 pm to noon the next day.</div></li>
-              <li><span class="num">2</span><div><strong>End Session.</strong> Only sessions and workouts need you to close the window. Nights, days and calendar days close on the clock.</div></li>
+              <li><span class="num">1</span><div><strong>Current assignment.</strong> The same badge as on the Today card, with Live while the window is open.</div></li>
+              <li><span class="num">2</span><div><strong>In progress.</strong> The unit has been randomized and its window is open, here since 7:15 pm. For a night or a day the window is cut from your sleep record once it exists; until then a night is planned from 6 pm to noon the next day.</div></li>
+              <li><span class="num">3</span><div><strong>End Session.</strong> Only sessions and workouts need you to close the window. Nights, days and calendar days close on the clock.</div></li>
             </ol>
           </div>
         </div>
@@ -410,14 +416,14 @@
         <div class="pair">
           <figure class="shot">
             <div class="frame">
-              <img src="/docs/images/enter-result.webp" alt="The Enter Result sheet with one manual metric and a number pad" width="804" height="1748" loading="lazy">
-              <span class="mk" style="left:12%;top:20%">1</span>
+              <img src="/docs/images/05-enter-result-sheet.webp" alt="The Enter Result sheet with one manual metric and a number pad" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:26%">1</span>
             </div>
             <figcaption>Enter Result, shown for manual metrics once the unit has ended.</figcaption>
           </figure>
           <div>
             <ol class="callouts">
-              <li><span class="num">1</span><div><strong>One value per manual metric per unit.</strong> ABMe never aggregates manual values; what you type is the unit's result. You can correct it later from the unit's row in the Data tab. While a manual value is missing, Randomize is withheld, so you cannot run ahead of your own measurements.</div></li>
+              <li><span class="num">1</span><div><strong>One value per manual metric per unit.</strong> The sheet names the unit and its condition, and takes one number in the metric's own unit. ABMe never aggregates manual values; what you type is the unit's result, and you can correct it later from the unit's card. While a manual value is missing, Randomize is withheld, so you cannot run ahead of your own measurements.</div></li>
             </ol>
             <p>Health metrics need nothing from you. At the unit's data-ready time ABMe reads Apple Health over the unit's window and stores one aggregated value per metric. If the data has not arrived yet, the unit shows "waiting for data" and is re-checked each time you open the app; a Check HealthKit button forces it.</p>
             <div class="tbl-wrap">
@@ -443,22 +449,22 @@
         <div class="pair">
           <figure class="shot">
             <div class="frame">
-              <img src="/docs/images/analysis-collapsed.webp" alt="The Analysis tab: confidence and correction controls above one row per metric, each with a band on a shared axis" width="804" height="1748" loading="lazy">
-              <span class="mk" style="left:12%;top:30%">1</span>
-              <span class="mk" style="left:12%;top:36%">2</span>
-              <span class="mk" style="left:50%;top:45%">3</span>
-              <span class="mk" style="left:88%;top:45%">4</span>
-              <span class="mk" style="left:50%;top:41%">5</span>
+              <img src="/docs/images/07-analysis-collapsed.webp" alt="The Analysis tab: confidence and correction controls above one row per metric, each with a band on a shared axis" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:42%">1</span>
+              <span class="mk" style="left:5%;top:46%">2</span>
+              <span class="mk" style="left:5%;top:50%">3</span>
+              <span class="mk" style="left:31%;top:56%">4</span>
+              <span class="mk" style="left:94%;top:56%">5</span>
             </div>
             <figcaption>Analysis tab of the Evening Alcohol &amp; Sleep example, 95% confidence, no correction.</figcaption>
           </figure>
           <div>
             <ol class="callouts">
-              <li><span class="num">1</span><div><strong>Confidence.</strong> 90, 95 or 99%. Each metric's stored sequence is redrawn at the chosen level. A higher level widens every band and changes no estimate. The choice is yours to make and change after looking, because the sequence is valid at every level at once; what cannot change after the fact is the set of metrics and each sequence's tuning parameter.</div></li>
-              <li><span class="num">2</span><div><strong>Correction.</strong> How the bands account for there being several metrics. <strong>None</strong> draws each at the chosen level on its own. <strong>Bonferroni</strong> draws each at the level divided by the number of metrics, so all of them hold at once. <strong>e-BY</strong> marks the metrics whose evidence clears an e-value threshold and draws the bands at a level that bounds the expected share of marked metrics whose band misses its true effect.</div></li>
-              <li><span class="num">3</span><div><strong>The band.</strong> The metric's current confidence sequence, drawn in units of that metric's usual unit-to-unit spread so that minutes of sleep and beats per minute can share one axis. The axis always spans the same number of spreads and never rescales, so a band visibly narrows as results arrive, and an early band wider than the axis runs off its edge.</div></li>
-              <li><span class="num">4</span><div><strong>The estimate.</strong> The current average treatment effect in the metric's own units, with its interval. A seal marks a band that excludes zero at the displayed level.</div></li>
-              <li><span class="num">5</span><div><strong>Zero.</strong> The vertical line is no effect. Left of it the treatment lowers the metric; right of it the treatment raises it. Which side is good depends on the metric.</div></li>
+              <li><span class="num">1</span><div><strong>The count.</strong> Units with a result so far, split by arm: here 120 nights, 66 treatment and 54 control. The split is whatever the coin produced; it is not forced to be even.</div></li>
+              <li><span class="num">2</span><div><strong>Confidence.</strong> 90, 95 or 99%. Each metric's stored sequence is redrawn at the chosen level. A higher level widens every band and changes no estimate. The choice is yours to make and change after looking, because the sequence is valid at every level at once; what cannot change after the fact is the set of metrics and each sequence's tuning parameter.</div></li>
+              <li><span class="num">3</span><div><strong>Correction.</strong> How the bands account for there being several metrics. <strong>None</strong> draws each at the chosen level on its own. <strong>Bonferroni</strong> draws each at the level divided by the number of metrics, so all of them hold at once. <strong>e-BY</strong> marks the metrics whose evidence clears an e-value threshold and draws the bands at a level that bounds the expected share of marked metrics whose band misses its true effect.</div></li>
+              <li><span class="num">4</span><div><strong>The band.</strong> The metric's current confidence sequence, with a dot at the estimate, drawn in units of that metric's usual unit-to-unit spread so that minutes of sleep and beats per minute can share one axis. The axis is centred on zero, no effect: left of centre the treatment lowers the metric, right of centre it raises it. It always spans the same number of spreads and never rescales, so a band visibly narrows as results arrive, and an early band wider than the axis runs off its edge.</div></li>
+              <li><span class="num">5</span><div><strong>The estimate.</strong> The current average treatment effect in the metric's own units, with its interval beneath. A seal marks a band that excludes zero at the displayed level. The first metric chosen at setup is tagged primary.</div></li>
             </ol>
           </div>
         </div>
@@ -466,18 +472,20 @@
         <div class="pair">
           <figure class="shot">
             <div class="frame">
-              <img src="/docs/images/analysis-expanded.webp" alt="A metric row expanded to show its confidence sequence over time" width="804" height="1748" loading="lazy">
-              <span class="mk" style="left:12%;top:52%">1</span>
-              <span class="mk" style="left:60%;top:58%">2</span>
-              <span class="mk" style="left:85%;top:64%">3</span>
+              <img src="/docs/images/07-analysis-expanded.webp" alt="A metric row expanded to show its confidence sequence over time" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:55%">1</span>
+              <span class="mk" style="left:58%;top:66%">2</span>
+              <span class="mk" style="left:14%;top:63%">3</span>
+              <span class="mk" style="left:88%;top:75%">4</span>
             </div>
             <figcaption>Tap a row to open its confidence sequence beneath it.</figcaption>
           </figure>
           <div>
             <ol class="callouts">
-              <li><span class="num">1</span><div><strong>The running estimate.</strong> The line is the average treatment effect after each unit. It moves a lot in the first few units and settles as they accumulate.</div></li>
-              <li><span class="num">2</span><div><strong>The band over time.</strong> The shaded area is the interval after each unit. Its width shrinks at roughly one over the square root of the number of units, faster when the metric is quiet and the forecasts are good.</div></li>
-              <li><span class="num">3</span><div><strong>Zero.</strong> The dashed line. The experiment has an answer for this metric once the band sits on one side of it and stays there; the band's edges then say how big the effect is, at least and at most.</div></li>
+              <li><span class="num">1</span><div><strong>The open row.</strong> Tap a metric to open it; tap again to close. One row is open at a time, and the Data tab follows the same metric.</div></li>
+              <li><span class="num">2</span><div><strong>The running estimate.</strong> The line is the average treatment effect after each unit. It moves a lot in the first few units and settles as they accumulate.</div></li>
+              <li><span class="num">3</span><div><strong>The band over time.</strong> The shaded area is the interval after each unit. It is wide at the start and shrinks at roughly one over the square root of the number of units, faster when the metric is quiet and the forecasts are good.</div></li>
+              <li><span class="num">4</span><div><strong>Zero.</strong> The dashed line at no effect. The experiment has an answer for this metric once the band sits on one side of it and stays there; the band's edges then say how big the effect is, at least and at most. Beneath the chart, the same reading is written out in a sentence: at least this much, at most that much, and whether there is clear evidence of a nonzero effect.</div></li>
             </ol>
             <div class="note">
               <div class="k">Anytime-valid</div>
@@ -491,23 +499,25 @@
       <!-- ───────── 5. Data ───────── -->
       <section id="data">
         <h2><span class="n">05</span>The Data tab</h2>
-        <p>The Data tab is the measurement log: what was read for each unit, from which window, and how it compared with the forecast made before the unit ran.</p>
+        <p>The Data tab is the measurement log: what was read for each unit and from which window, beneath a chart of the values over time that the next section explains.</p>
 
         <div class="pair">
           <figure class="shot">
             <div class="frame">
-              <img src="/docs/images/data-top.webp" alt="The Data tab: a chart of measured values by unit with the fitted level, and the measurement list below" width="804" height="1748" loading="lazy">
-              <span class="mk" style="left:12%;top:30%">1</span>
-              <span class="mk" style="left:50%;top:42%">2</span>
-              <span class="mk" style="left:12%;top:62%">3</span>
+              <img src="/docs/images/08-data-measurements.webp" alt="The Data tab scrolled to the Measurements list: one row per night with its condition and value" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:18%">1</span>
+              <span class="mk" style="left:5%;top:24%">2</span>
+              <span class="mk" style="left:60%;top:24%">3</span>
+              <span class="mk" style="left:94%;top:24%">4</span>
             </div>
-            <figcaption>Data tab, one metric selected.</figcaption>
+            <figcaption>Data tab, scrolled to the Measurements list.</figcaption>
           </figure>
           <div>
             <ol class="callouts">
-              <li><span class="num">1</span><div><strong>Metric selector.</strong> Experiments with several metrics show one at a time here. The Analysis tab's expanded row and the result card follow the same selection.</div></li>
-              <li><span class="num">2</span><div><strong>Measured values by unit.</strong> Blue points are treatment units, orange are control, in time order. The grey line is the smoothed level from the history model, drawn for orientation only; the estimator uses the one-step-ahead forecasts, not this smoothed line. Tap a point to see its forecast and the gap.</div></li>
-              <li><span class="num">3</span><div><strong>Measurements.</strong> One row per unit: its index, its condition, the resolved window ("23:12 to 06:48, 7 h 36 m" with the sleep tracker that set it for nights and days), the value and its unit, or "waiting for data", "no data" or "No entry".</div></li>
+              <li><span class="num">1</span><div><strong>Which metric.</strong> The list shows one metric at a time, named with its aggregation: "REM Sleep, total over the night". Experiments with several metrics have a selector at the top of the tab.</div></li>
+              <li><span class="num">2</span><div><strong>The unit.</strong> Its index and date, newest first, and the window it was measured over. A night or day cut from a sleep record shows the resolved span, such as 23:12 to 06:48, with the sleep tracker that set it.</div></li>
+              <li><span class="num">3</span><div><strong>The condition.</strong> Treatment or control, as the coin decided. This is the only place the full sequence of assignments is listed.</div></li>
+              <li><span class="num">4</span><div><strong>The value.</strong> The aggregated result in the metric's unit, or the unit's state instead: "waiting for data", "no data", or "No entry" for a manual metric still to be typed in.</div></li>
             </ol>
           </div>
         </div>
@@ -520,20 +530,24 @@
         <div class="pair">
           <figure class="shot">
             <div class="frame">
-              <img src="/docs/images/data-forecast.webp" alt="The Data tab chart with one unit selected, showing its forecast and the measured value" width="804" height="1748" loading="lazy">
-              <span class="mk" style="left:50%;top:40%">1</span>
-              <span class="mk" style="left:12%;top:50%">2</span>
+              <img src="/docs/images/08-data-top.webp" alt="The Data tab chart: measured values by night in treatment and control colours, with forecasts switched on" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:40%">1</span>
+              <span class="mk" style="left:50%;top:47%">2</span>
+              <span class="mk" style="left:5%;top:69%">3</span>
+              <span class="mk" style="left:94%;top:83%">4</span>
             </div>
-            <figcaption>A unit selected on the Data chart.</figcaption>
+            <figcaption>Data tab, the chart at the top.</figcaption>
           </figure>
           <div>
             <ol class="callouts">
-              <li><span class="num">1</span><div><strong>Forecast and measured.</strong> The forecast is a one-step-ahead prediction from a local-level model fitted to your own pre-experiment history for this metric and device. It is made before the unit's value is seen and is the same whichever arm the unit lands in, so it cannot depend on the assignment.</div></li>
-              <li><span class="num">2</span><div><strong>The gap.</strong> How far above or below its forecast the unit came in. Treatment units systematically above their forecasts and control units systematically below is what a positive effect looks like, once the day-to-day drift has been forecast away.</div></li>
+              <li><span class="num">1</span><div><strong>Metric selector.</strong> The chart, the list below it and the Analysis tab's open row all follow this choice.</div></li>
+              <li><span class="num">2</span><div><strong>Measured values by unit.</strong> Blue points are treatment units, orange are control, in time order, in the metric's own units. With a treatment effect, the two colours sit at different heights.</div></li>
+              <li><span class="num">3</span><div><strong>Forecasts.</strong> With forecasts switched on, the chart also draws the model's fitted level through the points and the forecast for the next unit, and you can tap a unit to compare it with the forecast made for it: "Forecast 84.1, Measured 96.3, 12.2 above". Each forecast is a one-step-ahead prediction from a local-level model fitted to your own pre-experiment history for this metric and device. It is made before the unit's value is seen and is the same whichever arm the unit lands in, so it cannot depend on the assignment.</div></li>
+              <li><span class="num">4</span><div><strong>Show forecasts.</strong> Hides or shows the model's lines. A note explains when the model had no pre-experiment history to start from, as here, and so began at the first unit.</div></li>
             </ol>
             <div class="note">
               <div class="k">Why this is safe</div>
-              <p>Because the forecast is fixed before the unit runs and does not use the assignment, subtracting it cannot bias the estimate. It only removes variance you would otherwise be paying for: slow drifts in fitness, season or routine. A poor forecast costs precision, never validity. Health metrics without enough history fall back to a running mean of the experiment's own units, which has the same property.</p>
+              <p>Because the forecast is fixed before the unit runs and does not use the assignment, subtracting it cannot bias the estimate. It only removes variance you would otherwise be paying for: slow drifts in fitness, season or routine. Treatment units systematically above their forecasts and control units systematically below is what a positive effect looks like once that drift has been forecast away. A poor forecast costs precision, never validity. Metrics without enough history fall back to a running mean of the experiment's own units, which has the same property.</p>
               <p>The models are fitted when the experiment is created, one per metric and device, and kept for its whole run. Settings offers to retrain them for future experiments after a long gap in data or a change of routine.</p>
             </div>
           </div>
@@ -546,31 +560,34 @@
         <div class="pair">
           <figure class="shot">
             <div class="frame">
-              <img src="/docs/images/edit-details.webp" alt="The Edit Details sheet with name, hypothesis, treatment and control fields" width="804" height="1748" loading="lazy">
-              <span class="mk" style="left:12%;top:22%">1</span>
+              <img src="/docs/images/09-edit-details.webp" alt="The Edit Details sheet with name, hypothesis, treatment and control fields" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:25%">1</span>
+              <span class="mk" style="left:5%;top:66%">2</span>
             </div>
             <figcaption>Edit Details, from the pencil button on the experiment screen.</figcaption>
           </figure>
           <div>
             <ol class="callouts">
               <li><span class="num">1</span><div><strong>Names and descriptions only.</strong> The name, hypothesis, treatment and control text can be corrected at any time. Nothing that affects the analysis is editable here: not the unit, the metrics, the devices or the randomization. Renaming reschedules the experiment's reminders and updates its public copy if it has been published.</div></li>
+              <li><span class="num">2</span><div><strong>The guarantee.</strong> Only the wording changes. Past and future assignments, the data and the analysis stay the same. Reminder times are edited separately, from the share menu.</div></li>
             </ol>
           </div>
         </div>
         <div class="pair">
           <figure class="shot">
             <div class="frame">
-              <img src="/docs/images/experiments-swipe.webp" alt="The Experiments list with a row swiped to reveal Stop" width="804" height="1748" loading="lazy">
-              <span class="mk" style="left:12%;top:30%">1</span>
-              <span class="mk" style="left:88%;top:30%">2</span>
+              <img src="/docs/images/06-experiments-swipe-stop.webp" alt="The Experiments list with a completed row swiped right to reveal Restart" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:63%">1</span>
+              <span class="mk" style="left:5%;top:88%">2</span>
             </div>
-            <figcaption>Experiments tab. Swipe right for Stop or Restart, left for Delete.</figcaption>
+            <figcaption>Experiments tab. Swipe right on a running experiment for Stop, on a finished one for Restart.</figcaption>
           </figure>
           <div>
             <ol class="callouts">
               <li><span class="num">1</span><div><strong>Stop and Restart.</strong> Stopping ends the experiment where it is and keeps every unit and its analysis. Restart picks it up again with the next unit index; the sequence continues, it does not start over.</div></li>
-              <li><span class="num">2</span><div><strong>Delete.</strong> Removes the experiment and all its data from the phone and from your private iCloud. A published copy stays public. Deleted example experiments stay deleted; Settings can restore the set.</div></li>
+              <li><span class="num">2</span><div><strong>The hint.</strong> Each section of the list says what its swipes do.</div></li>
             </ol>
+            <p><strong>Delete</strong>, by swiping left, removes the experiment and all its data from the phone and from your private iCloud. A published copy stays public. Deleted example experiments stay deleted; Settings can restore the set.</p>
           </div>
         </div>
       </section>
@@ -582,30 +599,33 @@
         <div class="pair">
           <figure class="shot">
             <div class="frame">
-              <img src="/docs/images/share-menu.webp" alt="The share menu on an experiment: Publish Experiment, Share Template, Share Result Card, Reminders" width="804" height="1748" loading="lazy">
-              <span class="mk" style="left:88%;top:16%">1</span>
-              <span class="mk" style="left:88%;top:21%">2</span>
-              <span class="mk" style="left:88%;top:26%">3</span>
+              <img src="/docs/images/10-share-menu.webp" alt="The share menu on an experiment: Publish Experiment, Share Template, Share Result Card, Reminders" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:92%;top:14%">1</span>
+              <span class="mk" style="left:92%;top:19%">2</span>
+              <span class="mk" style="left:92%;top:23%">3</span>
+              <span class="mk" style="left:92%;top:30%">4</span>
             </div>
             <figcaption>The share menu.</figcaption>
           </figure>
           <div>
             <ol class="callouts">
-              <li><span class="num">1</span><div><strong>Publish Experiment.</strong> Writes the design, the per-unit assignments and the per-unit observation values for this experiment's metrics to a public iCloud database, under a creator name you choose. Others can follow it and run the same design on themselves. Raw Health data outside the experiment's units and metrics is never included. There is no unpublish.</div></li>
+              <li><span class="num">1</span><div><strong>Publish Experiment.</strong> Writes the design, the per-unit assignments and the per-unit observation values for this experiment's metrics to a public iCloud database, under a researcher profile created with Sign in with Apple the first time. Others can follow it and run the same design on themselves. Raw Health data outside the experiment's units and metrics is never included. There is no unpublish.</div></li>
               <li><span class="num">2</span><div><strong>Share Template.</strong> Sends the design only: question, arms, unit, metrics, aggregation. No results. Whoever receives it can start the same experiment with one tap.</div></li>
-              <li><span class="num">3</span><div><strong>Share Result Card.</strong> An image of one metric's confidence sequence with the estimate and interval at the current settings, for a message or a post. It carries the chart, not the measurements.</div></li>
+              <li><span class="num">3</span><div><strong>Share Result Card.</strong> An image of one metric's confidence sequence with the estimate and interval at the experiment's 95% level, for a message or a post. It carries the chart, not the measurements.</div></li>
+              <li><span class="num">4</span><div><strong>Reminders.</strong> The two times set in the wizard, editable while the experiment runs.</div></li>
             </ol>
           </div>
         </div>
         <div class="pair">
           <figure class="shot">
             <div class="frame">
-              <img src="/docs/images/result-card.webp" alt="The Result Card preview sheet" width="804" height="1748" loading="lazy">
+              <img src="/docs/images/10-result-card.webp" alt="The Result Card preview sheet" width="804" height="1748" loading="lazy">
             </div>
-            <figcaption>Result Card Preview.</figcaption>
+            <figcaption>Result Card Preview, from Share Result Card.</figcaption>
           </figure>
           <div>
-            <p>The card shows the experiment's name, the two arms, the metric, the number of units, the estimate with its interval, and the confidence sequence. It is rendered on the phone from the same stored sequence as the Analysis tab.</p>
+            <p>The card shows the experiment's name, the two arms, the metric, the number of units, the confidence sequence, the estimate with its interval and the same written interpretation as the Analysis tab. It is rendered on the phone from the same stored sequence, and shared as an image.</p>
+            <p>Before anything is published, the sheet lists exactly what will be shared: the experiment's name and hypothesis, its metrics, the number of units of observation data and the confidence sequence results, with a privacy note that raw Health data from other metrics or periods never leaves the phone.</p>
           </div>
         </div>
       </section>
@@ -616,13 +636,12 @@
         <div class="pair">
           <figure class="shot">
             <div class="frame">
-              <img src="/docs/images/settings.webp" alt="The Settings tab: Appearance, Apple Health, proxy models, Data, Help, About" width="804" height="1748" loading="lazy">
-              <span class="mk" style="left:12%;top:22%">1</span>
-              <span class="mk" style="left:12%;top:34%">2</span>
-              <span class="mk" style="left:12%;top:50%">3</span>
-              <span class="mk" style="left:12%;top:58%">4</span>
-              <span class="mk" style="left:12%;top:66%">5</span>
-              <span class="mk" style="left:12%;top:78%">6</span>
+              <img src="/docs/images/11-settings-top.webp" alt="The Settings tab: Appearance, Apple Health, Variance-Reduction Proxies and Data" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:42%">1</span>
+              <span class="mk" style="left:5%;top:63%">2</span>
+              <span class="mk" style="left:5%;top:78%">3</span>
+              <span class="mk" style="left:5%;top:84%">4</span>
+              <span class="mk" style="left:5%;top:89%">5</span>
             </div>
             <figcaption>Settings tab.</figcaption>
           </figure>
@@ -630,10 +649,26 @@
             <ol class="callouts">
               <li><span class="num">1</span><div><strong>Apple Health.</strong> iOS asks for each data type once. To add or remove the types ABMe can read, this row opens the Health app; the change takes effect when you come back.</div></li>
               <li><span class="num">2</span><div><strong>Retrain proxy models.</strong> Refits the forecasting models from your Health history for future experiments. Running experiments keep the models they started with.</div></li>
-              <li><span class="num">3</span><div><strong>iCloud Sync.</strong> On, Off, Checking or Unavailable, with the last sync time. Experiments live in your private iCloud database and come back if you reinstall or add an iPad. Nobody else can read that database.</div></li>
+              <li><span class="num">3</span><div><strong>iCloud Sync.</strong> On, Off, Checking or Unavailable, with the last sync time, and a footer saying what to do about it. Experiments live in your private iCloud database and come back if you reinstall or add an iPad. Nobody else can read that database.</div></li>
               <li><span class="num">4</span><div><strong>Export All Data.</strong> Every experiment as CSV files, one row per unit and metric with the assignment, the window and the value, for R, Python or a spreadsheet.</div></li>
               <li><span class="num">5</span><div><strong>Restore Example Experiments.</strong> Reloads the six worked examples with their synthetic data, for exploring the Analysis and Data tabs before you have results of your own.</div></li>
-              <li><span class="num">6</span><div><strong>Report a Problem.</strong> Opens an email to support with a diagnostics report (app and iOS versions, Health sources, recent units, sync state) that you can read before it goes.</div></li>
+            </ol>
+            <p>Above these, Appearance switches the app between System, Light and Dark.</p>
+          </div>
+        </div>
+        <div class="pair">
+          <figure class="shot">
+            <div class="frame">
+              <img src="/docs/images/11-report-problem.webp" alt="The Report a Problem sheet with a description field and an attached diagnostics report" width="804" height="1748" loading="lazy">
+              <span class="mk" style="left:5%;top:21%">1</span>
+              <span class="mk" style="left:5%;top:50%">2</span>
+            </div>
+            <figcaption>Report a Problem, from the Help section of Settings.</figcaption>
+          </figure>
+          <div>
+            <ol class="callouts">
+              <li><span class="num">1</span><div><strong>What happened.</strong> What you expected and what you saw instead. Send opens your email app with the message addressed to support; it goes when you send it there.</div></li>
+              <li><span class="num">2</span><div><strong>The diagnostics report.</strong> App and iOS versions, which devices have written to Apple Health and when, and your experiments' recent units with the values ABMe fetched. No Health data outside those units is included, and you can read the whole report before sending.</div></li>
             </ol>
           </div>
         </div>

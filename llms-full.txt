@@ -349,6 +349,19 @@ Twenty-six ready-made experiment templates, each loadable into the app from http
 - Literature: Nobre et al. (2008), "L-theanine, a natural constituent in tea, and its effect on mental state", Asia Pacific Journal of Clinical Nutrition; Owen et al. (2008), "The combined effects of L-theanine and caffeine on cognitive performance and mood", Nutritional Neuroscience, https://doi.org/10.1179/147683008X301513
 <!-- /build:catalogue -->
 
+## The manual (getabme.com/docs/)
+
+A screen-by-screen manual with iPhone screenshots. Summary of what it documents:
+
+- Today tab: one card per running experiment with the unit counter (Night 12, Session 8), the Randomize button, and after randomizing the assignment badge (blue treatment, orange control), the unit's status line and the one action it may need (End Session, Log Workout, Enter Result).
+- Creating an experiment, seven wizard steps: name and hypothesis; treatment and control descriptions; the unit (night = bedtime to rising from the sleep tracker, dated by the evening it starts; day = rising to bedtime; workout = one recorded workout; session = started and ended by hand for values typed in; calendar days = midnight to midnight, one or more days) with an optional washout; metrics from Apple Health categories filtered by unit kind plus manual-entry metrics, each with one fixed aggregation; one device per Health metric for the whole experiment; reminder times; review and Start Experiment, which fits a forecasting model to pre-experiment history.
+- Running a unit: states in progress, awaiting entry, waiting for data, partial, collected, no data. Randomize is withheld while a manual value is missing. No imputation.
+- Analysis tab: one row per metric with its confidence sequence as a band on a shared axis in standard deviations of the metric's usual unit-to-unit spread (never rescales, +-2.5 SD), estimate and interval in native units, a seal when zero is excluded. Confidence control 90/95/99% and Correction control None (per metric), Bonferroni (level divided by the number of metrics, all hold at once) or e-BY (e-BH marks significant metrics, bands at the e-BY level bounding the false coverage rate among them). Both are display-time choices; the metric set and each sequence's tuning parameter are fixed at setup. Tapping a row shows the sequence over time with a written interpretation.
+- Data tab: chart of measured values by unit with the fitted level and next forecast, and the measurement log (unit, window, condition, value).
+- Regression adjustment: a one-step-ahead forecast from a local-level model fitted to the user's pre-experiment history for the metric and device, made before each unit and identical for both arms, is subtracted from the outcome before inverse-probability weighting. It reduces variance and cannot bias the estimate.
+- Editing, stopping, deleting; publishing to a public iCloud database with a researcher profile (Sign in with Apple), sharing a template or a result card; Settings (Health access, retrain proxy models, iCloud Sync, Export All Data as CSV, Restore Example Experiments, Report a Problem with a readable diagnostics report).
+- The statistics: the estimand is the average over the units run so far of Y_t(1) - Y_t(0); the estimator is the running mean of inverse-probability-weighted, forecast-adjusted contributions; the confidence sequence is centred on it with half-width (1/t) sqrt((S_t eta^2 + 1)/eta^2 log((S_t eta^2 + 1)/alpha^2)), valid at every t simultaneously, so stopping at any data-dependent time keeps the error rate at alpha.
+
 ## Blog
 
 Each post reviews what published studies say about an intervention and lays out an N-of-1 design to test it on yourself. The results sections show simulated data, labelled as synthetic, using effect sizes from the literature.
