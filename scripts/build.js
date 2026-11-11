@@ -146,6 +146,7 @@ replaceRegion('llms-full.txt', 'catalogue', md);
 const pages = [
   ['/', 'index.html'],
   ['/how-it-works/', 'how-it-works/index.html'],
+  ['/docs/', 'docs/index.html'],
   ['/experiments/', 'experiments/index.html', 'experiments/data.js'],
   ['/blog/', 'blog/index.html'],
   ...fs.readdirSync(path.join(ROOT, 'blog')).filter(f => f.endsWith('.html') && f !== 'index.html').sort().map(f => [`/blog/${f}`, `blog/${f}`]),
